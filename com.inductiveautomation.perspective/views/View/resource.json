@@ -4,13 +4,14 @@
   "restricted": false,
   "overridable": true,
   "files": [
-    "config.json"
+    "view.json",
+    "thumbnail.png"
   ],
   "attributes": {
     "lastModification": {
       "actor": "Sachin",
-      "timestamp": "2025-10-24T09:58:15Z"
+      "timestamp": "2025-10-24T09:58:17Z"
     },
-    "lastModificationSignature": "9d7713c33b48094c7acdf6547a54772d74ebc80c23b7d81820c9e470cc483850"
+    "lastModificationSignature": "ea80db7856fa4215efb72ba3b8b965d32982d2e132c37afe03c1dc58e705262a"
   }
 }
