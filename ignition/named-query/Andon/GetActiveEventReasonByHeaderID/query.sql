@@ -1,0 +1,5 @@
+SELECT TOP 1 ReasonID
+FROM AndonEvent
+WHERE EventHeaderID = :AndonHeader
+	AND ReasonID IS NOT NULL
+ORDER BY ID DESC

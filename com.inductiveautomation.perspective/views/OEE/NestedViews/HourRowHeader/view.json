@@ -1,0 +1,186 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 100,
+      "width": 900
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Hour Label"
+        },
+        "position": {
+          "height": 0.5927,
+          "width": 0.0975,
+          "x": 0.0112,
+          "y": 0.2788
+        },
+        "props": {
+          "text": "Hour",
+          "textStyle": {
+            "fontSize": "1.75rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number"
+        },
+        "position": {
+          "height": 0.5962,
+          "width": 0.2251,
+          "x": 0.1516,
+          "y": 0.2788
+        },
+        "props": {
+          "text": "Part Number",
+          "textStyle": {
+            "fontSize": "1.75rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Planned"
+        },
+        "position": {
+          "height": 0.5927,
+          "width": 0.1486,
+          "x": 0.4749,
+          "y": 0.2788
+        },
+        "props": {
+          "text": "Planned",
+          "textStyle": {
+            "fontSize": "1.75rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Actual"
+        },
+        "position": {
+          "height": 0.5927,
+          "width": 0.0908,
+          "x": 0.3628,
+          "y": 0.2788
+        },
+        "props": {
+          "text": "Actual",
+          "textStyle": {
+            "fontSize": "1.75rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Scrap"
+        },
+        "position": {
+          "height": 0.5927,
+          "width": 0.0874,
+          "x": 0.6237,
+          "y": 0.2788
+        },
+        "props": {
+          "text": "Scrap",
+          "textStyle": {
+            "fontSize": "1.75rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Downtime"
+        },
+        "position": {
+          "height": 0.5927,
+          "width": 0.1097,
+          "x": 0.7517,
+          "y": 0.2431
+        },
+        "props": {
+          "text": "Downtime (min)",
+          "textStyle": {
+            "fontSize": "1.75rem",
+            "fontWeight": "bold",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Downtime_0"
+        },
+        "position": {
+          "height": 0.5927,
+          "width": 0.1166,
+          "x": 0.8777,
+          "y": 0.2459
+        },
+        "props": {
+          "text": "Cycle Time (min)",
+          "textStyle": {
+            "fontSize": "1.75rem",
+            "fontWeight": "bold",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "events": {
+      "dom": {
+        "onClick": {
+          "config": {
+            "draggable": true,
+            "id": "PQsOBwM8",
+            "modal": false,
+            "overlayDismiss": false,
+            "resizable": true,
+            "showCloseIcon": true,
+            "type": "open",
+            "viewParams": {
+              "End": "{view.custom.EndTime}",
+              "PartNumber": "{view.custom.Data[0].PartNumber}",
+              "ProductionLineID": "{view.custom.Data[0].ProductionLineID}",
+              "Start": "{view.custom.Data[0].StartTime}",
+              "WorkOrder": "{view.custom.Data[0].ID}"
+            },
+            "viewPath": "OEE/NestedViews/HourDetails",
+            "viewportBound": false
+          },
+          "scope": "C",
+          "type": "popup"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "borderStyle": "solid",
+        "borderWidth": 2
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

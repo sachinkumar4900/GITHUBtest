@@ -1,0 +1,85 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "ab66f95e3677831439aa901d34761f44a4282d6f5a5032a327b8d852dba345c1",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-11-01T14:20:13Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "ID",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "PartNumber",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "MoldNumber",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ResinPartNumber",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "BOMWeight",
+        "sqlType": 5
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ScrapRate",
+        "sqlType": 4
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ChangeoverTime",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ProcessSheetLocation",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "Cavities",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "CycleTime",
+        "sqlType": 2
+      }
+    ]
+  }
+}

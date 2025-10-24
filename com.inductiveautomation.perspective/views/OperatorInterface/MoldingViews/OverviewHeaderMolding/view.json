@@ -1,0 +1,992 @@
+{
+  "custom": {
+    "Equipment": "IM43",
+    "EquipmentStatus": null,
+    "ProductionLineID": 10,
+    "Quality": "Bad_NotFound(\"Path \u0027[default]Sanford/Molding/IM43/Historized/Total Material.quality\u0027 not found.\")",
+    "Site": "Sanford",
+    "WorkOrderData": [
+      {
+        "BOMWeight": 0.785,
+        "Cavities": "1",
+        "ChangeoverTime": 60,
+        "Color": "Black",
+        "CycleTime": 145,
+        "DryTemperature": 180,
+        "ID": "271190-B03-PF1314-130022",
+        "MaterialDryTime": 2,
+        "MoldNumber": "PF1314",
+        "PartNumber": "271190",
+        "ProcessSheetLocation": null,
+        "ProcessTemperature": 400,
+        "ProductionLine": "SB03",
+        "ProductionLineID": 3,
+        "ResinDescription": "ABS BAYER LUSTRAN 633-90",
+        "ResinPartNumber": "130022",
+        "ResinPartNumber1": "130022",
+        "ScrapRate": 0.1,
+        "WorkOrder": "271190-B03-PF1314-130022",
+        "WorkOrderID": 1295
+      }
+    ],
+    "WorkOrderScheduleData": [],
+    "tagPath": "[default]Moorpark/Molding/IM43"
+  },
+  "params": {
+    "EquipmentID": 10,
+    "WorkOrderID": 1295
+  },
+  "propConfig": {
+    "custom.Equipment": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "id": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineNameByID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.EquipmentStatus": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "Equipment": "{view.custom.Equipment}",
+            "ProductionSite": "{session.custom.ProductionSite}"
+          },
+          "tagPath": "[default]{ProductionSite}/Molding/{Equipment}/Status"
+        },
+        "type": "tag"
+      },
+      "persistent": true
+    },
+    "custom.ProductionLineID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.EquipmentID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineIDByEquipmentID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.Quality": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "Equipment": "{view.custom.Equipment}",
+            "ProductionSite": "{session.custom.ProductionSite}"
+          },
+          "tagPath": "[default]{ProductionSite}/Molding/{Equipment}/Historized/Total Material.Quality"
+        },
+        "type": "tag"
+      },
+      "persistent": true
+    },
+    "custom.Site": {
+      "binding": {
+        "config": {
+          "path": "session.custom.ProductionSiteID"
+        },
+        "transforms": [
+          {
+            "code": "\tsite \u003d \"Sanford\" if value \u003d\u003d 1 else \"Moorpark\"\n\treturn site",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.WorkOrderData": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "pWorkOrderID": "{view.params.WorkOrderID}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "5"
+          },
+          "queryPath": "WorkOrder/GetWorkOrderMoldingDataByID",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.WorkOrderScheduleData": {
+      "binding": {
+        "config": {
+          "enableValueCache": false,
+          "parameters": {
+            "ProductionLineID": "{view.custom.ProductionLineID}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "{session.custom.PollingRate}"
+          },
+          "queryPath": "WorkOrder/GetWorkOrderScheduleDataByAsset",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.tagPath": {
+      "binding": {
+        "config": {
+          "expression": "now(0)"
+        },
+        "transforms": [
+          {
+            "code": "\tplID \u003d self.view.custom.ProductionLineID\n\tpaths \u003d system.tag.readBlocking([\u0027TagPaths\u0027])[0].value\n\ti \u003d 0\n\tpathFound \u003d False\n\twhile(pathFound \u003d\u003d False):\n\t\tif paths.getValueAt(i, 0) \u003d\u003d plID:\n\t\t\tpathFound \u003d True\n\t\telse:\n\t\t\ti +\u003d 1\n\treturn paths.getValueAt(i, 1)",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.WorkOrderID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 250
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "ProcessAreaLabel"
+        },
+        "position": {
+          "height": 0.2048,
+          "width": 0.2675,
+          "x": 0.7251,
+          "y": 0.132
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Equipment"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "24px",
+            "textAlign": "right"
+          },
+          "textStyle": {
+            "classes": "Barlow",
+            "color": "#000000",
+            "fontSize": "2.75rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Site_Label"
+        },
+        "position": {
+          "height": 0.144,
+          "width": 0.1307,
+          "x": 0.8613,
+          "y": 0.324
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "session.custom.ProductionSite"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "classes": "Barlow",
+            "color": "#000000",
+            "fontSize": "16px",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "WorkOrder_Label"
+        },
+        "position": {
+          "height": 0.112,
+          "width": 0.4863,
+          "x": 0.0064,
+          "y": 0.2518
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.WorkOrderData}) \u003e 0, {view.custom.WorkOrderData[0].WorkOrder}, \"NOT SCHEDULED\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/DataLabel"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Sku_Label"
+        },
+        "position": {
+          "height": 0.084,
+          "width": 0.21,
+          "x": 0.0069,
+          "y": 0.5176
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.WorkOrderData}) \u003e 0, {view.custom.WorkOrderData[0].PartNumber}, \"N/A\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "OverviewHeader/DataLabel_small",
+            "fontSize": 14
+          },
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/DataLabel_small"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Progress"
+        },
+        "position": {
+          "height": 0.0841,
+          "width": 0.7212,
+          "x": 0.1419,
+          "y": 0.7564
+        },
+        "propConfig": {
+          "props.max": {
+            "binding": {
+              "config": {
+                "path": "../PlannedTotal_Label.custom.PlannedTotal"
+              },
+              "type": "property"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "../GoodParts_Label.custom.GoodParts"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "bar": {
+            "color": "#006E96",
+            "style": {
+              "borderBottomLeftRadius": "0px",
+              "borderBottomRightRadius": "0px",
+              "borderTopLeftRadius": "0px",
+              "borderTopRightRadius": "0px"
+            }
+          },
+          "track": {
+            "style": {
+              "borderBottomLeftRadius": "0px",
+              "borderBottomRightRadius": "0px",
+              "borderTopLeftRadius": "0px",
+              "borderTopRightRadius": "0px"
+            }
+          }
+        },
+        "type": "ia.display.progress"
+      },
+      {
+        "meta": {
+          "name": "PlannedTotal_Label"
+        },
+        "position": {
+          "height": 0.26,
+          "width": 0.17,
+          "x": 0.6931,
+          "y": 0.4108
+        },
+        "propConfig": {
+          "custom.PlannedTotal": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.WorkOrderScheduleData}) \u003e 0, {view.custom.WorkOrderScheduleData[0].Quantity}, 0)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{this.custom.PlannedTotal}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "textAlign": "right"
+          },
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/ProgressBar_Num",
+            "color": "#6F6F6F"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Scrap_Label"
+        },
+        "position": {
+          "height": 0.26,
+          "width": 0.1375,
+          "x": 0.4338,
+          "y": 0.4108
+        },
+        "propConfig": {
+          "custom.ScrapCount": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "offset": "{session.props.device.timezone.utcOffset}",
+                  "pWorkOrderID": "{view.params.WorkOrderID}"
+                },
+                "polling": {
+                  "enabled": true,
+                  "rate": "1"
+                },
+                "queryPath": "Scrap/GetTotalScrapByWorkOrderID",
+                "returnFormat": "scalar"
+              },
+              "type": "query"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{this.custom.ScrapCount}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif self.getSibling(\"WorkOrder_Label\").props.text \u003d\u003d \"NOT SCHEDULED\":\n\t\treturn 0\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "textAlign": "center"
+          },
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/ProgressBar_Num",
+            "color": "#E52C4F"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "custom": {
+          "TagFormat": [
+            {
+              "aggregate": "LastValue",
+              "alias": "value"
+            }
+          ],
+          "popupShown": false,
+          "previousValue": 0
+        },
+        "meta": {
+          "name": "GoodParts_Label"
+        },
+        "position": {
+          "height": 0.26,
+          "width": 0.17,
+          "x": 0.1419,
+          "y": 0.4108
+        },
+        "propConfig": {
+          "custom.GoodParts": {
+            "binding": {
+              "config": {
+                "expression": "{this.custom.TotalParts} - {../Scrap_Label.custom.ScrapCount}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003c 0:\n\t\treturn 0\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          },
+          "custom.TagFormat[0].path": {
+            "binding": {
+              "config": {
+                "expression": "\"[ConnectedFactoryPilot_Historian/ignition-uschisap401:default]\" + {view.custom.Site} + \"/Molding/\" + {view.custom.Equipment} + \"/oee/quality/Total Daily Count\""
+              },
+              "type": "expr"
+            }
+          },
+          "custom.TotalParts": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "Equipment": "{view.custom.Equipment}",
+                  "Site": "{view.custom.Site}"
+                },
+                "tagPath": "[default]{Site}/Molding/{Equipment}/OEE/Quality/Work Order Count"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d None:\n\t\treturn 0\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{this.custom.GoodParts}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif self.getSibling(\"WorkOrder_Label\").props.text \u003d\u003d \"NOT SCHEDULED\":\n\t\treturn 0\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "textAlign": "left"
+          },
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/ProgressBar_Num",
+            "color": "#6EB70B"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "EstEnd_Label"
+        },
+        "position": {
+          "height": 0.15,
+          "width": 0.185,
+          "x": 0.6781,
+          "y": 0.8416
+        },
+        "propConfig": {
+          "custom.End": {
+            "binding": {
+              "config": {
+                "expression": "if(toInt({../GoodParts_Label.props.text}) \u003e\u003d toInt({../PlannedTotal_Label.props.text}), addMinutes( now(), {session.props.device.timezone.utcOffset} * 60),\r\nif(len({view.custom.WorkOrderScheduleData}) \u003e 0, addMinutes( fromMillis({view.custom.WorkOrderScheduleData[0].EndTime}), {session.props.device.timezone.utcOffset} * 60), 0))"
+              },
+              "type": "expr"
+            }
+          },
+          "custom.EstSecondsRemaining": {
+            "binding": {
+              "config": {
+                "expression": "if({../GoodParts_Label.custom.GoodParts} \u003e\u003d {../PlannedTotal_Label.custom.PlannedTotal}, 0 ,\r\n\tif({../PlannedTotal_Label.custom.PlannedTotal} \u003c 1, (({../PlannedTotal_Label.custom.PlannedTotal} * {view.custom.WorkOrderData[0].CycleTime}) + ({view.custom.WorkOrderData[0].ChangeoverTime} * 60.0)),\r\n\t\t(({../PlannedTotal_Label.custom.PlannedTotal} - {../GoodParts_Label.custom.GoodParts}) * ({view.custom.WorkOrderData[0].CycleTime}))\r\n\t\t \t))// + {view.custom.WorkOrderData[0].ChangeoverTime} * 60.0)\r\n"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "dateFormat({this.custom.End}, \"HH:mm:ss aa\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "1.25rem",
+            "fontWeight": "bold",
+            "textAlign": "right"
+          },
+          "textStyle": {
+            "classes": "Barlow"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "StartTime_Label"
+        },
+        "position": {
+          "height": 0.15,
+          "width": 0.185,
+          "x": 0.1419,
+          "y": 0.8416
+        },
+        "propConfig": {
+          "custom.start": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.WorkOrderScheduleData}) \u003e 0, addMinutes( fromMillis({view.custom.WorkOrderScheduleData[0].StartTime}), {session.props.device.timezone.utcOffset} * 60), 0)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "dateFormat({this.custom.start}, \"HH:mm:ss aa\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontWeight": "bold"
+          },
+          "textStyle": {
+            "classes": "Barlow",
+            "fontSize": "1.25rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "StatusColorBar"
+        },
+        "position": {
+          "height": 0.112,
+          "width": 1
+        },
+        "propConfig": {
+          "custom.AndonHeader": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "productionLineID": "{view.custom.ProductionLineID}"
+                },
+                "polling": {
+                  "enabled": true,
+                  "rate": "1"
+                },
+                "queryPath": "Andon/GetEventHeaderByProductionLineID",
+                "returnFormat": "scalar"
+              },
+              "type": "query"
+            }
+          },
+          "custom.AndonStatus": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "EventHeaderID": "{this.custom.AndonHeader}"
+                },
+                "polling": {
+                  "enabled": true,
+                  "rate": "1"
+                },
+                "queryPath": "Andon/GetEventStatusByEventHeaderID",
+                "returnFormat": "scalar"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d None:\n\t\treturn 6\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "query"
+            }
+          },
+          "custom.DTReason": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "EventID": "{this.custom.DowntimeEventID}"
+                },
+                "queryPath": "Downtime/GetDowntimeEventReasonByDowntimeID",
+                "returnFormat": "scalar"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d None:\n\t\treturn value\n\telse:\n\t\treason \u003d system.db.runNamedQuery(\"Downtime/GetDowntimeReasonByID\", {\"ReasonID\": value})\n\t\treturn reason[0][0]",
+                  "type": "script"
+                }
+              ],
+              "type": "query"
+            }
+          },
+          "custom.DowntimeEventID": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "EquipmentID": "{view.params.EquipmentID}"
+                },
+                "polling": {
+                  "enabled": true,
+                  "rate": "1"
+                },
+                "queryPath": "Downtime/GetActiveDowntimeEventByEquipmentID",
+                "returnFormat": "scalar"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d None:\n\t\treturn -1\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "query"
+            }
+          },
+          "props.style.backgroundColor": {
+            "binding": {
+              "config": {
+                "expression": "if({this.custom.DTReason} \u003d \"Mold Change\", \u0027#006E96\u0027,\r\n\t\tif({view.custom.EquipmentStatus} \u003d 0, \u0027#E52C4F\u0027, //Red on stopped\r\n\t\t\tif({this.custom.AndonStatus} !\u003d 6 \u0026\u0026 {this.custom.AndonStatus} !\u003d null, \u0027#FFE040\u0027, //Yellow on Andon but running\r\n\t\t\t\tif(len({view.custom.WorkOrderData}) \u003c\u003d 0, \u0027#006E96\u0027, //Green on running work order\r\n\t\t\t\t\t\u0027#6EB70B\u0027)))) //Blue on no work order, running normally otherwise"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "type": "ia.container.coord"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.096,
+          "width": 0.2888,
+          "x": 0.0064,
+          "y": 0.1303
+        },
+        "props": {
+          "text": "WORK ORDER",
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/Label"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.096,
+          "width": 0.2913,
+          "x": 0.0064,
+          "y": 0.3984
+        },
+        "props": {
+          "text": "PART #",
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/Label"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "height": 0.096,
+          "width": 0.1338,
+          "x": 0.1419,
+          "y": 0.6744
+        },
+        "props": {
+          "text": "GOOD PARTS",
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/Label"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_2"
+        },
+        "position": {
+          "height": 0.096,
+          "width": 0.1338,
+          "x": 0.4356,
+          "y": 0.6744
+        },
+        "props": {
+          "style": {
+            "textAlign": "center"
+          },
+          "text": "SCRAP",
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/Label"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_3"
+        },
+        "position": {
+          "height": 0.096,
+          "width": 0.165,
+          "x": 0.6981,
+          "y": 0.6744
+        },
+        "props": {
+          "style": {
+            "textAlign": "right"
+          },
+          "text": "PLANNED TOTAL",
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/Label"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "StartTime_Label_0"
+        },
+        "position": {
+          "height": 0.15,
+          "width": 0.185,
+          "x": 0.2144,
+          "y": 0.8416
+        },
+        "propConfig": {
+          "custom.start": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.WorkOrderScheduleData}) \u003e 0, fromMillis({view.custom.WorkOrderScheduleData[0].StartTime}), 0)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "STARTED",
+          "textStyle": {
+            "classes": "Barlow",
+            "fontSize": "1rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "StartTime_Label_1"
+        },
+        "position": {
+          "height": 0.15,
+          "width": 0.185,
+          "x": 0.6095,
+          "y": 0.8416
+        },
+        "propConfig": {
+          "custom.start": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.WorkOrderScheduleData}) \u003e 0, fromMillis({view.custom.WorkOrderScheduleData[0].StartTime}), 0)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "textAlign": "right"
+          },
+          "text": "EST END",
+          "textStyle": {
+            "classes": "Barlow",
+            "fontSize": "1rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_4"
+        },
+        "position": {
+          "height": 0.8,
+          "rotate": {
+            "anchor": "59% 50%"
+          },
+          "width": 0.4825,
+          "x": 0.27,
+          "y": 0.2
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if((({../PlannedTotal_Label.custom.PlannedTotal} \u003c\u003d {../GoodParts_Label.custom.GoodParts}) \u0026\u0026 ({../WorkOrder_Label.props.text} !\u003d\u0027NOT SCHEDULED\u0027)) || ({view.custom.Quality} !\u003d \"Good\"),\r\n    if(toMillis(now(1000)) % 2000 \u003c 1000, true, false),\r\n    false\r\n)\r\n"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.Quality} !\u003d \"Good\", \"NOT COUNTING ENTER ACTUAL PARTS MANUALLY\", \"PLANNED TOTAL REACHED\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#FFFF00",
+            "borderColor": "#FF0000",
+            "borderStyle": "double",
+            "color": "#FF0000",
+            "fontFamily": "Roboto",
+            "fontSize": 48,
+            "fontWeight": "bolder",
+            "stroke": "#FF8C00",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_5"
+        },
+        "position": {
+          "height": 0.62,
+          "rotate": {
+            "anchor": "59% 50%"
+          },
+          "width": 0.4825,
+          "x": 0.26,
+          "y": 0.346
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(\r\n    {view.custom.EquipmentStatus} \u003d 0 \u0026\u0026\r\n    {../WorkOrder_Label.props.text} !\u003d \"NOT SCHEDULED\" \u0026\u0026\r\n    tag(\"[default]\" + {view.custom.Site} + \"/Molding/\" + {view.custom.Equipment} + \"/Cycle Time.value\") \u003e 0 \u0026\u0026\r\n    tag(\"[default]\" + {view.custom.Site} + \"/Molding/\" + {view.custom.Equipment} + \"/Historized/Count_Change.value\") \u003d True \u0026\u0026\r\n    (\r\n        tag(\"[default]\" + {view.custom.Site} + \"/Molding/\" + {view.custom.Equipment} + \"/Historized/Mode Continuous.value\") \u003d 1 ||\r\n        tag(\"[default]\" + {view.custom.Site} + \"/Molding/\" + {view.custom.Equipment} + \"/Historized/Mode Semi.value\") \u003d 1\r\n    ),\r\n    if(\r\n        {view.custom.Equipment} \u003d \u0027IM45\u0027,\r\n        {[default]Moorpark/Molding/IM45/Historized/Active Alarm.value} \u003d 0 \u0026\u0026\r\n        toMillis(now(1000)) % 2000 \u003c 1000,\r\n        if(\r\n            {view.custom.Equipment} \u003d \u0027SB01\u0027,\r\n            {[default]Sanford/Molding/SB01/Historized/Machine Mode.value} \u003d 2 \u0026\u0026\r\n            toMillis(now(1000)) % 2000 \u003c 1000,\r\n            if(\r\n                {view.custom.Equipment} \u003d \u0027SB02\u0027,\r\n                {[default]Sanford/Molding/SB01/Historized/Machine Mode.value} \u003d 2 \u0026\u0026\r\n                toMillis(now(1000)) % 2000 \u003c 1000,\r\n                toMillis(now(1000)) % 2000 \u003c 1000\r\n            )\r\n        )\r\n    ),\r\n    false\r\n)\r\n"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#FFFF00",
+            "borderColor": "#FF0000",
+            "borderStyle": "double",
+            "color": "#FF0000",
+            "fontFamily": "Roboto",
+            "fontSize": 48,
+            "fontWeight": "bolder",
+            "textAlign": "center"
+          },
+          "text": "PLEASE \"UPDATE ANDON EVENT\" MACHINE IS RUNNING"
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": -0.13,
+      "y": -0.095
+    },
+    "propConfig": {
+      "props.style.backgroundColor": {
+        "binding": {
+          "config": {
+            "expression": "if({view.custom.EquipmentStatus} \u003d \u0027stopped\u0027, \u0027#FCE6EB\u0027,\r\n\t\t\u0027#EEEEEE\u0027)"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "refresh-Operator-Interface-Header",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\twosID \u003d self.view.custom.WorkOrderScheduleData[0].ID\n\tstart \u003d system.date.fromMillis(self.view.custom.WorkOrderScheduleData[0].StartTime)\n\tend \u003d system.date.fromMillis(self.view.custom.WorkOrderScheduleData[0].EndTime)\n\tquantity \u003d self.view.custom.WorkOrderScheduleData[0].Quantity\n\tpath \u003d payload[\u0027tagPath\u0027]\n\t\n\ttotalCountPath \u003d \"[default]\" + path + \"/OEE/Quality/Total Daily Count\"\n\tscrapCountPath \u003d \"[default]\" + path + \"/OEE/Quality/Scrap Count\"\n\t\n\tnow \u003d system.db.runScalarPrepQuery(\"SELECT GETUTCDATE()\", [])\n\t\n\tif end \u003e now:\n\t\tend \u003d now\n\t\n\tstart \u003d system.date.parse(start)\n\tend \u003d system.date.parse(end)\n\t\n\tstartCounts \u003d system.tag.queryTagHistory([totalCountPath, scrapCountPath], startDate \u003d start, endDate \u003d start, returnSize\u003d1, aggregationMode\u003d\"LastValue\", returnFormat\u003d\u0027Wide\u0027)\n\tendCounts \u003d system.tag.queryTagHistory([totalCountPath, scrapCountPath], startDate \u003d start, endDate \u003d end, returnSize\u003d1, aggregationMode\u003d\"LastValue\", returnFormat\u003d\u0027Wide\u0027)\n\t\n\ttotalStart \u003d startCounts.getValueAt(0, 1)\n\tif totalStart is None:\n\t\ttotalStart \u003d 0\n\t\n\tscrapStart \u003d startCounts.getValueAt(0, 2)\n\tif scrapStart is None:\n\t\tscrapStart \u003d 0\n\t\n\ttotalEnd \u003d endCounts.getValueAt(0, 1)\n\tif totalEnd is None:\n\t\ttotalEnd \u003d 0\n\t\n\tscrapEnd \u003d endCounts.getValueAt(0, 2)\n\tif scrapEnd is None:\n\t\tscrapEnd \u003d 0\n\t\n\ttotal \u003d totalEnd - totalStart\n\tscrap \u003d scrapEnd - scrapStart\n\t\n\tpercentage \u003d ((total - scrap) / float(quantity)) * 100\n\tgood \u003d total - scrap\n\t#system.db.runPrepUpdate(\"INSERT INTO WorkOrderSchedulePercentComplete(WorkOrderScheduleID, PercentComplete, GoodParts) VALUES(?, ?, ?)\", [wosID, percentage, good])\n\t\n\tself.view.refreshBinding(\"custom.WorkOrderScheduleData\")",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.coord"
+  }
+}

@@ -1,0 +1,2218 @@
+{
+  "custom": {
+    "ProductionLine": "N/A"
+  },
+  "params": {
+    "DowntimeEvents": [
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719831600000
+        },
+        "itemId": 1,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719806400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719918000000
+        },
+        "itemId": 1,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719861540000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720004400000
+        },
+        "itemId": 1,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719961200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720090800000
+        },
+        "itemId": 1,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720047600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720177200000
+        },
+        "itemId": 1,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720134000000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720263600000
+        },
+        "itemId": 1,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720220400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720350000000
+        },
+        "itemId": 1,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720306800000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720497600000
+        },
+        "itemId": 1,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720393200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719932400000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719806400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719955801000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719950400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720018800000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719950400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720042201000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720036800000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720105200000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720036800000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720128601000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720123200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720191600000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720123200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720215001000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720209600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720278000000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720209600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720301401000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720296000000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720364400000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720296000000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720387801000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720382400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720497600000
+        },
+        "itemId": 2,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720382400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719831600000
+        },
+        "itemId": 5,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719806400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719918000000
+        },
+        "itemId": 5,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719886740000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720004400000
+        },
+        "itemId": 5,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719961200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720090800000
+        },
+        "itemId": 5,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720047600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720177200000
+        },
+        "itemId": 5,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720134000000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720263600000
+        },
+        "itemId": 5,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720220400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720350000000
+        },
+        "itemId": 5,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720306800000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720497600000
+        },
+        "itemId": 5,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720393200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719831600000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719806400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719869401000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719867600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719932400000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719891001000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719955801000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719950400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720018800000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719950400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720042201000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720036800000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720105200000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720036800000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720128601000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720123200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720191600000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720123200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720215001000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720209600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720278000000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720209600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720301401000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720296000000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720364400000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720296000000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720387801000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720382400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720497600000
+        },
+        "itemId": 6,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720382400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719831600000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719806400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719869401000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719867600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719932400000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719891001000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719955801000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719950400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720018800000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719950400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720042201000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720036800000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720105200000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720036800000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720128601000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720123200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720191600000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720123200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720215001000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720209600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720278000000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720209600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720301401000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720296000000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720364400000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720296000000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720387801000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720382400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720497600000
+        },
+        "itemId": 7,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720382400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719831600000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719806400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719869401000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719867600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719932400000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719891001000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719955801000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719950400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720018800000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1719950400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720042201000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720036800000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720105200000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720036800000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720128601000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720123200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720191600000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720123200000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720215001000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720209600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720278000000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720209600000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720301401000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720296000000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720364400000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720296000000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720387801000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720382400000
+        },
+        "style": {},
+        "underlay": false
+      },
+      {
+        "color": "#D0DF00",
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720497600000
+        },
+        "itemId": 8,
+        "opacity": 0.7,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1719906364594
+          ],
+          "$ts": 1720382400000
+        },
+        "style": {},
+        "underlay": false
+      }
+    ],
+    "events": [
+      {
+        "WorkOrderID": 42,
+        "duration": 2.25,
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1718745441502
+          ],
+          "$ts": 1718752157771
+        },
+        "eventId": 379,
+        "itemId": 5,
+        "label": "P08-IF3-11076-8",
+        "leadStyle": {},
+        "percentDone": 0,
+        "quantity": 100,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1718745441502
+          ],
+          "$ts": 1718744057771
+        },
+        "style": {}
+      },
+      {
+        "Quantity": "105",
+        "WorkOrderID": 41,
+        "duration": 1.8333333333333333,
+        "endDate": {
+          "$": [
+            "ts",
+            192,
+            1718745441502
+          ],
+          "$ts": 1718758757771
+        },
+        "eventId": 380,
+        "itemId": 5,
+        "label": "P08-IF3-11076-9",
+        "leadStyle": {},
+        "percentDone": 0,
+        "quantity": 100,
+        "startDate": {
+          "$": [
+            "ts",
+            192,
+            1718745441502
+          ],
+          "$ts": 1718752157771
+        },
+        "style": {}
+      }
+    ],
+    "scheduledEvent": {
+      "eventId": 380,
+      "itemId": 5
+    }
+  },
+  "propConfig": {
+    "custom.ProductionLine": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "woid": "{view.custom.eventDetails.WorkOrderID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineIDByWorkOrderID",
+          "returnFormat": "scalar"
+        },
+        "transforms": [
+          {
+            "code": "\tif value \u003d\u003d None:\n\t\treturn \u0027N/A\u0027\n\telse:\n\t\tpl \u003d system.db.runNamedQuery(\u0027ProductionLine/GetProductionLineNameByID\u0027, {\"id\": value})\n\t\treturn pl",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.eventDetails": {
+      "binding": {
+        "config": {
+          "path": "view.params.events"
+        },
+        "transforms": [
+          {
+            "code": "\tindex \u003d -1\n\teventId \u003d self.params.scheduledEvent.eventId\n\tfor items in range(len(value)):\n\t\tif value[items][\"eventId\"] \u003d\u003d eventId:\n\t\t\tindex \u003d items\n\treturn value[index] if index \u003e\u003d 0 else []",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": false
+    },
+    "params.DowntimeEvents": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.events": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.scheduledEvent": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 400,
+      "width": 500
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Equipment Name"
+        },
+        "position": {
+          "basis": "48px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.ProductionLine}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "paddingBottom": 10,
+            "paddingLeft": 10,
+            "paddingRight": 10,
+            "paddingTop": 10,
+            "textAlign": "left",
+            "wordWrap": "normal"
+          },
+          "textStyle": {
+            "fontSize": "1.5rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Work Order Name"
+        },
+        "position": {
+          "basis": "48px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.eventDetails.label"
+              },
+              "transforms": [
+                {
+                  "expression": "\"WorkOrder: \" + {value}",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "paddingBottom": 10,
+            "paddingLeft": 10,
+            "paddingRight": 10,
+            "paddingTop": 10,
+            "textAlign": "center",
+            "wordWrap": "normal"
+          },
+          "textStyle": {
+            "fontSize": "1.25rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\t\n\timport math.ceil\n\tquantity \u003d self.view.params.Event.quantity\t\t\n\tstartDate \u003d system.date.parse(self.props.value)\n\tduration \u003d int(math.ceil(1.0 * self.view.params.Event.quantity/self.view.params.Event.rate))\n\tendDate \u003d system.date.addHours(startDate, duration)\n\tparams \u003d {\"ID\":self.view.custom.eventDetails.eventId,\n\t\t\t\"StartTime\":startDate,\n\t\t\t\"EndTime\":endDate,\n\t\t\t\"Quantity\":quantity}\n\treturn system.db.runNamedQuery(\"Scheduling/UpdateWOScheduleEntry\", params)"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "DateTimePicker",
+              "visible": false
+            },
+            "position": {
+              "basis": "360px",
+              "display": false,
+              "grow": 1
+            },
+            "propConfig": {
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.eventDetails.startDate"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "formattedValue": "Jun 18, 2024 11:09 PM"
+            },
+            "type": "ia.input.date-time-picker"
+          },
+          {
+            "children": [
+              {
+                "custom": {
+                  "key": "value"
+                },
+                "events": {
+                  "component": {
+                    "onEditCellCommit": {
+                      "config": {
+                        "script": "\tworkOrderScheduleID \u003d self.view.custom.eventDetails.eventId\n\tstartTime \u003d self.view.custom.eventDetails.startDate\n\t\n\tendTime \u003d self.view.custom.eventDetails.endDate\n\tsystem.perspective.print(self.props.data[event.row][0])\n\tif self.props.data[event.row][0] \u003d\u003d \"Quantity\":\n\t\tqty \u003d event.value\n\t\tdur \u003d int(3600* system.db.runScalarPrepQuery((\"Select [dbo].[getDuration](?, ?)\"), [self.view.custom.eventDetails.WorkOrderID,qty]))\n\t\tlastStart \u003d startTime\n\t\tendTime \u003d system.date.addSeconds(lastStart, dur)\n\t\tcheckDt \u003d True\n\t\tincludedDT \u003d []\n\t\twhile (checkDt):\n\t\t\tcheckDt \u003d False\n\n\t\t\tfor item in self.view.params.DowntimeEvents:\n\t\t\t\tif int(self.view.custom.eventDetails.itemId) \u003d\u003d int(item[\"itemId\"]) and lastStart \u003c item[\"startDate\"] and endTime \u003e item[\"startDate\"] and item[\"startDate\"] not in includedDT:\n\t\t\t\t\tincludedDT.append(item[\"startDate\"])\n\t\t\t\t\tdur -\u003d system.date.secondsBetween(lastStart, item[\"startDate\"])\n\t\t\t\t\tlastStart \u003d item[\"endDate\"]\n\t\t\t\t\tendTime \u003d system.date.addSeconds(lastStart, int(dur))\n\t\t\t\t\tcheckDt \u003d True\t\n\t\tparams \u003d {\"ID\":workOrderScheduleID,\n\t\t\t\"StartTime\":startTime,\n\t\t\t\"EndTime\":endTime,\n\t\t\t\"Quantity\":event.value}\n\t\tsystem.perspective.print(params)\n\t\t#Use Scheduling.updateSchedule to update the start and end times properly\t\t\n\t\tresult \u003d system.db.runNamedQuery(\"Scheduling/UpdateWOScheduleEntry\", params)\n\t\tfor event in self.view.params.events:\n\t\t\tif event[\"eventId\"] \u003d\u003d self.view.params.scheduledEvent.eventId:\n\t\t\t\tevent[\"Quantity\"] \u003d qty\n\t\tsystem.perspective.closePopup(\"\")\n\t\tsystem.perspective.sendMessage(\"updatedQuantity\", {})\n\t\treturn result"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Table"
+                },
+                "position": {
+                  "basis": "400px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.data": {
+                    "binding": {
+                      "config": {
+                        "path": "view.params.scheduledEvent.eventId"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\tevent \u003d [x for x in self.view.params.events if x[\"eventId\"] \u003d\u003d value]\n\ttoRemove \u003d [\"style\", \"leadStyle\"]\n\treturn [[x, y] for x, y in event[0].items() if x not in toRemove]",
+                          "type": "script"
+                        },
+                        {
+                          "code": "\ttable \u003d {value[i][0] : value[i][1] for i in range(len(value))}\n\tcount \u003d table[\"quantity\"] * (table[\"percentDone\"] / 100.0)\n\tresTable \u003d {\n#\t\t\"Label\": table[\"label\"],\n\t\t\"Duration (Hours)\": table[\"duration\"],\n\t\t\"Quantity\": table[\"quantity\"],\n\t\t\"Production Count\": count,\n\t\t\"Percent Complete\": str(round(table[\"percentDone\"], 2)) + \u0027%\u0027,\n\t\t\"Start Date\": table[\"startDate\"],\n\t\t\"End Date\": table[\"endDate\"],\n\t}\n\tformatList \u003d list(resTable.items())\n\treturn formatList",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "cells": {
+                    "style": {
+                      "classes": "Tables/TableRow"
+                    }
+                  },
+                  "columns": [
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "column_1",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": "Label"
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": ""
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY HH:mm:ss",
+                      "editable": true,
+                      "field": "column_2",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": "Value"
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": ""
+                    }
+                  ],
+                  "headerStyle": {
+                    "classes": "Mobile/Header2"
+                  },
+                  "pager": {
+                    "bottom": false
+                  },
+                  "rows": {
+                    "style": {
+                      "fontSize": "1.25rem"
+                    }
+                  },
+                  "selection": {
+                    "enableRowSelection": false
+                  }
+                },
+                "type": "ia.display.table"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "200px",
+              "grow": 1
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "basis": "400px"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,16 @@
+EXEC [dbo].[sp_OEE_HourByHourMDI]
+	@pID 					= :pID,
+	@pStartTime				= :pStartTime,
+	@pWorkOrderID			= :pWorkOrderID,
+	@pProductionLineID 		= :pProductionLineID,
+	@pPlannedParts			= :pPlannedParts,
+	@pActualParts			= :pActualParts,
+	@pDowntime				= :pDowntime,
+	@pScrap					= :pScrap,
+	@pAvgSpeed				= :pAvgSpeed,
+	@pRecovery				= :pRecovery,
+	@pRecoveryModifiedBy	= :pRecoveryModifiedBy,
+	@pPlannedPartsModifiedBy		= :pPlannedPartsModifiedBy,
+	@pActualPartsModifiedBy			= :pActualPartsModifiedBy,
+	@pShiftScheduleID		= :pShiftScheduleID,
+	@pIsDelete				= :pIsDelete

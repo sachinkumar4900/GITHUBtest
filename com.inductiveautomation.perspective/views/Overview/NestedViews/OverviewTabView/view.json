@@ -1,0 +1,51 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 840
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "EquipmentOverviewTab"
+        },
+        "props": {
+          "path": "Overview/NestedViews/Tabs/EquipmentOverviewTab"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "OperatorInterfaceTab"
+        },
+        "position": {
+          "tabIndex": 1
+        },
+        "props": {
+          "path": "Overview/NestedViews/Tabs/OperatorInterfaceTab"
+        },
+        "type": "ia.display.view"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "contentStyle": {
+        "backgroundColor": "#EEEEEE"
+      },
+      "menuType": "modern",
+      "tabSize": {
+        "width": 175
+      },
+      "tabs": [
+        "Equipment Overview",
+        "Operator Interface"
+      ]
+    },
+    "type": "ia.container.tab"
+  }
+}

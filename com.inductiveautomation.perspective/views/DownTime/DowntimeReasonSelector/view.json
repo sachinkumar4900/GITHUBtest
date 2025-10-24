@@ -1,0 +1,179 @@
+{
+  "custom": {
+    "Reasons": [
+      {
+        "EquipmentID": 9,
+        "ID": 1
+      },
+      {
+        "EquipmentID": 9,
+        "ID": 2
+      },
+      {
+        "EquipmentID": 9,
+        "ID": 3
+      },
+      {
+        "EquipmentID": 9,
+        "ID": 4
+      }
+    ],
+    "StartingReasons": [
+      {
+        "EquipmentID": 24,
+        "ID": 5
+      },
+      {
+        "EquipmentID": 24,
+        "ID": 6
+      },
+      {
+        "EquipmentID": 24,
+        "ID": 7
+      },
+      {
+        "EquipmentID": 24,
+        "ID": 8
+      },
+      {
+        "EquipmentID": 24,
+        "ID": 61
+      }
+    ]
+  },
+  "params": {
+    "EquipmentID": 24,
+    "ReasonGroupID": 2
+  },
+  "propConfig": {
+    "custom.Reasons": {
+      "persistent": true
+    },
+    "custom.StartingReasons": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.EquipmentID}",
+            "Level": "1",
+            "ReasonGroupID": "{view.params.ReasonGroupID}"
+          },
+          "queryPath": "Downtime/GetDowntimeReasonIDsByDTReasonTypeIDNoProcessArea",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ReasonGroupID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.1125,
+          "width": 1
+        },
+        "props": {
+          "text": "Select Downtime Reason",
+          "textStyle": {
+            "backgroundColor": "#FFFFFF",
+            "fontSize": "30px",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "height": 0.875,
+          "width": 1,
+          "y": 0.12
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Reasons"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "alignContent": "flex-start",
+          "alignItems": "flex-start",
+          "elementStyle": {
+            "boxShadow": "2px 2px 5px",
+            "marginBottom": "0.5rem",
+            "marginLeft": "0.25rem",
+            "marginRight": "0.25rem",
+            "marginTop": "0.5rem"
+          },
+          "justify": "space-around",
+          "path": "DownTime/DowntimeReason",
+          "style": {
+            "backgroundColor": "#EEEEEE"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.2913,
+          "width": 0.5288,
+          "x": 0.1575,
+          "y": 0.5112
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Reasons"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "refresh-DowntimeReason-Entry",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tself.view.custom.Reasons \u003d payload\n\tself.getChild(\"FlexRepeater\").refreshBinding(\"props.instances\")",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.coord"
+  }
+}

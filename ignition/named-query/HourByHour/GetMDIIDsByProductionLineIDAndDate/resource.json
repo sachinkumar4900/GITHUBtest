@@ -1,0 +1,55 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 10,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "5a71da70650c5aff6282a289731a1b205b9b7c5da585b5f92966cc4fa9fb957d",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2025-01-28T05:00:22Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "ProductionLineID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "day",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "offset",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "Toggle",
+        "sqlType": 0
+      }
+    ]
+  }
+}

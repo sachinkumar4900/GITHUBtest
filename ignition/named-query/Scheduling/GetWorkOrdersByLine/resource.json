@@ -1,0 +1,45 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "40535d02a7088aa263e66def5a964cd512189bec5b0208f7551918b6b50253ec",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-06-13T16:04:20Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "WorkOrderID",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "quantity",
+        "sqlType": 3
+      }
+    ]
+  }
+}

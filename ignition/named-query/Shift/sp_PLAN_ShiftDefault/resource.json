@@ -1,0 +1,60 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "9f1b2a1b4521d0eaef70d38444e6ddbc4dfcf32934957bc2469d18ac98ba0305",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-03-21T01:40:07Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "pProductionLineTypeID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pProductionSiteID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pName",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pHours",
+        "sqlType": 4
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pStartTime",
+        "sqlType": 8
+      }
+    ]
+  }
+}

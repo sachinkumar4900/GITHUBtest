@@ -1,0 +1,1122 @@
+{
+  "custom": {
+    "Access": false,
+    "Data": [
+      {
+        "ActualParts": 0,
+        "ActualPartsModifiedBy": null,
+        "AvgSpeed": 0,
+        "Downtime": 421,
+        "ID": 225,
+        "MoorparkCumulativeActualParts": -1,
+        "MoorparkCumulativePlannedParts": 17993,
+        "MoorparkTime": 1736848826072,
+        "PartNumber": null,
+        "PlannedParts": 0,
+        "PlannedPartsModifiedBy": "admin",
+        "ProductionLineID": 4,
+        "ProductionLineTypeID": 2,
+        "Recovery": "Review\n",
+        "RecoveryModifiedBy": "Nunez Ash, Starlin",
+        "SanfordCumulativeActualParts": -1,
+        "SanfordCumulativePlannedParts": 23391,
+        "SanfordTime": 1736859626072,
+        "Scrap": 1,
+        "Shift": "1st Shift",
+        "ShiftScheduleID": 5088,
+        "StartTime": 1736874026072,
+        "WorkOrderID": null
+      }
+    ],
+    "DateDiff": "value",
+    "EndTime": {
+      "$": [
+        "ts",
+        192,
+        1752035082660
+      ],
+      "$ts": 1736877626072
+    },
+    "Performance": null
+  },
+  "params": {
+    "Font": 28,
+    "ID": 225
+  },
+  "propConfig": {
+    "custom.Access": {
+      "binding": {
+        "config": {
+          "expression": "{session.custom.Roles.Planner} || {session.custom.Roles.ValueStreamLead}"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.Data": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "ID": "{view.params.ID}"
+          },
+          "queryPath": "HourByHour/GetHourByHourMDIByID",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.DateDiff": {
+      "persistent": true
+    },
+    "custom.EndTime": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "id": "{view.params.ID}"
+          },
+          "queryPath": "HourByHour/GetNextStartTimeByID"
+        },
+        "transforms": [
+          {
+            "code": "\treturn value if value is not None else system.date.addHours(system.date.fromMillis(self.custom.Data[0].StartTime), 1)",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.Performance": {
+      "binding": {
+        "config": {
+          "expression": "{view.custom.Data[0].ActualParts} / {view.custom.Data[0].PlannedParts}"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "params.Font": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 136,
+      "width": 1442
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Hour Label"
+        },
+        "position": {
+          "height": 0.6538,
+          "width": 0.0746,
+          "x": 0.0003,
+          "y": 0.1755
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "addMinutes(fromMillis({view.custom.Data[0].StartTime}), {session.props.device.timezone.utcOffset} * 60)"
+              },
+              "transforms": [
+                {
+                  "expression": "dateFormat({value}, \"HH:mm\")",
+                  "type": "expression"
+                }
+              ],
+              "type": "expr"
+            }
+          },
+          "props.textStyle.color": {
+            "binding": {
+              "config": {
+                "expression": "switch({view.custom.Data[0].Shift}, \u00271st Shift\u0027, \u00272nd Shift\u0027, \u00273rd Shift\u0027, \u0027#D2CE9E\u0027, \u0027#C4BFB6\u0027, \u0027#ADCAB8\u0027, \u0027#AAAAAA\u0027)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.1025,
+          "x": 0.0795,
+          "y": 0.1452
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Data[0].PartNumber"
+              },
+              "type": "property"
+            }
+          },
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onRowClick": {
+              "config": {
+                "draggable": true,
+                "id": "-xekskn_",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "HourByHourMDIID": "{view.custom.Data[0].ID}"
+                },
+                "viewPath": "OEE/NestedViews/MDIQualityAndDelivery",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "Table"
+        },
+        "position": {
+          "height": 0.8852,
+          "width": 0.3071,
+          "x": 0.5124,
+          "y": 0.0361
+        },
+        "propConfig": {
+          "props.columns[0].style.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font} - 12"
+              },
+              "type": "expr"
+            }
+          },
+          "props.columns[1].style.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}-10"
+              },
+              "type": "expr"
+            }
+          },
+          "props.columns[2].style.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}-10"
+              },
+              "type": "expr"
+            }
+          },
+          "props.data": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "MDIID": "{view.custom.Data[0].ID}"
+                },
+                "queryPath": "HourByHour/GetQualityAndDeliveryByMDIID"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "columns": [
+            {
+              "align": "center",
+              "boolean": "checkbox",
+              "dateFormat": "MM/DD/YYYY",
+              "editable": false,
+              "field": "Reason",
+              "filter": {
+                "boolean": {
+                  "condition": ""
+                },
+                "date": {
+                  "condition": "",
+                  "value": ""
+                },
+                "enabled": false,
+                "number": {
+                  "condition": "",
+                  "value": ""
+                },
+                "string": {
+                  "condition": "",
+                  "value": ""
+                },
+                "visible": "on-hover"
+              },
+              "footer": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "header": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "justify": "left",
+              "nullFormat": {
+                "includeNullStrings": false,
+                "nullFormatValue": "",
+                "strict": false
+              },
+              "number": "value",
+              "numberFormat": "0,0.##",
+              "progressBar": {
+                "bar": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "max": 100,
+                "min": 0,
+                "track": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "value": {
+                  "enabled": true,
+                  "format": "0,0.##",
+                  "justify": "center",
+                  "style": {
+                    "classes": ""
+                  }
+                }
+              },
+              "render": "auto",
+              "resizable": true,
+              "sort": "none",
+              "sortable": true,
+              "strictWidth": false,
+              "style": {
+                "classes": "",
+                "fontWeight": "bold"
+              },
+              "toggleSwitch": {
+                "color": {
+                  "selected": "",
+                  "unselected": ""
+                }
+              },
+              "viewParams": {},
+              "viewPath": "",
+              "visible": true,
+              "width": 45
+            },
+            {
+              "align": "center",
+              "boolean": "checkbox",
+              "dateFormat": "MM/DD/YYYY",
+              "editable": false,
+              "field": "Occurrences",
+              "filter": {
+                "boolean": {
+                  "condition": ""
+                },
+                "date": {
+                  "condition": "",
+                  "value": ""
+                },
+                "enabled": false,
+                "number": {
+                  "condition": "",
+                  "value": ""
+                },
+                "string": {
+                  "condition": "",
+                  "value": ""
+                },
+                "visible": "on-hover"
+              },
+              "footer": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "header": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "justify": "center",
+              "nullFormat": {
+                "includeNullStrings": false,
+                "nullFormatValue": "",
+                "strict": false
+              },
+              "number": "value",
+              "numberFormat": "0,0.##",
+              "progressBar": {
+                "bar": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "max": 100,
+                "min": 0,
+                "track": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "value": {
+                  "enabled": true,
+                  "format": "0,0.##",
+                  "justify": "center",
+                  "style": {
+                    "classes": ""
+                  }
+                }
+              },
+              "render": "auto",
+              "resizable": true,
+              "sort": "none",
+              "sortable": true,
+              "strictWidth": false,
+              "style": {
+                "classes": "",
+                "fontWeight": "bold"
+              },
+              "toggleSwitch": {
+                "color": {
+                  "selected": "",
+                  "unselected": ""
+                }
+              },
+              "viewParams": {},
+              "viewPath": "",
+              "visible": true,
+              "width": 35
+            },
+            {
+              "align": "center",
+              "boolean": "checkbox",
+              "dateFormat": "MM/DD/YYYY",
+              "editable": true,
+              "field": "Countermeasure",
+              "filter": {
+                "boolean": {
+                  "condition": ""
+                },
+                "date": {
+                  "condition": "",
+                  "value": ""
+                },
+                "enabled": false,
+                "number": {
+                  "condition": "",
+                  "value": ""
+                },
+                "string": {
+                  "condition": "",
+                  "value": ""
+                },
+                "visible": "on-hover"
+              },
+              "footer": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "header": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "justify": "left",
+              "nullFormat": {
+                "includeNullStrings": false,
+                "nullFormatValue": "",
+                "strict": false
+              },
+              "number": "value",
+              "numberFormat": "0,0.##",
+              "progressBar": {
+                "bar": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "max": 100,
+                "min": 0,
+                "track": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "value": {
+                  "enabled": true,
+                  "format": "0,0.##",
+                  "justify": "center",
+                  "style": {
+                    "classes": ""
+                  }
+                }
+              },
+              "render": "auto",
+              "resizable": false,
+              "sort": "none",
+              "sortable": true,
+              "strictWidth": false,
+              "style": {
+                "classes": ""
+              },
+              "toggleSwitch": {
+                "color": {
+                  "selected": "",
+                  "unselected": ""
+                }
+              },
+              "viewParams": {},
+              "viewPath": "",
+              "visible": true,
+              "width": ""
+            }
+          ],
+          "enableHeader": false,
+          "pager": {
+            "bottom": false
+          },
+          "rows": {
+            "striped": {
+              "color": {
+                "even": "#FFFFFF",
+                "odd": "#D5D5D5"
+              }
+            }
+          }
+        },
+        "type": "ia.display.table"
+      },
+      {
+        "meta": {
+          "name": "Part Number_1"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.055,
+          "x": 0.2808,
+          "y": 0.1417
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID} \u003d 1, {view.custom.Data[0].SanfordCumulativePlannedParts}, {view.custom.Data[0].MoorparkCumulativePlannedParts})"
+              },
+              "type": "expr"
+            }
+          },
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number_2"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.0446,
+          "x": 0.4356,
+          "y": 0.1383
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID} \u003d 1, {view.custom.Data[0].SanfordCumulativeActualParts}, {view.custom.Data[0].MoorparkCumulativeActualParts})"
+              },
+              "type": "expr"
+            }
+          },
+          "props.textStyle.color": {
+            "binding": {
+              "config": {
+                "expression": "if(toInt({this.props.text}) \u003e toInt({../Part Number_1.props.text}), \"#008000\",\r\n\tif(toInt({this.props.text}) \u003c toInt({../Part Number_1.props.text}), \"#FF0000\", \"#000000\"))"
+              },
+              "type": "expr"
+            }
+          },
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number_5"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.0571,
+          "x": 0.9393,
+          "y": 0.0798
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if(isNull({view.custom.Data[0].RecoveryModifiedBy}), \"\", {view.custom.Data[0].RecoveryModifiedBy})"
+              },
+              "type": "expr"
+            }
+          },
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}-12"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontWeight": "normal",
+            "overflowX": "auto"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tparts \u003d self.props.value\n\tuser \u003d self.session.props.auth.user.userName\n\tid \u003d self.view.custom.Data[0].ID\n\t\n\tsystem.db.runPrepUpdate(\"UPDATE HourByHourMDI SET PlannedParts \u003d ?, PlannedPartsModifiedBy \u003d ? WHERE ID \u003d ?\", [parts, user, id])\n\t\n\tsystem.perspective.sendMessage(\"modified-update\", {})"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "NumericEntryField"
+        },
+        "position": {
+          "height": 0.244,
+          "width": 0.0655,
+          "x": 0.1916,
+          "y": 0.3739
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.Roles.TeamLead} || {session.custom.Roles.GroupLead} || {session.custom.Roles.ValueStreamLead} || {session.custom.Roles.Admin}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Data[0].PlannedParts"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.input.numeric-entry-field"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tparts \u003d self.props.value\n\tuser \u003d self.session.props.auth.user.userName\n\tid \u003d self.view.custom.Data[0].ID\n\tif(self.view.custom.Data[0].ProductionLineTypeID !\u003d1):\n\t\tparts +\u003d self.view.custom.Data[0].Scrap\n\t\n\tsystem.db.runPrepUpdate(\"UPDATE HourByHourMDI SET ActualParts \u003d ?, PlannedPartsModifiedBy \u003d ? WHERE ID \u003d ?\", [parts, user, id])\n\t\n\tsystem.perspective.sendMessage(\"modified-update\", {})"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tself.view.refreshBinding(\"custom.Data\")"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "NumericEntryField_0"
+        },
+        "position": {
+          "height": 0.244,
+          "width": 0.0655,
+          "x": 0.3539,
+          "y": 0.3789
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.Roles.TeamLead} || {session.custom.Roles.GroupLead} || {session.custom.Roles.ValueStreamLead} || {session.custom.Roles.Admin}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.color": {
+            "binding": {
+              "config": {
+                "expression": "if({this.props.value} \u003e {../NumericEntryField.props.value}, \"#008000\",\r\n\tif({this.props.value} \u003c {../NumericEntryField.props.value}, \"#FF0000\", \"#000000\"))"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.Data[0].ProductionLineTypeID} \u003d 1,\r\n\t{view.custom.Data[0].ActualParts},\r\n\t{view.custom.Data[0].ActualParts} - {view.custom.Data[0].Scrap}\r\n)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.input.numeric-entry-field"
+      },
+      {
+        "meta": {
+          "name": "TextArea"
+        },
+        "position": {
+          "height": 0.8837,
+          "width": 0.1081,
+          "x": 0.8256,
+          "y": 0.0519
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.Roles.TeamLead} || {session.custom.Roles.GroupLead} || {session.custom.Roles.ValueStreamLead} || {session.custom.Roles.Admin} "
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.backgroundColor": {
+            "binding": {
+              "config": {
+                "expression": "if({this.props.enabled}, \"#FFFFFF\", \"#FFFFCC\" )\r\n"
+              },
+              "type": "expr"
+            }
+          },
+          "props.style.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}-12"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if(isNull({view.custom.Data[0].Recovery}), \"\", {view.custom.Data[0].Recovery})"
+              },
+              "type": "expr"
+            },
+            "onChange": {
+              "enabled": null,
+              "script": "\tif origin \u003d\u003d \"Browser\":\n\t\n\t\trecovery \u003d self.props.text\n\t\tuser \u003d self.session.props.auth.user.userName\n\t\tid \u003d self.view.custom.Data[0].ID\n\t\t\n\t\tsystem.db.runPrepUpdate(\"UPDATE HourByHourMDI SET [Recovery] \u003d ?, RecoveryModifiedBy \u003d ? WHERE ID \u003d ?\", [recovery, user, id])\n\t\t\n\t\tsystem.perspective.sendMessage(\"modified-update\", {})"
+            }
+          }
+        },
+        "type": "ia.input.text-area"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tif(self.view.custom.Data[0].ProductionLineID !\u003d 11):\n\t\tsystem.perspective.openPopup(\"IM\",\"OEE/NestedViews/IMCycleTime\",params \u003d{\u0027StartDate\u0027: self.view.custom.Data[0].StartTime, \u0027ProductionLineID\u0027:self.view.custom.Data[0].ProductionLineID})\n\telse:\n\t\tsystem.perspective.openPopup(\"IM\",\"OEE/NestedViews/P08CycleTime\",params \u003d{\u0027StartDate\u0027: self.view.custom.Data[0].StartTime})\n\t\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "height": 0.2273,
+          "width": 0.0209,
+          "x": 0.3797,
+          "y": 0.7273
+        },
+        "props": {
+          "path": "material/help"
+        },
+        "type": "ia.display.icon"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": -0.0014,
+      "y": -0.0076
+    },
+    "props": {
+      "mode": "percent",
+      "pipes": [
+        {
+          "appearance": "auto",
+          "end": "none",
+          "fill": "",
+          "flanges": true,
+          "lineVariant": "solid",
+          "name": "pipe",
+          "origin": {
+            "connections": [
+              {
+                "connections": [],
+                "x": 0.0765,
+                "y": 1
+              }
+            ],
+            "x": 0.0765,
+            "y": 0
+          },
+          "start": "none",
+          "stroke": "",
+          "visible": true,
+          "width": 2
+        },
+        {
+          "appearance": "simple",
+          "end": "none",
+          "fill": "",
+          "flanges": true,
+          "lineVariant": "solid",
+          "name": "pipe",
+          "origin": {
+            "connections": [
+              {
+                "connections": [],
+                "x": 0.185,
+                "y": 1
+              }
+            ],
+            "x": 0.185,
+            "y": 0
+          },
+          "start": "none",
+          "stroke": "",
+          "visible": true,
+          "width": 2
+        },
+        {
+          "appearance": "simple",
+          "end": "none",
+          "fill": "",
+          "flanges": true,
+          "lineVariant": "solid",
+          "name": "pipe",
+          "origin": {
+            "connections": [
+              {
+                "connections": [],
+                "x": 0.275,
+                "y": 1
+              }
+            ],
+            "x": 0.275,
+            "y": 0
+          },
+          "start": "none",
+          "stroke": "",
+          "visible": true,
+          "width": 2
+        },
+        {
+          "appearance": "simple",
+          "end": "none",
+          "fill": "",
+          "flanges": true,
+          "lineVariant": "solid",
+          "name": "pipe",
+          "origin": {
+            "connections": [
+              {
+                "connections": [],
+                "x": 0.35,
+                "y": 1
+              }
+            ],
+            "x": 0.35,
+            "y": 0
+          },
+          "start": "none",
+          "stroke": "",
+          "visible": true,
+          "width": 2
+        },
+        {
+          "appearance": "simple",
+          "end": "none",
+          "fill": "",
+          "flanges": true,
+          "lineVariant": "solid",
+          "name": "pipe",
+          "origin": {
+            "connections": [
+              {
+                "connections": [],
+                "x": 0.43,
+                "y": 1
+              }
+            ],
+            "x": 0.43,
+            "y": 0
+          },
+          "start": "none",
+          "stroke": "",
+          "visible": true,
+          "width": 2
+        },
+        {
+          "appearance": "simple",
+          "end": "none",
+          "fill": "",
+          "flanges": true,
+          "lineVariant": "solid",
+          "name": "pipe",
+          "origin": {
+            "connections": [
+              {
+                "connections": [],
+                "x": 0.5,
+                "y": 1
+              }
+            ],
+            "x": 0.5,
+            "y": 0
+          },
+          "start": "none",
+          "stroke": "",
+          "visible": true,
+          "width": 2
+        },
+        {
+          "appearance": "simple",
+          "end": "none",
+          "fill": "",
+          "flanges": true,
+          "lineVariant": "solid",
+          "name": "pipe",
+          "origin": {
+            "connections": [
+              {
+                "connections": [],
+                "x": 0.823,
+                "y": 1
+              }
+            ],
+            "x": 0.823,
+            "y": 0
+          },
+          "start": "none",
+          "stroke": "",
+          "visible": true,
+          "width": 2
+        },
+        {
+          "appearance": "simple",
+          "end": "none",
+          "fill": "",
+          "flanges": true,
+          "lineVariant": "solid",
+          "name": "pipe",
+          "origin": {
+            "connections": [
+              {
+                "connections": [],
+                "x": 0.937,
+                "y": 1
+              }
+            ],
+            "x": 0.937,
+            "y": 0
+          },
+          "start": "none",
+          "stroke": "",
+          "visible": true,
+          "width": 2
+        },
+        {
+          "appearance": "auto",
+          "end": "none",
+          "fill": "",
+          "flanges": true,
+          "lineVariant": "solid",
+          "name": "pipe_0",
+          "origin": {
+            "connections": [],
+            "x": 0.4449,
+            "y": 0.5021
+          },
+          "start": "none",
+          "stroke": "",
+          "visible": true,
+          "width": 10
+        }
+      ],
+      "style": {
+        "borderStyle": "solid",
+        "borderWidth": 2,
+        "overflowX": "hidden",
+        "overflowY": "hidden"
+      }
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "modified-update",
+          "pageScope": true,
+          "script": "\tself.view.refreshBinding(\"custom.Data\")",
+          "sessionScope": false,
+          "viewScope": false
+        },
+        {
+          "messageType": "quality-and-delivery-update",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tid \u003d payload[\"id\"]\n\t\n\tif id \u003d\u003d self.view.params.ID:\n\t\tself.getChild(\"Table\").refreshBinding(\"props.data\")",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.coord"
+  }
+}

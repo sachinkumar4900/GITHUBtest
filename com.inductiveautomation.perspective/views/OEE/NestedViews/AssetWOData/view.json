@@ -1,0 +1,388 @@
+{
+  "custom": {
+    "AndonGroup": 5,
+    "AndonGroupData": "Team Lead                                         ",
+    "AndonHeader": "A39A16F8-E22B-441A-9DBB-BA728305EDBA",
+    "AndonReason": "Troubleshooting",
+    "AndonStatus": 6,
+    "Asset": "IM54",
+    "DTReason": null,
+    "DowntimeEventID": -1,
+    "EquipmentID": 9,
+    "ProductionLineID": 9,
+    "Status": 6,
+    "WorkOrder": "",
+    "WorkOrderData": []
+  },
+  "params": {
+    "tagPath": "[default]Moorpark/Molding/IM54"
+  },
+  "propConfig": {
+    "custom.AndonGroup": {
+      "binding": {
+        "config": {
+          "path": "view.custom.ProductionLineID"
+        },
+        "transforms": [
+          {
+            "code": "\tagID \u003d system.db.runNamedQuery(\u0027Andon/GetAndonGroupByProductionLineID\u0027, {\"ProductionLineID\": value})[0][0]\n\t#Set Andon Group Name\n\tif agID:\n\t\tag \u003d system.db.runNamedQuery(\u0027Andon/GetAndonGroupNameByID\u0027, {\"ID\": agID})\n\t\treturn agID\n\telse:\n\t\treturn 5",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.AndonGroupData": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "AndonGroupID": "{view.custom.AndonGroup}"
+          },
+          "queryPath": "OperatorInterface/GetAndonGroupByID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.AndonHeader": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "productionLineID": "{view.custom.ProductionLineID}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "1"
+          },
+          "queryPath": "Andon/GetEventHeaderByProductionLineID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.AndonReason": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "AndonHeader": "{view.custom.AndonHeader}"
+          },
+          "queryPath": "Andon/GetActiveEventReasonByHeaderID",
+          "returnFormat": "scalar"
+        },
+        "transforms": [
+          {
+            "code": "\tif value is None:\n\t\treturn value\n\telse:\n\t\treason \u003d system.db.runNamedQuery(\"Downtime/GetDowntimeReasonByID\", {\"ReasonID\": value})\n\t\treturn reason[0][0]",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.AndonStatus": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EventHeaderID": "{this.custom.AndonHeader}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "1"
+          },
+          "queryPath": "Andon/GetEventStatusByEventHeaderID",
+          "returnFormat": "scalar"
+        },
+        "transforms": [
+          {
+            "code": "\tif value \u003d\u003d None:\n\t\treturn 7\n\telse:\n\t\treturn value",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.Asset": {
+      "binding": {
+        "config": {
+          "expression": "split({view.params.tagPath}, \u0027/\u0027)"
+        },
+        "transforms": [
+          {
+            "code": "\treturn value.getValueAt(value.getRowCount()-1, 0)",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.DTReason": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EventID": "{view.custom.DowntimeEventID}"
+          },
+          "queryPath": "Downtime/GetDowntimeEventReasonByDowntimeID",
+          "returnFormat": "scalar"
+        },
+        "transforms": [
+          {
+            "code": "\tif value \u003d\u003d None:\n\t\treturn value\n\telse:\n\t\treason \u003d system.db.runNamedQuery(\"Downtime/GetDowntimeReasonByID\", {\"ReasonID\": value})\n\t\treturn reason[0][0]",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.DowntimeEventID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "ProductionLineID": "{view.custom.ProductionLineID}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "1"
+          },
+          "queryPath": "Downtime/GetActiveDowntimeEventByProductionLineID",
+          "returnFormat": "scalar"
+        },
+        "transforms": [
+          {
+            "code": "\tif value \u003d\u003d None:\n\t\treturn -1\n\telse:\n\t\treturn value",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.EquipmentID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "plID": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "Equipment/GetProductionLineAsEquipment"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.ProductionLineID": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "1": "{view.params.tagPath}"
+          },
+          "tagPath": "{1}/OEE/ProductionLineID"
+        },
+        "type": "tag"
+      },
+      "persistent": true
+    },
+    "custom.Status": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EventHeaderID": "{this.custom.AndonHeader}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "1"
+          },
+          "queryPath": "Andon/GetEventStatusByEventHeaderID",
+          "returnFormat": "scalar"
+        },
+        "transforms": [
+          {
+            "code": "\tif value \u003d\u003d None:\n\t\treturn 7\n\telse:\n\t\treturn value",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.WorkOrder": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "productionLineID": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "WorkOrder/GetActiveWorkOrderNameForAsset"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.WorkOrderData": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "pWorkOrderID": "{view.params.WorkOrderID}"
+          },
+          "queryPath": "WorkOrder/GetWorkOrderMoldingDataByID",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 100,
+      "width": 300
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "params": {
+                  "ProductionLineID": "{view.custom.ProductionLineID}"
+                },
+                "view": "Overview/EquipmentOverview"
+              },
+              "scope": "C",
+              "type": "nav"
+            }
+          }
+        },
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.32,
+          "width": 0.41,
+          "x": 0.03,
+          "y": 0.09
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Asset"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "color": "#4747FF",
+            "fontSize": 24,
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.32,
+          "width": 0.92,
+          "x": 0.03,
+          "y": 0.5
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "productionLineID": "{view.custom.ProductionLineID}"
+                },
+                "queryPath": "WorkOrder/GetActiveWorkOrderNameForAsset"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d None or value \u003d\u003d \u0027\u0027:\n\t\treturn \"Not Scheduled\"\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "height": 0.32,
+          "width": 0.41,
+          "x": 0.56,
+          "y": 0.09
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.DowntimeEventID} \u003d -1 , \r\n\tif({view.custom.AndonStatus} \u003d 6, \r\n\t\t\u0027\u0027,\r\n\t\tif({view.custom.AndonStatus} \u003e 2 \u0026\u0026 {view.custom.AndonStatus} \u003c 6, \r\n\t\t\t{view.custom.AndonReason}, \r\n\t\t\t{view.custom.AndonGroupData})),  \r\n\tif(isNull({view.custom.DTReason}), \r\n\t\t{view.custom.AndonGroupData}, \r\n\t\t{view.custom.DTReason}))"
+              },
+              "type": "expr"
+            }
+          },
+          "props.textStyle.color": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.DTReason} \u003d \"Mold Change\" || {view.custom.DTReason} \u003d \"Changeover\", \u0027#006E96\u0027,\r\n\tif({view.custom.DowntimeEventID} !\u003d -1, \u0027#E52C4F\u0027, //Red on stopped\r\n\t\tif({view.custom.AndonStatus} !\u003d 6, \u0027#FFE040\u0027, //Yellow on Andon but running\r\n\t\t\tif(len({view.custom.WorkOrderData}) \u003c\u003d 0, \u0027#006E96\u0027, //Green on running work order\r\n\t\t\t\t\u0027#6EB70B\u0027)))) //Blue on no work order, running normally otherwise"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": -0.0133,
+      "y": -0.0206
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "backgroundColor": "#FFFFFF",
+        "borderBottomColor": "#EEEEEE",
+        "borderBottomLeftRadius": 8,
+        "borderBottomRightRadius": 8,
+        "borderBottomStyle": "solid",
+        "borderTopLeftRadius": 8,
+        "borderTopRightRadius": 8
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

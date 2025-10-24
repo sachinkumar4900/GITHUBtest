@@ -1,0 +1,170 @@
+{
+  "custom": {},
+  "params": {
+    "daysDisplayed": "value",
+    "downtimeEvents": [],
+    "event": {},
+    "scheduledEvents": [],
+    "startTime": "value"
+  },
+  "propConfig": {
+    "params.daysDisplayed": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.downtimeEvents": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.event": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.scheduledEvents": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.startTime": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 296,
+      "width": 600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.2027,
+          "width": 1
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#CCCC00",
+            "borderBottomStyle": "solid",
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden"
+          },
+          "text": "Delete Work Order",
+          "textStyle": {
+            "color": "#000000",
+            "paddingLeft": "1rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Calling_Label"
+        },
+        "position": {
+          "height": 0.4054,
+          "width": 1,
+          "y": 0.2027
+        },
+        "props": {
+          "style": {
+            "borderBottomStyle": "solid",
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden"
+          },
+          "text": "Would you like to delete this Work Order?",
+          "textStyle": {
+            "fontSize": "1.5rem",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tscheduled \u003d self.view.params.scheduledEvents\n\tevent \u003d self.view.params.event\n\teventStart \u003d system.date.fromMillis(event.start)\n\tfor count, toFind in enumerate(scheduled):\n\t    if toFind.eventId \u003d\u003d event.eventId and toFind.itemId \u003d\u003d event.itemId:\n\t    \n\t    \tparams \u003d {\"WorkOrderScheduleID\":event.eventId,\n\t    \t\t\t\t\"startTime\":self.view.params.startTime\n\t    \t\t\t\t}\n\t    \t#self.custom.params \u003d params\n\t    \tsystem.db.runNamedQuery(\"Scheduling/DeleteWOScheduleEntry\", params)\n    \t\t\n\t        del scheduled[count]\n\t        break\n\t        \n\t\n\tnow \u003d system.date.now()\n\tparams \u003d {\"ProductionLineID\":event.itemId,\t\"StartTime\":self.view.params.startTime,\t\"EndTime\":system.date.addDays(self.view.params.startTime, self.view.params.daysDisplayed)}\n\tevents \u003d system.db.runNamedQuery(\"Scheduling/GetCurrentWOSchedule\",params)\n\t\n\tif len(events) \u003e 0:\n\t\tdte \u003d self.view.params.downtimeEvents\n\t\tendTime \u003d events[0][\"EndTime\"] if system.date.isBefore(events[0][\"EndTime\"], now) else now\n\t\tfor entry in events:\n\t\t\tif system.date.isAfter(entry[\"StartTime\"], now) and entry[\"ID\"] !\u003d event.eventId:\n\t\t\t\tendTime \u003d Scheduling.updateEvent(entry[\"ID\"],endTime,dte,entry[\"Quantity\"],event.itemId)[0][0]\n\t\t\telif system.date.isAfter(entry[\"EndTime\"], now):\n\t\t\t\tendTime \u003d entry[\"EndTime\"]"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.closePopup(\u0027delSched\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Yes_Down"
+        },
+        "position": {
+          "height": 0.2297,
+          "width": 0.2667,
+          "x": 0.12,
+          "y": 0.6723
+        },
+        "props": {
+          "primary": false,
+          "text": "Yes",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tsystem.perspective.closePopup(\"delSched\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "No_Down"
+        },
+        "position": {
+          "height": 0.2297,
+          "width": 0.2667,
+          "x": 0.5867,
+          "y": 0.6723
+        },
+        "props": {
+          "primary": false,
+          "text": "No",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": -28,
+      "y": 0
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

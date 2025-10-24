@@ -1,0 +1,50 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "1",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": true,
+    "lastModificationSignature": "8bd2990da83213fa1fc7c0fda638ff307078fb82bd766bebd3d4387f3652bcec",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-06-25T00:27:51Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "StartTime",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "EndTime",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "plID",
+        "sqlType": 2
+      }
+    ]
+  }
+}

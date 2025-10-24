@@ -1,0 +1,3323 @@
+{
+  "custom": {
+    "EndDate": {
+      "$": [
+        "ts",
+        192,
+        1745428953536
+      ],
+      "$ts": 1745625600000
+    },
+    "LEndDate": {
+      "$": [
+        "ts",
+        192,
+        1745428953517
+      ],
+      "$ts": 1743379200000
+    },
+    "LMonth": 3,
+    "LStartDate": {
+      "$": [
+        "ts",
+        192,
+        1745428953520
+      ],
+      "$ts": 1740873600000
+    },
+    "Month": 4,
+    "OTD_Target": 86,
+    "StartDate": {
+      "$": [
+        "ts",
+        192,
+        1745428953599
+      ],
+      "$ts": 1743465600000
+    },
+    "Year": 2025
+  },
+  "params": {
+    "ProductionLineID": 4
+  },
+  "propConfig": {
+    "custom.EndDate": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{view.custom.Month}",
+            "ProductionSiteID": "{session.custom.ProductionSiteID}",
+            "Year": "getYear(now())"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,1]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.LEndDate": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{view.custom.LMonth}",
+            "ProductionSiteID": "{session.custom.ProductionSiteID}",
+            "Year": "getYear(now())"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,1]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.LMonth": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "DateNow": "addMonths(now(),-1)",
+            "ProductionSiteID": "{session.custom.ProductionSiteID}"
+          },
+          "queryPath": "Lean_Query/CurrentMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,0]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.LStartDate": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{view.custom.LMonth}",
+            "ProductionSiteID": "{session.custom.ProductionSiteID}",
+            "Year": "getYear(now())"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,0]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.Month": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "DateNow": "addMonths(now(),0)",
+            "ProductionSiteID": "{session.custom.ProductionSiteID}"
+          },
+          "queryPath": "Lean_Query/CurrentMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,0]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.OTD_Target": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{view.custom.Month}",
+            "ProductionSiteID": "{session.custom.ProductionSiteID}",
+            "Year": "{view.custom.Year}"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,4]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.StartDate": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{view.custom.Month}",
+            "ProductionSiteID": "{session.custom.ProductionSiteID}",
+            "Year": "getYear(Now())"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,0]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.Year": {
+      "binding": {
+        "config": {
+          "expression": "getYear(now())"
+        },
+        "transforms": [
+          {
+            "code": "\treturn int(value)",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "params.ProductionLineID": {
+      "onChange": {
+        "enabled": null,
+        "script": "\tself.getChild(\"root\").getChild(\"CoordinateContainer\").getChild(\"Image\").props.style \u003d {\"classes\":\"loader-28\"}\n\tself.getChild(\"root\").getChild(\"CoordinateContainer_0\").getChild(\"Image\").props.style \u003d {\"classes\":\"loader-28\"}\n\tself.getChild(\"root\").getChild(\"CoordinateContainer_1\").getChild(\"Image\").props.style \u003d {\"classes\":\"loader-28\"}"
+      },
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 900
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "basis": "260px"
+            },
+            "props": {
+              "style": {
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "100px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "alignItems": "center",
+                "justifyContent": "center"
+              },
+              "text": "DELIVERY",
+              "textStyle": {
+                "color": "#0000D9",
+                "fontSize": 35,
+                "fontWeight": "bold",
+                "key": "value",
+                "marginBottom": "5px",
+                "marginTop": "5px"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "130px"
+                },
+                "props": {
+                  "style": {
+                    "alignItems": "center",
+                    "justifyContent": "center"
+                  },
+                  "text": "OTD Target",
+                  "textStyle": {
+                    "color": "#FF8C00",
+                    "fontSize": 22,
+                    "fontWeight": "bold",
+                    "key": "value",
+                    "marginBottom": "5px",
+                    "marginTop": "5px"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Label_0"
+                },
+                "position": {
+                  "basis": "20px"
+                },
+                "props": {
+                  "style": {
+                    "alignItems": "center",
+                    "justifyContent": "center"
+                  },
+                  "text": "%",
+                  "textStyle": {
+                    "color": "#FF8C00",
+                    "fontSize": 22,
+                    "fontWeight": "bold",
+                    "key": "value",
+                    "marginBottom": "5px",
+                    "marginTop": "5px"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Label_1"
+                },
+                "position": {
+                  "basis": "50px"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.OTD_Target"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "paddingLeft": "10px"
+                  },
+                  "textStyle": {
+                    "color": "#000000",
+                    "fontSize": 22,
+                    "fontWeight": "bold",
+                    "key": "value",
+                    "marginBottom": "5px",
+                    "marginTop": "5px"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "210px"
+            },
+            "props": {
+              "style": {
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "FlexContainer_1"
+            },
+            "position": {
+              "basis": "20px"
+            },
+            "props": {
+              "style": {
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "height": 0.04,
+          "width": 1
+        },
+        "props": {
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "solid",
+            "borderWidth": 3,
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "322px"
+            },
+            "props": {
+              "style": {
+                "alignItems": "center",
+                "justifyContent": "center",
+                "paddingLeft": 20
+              },
+              "text": "TTI Description",
+              "textStyle": {
+                "color": "#0000D9",
+                "fontSize": 25,
+                "fontWeight": "bold",
+                "key": "value",
+                "marginBottom": "5px",
+                "marginTop": "5px"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "TextField"
+                },
+                "position": {
+                  "basis": "150px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "backgroundColor": "#0000FF",
+                    "color": "#FFFFFF",
+                    "fontFamily": "Roboto",
+                    "fontSize": 22,
+                    "fontWeight": "bold",
+                    "textAlign": "center"
+                  },
+                  "text": "On Time In Full (Quad 1)"
+                },
+                "type": "ia.input.text-field"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "color": "#000000",
+                "fontFamily": "Roboto",
+                "fontSize": 22,
+                "fontWeight": "bold",
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_0"
+        },
+        "position": {
+          "height": 0.05,
+          "width": 0.98,
+          "y": 0.035
+        },
+        "props": {
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "solid",
+            "borderWidth": 3,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 5,
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "TextField"
+                },
+                "position": {
+                  "basis": "150px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textAlign": "center"
+                  },
+                  "text": "Daily lines shipped on time vs first promise date at a 100% service level for Quad 1 Customers."
+                },
+                "type": "ia.input.text-field"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "color": "#000000",
+                "fontFamily": "Roboto",
+                "fontSize": 22,
+                "fontWeight": "bold",
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_5"
+        },
+        "position": {
+          "height": 0.04,
+          "width": 0.98,
+          "y": 0.09
+        },
+        "props": {
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "solid",
+            "borderWidth": 3,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "322px"
+            },
+            "props": {
+              "style": {
+                "alignItems": "center",
+                "justifyContent": "center",
+                "paddingLeft": 20
+              },
+              "text": "Owner",
+              "textStyle": {
+                "color": "#000000",
+                "fontSize": 25,
+                "fontWeight": "bold",
+                "key": "value",
+                "marginBottom": "5px",
+                "marginTop": "5px"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "TextField"
+                },
+                "position": {
+                  "basis": "150px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": 22,
+                    "fontWeight": "normal",
+                    "textAlign": "center"
+                  },
+                  "text": "Alyssa Davis \u0026 Dave Mills"
+                },
+                "type": "ia.input.text-field"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "basis": "260px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "color": "#000000",
+                "fontFamily": "Roboto",
+                "fontSize": 22,
+                "fontWeight": "bold",
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_6"
+        },
+        "position": {
+          "height": 0.04,
+          "width": 0.98,
+          "y": 0.13
+        },
+        "props": {
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "solid",
+            "borderWidth": 3,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "borderStyle": "solid",
+                        "fontFamily": "Roboto",
+                        "fontSize": 25,
+                        "textAlign": "center"
+                      },
+                      "text": "Target"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "position": {
+                  "basis": "56px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "40px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "0",
+                              "startTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n\t\treturn \u0027#000000\u0027  # Black\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "0",
+                              "startTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount()-1, \"TargetPlannedParts\")\n        return round(latest_row,0)\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "backgroundColor": "#FFFFFF",
+                        "fontFamily": "Roboto",
+                        "fontSize": 40,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_0"
+                },
+                "position": {
+                  "basis": "60px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "borderStyle": "solid",
+                        "fontFamily": "Roboto",
+                        "fontSize": 24,
+                        "textAlign": "center"
+                      },
+                      "text": "Month to Date Target"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_1"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "20px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "1",
+                              "startTime": "{view.custom.StartDate}",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n\t\treturn \u0027#000000\u0027  # Black\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "1",
+                              "startTime": "{view.custom.StartDate}",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount()-1, \"TargetPlannedParts\")\n        return round(latest_row,0)\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "backgroundColor": "#FFFFFF",
+                        "fontFamily": "Roboto",
+                        "fontSize": 26,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_2"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "borderStyle": "solid",
+                        "fontFamily": "Roboto",
+                        "fontSize": 24,
+                        "textAlign": "center"
+                      },
+                      "text": "Year to Date Target"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_3"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "1",
+                              "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n\t\treturn \u0027#000000\u0027  # Black\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "2",
+                              "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount()-1, \"TargetPlannedParts\")\n        return round (latest_row,0)\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "backgroundColor": "#FFFFFF",
+                        "fontFamily": "Roboto",
+                        "fontSize": 26,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_4"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "basis": "276px",
+              "grow": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "borderStyle": "solid",
+                        "fontFamily": "Roboto",
+                        "fontSize": 25,
+                        "textAlign": "center"
+                      },
+                      "text": "Actual"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "position": {
+                  "basis": "56px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "393px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.backgroundColor": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "0",
+                              "startTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        # Fetch the last row index\n        last_row_index \u003d value.getRowCount() - 1\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(last_row_index, \u0027MissedParts\u0027)\n        value2 \u003d value.getValueAt(last_row_index, \u0027TargetPlannedParts\u0027)\n        \n        # Compare the values and return the corresponding color\n        if(value1 \u003e value2):\n            return \u0027#FFCCCC\u0027  # Red\n        elif (value1 \u003d\u003d value2):\n        \treturn \u0027#FFFFFF\u0027 #White\n        else:\n            return \u0027#CCFFCC\u0027  # Green\n    else:\n        return \u0027#FFFFFF\u0027  # White for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "0",
+                              "startTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        # Fetch the last row index\n        last_row_index \u003d value.getRowCount() - 1\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(last_row_index, \u0027MissedParts\u0027)\n        value2 \u003d value.getValueAt(last_row_index, \u0027TargetPlannedParts\u0027)\n        \n        # Compare the values and return the corresponding color\n    \tif value1 \u003e value2:\n            return \u0027#FF0000\u0027  # Red\n     \telif value1 \u003d\u003d value2:\n            return \u0027#000000\u0027  # Black\n        else:\n            return \u0027#008000\u0027  # Green\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "0",
+                              "startTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "targetPercent": "0",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount() - 1, \"MissedParts\")\n        return round(latest_row,0)\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 40,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_0"
+                },
+                "position": {
+                  "basis": "60px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "borderStyle": "solid",
+                        "fontFamily": "Roboto",
+                        "fontSize": 24,
+                        "textAlign": "center"
+                      },
+                      "text": "Month to Date Actual"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_1"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.backgroundColor": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "1",
+                              "startTime": "{view.custom.StartDate}",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        # Fetch the last row index\n        last_row_index \u003d value.getRowCount() - 1\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(last_row_index, \u0027MissedParts\u0027)\n        value2 \u003d value.getValueAt(last_row_index, \u0027TargetPlannedParts\u0027)\n        \n        # Compare the values and return the corresponding color\n        if(value1 \u003e value2):\n            return \u0027#FFCCCC\u0027  # Red\n        elif (value1 \u003d\u003d value2):\n        \treturn \u0027#FFFFFF\u0027 #White\n        else:\n            return \u0027#CCFFCC\u0027  # Green\n    else:\n        return \u0027#FFFFFF\u0027  # White for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "1",
+                              "startTime": "{view.custom.StartDate}",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        # Fetch the last row index\n        last_row_index \u003d value.getRowCount() - 1\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(last_row_index, \u0027MissedParts\u0027)\n        value2 \u003d value.getValueAt(last_row_index, \u0027TargetPlannedParts\u0027)\n        \n        # Compare the values and return the corresponding color\n        if value1 \u003e value2:\n            return \u0027#FF0000\u0027  # Red\n     \telif value1 \u003d\u003d value2:\n            return \u0027#000000\u0027  # Black\n        else:\n            return \u0027#008000\u0027  # Green\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "1",
+                              "startTime": "{view.custom.StartDate}",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount()-1, \"MissedParts\")\n        return round(latest_row,0)\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 26,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_2"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "backgroundColor": "#FFFFFF",
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 24,
+                        "textAlign": "center"
+                      },
+                      "text": "Year to Date Actual"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_3"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.backgroundColor": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "1",
+                              "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        # Fetch the last row index\n        last_row_index \u003d value.getRowCount() - 1\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(last_row_index, \u0027MissedParts\u0027)\n        value2 \u003d value.getValueAt(last_row_index, \u0027TargetPlannedParts\u0027)\n        \n        # Compare the values and return the corresponding color\n        if(value1 \u003e value2):\n            return \u0027#FFCCCC\u0027  # Red\n        elif (value1 \u003d\u003d value2):\n        \treturn \u0027#FFFFFF\u0027 #White\n        else:\n            return \u0027#CCFFCC\u0027  # Green\n    else:\n        return \u0027#FFFFFF\u0027  # White for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "1",
+                              "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        # Fetch the last row index\n        last_row_index \u003d value.getRowCount() - 1\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(last_row_index, \u0027MissedParts\u0027)\n        value2 \u003d value.getValueAt(last_row_index, \u0027TargetPlannedParts\u0027)\n        \n        # Compare the values and return the corresponding color\n        if value1 \u003e value2:\n            return \u0027#FF0000\u0027  # Red\n     \telif value1 \u003d\u003d value2:\n            return \u0027#000000\u0027  # Black\n        else:\n            return \u0027#008000\u0027  # Green\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ProductionLineID": "{view.params.ProductionLineID}",
+                              "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "2",
+                              "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                              "targetPercent": "95",
+                              "targetPercentPlanned": "{view.custom.OTD_Target}"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount()-1, \"MissedParts\")\n        return round (latest_row,2)\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 26,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_4"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "backgroundColor": "#FFFFFF",
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_1"
+            },
+            "position": {
+              "basis": "297px",
+              "grow": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_1"
+        },
+        "position": {
+          "height": 0.25,
+          "width": 0.98,
+          "y": 0.16
+        },
+        "props": {
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "solid",
+            "marginBottom": "5px",
+            "marginLeft": "10px",
+            "marginRight": "10px",
+            "marginTop": "10px",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TimeSeriesChart_0"
+            },
+            "position": {
+              "height": 1,
+              "width": 1
+            },
+            "propConfig": {
+              "props.series[0].data": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "ProductionLineID": "{view.params.ProductionLineID}",
+                      "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                      "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                      "resetOption": "2",
+                      "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                      "targetPercent": "95",
+                      "targetPercentPlanned": "{view.custom.OTD_Target}"
+                    },
+                    "queryPath": "Lean_Query/MDI_Board"
+                  },
+                  "type": "query"
+                },
+                "onChange": {
+                  "enabled": null,
+                  "script": "\tself.getSibling(\"Image\").props.style \u003d {\"classes\":\"\"}"
+                }
+              },
+              "props.series[1].data": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "ProductionLineID": "{view.params.ProductionLineID}",
+                      "ProductionSiteID": "{session.custom.ProductionSiteID}",
+                      "endTime": "dateFormat(addYears(now(), -1), \"yyyy\") + \"-12-31 00:00:00\"",
+                      "resetOption": "2",
+                      "startTime": "dateFormat(addYears(now(), -1), \"yyyy\") + \"-01-01 00:00:00\"",
+                      "targetPercent": "95",
+                      "targetPercentPlanned": "{view.custom.OTD_Target}"
+                    },
+                    "queryPath": "Lean_Query/MDI_Board"
+                  },
+                  "type": "query"
+                }
+              }
+            },
+            "props": {
+              "defaultStyles": {
+                "colorScheme": "RdPu"
+              },
+              "plots": [
+                {
+                  "axes": [
+                    {
+                      "alignment": "left",
+                      "grid": {
+                        "color": "#0000D9",
+                        "dashArray": 0,
+                        "opacity": 0.9,
+                        "style": {
+                          "classes": ""
+                        },
+                        "visible": false
+                      },
+                      "label": {
+                        "font": {
+                          "color": "#0000D9",
+                          "size": 12
+                        },
+                        "offset": -35,
+                        "style": {
+                          "classes": "",
+                          "color": "#0000D9",
+                          "fontFamily": "Roboto",
+                          "fontSize": 16,
+                          "fontWeight": "normal",
+                          "marginRight": 3,
+                          "textAlign": "center"
+                        },
+                        "text": "YoY Deviation",
+                        "visible": true
+                      },
+                      "max": "",
+                      "min": "",
+                      "name": "Value",
+                      "style": {
+                        "classes": "",
+                        "stroke": "#0000D9"
+                      },
+                      "tick": {
+                        "color": "#0000D9",
+                        "count": 3,
+                        "label": {
+                          "font": {
+                            "color": "#0000D9",
+                            "size": 15
+                          },
+                          "format": "Auto",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "style": {
+                          "classes": ""
+                        }
+                      },
+                      "width": 90
+                    }
+                  ],
+                  "markers": [],
+                  "relativeWeight": 1,
+                  "trends": [
+                    {
+                      "axis": "Value",
+                      "baselines": [],
+                      "breakLine": true,
+                      "columns": [
+                        {
+                          "color": "#000000",
+                          "key": "MissedParts",
+                          "styles": {
+                            "highlighted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "muted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "normal": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": 4
+                              }
+                            },
+                            "selected": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "interpolation": "curveBasis",
+                      "radius": 2,
+                      "series": "Production",
+                      "stack": true,
+                      "type": "line",
+                      "visible": true
+                    },
+                    {
+                      "axis": "Value",
+                      "baselines": [],
+                      "breakLine": true,
+                      "columns": [
+                        {
+                          "color": "#0000FF",
+                          "key": "MissedParts",
+                          "styles": {
+                            "highlighted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "muted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "normal": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "selected": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "interpolation": "curveBasis",
+                      "radius": 2,
+                      "series": "LastProduction",
+                      "stack": true,
+                      "type": "line",
+                      "visible": true
+                    }
+                  ]
+                }
+              ],
+              "series": [
+                {
+                  "name": "Production"
+                },
+                {
+                  "name": "LastProduction"
+                }
+              ],
+              "style": {
+                "backgroundColor": "rgba(250,250,250,1)",
+                "borderColor": "rgba(120,150,150,1)",
+                "borderStyle": "solid",
+                "borderWidth": "2px",
+                "overflow": "hidden"
+              },
+              "timeAxis": {
+                "color": "#0000D9",
+                "tick": {
+                  "color": "#0000D9",
+                  "label": {
+                    "font": {
+                      "color": "#0000D9",
+                      "size": 15
+                    },
+                    "format": "MMM"
+                  }
+                },
+                "tickCount": 12
+              },
+              "timeRange": {
+                "dateFormat": "MMM",
+                "timeFormat": "None",
+                "visible": false
+              },
+              "title": {
+                "font": {
+                  "color": "#0000D9",
+                  "size": 16
+                },
+                "height": 35,
+                "style": {
+                  "color": "#0000D9",
+                  "fontFamily": "Roboto",
+                  "fontSize": 22,
+                  "fontWeight": "bold",
+                  "textAlign": "center"
+                },
+                "text": "Production History"
+              },
+              "xTrace": {
+                "infoBox": {
+                  "font": {
+                    "size": 20
+                  }
+                },
+                "line": {
+                  "color": "#FF0000",
+                  "width": 5
+                }
+              }
+            },
+            "type": "ia.chart.timeseries"
+          },
+          {
+            "meta": {
+              "name": "Image"
+            },
+            "position": {
+              "height": 0.15,
+              "width": 0.03,
+              "x": 0.5,
+              "y": 0.2
+            },
+            "type": "ia.display.image"
+          }
+        ],
+        "meta": {
+          "name": "CoordinateContainer"
+        },
+        "position": {
+          "height": 0.2,
+          "width": 1,
+          "y": 0.424
+        },
+        "props": {
+          "mode": "percent"
+        },
+        "type": "ia.container.coord"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TimeSeriesChart_1"
+            },
+            "position": {
+              "height": 1,
+              "width": 1
+            },
+            "propConfig": {
+              "props.series[0].data": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "ProductionLineID": "{view.params.ProductionLineID}",
+                      "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                      "resetOption": "0",
+                      "startTime": "{view.custom.StartDate}",
+                      "targetPercent": "95",
+                      "targetPercentPlanned": "{view.custom.OTD_Target}"
+                    },
+                    "queryPath": "Lean_Query/MDI_Graphs_Month"
+                  },
+                  "type": "query"
+                },
+                "onChange": {
+                  "enabled": null,
+                  "script": "\tself.getSibling(\"Image\").props.style \u003d {\"classes\":\"\"}\n\t"
+                }
+              }
+            },
+            "props": {
+              "defaultStyles": {
+                "colorScheme": "RdPu"
+              },
+              "legend": {
+                "style": {
+                  "color": "#555555",
+                  "fontFamily": "Roboto",
+                  "fontSize": 16,
+                  "fontWeight": "bold",
+                  "textAlign": "center"
+                },
+                "visible": true
+              },
+              "plots": [
+                {
+                  "axes": [
+                    {
+                      "alignment": "left",
+                      "grid": {
+                        "color": "#0000D9",
+                        "dashArray": 0,
+                        "opacity": 0.9,
+                        "style": {
+                          "classes": ""
+                        },
+                        "visible": false
+                      },
+                      "label": {
+                        "font": {
+                          "color": "#0000D9",
+                          "size": 16
+                        },
+                        "offset": -20,
+                        "style": {
+                          "classes": "",
+                          "color": "#0000D9",
+                          "fontFamily": "Roboto",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                          "textAlign": "center"
+                        },
+                        "text": "Planned vs Actual",
+                        "visible": false
+                      },
+                      "max": "",
+                      "min": "",
+                      "name": "Value",
+                      "style": {
+                        "classes": "",
+                        "stroke": "#0000D9"
+                      },
+                      "tick": {
+                        "color": "#0000D9",
+                        "count": 3,
+                        "label": {
+                          "font": {
+                            "color": "#0000D9",
+                            "size": 15
+                          },
+                          "format": "Auto",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "style": {
+                          "classes": ""
+                        }
+                      },
+                      "width": 75
+                    }
+                  ],
+                  "markers": [],
+                  "relativeWeight": 1,
+                  "trends": [
+                    {
+                      "axis": "Value",
+                      "baselines": [],
+                      "breakLine": true,
+                      "columns": [
+                        {
+                          "color": "#000000",
+                          "key": "CurrentMonthMissed",
+                          "styles": {
+                            "highlighted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "muted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "normal": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": 4
+                              }
+                            },
+                            "selected": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "color": "#FF0000",
+                          "key": "DailyTargetMissed",
+                          "styles": {
+                            "highlighted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "muted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "normal": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": 4
+                              }
+                            },
+                            "selected": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "interpolation": "curveBasis",
+                      "radius": 2,
+                      "series": "Production",
+                      "stack": true,
+                      "type": "line",
+                      "visible": true
+                    }
+                  ]
+                }
+              ],
+              "series": [
+                {
+                  "name": "Production"
+                }
+              ],
+              "style": {
+                "backgroundColor": "rgba(250,250,250,1)",
+                "borderColor": "rgba(120,150,150,1)",
+                "borderStyle": "solid",
+                "borderWidth": "2px",
+                "fontSize": 16,
+                "overflow": "hidden"
+              },
+              "timeAxis": {
+                "color": "#0000D9",
+                "tick": {
+                  "color": "#0000D9",
+                  "label": {
+                    "font": {
+                      "color": "#0000D9",
+                      "size": 15
+                    },
+                    "format": "MM-DD"
+                  }
+                },
+                "tickCount": 15
+              },
+              "timeRange": {
+                "dateFormat": "MMM Do",
+                "timeFormat": "None",
+                "visible": false
+              },
+              "title": {
+                "font": {
+                  "color": "#0000D9",
+                  "size": 16
+                },
+                "height": 35,
+                "style": {
+                  "color": "#0000D9",
+                  "fontFamily": "Roboto",
+                  "fontSize": 22,
+                  "fontWeight": "bold",
+                  "textAlign": "center"
+                },
+                "text": "Production History"
+              },
+              "xTrace": {
+                "infoBox": {
+                  "font": {
+                    "size": 20
+                  }
+                },
+                "line": {
+                  "color": "#FF0000",
+                  "width": 5
+                }
+              }
+            },
+            "type": "ia.chart.timeseries"
+          },
+          {
+            "meta": {
+              "name": "Image"
+            },
+            "position": {
+              "height": 0.15,
+              "width": 0.03,
+              "x": 0.5,
+              "y": 0.2
+            },
+            "type": "ia.display.image"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onDoubleClick": {
+              "config": {
+                "draggable": true,
+                "id": "CdtzuQws",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "ProductionLineID": "{view.params.ProductionLineID}",
+                  "TargetOTD": "{/root/FlexContainer/FlexContainer/NumericEntryField.props.value}"
+                },
+                "viewPath": "Lean/PopUp/MonthlyChart",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "CoordinateContainer_0"
+        },
+        "position": {
+          "height": 0.2,
+          "width": 1,
+          "y": 0.625
+        },
+        "props": {
+          "mode": "percent"
+        },
+        "type": "ia.container.coord"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "XYChart_0"
+            },
+            "position": {
+              "height": 1,
+              "width": 1
+            },
+            "propConfig": {
+              "props.dataSources.example": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "Equipement": "{view.params.ProductionLineID}",
+                      "Switch": "0",
+                      "TopSelect": "1",
+                      "endDate": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                      "startDate": "{view.custom.StartDate}"
+                    },
+                    "queryPath": "Lean_Query/Delivery_DT"
+                  },
+                  "type": "query"
+                },
+                "onChange": {
+                  "enabled": null,
+                  "script": "\tself.getSibling(\"Image\").props.style \u003d {\"classes\":\"\"}"
+                }
+              },
+              "props.yAxes[0].label.text": {
+                "binding": {
+                  "config": {
+                    "expression": "now()"
+                  },
+                  "transforms": [
+                    {
+                      "code": "#\tif(self.parent.getChild(\"FlexContainer\").getChild(\"ToggleSwitch\").props.selected \u003d\u003d True):\n#\t\treturn \u0027Downtime(in Hr)\u0027\n#\telse:\n\t\treturn \u0027Missed Parts\u0027",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "dataSources": {},
+              "legend": {
+                "labels": {
+                  "font": {
+                    "weight": 500
+                  },
+                  "text": "[label]{name}[/]"
+                }
+              },
+              "series": [
+                {
+                  "candlestick": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      }
+                    },
+                    "high": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "low": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "column": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "#800000",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "height": null,
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      },
+                      "width": null
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "data": {
+                    "source": "example",
+                    "x": "DisplayField",
+                    "y": "Value",
+                    "z": "Details"
+                  },
+                  "defaultState": {
+                    "visible": true
+                  },
+                  "hiddenInLegend": false,
+                  "label": {
+                    "text": "Downtime"
+                  },
+                  "line": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": false,
+                          "fill": {
+                            "color": "",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": 0,
+                              "dy": 0
+                            },
+                            "text": "{value}"
+                          },
+                          "render": "circle",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "fill": {
+                        "color": "",
+                        "opacity": 0
+                      },
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 3
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "name": "Defect Count",
+                  "render": "column",
+                  "stepLine": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": true,
+                          "fill": {
+                            "color": "",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": 0,
+                              "dy": 0
+                            },
+                            "text": "{value}"
+                          },
+                          "render": "circle",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "fill": {
+                        "color": "",
+                        "opacity": 0
+                      },
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 3
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "pointerLength": 4,
+                    "text": "{DisplayField}:{Details}[/]"
+                  },
+                  "visible": true,
+                  "xAxis": "defect",
+                  "yAxis": "Defect Count",
+                  "zIndex": 0
+                },
+                {
+                  "candlestick": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      }
+                    },
+                    "high": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "low": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "column": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      }
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "data": {
+                    "source": "example",
+                    "x": "DisplayField",
+                    "y": "CumulativePer"
+                  },
+                  "defaultState": {
+                    "visible": true
+                  },
+                  "hiddenInLegend": false,
+                  "label": {
+                    "text": "Downtime%"
+                  },
+                  "line": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": true,
+                          "fill": {
+                            "color": "",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": 20,
+                              "dy": 40
+                            },
+                            "text": ""
+                          },
+                          "render": "circle",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "#FF8C00",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 3
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "name": "Defect Percent",
+                  "render": "line",
+                  "stepLine": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": true,
+                          "fill": {
+                            "color": "",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": 0,
+                              "dy": 0
+                            },
+                            "text": "{value}"
+                          },
+                          "render": "circle",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 3
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "pointerLength": 4,
+                    "text": "{name}: [bold]{valueY}[/]"
+                  },
+                  "visible": true,
+                  "xAxis": "defect",
+                  "yAxis": "Defect Percent",
+                  "zIndex": 0
+                },
+                {
+                  "candlestick": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      }
+                    },
+                    "high": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "low": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "column": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "height": null,
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      },
+                      "width": null
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "data": {
+                    "source": "example",
+                    "x": "DisplayField",
+                    "y": "Value"
+                  },
+                  "defaultState": {
+                    "visible": true
+                  },
+                  "hiddenInLegend": false,
+                  "label": {
+                    "text": " "
+                  },
+                  "line": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": true,
+                          "fill": {
+                            "color": "#000000",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": -20,
+                              "dy": -5
+                            },
+                            "text": "[Bold]{Value}"
+                          },
+                          "render": "label",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "#FFFFFF",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "#FFFFFF",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "[bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "fill": {
+                        "color": "#FFFFFF",
+                        "opacity": 0
+                      },
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "#FFFFFF",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 0
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "name": "Defect Count",
+                  "render": "line",
+                  "stepLine": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": true,
+                          "fill": {
+                            "color": "",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": 0,
+                              "dy": 0
+                            },
+                            "text": "{value}"
+                          },
+                          "render": "circle",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "fill": {
+                        "color": "",
+                        "opacity": 0
+                      },
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 3
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "pointerLength": 4,
+                    "text": "{DisplayField}:[bold]{valueY}[/]"
+                  },
+                  "visible": true,
+                  "xAxis": "defect",
+                  "yAxis": "Defect Count",
+                  "zIndex": 0
+                }
+              ],
+              "style": {
+                "borderColor": "rgba(120,150,150,1)",
+                "borderStyle": "solid",
+                "borderWidth": "2px",
+                "fontFamily": "Roboto",
+                "fontSize": 16
+              },
+              "xAxes": [
+                {
+                  "appearance": {
+                    "font": {
+                      "size": 14,
+                      "weight": 800
+                    },
+                    "grid": {
+                      "color": "",
+                      "dashArray": "",
+                      "minDistance": 60,
+                      "opacity": 1,
+                      "position": 0.5
+                    },
+                    "inside": false,
+                    "labels": {
+                      "color": "#0000FF",
+                      "horizontalCenter": "middle",
+                      "opacity": 1,
+                      "rotation": 0,
+                      "verticalCenter": "middle"
+                    },
+                    "opposite": false
+                  },
+                  "category": {
+                    "break": {
+                      "enabled": false,
+                      "endCategory": "",
+                      "size": 0.03,
+                      "startCategory": ""
+                    }
+                  },
+                  "date": {
+                    "baseInterval": {
+                      "count": 1,
+                      "enabled": false,
+                      "skipEmptyPeriods": false,
+                      "timeUnit": "hour"
+                    },
+                    "break": {
+                      "enabled": false,
+                      "endDate": "",
+                      "size": 0.05,
+                      "startDate": ""
+                    },
+                    "format": "M/d",
+                    "inputFormat": "yyyy-MM-dd kk:mm:ss",
+                    "range": {
+                      "max": "",
+                      "min": "",
+                      "useStrict": false
+                    }
+                  },
+                  "inversed": false,
+                  "label": {
+                    "color": "",
+                    "enabled": false,
+                    "text": "Category"
+                  },
+                  "name": "defect",
+                  "render": "category",
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "format": "value",
+                    "pointerLength": 4,
+                    "text": ""
+                  },
+                  "value": {
+                    "break": {
+                      "enabled": false,
+                      "endValue": 100,
+                      "size": 0.05,
+                      "startValue": 0
+                    },
+                    "format": "#,###.##",
+                    "logarithmic": false,
+                    "range": {
+                      "max": "",
+                      "min": "",
+                      "useStrict": false
+                    }
+                  },
+                  "visible": true
+                }
+              ],
+              "yAxes": [
+                {
+                  "appearance": {
+                    "font": {
+                      "size": "",
+                      "weight": 500
+                    },
+                    "grid": {
+                      "color": "",
+                      "dashArray": "",
+                      "minDistance": null,
+                      "opacity": 1,
+                      "position": 0.5
+                    },
+                    "inside": false,
+                    "labels": {
+                      "color": "",
+                      "horizontalCenter": "middle",
+                      "opacity": 1,
+                      "rotation": 0,
+                      "verticalCenter": "middle"
+                    },
+                    "opposite": false
+                  },
+                  "category": {
+                    "break": {
+                      "enabled": false,
+                      "endCategory": "",
+                      "size": 0.05,
+                      "startCategory": ""
+                    }
+                  },
+                  "date": {
+                    "baseInterval": {
+                      "count": 1,
+                      "enabled": false,
+                      "skipEmptyPeriods": false,
+                      "timeUnit": "hour"
+                    },
+                    "break": {
+                      "enabled": false,
+                      "endDate": "",
+                      "size": 0.05,
+                      "startDate": ""
+                    },
+                    "format": "M/d/yyyy HH:mm:ss",
+                    "inputFormat": "yyyy-MM-dd kk:mm:ss",
+                    "range": {
+                      "max": "",
+                      "min": "",
+                      "useStrict": false
+                    }
+                  },
+                  "inversed": false,
+                  "label": {
+                    "color": "#0000D9",
+                    "enabled": true
+                  },
+                  "name": "Defect Count",
+                  "render": "value",
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "format": "",
+                    "pointerLength": 4,
+                    "text": ""
+                  },
+                  "value": {
+                    "break": {
+                      "enabled": false,
+                      "endValue": 100,
+                      "size": 0.05,
+                      "startValue": 0
+                    },
+                    "format": "#,###.##",
+                    "logarithmic": false,
+                    "range": {
+                      "max": "auto",
+                      "min": 0,
+                      "useStrict": false
+                    }
+                  },
+                  "visible": true
+                },
+                {
+                  "appearance": {
+                    "font": {
+                      "size": "",
+                      "weight": 500
+                    },
+                    "grid": {
+                      "color": "",
+                      "dashArray": "4,4",
+                      "minDistance": null,
+                      "opacity": 1,
+                      "position": 0.5
+                    },
+                    "inside": false,
+                    "labels": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "opposite": true
+                  },
+                  "category": {
+                    "break": {
+                      "enabled": false,
+                      "endCategory": "",
+                      "size": 0.05,
+                      "startCategory": ""
+                    }
+                  },
+                  "date": {
+                    "baseInterval": {
+                      "count": 1,
+                      "enabled": false,
+                      "skipEmptyPeriods": false,
+                      "timeUnit": "hour"
+                    },
+                    "break": {
+                      "enabled": false,
+                      "endDate": "",
+                      "size": 0.05,
+                      "startDate": ""
+                    },
+                    "format": "M/d/yyyy",
+                    "inputFormat": "yyyy-MM-dd kk:mm:ss",
+                    "range": {
+                      "max": "",
+                      "min": "",
+                      "useStrict": false
+                    }
+                  },
+                  "label": {
+                    "color": "#0000D9",
+                    "enabled": true,
+                    "text": "Downtime%"
+                  },
+                  "name": "Defect Percent",
+                  "render": "value",
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "format": "",
+                    "pointerLength": 4
+                  },
+                  "value": {
+                    "break": {
+                      "enabled": false,
+                      "endValue": 100,
+                      "size": 0.05,
+                      "startValue": 0
+                    },
+                    "format": "#,###.##",
+                    "logarithmic": false,
+                    "range": {
+                      "max": 100,
+                      "min": 0,
+                      "useStrict": true
+                    }
+                  },
+                  "visible": true
+                }
+              ]
+            },
+            "type": "ia.chart.xy"
+          },
+          {
+            "meta": {
+              "name": "Image"
+            },
+            "position": {
+              "height": 0.15,
+              "width": 0.03,
+              "x": 0.5,
+              "y": 0.2
+            },
+            "type": "ia.display.image"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onDoubleClick": {
+              "config": {
+                "draggable": true,
+                "id": "a3nlMESF",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "ProductionLineID": "{view.params.ProductionLineID}"
+                },
+                "viewPath": "Lean/PopUp/DeliveryPareto",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "CoordinateContainer_1"
+        },
+        "position": {
+          "height": 0.25,
+          "width": 1,
+          "y": 0.828
+        },
+        "props": {
+          "mode": "percent",
+          "style": {
+            "paddingTop": 7
+          }
+        },
+        "type": "ia.container.coord"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

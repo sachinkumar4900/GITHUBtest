@@ -1,0 +1,709 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 874,
+      "width": 287
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Image"
+                },
+                "position": {
+                  "basis": "287px"
+                },
+                "props": {
+                  "fit": {
+                    "mode": "contain"
+                  },
+                  "source": "/system/images/Pentair_logo_RGB.png"
+                },
+                "type": "ia.display.image"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "props": {
+              "style": {
+                "marginBottom": 12
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Image"
+                },
+                "position": {
+                  "basis": "186px"
+                },
+                "props": {
+                  "fit": {
+                    "mode": "contain"
+                  },
+                  "source": "/system/images/Pentair_logo_RGB.png"
+                },
+                "type": "ia.display.image"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "size": "large"
+            },
+            "props": {
+              "style": {
+                "marginBottom": 12
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "BreakpointContainer"
+        },
+        "position": {
+          "basis": "64px"
+        },
+        "type": "ia.container.breakpt"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Accordion"
+            },
+            "props": {
+              "items": [
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "10px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": "SideNav/DashboardLinks"
+                  },
+                  "expanded": false,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/dashboard",
+                        "name": "Dashboard"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "collapsedIcon": {
+                        "color": "",
+                        "path": "material/expand_more",
+                        "style": {
+                          "classes": ""
+                        }
+                      },
+                      "enabled": true,
+                      "expandedIcon": {
+                        "color": "",
+                        "path": "material/expand_less",
+                        "style": {
+                          "classes": ""
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "16px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": "SideNav/AssetLinks"
+                  },
+                  "expanded": true,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/library_books",
+                        "name": "Assets"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "collapsedIcon": {
+                        "color": "",
+                        "path": "material/expand_more",
+                        "style": {
+                          "classes": ""
+                        }
+                      },
+                      "enabled": true,
+                      "expandedIcon": {
+                        "color": "",
+                        "path": "material/expand_less",
+                        "style": {
+                          "classes": ""
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "16px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": ""
+                  },
+                  "expanded": false,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/notifications",
+                        "link": "/andon",
+                        "name": "Andon"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "enabled": false
+                    }
+                  }
+                },
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "16px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": "SideNav/ScheduleLinks"
+                  },
+                  "expanded": false,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/calendar_today",
+                        "name": "Scheduling"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "collapsedIcon": {
+                        "color": "",
+                        "path": "material/expand_more",
+                        "style": {}
+                      },
+                      "enabled": true,
+                      "expandedIcon": {
+                        "color": "",
+                        "path": "material/expand_less",
+                        "style": {}
+                      }
+                    }
+                  }
+                },
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "16px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": "SideNav/SettingsLinks"
+                  },
+                  "expanded": false,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/settings",
+                        "name": "Settings"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "collapsedIcon": {
+                        "color": "",
+                        "path": "material/expand_more",
+                        "style": {}
+                      },
+                      "enabled": true,
+                      "expandedIcon": {
+                        "color": "",
+                        "path": "material/expand_less",
+                        "style": {}
+                      }
+                    }
+                  }
+                },
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "16px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": ""
+                  },
+                  "expanded": false,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/text_snippet",
+                        "name": "Reports"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "enabled": true
+                    }
+                  }
+                }
+              ],
+              "style": {
+                "backgroundColor": "#FFFFFF",
+                "borderStyle": "none"
+              },
+              "unusedSpaceStyle": {
+                "backgroundColor": "#FFFFFF"
+              }
+            },
+            "type": "ia.display.accordion"
+          },
+          {
+            "meta": {
+              "name": "Accordion_0"
+            },
+            "position": {
+              "size": "large"
+            },
+            "props": {
+              "items": [
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "10px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": "SideNav/DashboardLinks"
+                  },
+                  "expanded": false,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/dashboard",
+                        "name": "Dashboard"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "collapsedIcon": {
+                        "color": "",
+                        "path": "material/expand_more",
+                        "style": {
+                          "classes": ""
+                        }
+                      },
+                      "enabled": true,
+                      "expandedIcon": {
+                        "color": "",
+                        "path": "material/expand_less",
+                        "style": {
+                          "classes": ""
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "16px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": "SideNav/AssetLinks"
+                  },
+                  "expanded": false,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/library_books",
+                        "name": "Assets"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "collapsedIcon": {
+                        "color": "",
+                        "path": "material/expand_more",
+                        "style": {
+                          "classes": ""
+                        }
+                      },
+                      "enabled": true,
+                      "expandedIcon": {
+                        "color": "",
+                        "path": "material/expand_less",
+                        "style": {
+                          "classes": ""
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "16px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": ""
+                  },
+                  "expanded": false,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/notifications",
+                        "link": "/andon",
+                        "name": "Andon"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "enabled": false
+                    }
+                  }
+                },
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "16px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": "SideNav/ScheduleLinks"
+                  },
+                  "expanded": false,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/calendar_today",
+                        "name": "Scheduling"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "collapsedIcon": {
+                        "color": "",
+                        "path": "material/expand_more",
+                        "style": {}
+                      },
+                      "enabled": true,
+                      "expandedIcon": {
+                        "color": "",
+                        "path": "material/expand_less",
+                        "style": {}
+                      }
+                    }
+                  }
+                },
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "16px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": "SideNav/SettingsLinks"
+                  },
+                  "expanded": false,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/settings",
+                        "name": "Settings"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "collapsedIcon": {
+                        "color": "",
+                        "path": "material/expand_more",
+                        "style": {}
+                      },
+                      "enabled": true,
+                      "expandedIcon": {
+                        "color": "",
+                        "path": "material/expand_less",
+                        "style": {}
+                      }
+                    }
+                  }
+                },
+                {
+                  "body": {
+                    "height": "auto",
+                    "style": {
+                      "classes": "",
+                      "margin": "16px"
+                    },
+                    "useDefaultViewHeight": false,
+                    "useDefaultViewWidth": false,
+                    "viewParams": {},
+                    "viewPath": ""
+                  },
+                  "expanded": false,
+                  "header": {
+                    "content": {
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 1
+                      },
+                      "text": "Dashboard",
+                      "type": "view",
+                      "useDefaultViewHeight": false,
+                      "useDefaultViewWidth": false,
+                      "viewParams": {
+                        "icon": "material/text_snippet",
+                        "name": "Reports"
+                      },
+                      "viewPath": "SideNav/AccordionHeader"
+                    },
+                    "height": "47px",
+                    "reverse": true,
+                    "style": {
+                      "classes": "Accordion/AccordionTab"
+                    },
+                    "toggle": {
+                      "enabled": true
+                    }
+                  }
+                }
+              ],
+              "style": {
+                "backgroundColor": "#FFFFFF",
+                "borderStyle": "none"
+              },
+              "unusedSpaceStyle": {
+                "backgroundColor": "#FFFFFF"
+              }
+            },
+            "type": "ia.display.accordion"
+          }
+        ],
+        "meta": {
+          "name": "BreakpointContainer_0"
+        },
+        "position": {
+          "basis": "300px",
+          "grow": 1
+        },
+        "type": "ia.container.breakpt"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

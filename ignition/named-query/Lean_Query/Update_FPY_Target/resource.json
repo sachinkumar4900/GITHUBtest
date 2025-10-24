@@ -1,0 +1,55 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 60,
+    "cacheEnabled": true,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "818edc6657018e12ddd0559d06aea7e6c84bff4f9896cefcc1480b8c5e19b2b7",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2025-07-02T09:39:17Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "Month",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "Year",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "FPY_Target",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ProductionSiteID",
+        "sqlType": 0
+      }
+    ]
+  }
+}

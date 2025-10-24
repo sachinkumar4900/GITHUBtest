@@ -1,0 +1,643 @@
+{
+  "custom": {},
+  "events": {
+    "system": {
+      "onStartup": {
+        "config": {
+          "script": "\tself.session.custom.ActiveWindow \u003d \"Andon Board\""
+        },
+        "scope": "G",
+        "type": "script"
+      }
+    }
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 734,
+      "width": 1010
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "FlexRepeater"
+                },
+                "position": {
+                  "size": "large"
+                },
+                "propConfig": {
+                  "props.instances": {
+                    "binding": {
+                      "config": {
+                        "parameters": {
+                          "lineTypeID": "2",
+                          "siteID": "{session.custom.ProductionSiteID}"
+                        },
+                        "polling": {
+                          "enabled": true,
+                          "rate": "1"
+                        },
+                        "queryPath": "Andon/GetAndonWorkOrderInfo",
+                        "returnFormat": "json"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\tsite \u003d self.session.custom.ProductionSite\n\toffset \u003d -7 if site \u003d\u003d \"Moorpark\" else -4\n\tnow \u003d system.db.runNamedQuery(\u0027Downtime/GetUTC\u0027)[0][0]\n\tds \u003d []\n\ttagPaths \u003d {}\n\teqPaths \u003d system.tag.readBlocking([\"[default]TagPaths\"])[0].value\n\tfor i in range (eqPaths.getRowCount()):\n\t\ttagPaths[eqPaths.getValueAt(i,\"ProductionLineID\")] \u003d eqPaths.getValueAt(i,\"tagPath\")\n\tfor row in value:\n\t\ttagPath \u003d tagPaths[row[\"ID\"]]\n\t\n\t\tstartObj \u003d system.date.fromMillis(row[\"StartTime\"]) if row[\"StartTime\"] is not None else None\n\t\tendObj \u003d now #system.date.fromMillis(row[\"EndTime\"]) if row[\"EndTime\"] is not None else None\n\t\tstart \u003d system.date.addHours(system.date.parse(startObj), offset) if row[\"StartTime\"] is not None else None\n\t\tend \u003d system.date.addHours(system.date.parse(endObj), offset) if row[\"EndTime\"] is not None else None\n#\t\tsystem.perspective.print(\u0027tagPath: \u0027 + tagPath + \u0027 ---- start: \u0027 + str(start) + \u0027 ---- end: \u0027 + str(end))\n\t\n\t\tavail \u003d OEE.getAvailability(tagPath, start, end)\n\t\tperf \u003d OEE.getPerformance(tagPath, start, end)\n\t\tqual \u003d OEE.getAndonQuality(tagPath, start, end)\n\t\toee \u003d avail * perf * qual\n\t\t\n\t\t#Grab Andon Data by Production Line ID\n\t\tandonHeader \u003d system.db.runNamedQuery(\"Andon/GetEventHeaderByProductionLineID\", {\"productionLineID\": row[\"ID\"]})[0][0]\n\t\tandonStatus \u003d system.db.runNamedQuery(\"Andon/GetEventStatusByEventHeaderID\", {\"EventHeaderID\": andonHeader})[0][0] if andonHeader !\u003d \u0027-1\u0027 else 6\n\t\tdowntimeEventID \u003d system.db.runNamedQuery(\"Downtime/GetActiveDowntimeEventByProductionLineID\", {\"ProductionLineID\": row[\"ID\"]})\n\t\t\n\t\t#Default Downtime ID for when no event is active\n\t\tif len(downtimeEventID) \u003c\u003d 0:\n\t\t\tdtid \u003d -1\n\t\telse:\n\t\t\tdtid \u003d downtimeEventID[0][0]\n\t\t\t\n\t\t#Grab Current Andon Group\n\t\tandonGroup \u003d system.db.runNamedQuery(\"Andon/GetAndonGroupByProductionLineID\", {\"ProductionLineID\": row[\"ID\"]})[0][0] if andonHeader !\u003d \u0027-1\u0027 else 5\n\t\t\n\t\tandon \u003d system.tag.readBlocking([tagPath + \"/OEE/Quality/Work Order Count\", tagPath + \"/OEE/Quality/Scrap Count\"])\n\t\t\n\t\tstatus \u003d andonStatus\n\t\tgroup \u003d system.db.runNamedQuery(\"Andon/GetAndonGroupNameByID\", {\"ID\": andonGroup})\n\t\tif dtid \u003d\u003d -1:\n\t\t\treason \u003d system.db.runNamedQuery(\"Andon/GetActiveEventReasonByHeaderID\", {\"AndonHeader\": andonHeader}) if andonHeader !\u003d \u0027-1\u0027 else [[\u0027-1\u0027][-1]]\n\t\telse:\n\t\t\treason \u003d system.db.runNamedQuery(\"Downtime/GetDowntimeEventReasonByDowntimeID\", {\"EventID\": dtid})\n\t\ttotalCount \u003d andon[0].value if andon[0].value is not None else 0\n\t\tscrapCount \u003d andon[1].value if andon[1].value is not None else 0\n\t\t\n\t\tif len(reason) \u003c\u003d 0:\n\t\t\treasonID \u003d -1\n\t\telse: \n\t\t\treasonID \u003d reason[0][0]\n\t\t\n\t\tif status \u003c 6:\n\t\t\tstatus \u003d group\t\t\n\t\telif dtid !\u003d -1:\n\t\t\tstatus \u003d \"Stopped\"\n\t\telif status !\u003d 6 \u0026 dtid \u003d\u003d -1:\n\t\t\tstatus \u003d \"Andon Active\"\t\n\t\telif row[\"WorkOrder\"] is None:\n\t\t\tstatus \u003d \"Not Scheduled\"\n\t\telse:\n\t\t\tstatus \u003d \"Running\"\n\t\t\n\t\tandonStatusTime \u003d system.db.runNamedQuery(\"Andon/GetNotificationTimestampsByProductionLineID\", {\"ProductionLineID\": row[\"ID\"]})[0][\"Timestamp\"] # if andonHeader !\u003d \u0027-1\u0027 else system.date.now()\n\t\tstatusTime \u003d \"\"\n\t\t#system.perspective.print(str(andonStatusTime))\n\t\tdaysBetween \u003d system.date.daysBetween(andonStatusTime, now)\n\t\tif daysBetween \u003c 10:\n\t\t\tdaysBetween \u003d \"0\" + str(daysBetween)\n\t\telse:\n\t\t\tdaysBetween \u003d str(daysBetween)\n\t\t\t\n\t\thoursBetween \u003d (system.date.hoursBetween(andonStatusTime, now) % 24)\n\t\tif hoursBetween \u003c 10:\n\t\t\thoursBetween \u003d \"0\" + str(hoursBetween)\n\t\telse:\n\t\t\thoursBetween \u003d str(hoursBetween)\n\t\t\t\n\t\tminutesBetween \u003d (system.date.minutesBetween(andonStatusTime, now) % 60)\n\t\tif minutesBetween \u003c 10:\n\t\t\tminutesBetween \u003d \"0\" + str(minutesBetween)\n\t\telse:\n\t\t\tminutesBetween \u003d str(minutesBetween)\n\t\tstatusTime +\u003d (daysBetween + \":\" + hoursBetween + \":\"+ minutesBetween)\n\t\t\n\t\t#system.perspective.print(\u0027 ----------- \u0027 + statusTime)\n\t\tds.append({\"Asset\":row[\"Name\"], \n\t\t\t\t\t\"TargetCount\":row[\"Quantity\"],\n\t\t\t\t\t\"Availability\":avail,\n\t\t\t\t\t\"Performance\":perf,\n\t\t\t\t\t\"Quality\":qual,\n\t\t\t\t\t\"OEE\":oee,\n\t\t\t\t\t\"path\":tagPath,\n\t\t\t\t\t\"StatusTime\":statusTime,\n\t\t\t\t\t\"WorkOrder\":row[\"WorkOrder\"],\n\t\t\t\t\t\"Reason\":reasonID,\n\t\t\t\t\t\"Status\":status.rstrip() if status is not None else None,\n\t\t\t\t\t\"GoodCount\":totalCount - scrapCount,\n\t\t\t\t\t\"RowOBJ\": row\n\t\t\t\t\t})\n\treturn ds",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "query"
+                    }
+                  }
+                },
+                "props": {
+                  "elementStyle": {
+                    "margin": 5
+                  },
+                  "path": "Overview/NestedViews/AssetAndon",
+                  "wrap": "wrap"
+                },
+                "type": "ia.display.flex-repeater"
+              },
+              {
+                "meta": {
+                  "name": "FlexRepeater_0"
+                },
+                "propConfig": {
+                  "props.instances": {
+                    "binding": {
+                      "config": {
+                        "parameters": {
+                          "lineTypeID": "2",
+                          "siteID": "{session.custom.ProductionSiteID}"
+                        },
+                        "polling": {
+                          "enabled": true,
+                          "rate": "1"
+                        },
+                        "queryPath": "Andon/GetAndonWorkOrderInfo",
+                        "returnFormat": "json"
+                      },
+                      "type": "query"
+                    }
+                  }
+                },
+                "props": {
+                  "elementStyle": {
+                    "margin": 5
+                  },
+                  "path": "Overview/NestedViews/AssetAndon_Copy",
+                  "wrap": "wrap"
+                },
+                "type": "ia.display.flex-repeater"
+              }
+            ],
+            "meta": {
+              "name": "BreakpointContainer"
+            },
+            "type": "ia.container.breakpt"
+          },
+          {
+            "meta": {
+              "name": "FlexRepeater_0"
+            },
+            "position": {
+              "tabIndex": 1
+            },
+            "propConfig": {
+              "custom.Moorpark": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "lineTypeID": "1",
+                      "siteID": "2"
+                    },
+                    "queryPath": "Andon/GetAndonWorkOrderInfo",
+                    "returnFormat": "json"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tds \u003d []\n\ttagPaths \u003d {}\n\teqPaths \u003d system.tag.readBlocking([\"[default]TagPaths\"])[0].value\n\tfor i in range (eqPaths.getRowCount()):\n\t\ttagPaths[eqPaths.getValueAt(i,\"ProductionLineID\")] \u003d eqPaths.getValueAt(i,\"tagPath\")\n\tfor row in value:\n\t\tavail \u003d OEE.getAvailability(\"\", row[\"StartTime\"], row[\"EndTime\"])\n\t\tperf \u003d OEE.getPerformance(\"\", row[\"StartTime\"], row[\"EndTime\"])\n\t\tqual \u003d OEE.getQuality(\"\", row[\"StartTime\"], row[\"EndTime\"])\n\t\toee \u003d avail * perf * qual\n\t\ttagPath \u003d tagPaths[row[\"ID\"]]\n\t\tandon \u003d system.tag.readBlocking([tagPath + \"/Andon/Andon Status\", tagPath + \"/Andon/Andon Group\", tagPath + \"/Andon/Reason01\", tagPath + \"/Andon/Reason02\", tagPath + \"/Andon/TimeStamp\", tagPath + \"/OEE/Quality/Total Count\", tagPath + \"/OEE/Quality/Scrap Count\"])\n\t\tstatus \u003d andon[0].value\n\t\tgroup \u003d andon[1].value\n\t\treason1 \u003d andon[2].value\n\t\treason2 \u003d andon[3].value\n\t\t\n\t\tif reason2 !\u003d -1:\n\t\t\treason \u003d reason2  \n\t\telif reason1 !\u003d -1:\n\t\t\treason \u003d reason1\n\t\telif status \u003e 0:\n\t\t\treason \u003d \u0027No Reason Entered\u0027\n\t\telse: \n\t\t\treason \u003d \u0027\u0027\n\t\t\t\n\t\tif row[\"WorkOrder\"] is None:\n\t\t\tstatus \u003d \"Not Scheduled\"\n\t\telif status \u003d\u003d 0:\n\t\t\tstatus \u003d \"Running\"\n\t\telif status \u003e 0:\n\t\t\tstatus \u003d group\n\t\telse:\n\t\t\tstatus \u003d \"stopped\"\n\t\t\n\t\tds.append({\"Asset\":row[\"Name\"], \n\t\t\t\t\t\"TargetCount\":row[\"Quantity\"],\n\t\t\t\t\t\"Availability\":avail,\n\t\t\t\t\t\"Performance\":perf,\n\t\t\t\t\t\"Quality\":qual,\n\t\t\t\t\t\"OEE\":oee,\n\t\t\t\t\t\"path\":tagPath,\n\t\t\t\t\t\"StatusTime\":andon[4].value,\n\t\t\t\t\t\"WorkOrder\":row[\"WorkOrder\"],\n\t\t\t\t\t\"Reason\":reason,\n\t\t\t\t\t\"Status\":status\n\t\t\t\t\t})\n\treturn ds",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "query"
+                }
+              },
+              "custom.Sanford": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "lineTypeID": "1",
+                      "siteID": "1"
+                    },
+                    "queryPath": "Andon/GetAndonWorkOrderInfo",
+                    "returnFormat": "json"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tds \u003d []\n\ttagPaths \u003d {}\n\teqPaths \u003d system.tag.readBlocking([\"[default]TagPaths\"])[0].value\n\tfor i in range (eqPaths.getRowCount()):\n\t\ttagPaths[eqPaths.getValueAt(i,\"ProductionLineID\")] \u003d eqPaths.getValueAt(i,\"tagPath\")\n\tfor row in value:\n#\t\tavail \u003d OEE.getAvailability(\"\", row[\"StartTime\"], row[\"EndTime\"])\n#\t\tperf \u003d OEE.getPerformance(\"\", row[\"StartTime\"], row[\"EndTime\"])\n#\t\tqual \u003d OEE.getQuality(\"\", row[\"StartTime\"], row[\"EndTime\"])\n#\t\toee \u003d avail * perf * qual\n\t\ttagPath \u003d tagPaths[row[\"ID\"]]\n\t\tprint(tagPath)\n#\t\tandon \u003d system.tag.readBlocking([tagPath + \"/Andon/Andon Status\", tagPath + \"/Andon/Andon Group\", tagPath + \"/Andon/Reason01\", tagPath + \"/Andon/Reason02\", tagPath + \"/Andon/TimeStamp\", tagPath + \"/OEE/Quality/Total Count\", tagPath + \"/OEE/Quality/Scrap Count\"])\n#\t\tstatus \u003d andon[0].value\n#\t\tgroup \u003d andon[1].value\n#\t\treason1 \u003d andon[2].value\n#\t\treason2 \u003d andon[3].value\n\t\t\n\t\tstart \u003d system.date.fromMillis(row[\"StartTime\"]) if row[\"StartTime\"] is not None else None\n\t\tend \u003d system.date.fromMillis(row[\"EndTime\"]) if row[\"EndTime\"] is not None else None\n\t\t\n\t\tavail \u003d OEE.getAvailability(tagPath, start, end)\n\t\tperf \u003d OEE.getPerformance(tagPath, start, end)\n\t\tqual \u003d OEE.getQuality(tagPath, start, end)\n\t\toee \u003d avail * perf * qual\n\t\t\n\t\t#Grab Andon Data by Production Line ID\n\t\tandonHeader \u003d system.db.runNamedQuery(\"Andon/GetEventHeaderByProductionLineID\", {\"productionLineID\": row[\"ID\"]})[0][0]\n\t\tandonStatus \u003d system.db.runNamedQuery(\"Andon/GetEventStatusByEventHeaderID\", {\"EventHeaderID\": andonHeader})[0][0] if andonHeader !\u003d \u0027-1\u0027 else 6\n\t\tdowntimeEventID \u003d system.db.runNamedQuery(\"Downtime/GetActiveDowntimeEventByProductionLineID\", {\"ProductionLineID\": row[\"ID\"]})\n\t\t\n\t\t#Default Downtime ID for when no event is active\n\t\tif len(downtimeEventID) \u003c\u003d 0:\n\t\t\tdtid \u003d -1\n\t\telse:\n\t\t\tdtid \u003d downtimeEventID[0][0]\n\t\t\n\t\t#Grab Current Andon Group\n\t\tandonGroup \u003d system.db.runNamedQuery(\"Andon/GetAndonGroupByProductionLineID\", {\"ProductionLineID\": row[\"ID\"]})[0][0] if andonHeader !\u003d \u0027-1\u0027 else 5\n\t\t\n\t\tandon \u003d system.tag.readBlocking([tagPath + \"/OEE/Quality/Total Count\", tagPath + \"/OEE/Quality/Scrap Count\"])\n\t\t\n\t\tstatus \u003d andonStatus\n\t\tgroup \u003d system.db.runNamedQuery(\"Andon/GetAndonGroupNameByID\", {\"ID\": andonGroup})[0][0]\n\t\tif dtid \u003d\u003d -1:\n\t\t\treason \u003d system.db.runNamedQuery(\"Andon/GetActiveEventReasonByHeaderID\", {\"AndonHeader\": andonHeader}) if andonHeader !\u003d \u0027-1\u0027 else [[\u0027-1\u0027][-1]]\n\t\telse:\n\t\t\treason \u003d system.db.runNamedQuery(\"Downtime/GetDowntimeEventReasonByDowntimeID\", {\"EventID\": dtid})\n\t\ttotalCount \u003d andon[0].value if andon[0].value is not None else 0\n\t\tscrapCount \u003d andon[1].value if andon[1].value is not None else 0\n\t\t\n\t\tif len(reason) \u003c\u003d 0:\n\t\t\treasonID \u003d -1\n\t\telse: \n\t\t\treasonID \u003d reason[0][0]\n\t\t\n\t\tif status \u003c 6:\n\t\t\tstatus \u003d group\t\t\n\t\telif dtid !\u003d -1:\n\t\t\tstatus \u003d \"Stopped\"\n\t\telif status !\u003d 6 \u0026 dtid \u003d\u003d -1:\n\t\t\tstatus \u003d \"Andon Active\"\t\n\t\telif row[\"WorkOrder\"] is None:\n\t\t\tstatus \u003d \"Not Scheduled\"\n\t\telse:\n\t\t\tstatus \u003d \"Running\"\n\t\t\n\t\tnow \u003d system.date.now()\n\t\tandonStatusTime \u003d system.db.runNamedQuery(\"Andon/GetNotificationTimestampsByProductionLineID\", {\"ProductionLineID\": row[\"ID\"]})[0][\"Timestamp\"] if andonHeader !\u003d \u0027-1\u0027 else system.date.now()\n\t\tstatusTime \u003d \"\"\n\t\t\n\t\tdaysBetween \u003d system.date.daysBetween(andonStatusTime, now)\n\t\tif daysBetween \u003c 10:\n\t\t\tdaysBetween \u003d \"0\" + str(daysBetween)\n\t\telse:\n\t\t\tdaysBetween \u003d str(daysBetween)\n\t\t\t\n\t\thoursBetween \u003d (system.date.hoursBetween(andonStatusTime, now) % 24)\n\t\tif hoursBetween \u003c 10:\n\t\t\thoursBetween \u003d \"0\" + str(hoursBetween)\n\t\telse:\n\t\t\thoursBetween \u003d str(hoursBetween)\n\t\t\t\n\t\tminutesBetween \u003d (system.date.minutesBetween(andonStatusTime, now) % 60)\n\t\tif minutesBetween \u003c 10:\n\t\t\tminutesBetween \u003d \"0\" + str(minutesBetween)\n\t\telse:\n\t\t\tminutesBetween \u003d str(minutesBetween)\n\t\tstatusTime +\u003d (daysBetween + \":\" + hoursBetween + \":\"+ minutesBetween)\n\t\t\n\t\t\n\t\tds.append({\"Asset\":row[\"Name\"], \n\t\t\t\t\t\"TargetCount\":row[\"Quantity\"],\n\t\t\t\t\t\"Availability\":avail,\n\t\t\t\t\t\"Performance\":perf,\n\t\t\t\t\t\"Quality\":qual,\n\t\t\t\t\t\"OEE\":oee,\n\t\t\t\t\t\"path\":tagPath,\n\t\t\t\t\t\"StatusTime\":statusTime,\n\t\t\t\t\t\"WorkOrder\":row[\"WorkOrder\"],\n\t\t\t\t\t\"Reason\":reasonID,\n\t\t\t\t\t\"Status\":status,\n\t\t\t\t\t\"GoodCount\":totalCount - scrapCount,\n\t\t\t\t\t\"RowOBJ\": dtid\n\t\t\t\t\t})\n#\t\tif reason2 !\u003d -1:\n#\t\t\treason \u003d reason2  \n#\t\telif reason1 !\u003d -1:\n#\t\t\treason \u003d reason1\n#\t\telif status \u003e 0:\n#\t\t\treason \u003d \u0027No Reason Entered\u0027\n#\t\telse: \n#\t\t\treason \u003d \u0027\u0027\n#\t\t\t\n#\t\tif row[\"WorkOrder\"] is None:\n#\t\t\tstatus \u003d \"Not Scheduled\"\n#\t\telif status \u003d\u003d 0:\n#\t\t\tstatus \u003d \"Running\"\n#\t\telif status \u003e 0:\n#\t\t\tstatus \u003d group\n#\t\telse:\n#\t\t\tstatus \u003d \"stopped\"\n#\t\t\n#\t\tds.append({\"Asset\":row[\"Name\"], \n#\t\t\t\t\t\"TargetCount\":row[\"Quantity\"],\n#\t\t\t\t\t\"Availability\":avail,\n#\t\t\t\t\t\"Performance\":perf,\n#\t\t\t\t\t\"Quality\":qual,\n#\t\t\t\t\t\"OEE\":oee,\n#\t\t\t\t\t\"path\":tagPath,\n#\t\t\t\t\t\"StatusTime\":andon[4].value,\n#\t\t\t\t\t\"WorkOrder\":row[\"WorkOrder\"],\n#\t\t\t\t\t\"Reason\":reason,\n#\t\t\t\t\t\"Status\":status\n#\t\t\t\t\t})\n\treturn ds",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "query"
+                }
+              },
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "{session.custom.ProductionSiteID} \u003d 1"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.instances": {
+                "binding": {
+                  "config": {
+                    "expression": "{this.custom.Sanford}"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.instances[0].Reason": {
+                "binding": {
+                  "config": {
+                    "expression": "if({[default]Assembly/P08/Andon/Reason02} !\u003d \u0027-1\u0027, {[default]Assembly/P08/Andon/Reason02},\r\n\tif({[default]Assembly/P08/Andon/Reason01} !\u003d \u0027-1\u0027, {[default]Assembly/P08/Andon/Reason01},\r\n\t\tif({[default]Assembly/P08/Andon/Andon Status} \u003e 0, \u0027No Reason Entered\u0027,\r\n\t\t\t\u0027\u0027\r\n)))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.instances[0].Status": {
+                "binding": {
+                  "config": {
+                    "expression": "if({[default]Assembly/P08/Andon/Andon Status} \u003d 0, \"Running\",\r\n\tif({[default]Assembly/P08/Andon/Andon Status} \u003e 0, {[default]Assembly/P08/Andon/Andon Group},\r\n\"stopped\"\r\n))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.instances[0].StatusTime": {
+                "binding": {
+                  "config": {
+                    "expression": "if(\r\n\tisNull({[default]Assembly/P08/Andon/TimeStamp}),\r\n\t\"0:00:00\",\r\n\tstringFormat(\r\n\t\t\"%02d:%02d:%02d\",\r\n\t\ttoInt(floor(dateDiff({[default]Assembly/P08/Andon/TimeStamp},now(),\"second\")/86400)),\r\n\t\ttoInt(floor(dateDiff({[default]Assembly/P08/Andon/TimeStamp},now(),\"second\")%86400/3600)),\r\n\t\ttoInt(floor(dateDiff({[default]Assembly/P08/Andon/TimeStamp},now(),\"second\")%3600/60))\r\n\t)\r\n)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "elementStyle": {
+                "margin": 5
+              },
+              "path": "Overview/NestedViews/AssetAndon",
+              "wrap": "wrap"
+            },
+            "type": "ia.display.flex-repeater"
+          }
+        ],
+        "meta": {
+          "name": "TabContainer"
+        },
+        "position": {
+          "height": 1,
+          "width": 1
+        },
+        "propConfig": {
+          "props.tabs[1].disabled": {
+            "binding": {
+              "config": {
+                "path": "session.custom.ProductionSiteID"
+              },
+              "transforms": [
+                {
+                  "fallback": null,
+                  "inputType": "scalar",
+                  "mappings": [
+                    {
+                      "input": 1,
+                      "output": false
+                    },
+                    {
+                      "input": 2,
+                      "output": true
+                    }
+                  ],
+                  "outputType": "scalar",
+                  "type": "map"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "menuType": "modern",
+          "tabSize": {
+            "height": 48,
+            "width": 150
+          },
+          "tabs": [
+            {
+              "disabled": false,
+              "text": "Molding"
+            },
+            {
+              "text": "Assembly"
+            }
+          ]
+        },
+        "type": "ia.container.tab"
+      },
+      {
+        "events": {
+          "component": {
+            "onEnded": {
+              "config": {
+                "script": "\t # Initialize playCount if it doesn\u0027t exist\n    if not hasattr(self.custom, \u0027playCount\u0027):\n        self.custom.playCount \u003d 0\n\n    # Get the current play count from the custom property\n    count \u003d self.custom.playCount\n    \n    # Increment the count\n    count +\u003d 1\n    target_tag \u003d \"[default]Moorpark/Molding/IM43/Down_Sound\"\n    # Check if the audio has played more than 3 times\n    if count \u003c\u003d 2:\n        # Play the audio again (manually trigger the play)\n        self.props.play \u003d True\n    else:\n        # Stop playing and toggle the switch off\n        self.props.play \u003d False\n        system.tag.writeBlocking([target_tag], [False])\n        count \u003d 0  # Reset the count after 3 plays\n    \n    # Update the custom playCount property with the new count\n    self.custom.playCount \u003d count\t\n    \n    \n    "
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "IM43Audio"
+        },
+        "position": {
+          "height": 0.0749,
+          "width": 0.297,
+          "x": 0.1911,
+          "y": 0.2425
+        },
+        "propConfig": {
+          "props.play": {
+            "binding": {
+              "config": {
+                "expression": "{[default]Moorpark/Molding/IM43/Down_Sound}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d True and self.session.custom.ProductionSiteID \u003d\u003d 2:\n\t\treturn True\n\telse:\n\t\treturn False",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "source": "https://connectedfactory.pentair.com/IM43MachineDown.wav"
+        },
+        "type": "ia.display.audio"
+      },
+      {
+        "events": {
+          "component": {
+            "onEnded": {
+              "config": {
+                "script": " # Initialize playCount if it doesn\u0027t exist\n    if not hasattr(self.custom, \u0027playCount\u0027):\n        self.custom.playCount \u003d 0\n\n    # Get the current play count from the custom property\n    count \u003d self.custom.playCount\n    \n    # Increment the count\n    count +\u003d 1\n    target_tag \u003d \"[default]Moorpark/Molding/IM45/Down_Sound\"\n    # Check if the audio has played more than 3 times\n    if count \u003c\u003d 2:\n        # Play the audio again (manually trigger the play)\n        self.props.play \u003d True\n    else:\n        # Stop playing and toggle the switch off\n        self.props.play \u003d False\n        system.tag.writeBlocking([target_tag], [False])\n        count \u003d 0  # Reset the count after 3 plays\n    \n    # Update the custom playCount property with the new count\n    self.custom.playCount \u003d count\t    "
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "IM45Audio"
+        },
+        "position": {
+          "height": 0.0749,
+          "width": 0.297,
+          "x": 0.1891,
+          "y": 0.2398
+        },
+        "propConfig": {
+          "props.play": {
+            "binding": {
+              "config": {
+                "expression": "{[default]Moorpark/Molding/IM45/Down_Sound}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d True and self.session.custom.ProductionSiteID \u003d\u003d 2:\n\t\treturn True\n\telse:\n\t\treturn False",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "source": "https://connectedfactory.pentair.com/IM45MachineDown.wav"
+        },
+        "type": "ia.display.audio"
+      },
+      {
+        "events": {
+          "component": {
+            "onEnded": {
+              "config": {
+                "script": " # Initialize playCount if it doesn\u0027t exist\n    if not hasattr(self.custom, \u0027playCount\u0027):\n        self.custom.playCount \u003d 0\n\n    # Get the current play count from the custom property\n    count \u003d self.custom.playCount\n    \n    # Increment the count\n    count +\u003d 1\n    target_tag \u003d \"[default]Moorpark/Molding/IM48/Down_Sound\"\n    # Check if the audio has played more than 3 times\n    if count \u003c\u003d 2:\n        # Play the audio again (manually trigger the play)\n        self.props.play \u003d True\n    else:\n        # Stop playing and toggle the switch off\n        self.props.play \u003d False\n        system.tag.writeBlocking([target_tag], [False])\n        count \u003d 0  # Reset the count after 3 plays\n    \n    # Update the custom playCount property with the new count\n    self.custom.playCount \u003d count"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "IM48Audio"
+        },
+        "position": {
+          "height": 0.0749,
+          "width": 0.297,
+          "x": 0.1891,
+          "y": 0.2398
+        },
+        "propConfig": {
+          "props.play": {
+            "binding": {
+              "config": {
+                "expression": "{[default]Moorpark/Molding/IM48/Down_Sound}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d True and self.session.custom.ProductionSiteID \u003d\u003d 2:\n\t\treturn True\n\telse:\n\t\treturn False",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "source": "https://connectedfactory.pentair.com/IM48MachineDown.wav"
+        },
+        "type": "ia.display.audio"
+      },
+      {
+        "events": {
+          "component": {
+            "onEnded": {
+              "config": {
+                "script": " # Initialize playCount if it doesn\u0027t exist\n    if not hasattr(self.custom, \u0027playCount\u0027):\n        self.custom.playCount \u003d 0\n\n    # Get the current play count from the custom property\n    count \u003d self.custom.playCount\n    \n    # Increment the count\n    count +\u003d 1\n    target_tag \u003d \"[default]Moorpark/Molding/IM50/Down_Sound\"\n    # Check if the audio has played more than 3 times\n    if count \u003c\u003d 2:\n        # Play the audio again (manually trigger the play)\n        self.props.play \u003d True\n    else:\n        # Stop playing and toggle the switch off\n        self.props.play \u003d False\n        system.tag.writeBlocking([target_tag], [False])\n        count \u003d 0  # Reset the count after 3 plays\n    \n    # Update the custom playCount property with the new count\n    self.custom.playCount \u003d count"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "IM50Audio"
+        },
+        "position": {
+          "height": 0.0749,
+          "width": 0.297,
+          "x": 0.1891,
+          "y": 0.2398
+        },
+        "propConfig": {
+          "props.play": {
+            "binding": {
+              "config": {
+                "expression": "{[default]Moorpark/Molding/IM50/Down_Sound}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d True and self.session.custom.ProductionSiteID \u003d\u003d 2:\n\t\treturn True\n\telse:\n\t\treturn False",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "source": "https://connectedfactory.pentair.com/IM50MachineDown.wav"
+        },
+        "type": "ia.display.audio"
+      },
+      {
+        "events": {
+          "component": {
+            "onEnded": {
+              "config": {
+                "script": " # Initialize playCount if it doesn\u0027t exist\n    if not hasattr(self.custom, \u0027playCount\u0027):\n        self.custom.playCount \u003d 0\n\n    # Get the current play count from the custom property\n    count \u003d self.custom.playCount\n    \n    # Increment the count\n    count +\u003d 1\n    target_tag \u003d \"[default]Moorpark/Molding/IM54/Down_Sound\"\n    # Check if the audio has played more than 3 times\n    if count \u003c\u003d 3:\n        # Play the audio again (manually trigger the play)\n        self.props.play \u003d True\n    else:\n        # Stop playing and toggle the switch off\n        self.props.play \u003d False\n        system.tag.writeBlocking([target_tag], [False])\n        count \u003d 0  # Reset the count after 3 plays\n    \n    # Update the custom playCount property with the new count\n    self.custom.playCount \u003d count"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "IM54Audio"
+        },
+        "position": {
+          "height": 0.0749,
+          "width": 0.297,
+          "x": 0.1891,
+          "y": 0.2398
+        },
+        "propConfig": {
+          "props.play": {
+            "binding": {
+              "config": {
+                "expression": "{[default]Moorpark/Molding/IM54/Down_Sound}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d True and self.session.custom.ProductionSiteID \u003d\u003d 2:\n\t\treturn True\n\telse:\n\t\treturn False",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "source": "https://connectedfactory.pentair.com/IM54MachineDown.wav"
+        },
+        "type": "ia.display.audio"
+      },
+      {
+        "events": {
+          "component": {
+            "onEnded": {
+              "config": {
+                "script": " # Initialize playCount if it doesn\u0027t exist\n    if not hasattr(self.custom, \u0027playCount\u0027):\n        self.custom.playCount \u003d 0\n\n    # Get the current play count from the custom property\n    count \u003d self.custom.playCount\n    \n    # Increment the count\n    count +\u003d 1\n    target_tag \u003d \"[default]Sanford/Molding/SB01/Down_Sound\"\n    # Check if the audio has played more than 3 times\n    if count \u003c\u003d 2:\n        # Play the audio again (manually trigger the play)\n        self.props.play \u003d True\n    else:\n        # Stop playing and toggle the switch off\n        self.props.play \u003d False\n        system.tag.writeBlocking([target_tag], [False])\n        count \u003d 0  # Reset the count after 3 plays\n    \n    # Update the custom playCount property with the new count\n    self.custom.playCount \u003d count\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "SB01Audio"
+        },
+        "position": {
+          "height": 0.0749,
+          "width": 0.297,
+          "x": 0.1911,
+          "y": 0.2425
+        },
+        "propConfig": {
+          "props.play": {
+            "binding": {
+              "config": {
+                "expression": "{[default]Sanford/Molding/SB01/Down_Sound.value}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d True and self.session.custom.ProductionSiteID \u003d\u003d 1:\n\t\treturn True\n\telse:\n\t\treturn False",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "source": "https://connectedfactory.pentair.com/SB01MachineDown.wav"
+        },
+        "type": "ia.display.audio"
+      },
+      {
+        "events": {
+          "component": {
+            "onEnded": {
+              "config": {
+                "script": " # Initialize playCount if it doesn\u0027t exist\n    if not hasattr(self.custom, \u0027playCount\u0027):\n        self.custom.playCount \u003d 0\n\n    # Get the current play count from the custom property\n    count \u003d self.custom.playCount\n    \n    # Increment the count\n    count +\u003d 1\n    target_tag \u003d \"[default]Sanford/Molding/SB02/Down_Sound\"\n    # Check if the audio has played more than 3 times\n    if count \u003c\u003d 2:\n        # Play the audio again (manually trigger the play)\n        self.props.play \u003d True\n    else:\n        # Stop playing and toggle the switch off\n        self.props.play \u003d False\n        system.tag.writeBlocking([target_tag], [False])\n        count \u003d 0  # Reset the count after 3 plays\n    \n    # Update the custom playCount property with the new count\n    self.custom.playCount \u003d count\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "SB02Audio"
+        },
+        "position": {
+          "height": 0.0749,
+          "width": 0.297,
+          "x": 0.1891,
+          "y": 0.2398
+        },
+        "propConfig": {
+          "props.play": {
+            "binding": {
+              "config": {
+                "expression": "{[default]Sanford/Molding/SB02/Down_Sound}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d True and self.session.custom.ProductionSiteID \u003d\u003d 1:\n\t\treturn True\n\telse:\n\t\treturn False",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "source": "https://connectedfactory.pentair.com/SB02MachineDown.wav"
+        },
+        "type": "ia.display.audio"
+      },
+      {
+        "events": {
+          "component": {
+            "onEnded": {
+              "config": {
+                "script": " # Initialize playCount if it doesn\u0027t exist\n    if not hasattr(self.custom, \u0027playCount\u0027):\n        self.custom.playCount \u003d 0\n\n    # Get the current play count from the custom property\n    count \u003d self.custom.playCount\n    \n    # Increment the count\n    count +\u003d 1\n    target_tag \u003d \"[default]Sanford/Molding/SB03/Down_Sound\"\n    # Check if the audio has played more than 3 times\n    if count \u003c\u003d 2:\n        # Play the audio again (manually trigger the play)\n        self.props.play \u003d True\n    else:\n        # Stop playing and toggle the switch off\n        self.props.play \u003d False\n        system.tag.writeBlocking([target_tag], [False])\n        count \u003d 0  # Reset the count after 3 plays\n    \n    # Update the custom playCount property with the new count\n    self.custom.playCount \u003d count\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "SB03Audio"
+        },
+        "position": {
+          "height": 0.0749,
+          "width": 0.297,
+          "x": 0.1891,
+          "y": 0.2398
+        },
+        "propConfig": {
+          "props.play": {
+            "binding": {
+              "config": {
+                "expression": "{[default]Sanford/Molding/SB03/Down_Sound}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d True and self.session.custom.ProductionSiteID \u003d\u003d 1:\n\t\treturn True\n\telse:\n\t\treturn False",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "source": "https://connectedfactory.pentair.com/SB03MachineDown.wav"
+        },
+        "type": "ia.display.audio"
+      },
+      {
+        "events": {
+          "component": {
+            "onEnded": {
+              "config": {
+                "script": " # Initialize playCount if it doesn\u0027t exist\n    if not hasattr(self.custom, \u0027playCount\u0027):\n        self.custom.playCount \u003d 0\n\n    # Get the current play count from the custom property\n    count \u003d self.custom.playCount\n    \n    # Increment the count\n    count +\u003d 1\n    target_tag \u003d \"[default]Sanford/Molding/SB04/Down_Sound\"\n    # Check if the audio has played more than 3 times\n    if count \u003c\u003d 2:\n        # Play the audio again (manually trigger the play)\n        self.props.play \u003d True\n    else:\n        # Stop playing and toggle the switch off\n        self.props.play \u003d False\n        system.tag.writeBlocking([target_tag], [False])\n        count \u003d 0  # Reset the count after 3 plays\n    \n    # Update the custom playCount property with the new count\n    self.custom.playCount \u003d count\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "SB04Audio"
+        },
+        "position": {
+          "height": 0.0749,
+          "width": 0.297,
+          "x": 0.1891,
+          "y": 0.2398
+        },
+        "propConfig": {
+          "props.play": {
+            "binding": {
+              "config": {
+                "expression": "{[default]Sanford/Molding/SB04/Down_Sound}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d True and self.session.custom.ProductionSiteID \u003d\u003d 1:\n\t\treturn True\n\telse:\n\t\treturn False",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "source": "https://connectedfactory.pentair.com/SB04MachineDown.wav"
+        },
+        "type": "ia.display.audio"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

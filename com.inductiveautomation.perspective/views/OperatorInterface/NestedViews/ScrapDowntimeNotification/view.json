@@ -1,0 +1,192 @@
+{
+  "custom": {
+    "DateTimeNow": {
+      "$": [
+        "ts",
+        192,
+        1721772810790
+      ],
+      "$ts": 1721772810790
+    },
+    "Equipment": "P08",
+    "ProductionLineID": 11
+  },
+  "params": {
+    "EquipmentID": 19,
+    "ProcessArea": "Molding"
+  },
+  "propConfig": {
+    "custom.DateTimeNow": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.Equipment": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "id": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineNameByID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.ProductionLineID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.EquipmentID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineIDByEquipmentID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ProcessArea": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Calling_Label"
+        },
+        "position": {
+          "height": 240,
+          "width": 800,
+          "y": 120
+        },
+        "props": {
+          "style": {
+            "borderBottomStyle": "solid",
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden"
+          },
+          "text": "Starting a downtime event due to excessive scrap. Calling for help...",
+          "textStyle": {
+            "fontSize": "2rem",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tequipment \u003d self.view.custom.Equipment\n\tprocessArea \u003d self.view.params.ProcessArea\n\t\n\tsite \u003d self.session.custom.ProductionSite\n\t\t\n\tsystem.tag.writeBlocking(\"[default]\" + site + \"/\" + processArea + \"/\" + equipment + \"/Status\", 0)\n\tsystem.tag.writeBlocking(\"[default]\" + site + \"/\" + processArea + \"/\" + equipment + \"/OEE/Quality/Consecutive Scrap\", 0)\n\tsystem.tag.writeBlocking(\"[default]\" + site + \"/\" + processArea + \"/\" + equipment + \"/Andon/Andon Status\", 2)\n\t\n\tpEventHeaderID \u003d None\n\tpID \u003d None\n\tpNotificationGroupID \u003d 5\n\tpTimestamp \u003d self.view.custom.DateTimeNow\n\tpProductionLineID \u003d self.view.custom.ProductionLineID\n\tpStatusID \u003d 2\n\tpIsDelete \u003d False\n\t\n\tparams \u003d {\"pEventHeaderID\": pEventHeaderID, \"pID\": pID, \"pNotificationGroupID\": pNotificationGroupID, \"pTimestamp\": pTimestamp, \"pProductionLineID\": pProductionLineID, \"pStatusID\": pStatusID, \"pIsDelete\": pIsDelete}\n\tsystem.db.runNamedQuery(\"Andon/sp_ANDON_AndonEvent\", params)\n\t\n\tpID \u003d None\n\tpEquipmentID \u003d self.view.params.EquipmentID\n\tpReasonID \u003d None\n\tpStartTime \u003d pTimestamp\n\tpCommentID \u003d None\n\tpAndonHeaderID \u003d system.db.runNamedQuery(\"Andon/GetAndonHeaderByTime\", {\"Timestamp\": pStartTime})\n\t\n\tparams \u003d {\"pID\": pID, \"pEquipmentID\": pEquipmentID, \"pReasonID\": pReasonID, \"pStartTime\": pStartTime, \"pEndTime\": None, \"pCommentID\": pCommentID, \"pAndonHeaderID\": pAndonHeaderID[0][0], \"pIsDelete\": False}\n\tsystem.db.runNamedQuery(\"Downtime/sp_GEN_DowntimeEvent\", params)\n\t"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.closePopup(\u0027ScrapDT\u0027)\n\t#system.perspective.refresh()"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Confirm"
+        },
+        "position": {
+          "height": 136,
+          "width": 398,
+          "x": 201,
+          "y": 415
+        },
+        "propConfig": {
+          "custom.DateTime": {
+            "binding": {
+              "config": {
+                "expression": "now()"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "primary": false,
+          "text": "CONFIRM",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 120,
+          "width": 800
+        },
+        "propConfig": {
+          "props.style.backgroundColor": {
+            "binding": {
+              "config": {
+                "expression": "\u0027#B22222\u0027"
+              },
+              "type": "expr"
+            }
+          },
+          "props.textStyle.color": {
+            "binding": {
+              "config": {
+                "expression": "\u0027#D5D5D5\u0027"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderBottomStyle": "solid",
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden"
+          },
+          "text": "STARTING DOWNTIME",
+          "textStyle": {
+            "classes": "Barlow",
+            "fontSize": "2rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "type": "ia.container.coord"
+  }
+}

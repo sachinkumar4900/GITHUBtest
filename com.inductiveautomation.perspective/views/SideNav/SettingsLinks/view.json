@@ -1,0 +1,440 @@
+{
+  "custom": {
+    "ButtonAccess": true
+  },
+  "params": {},
+  "propConfig": {
+    "custom.ButtonAccess": {
+      "binding": {
+        "config": {
+          "expression": "{session.custom.Roles.Planner} || {session.custom.Roles.ValueStreamLead} || {session.custom.Roles.Admin}"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 196,
+      "width": 299
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Shift/ShiftManagement"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Shift Management\""
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Shift Management"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "DownTime/DowntimeReasonManagement"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Downtime Reasons\""
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Downtime Reasons"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Scrap/ScrapReasonManagement"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Scrap Reasons\""
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Scrap Reasons"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Trends/TagTrending"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Tag Trending\""
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Tag Trending"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "OEE/OEE Calculations"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"OEE Calculations\""
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Tag Trending_0"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          },
+          "text": "OEE Calculations"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Lean/Pentair_Calender"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"MDI SETTINGS\""
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "MDI Settings"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          },
+          "text": "MDI Settings"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Demo/WorkOrderTrack"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"WORK ORDER HISTORY\""
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Work Order History"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          },
+          "text": "Work Order History"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

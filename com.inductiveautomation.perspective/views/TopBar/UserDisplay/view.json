@@ -1,0 +1,118 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 113,
+      "width": 356
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "20px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "session.props.auth.user.userName"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontSize": 14,
+                "fontWeight": "bold",
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "20px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "session.custom.Roles"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif value[\"Admin\"]:\n\t\treturn \"Administrator\"\n\troles \u003d \"\"\n\tif value[\"Sanford\"]:\n\t\troles +\u003d \"Sanford \"\n\telif value[\"Moorpark\"]:\n\t\troles +\u003d \"Moorpark \"\n\t\n\tif value[\"Operator\"]:\n\t\troles +\u003d \"Operator\"\n\telif value[\"TeamLead\"]:\n\t\troles +\u003d \"Team Lead\"\n\telif value[\"GroupLead\"]:\n\t\troles +\u003d \"Group Lead\"\n\telif value[\"ValueStreamLead\"]:\n\t\troles +\u003d \"Value Stream Lead\"\n\telif value[\"Planner\"]:\n\t\troles +\u003d \"Planner\"\n\t\t\n\treturn roles",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "fontSize": 12,
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "basis": "135px",
+          "grow": 1
+        },
+        "props": {
+          "direction": "column"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "Image"
+        },
+        "position": {
+          "basis": "30px"
+        },
+        "props": {
+          "fit": {
+            "mode": "cover"
+          },
+          "source": "/system/images/Builtin/icons/48/businessman2.png",
+          "style": {
+            "borderBottomLeftRadius": 20,
+            "borderBottomRightRadius": 20,
+            "borderTopLeftRadius": 20,
+            "borderTopRightRadius": 20,
+            "marginRight": 7
+          }
+        },
+        "type": "ia.display.image"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "justify": "center"
+    },
+    "type": "ia.container.flex"
+  }
+}

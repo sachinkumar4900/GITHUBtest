@@ -1,0 +1,55 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 60,
+    "cacheEnabled": true,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "d2ef91644598a843103518c7338034d7e76ee6b05c744e0a48f37e3b15d01e98",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2025-07-02T09:39:17Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "ProductionLineID",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "startDate",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "endDate",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "TopSelect",
+        "sqlType": 2
+      }
+    ]
+  }
+}

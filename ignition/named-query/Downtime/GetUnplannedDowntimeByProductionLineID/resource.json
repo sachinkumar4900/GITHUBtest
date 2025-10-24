@@ -1,0 +1,50 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "ScalarQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "97f6b64a49735e749142e02f4258245a6d91743b182e3548ca6e4e6944d5d8ac",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-08-01T19:53:00Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "productionLineID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "start",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "end",
+        "sqlType": 8
+      }
+    ]
+  }
+}

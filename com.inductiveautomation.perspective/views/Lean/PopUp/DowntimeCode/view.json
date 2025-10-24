@@ -1,0 +1,70 @@
+{
+  "custom": {},
+  "params": {
+    "ProductionLineID": "\u00271,2\u0027"
+  },
+  "propConfig": {
+    "params.ProductionLineID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 400,
+      "width": 500
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Table"
+            },
+            "position": {
+              "basis": "400px",
+              "grow": 1,
+              "shrink": ""
+            },
+            "propConfig": {
+              "props.data": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "ProductionLineID": "{view.params.ProductionLineID}"
+                    },
+                    "queryPath": "Lean_Query/DeliveryCodesDetails"
+                  },
+                  "type": "query"
+                }
+              }
+            },
+            "props": {
+              "filter": {
+                "enabled": true
+              }
+            },
+            "type": "ia.display.table"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "basis": "200px",
+          "grow": 1
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

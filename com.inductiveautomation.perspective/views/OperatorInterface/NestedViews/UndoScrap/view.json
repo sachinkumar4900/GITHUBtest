@@ -1,0 +1,592 @@
+{
+  "custom": {
+    "ScrapData": [
+      {
+        "CommentID": null,
+        "EquipmentID": 1,
+        "ID": 764,
+        "ProductionLineID": 1,
+        "Quantity": 2,
+        "ReasonID": 57,
+        "Timestamp": 1737003617630,
+        "WorkOrderID": 1256
+      }
+    ],
+    "WorkOrderName": "516252-B01-PF272-130004"
+  },
+  "params": {
+    "EquipmentID": 1
+  },
+  "propConfig": {
+    "custom.ScrapData": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.EquipmentID}"
+          },
+          "queryPath": "Scrap/GetLastScrapByEquipmentID",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.WorkOrderName": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "WorkOrderID": "{view.custom.ScrapData[0].WorkOrderID}"
+          },
+          "queryPath": "WorkOrder/GetWorkOrderNameByID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 900,
+      "width": 900
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Confirmation_Label"
+        },
+        "position": {
+          "height": 0.1244,
+          "width": 0.96,
+          "x": 0.02,
+          "y": 0.0855
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "22px",
+            "textAlign": "center"
+          },
+          "text": "Are you sure you want to undo the scrap action below?",
+          "textStyle": {
+            "fontSize": "2rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Header_Label"
+        },
+        "position": {
+          "height": 0.0889,
+          "width": 1
+        },
+        "props": {
+          "text": "Undo Scrap",
+          "textStyle": {
+            "backgroundColor": "#FFFFFF",
+            "fontSize": "3rem",
+            "paddingLeft": "1rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tscrapID \u003d self.view.custom.ScrapData[0].ID\n\tisDelete \u003d True\n\tsystem.db.runNamedQuery(\"Scrap/sp_GEN_Scrap\", {\"pID\": scrapID, \"pIsDelete\": isDelete})\n\t#system.perspective.refresh()\n\t\n\tplID \u003d self.view.custom.ScrapData[0].ProductionLineID\n\t\n\t# assembly\n\tif plID \u003d\u003d 11:\n\t\tqty \u003d self.view.custom.ScrapData[0].Quantity\n\t\t\n\t\tpath \u003d OEE.getTagPathByProductionLineID(plID)\n\t\ttdcPath \u003d path + \"/OEE/Quality/Total Daily Count\"\n\t\twoPath \u003d path + \"/OEE/Quality/Work Order Count\"\n\t\t\n\t\ttags \u003d system.tag.readBlocking([tdcPath, woPath])\n\t\t\n\t\ttdc \u003d tags[0].value - qty\n\t\two \u003d tags[1].value - qty\n\t\t\n\t\tsystem.tag.writeBlocking([tdcPath, woPath], [tdc, wo])"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "draggable": true,
+                  "id": "UndoScrap",
+                  "modal": false,
+                  "overlayDismiss": false,
+                  "resizable": true,
+                  "showCloseIcon": true,
+                  "type": "close",
+                  "viewPath": "",
+                  "viewportBound": false
+                },
+                "enabled": false,
+                "scope": "C",
+                "type": "popup"
+              },
+              {
+                "config": {
+                  "script": "\tfrom time import sleep\n\tsleep(1)\n\tsystem.perspective.closePopup(\"\")"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Submit_btn"
+        },
+        "position": {
+          "height": 0.0889,
+          "width": 0.4325,
+          "x": 0.53,
+          "y": 0.8977
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "UNDO SCRAP",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "draggable": true,
+                "id": "UndoScrap",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "close",
+                "viewPath": "",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button_0"
+        },
+        "position": {
+          "height": 0.0889,
+          "width": 0.4325,
+          "x": 0.0325,
+          "y": 0.8977
+        },
+        "props": {
+          "primary": false,
+          "text": "CANCEL",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "WorkOrder_Label"
+        },
+        "position": {
+          "height": 0.06,
+          "width": 0.905,
+          "x": 0.0422,
+          "y": 0.3311
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Work Order:",
+          "textStyle": {
+            "fontSize": "2rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Quantity_Label"
+        },
+        "position": {
+          "height": 0.06,
+          "width": 0.905,
+          "x": 0.0422,
+          "y": 0.4511
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Quantity:",
+          "textStyle": {
+            "fontSize": "2rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "TimeScrapped_Label"
+        },
+        "position": {
+          "height": 0.06,
+          "width": 0.905,
+          "x": 0.0422,
+          "y": 0.5711
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Time Scrapped:",
+          "textStyle": {
+            "fontSize": "2rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "WorkOrder"
+        },
+        "position": {
+          "height": 0.06,
+          "width": 0.855,
+          "x": 0.0422,
+          "y": 0.3911
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.WorkOrderName"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "2rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Quantity"
+        },
+        "position": {
+          "height": 0.06,
+          "width": 0.855,
+          "x": 0.0422,
+          "y": 0.5111
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ScrapData[0].Quantity"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "2rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Timestamp"
+        },
+        "position": {
+          "height": 0.06,
+          "width": 0.855,
+          "x": 0.0422,
+          "y": 0.6311
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "dateFormat(addMinutes( toDate({view.custom.ScrapData[0].Timestamp}), {session.props.device.timezone.utcOffset} * 60 ), \"hh:mm a yyyy-MM-dd\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "2rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "NoScrap_Label"
+        },
+        "position": {
+          "height": 0.1733,
+          "width": 0.96,
+          "x": 0.02,
+          "y": 0.1022
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003c\u003d 0, true, false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "22px",
+            "textAlign": "center"
+          },
+          "text": "No scrap data found. Cannot undo scrap."
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Comment"
+        },
+        "position": {
+          "height": 0.14,
+          "width": 0.925,
+          "x": 0.0422,
+          "y": 0.7511
+        },
+        "propConfig": {
+          "custom.Comment": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "CommentID": "{view.custom.ScrapData[0].CommentID}"
+                },
+                "queryPath": "Comment/GetCommentByID",
+                "returnFormat": "json"
+              },
+              "type": "query"
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if(len({this.custom.Comment}) \u003c 1, \"\", {this.custom.Comment[0].Text})"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "alignVertical": "top",
+          "textStyle": {
+            "fontSize": "2rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Comment_Label"
+        },
+        "position": {
+          "height": 0.06,
+          "width": 0.905,
+          "x": 0.0422,
+          "y": 0.6911
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Comment:",
+          "textStyle": {
+            "fontSize": "2rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "WorkOrder_0"
+        },
+        "position": {
+          "height": 0.06,
+          "width": 0.855,
+          "x": 0.0422,
+          "y": 0.2735
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ScrapData[0].ReasonID"
+              },
+              "transforms": [
+                {
+                  "code": "\treason \u003d system.db.runNamedQuery(\"Scrap/GetScrapReasonByID\", {\"ID\": self.view.custom.ScrapData[0].ReasonID})\n\treturn reason[0][\"NAME\"]",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "2rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Reason_Label"
+        },
+        "position": {
+          "height": 0.06,
+          "width": 0.905,
+          "x": 0.0422,
+          "y": 0.2201
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScrapData}) \u003e 0, true, false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Reason:",
+          "textStyle": {
+            "fontSize": "2rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "backgroundColor": "#EEEEEE"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

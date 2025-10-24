@@ -1,0 +1,1 @@
+SELECT e.Name FROM DowntimeEvent de JOIN Equipment e ON e.ID = de.EquipmentID WHERE de.ID = :dtID

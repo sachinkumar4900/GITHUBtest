@@ -1,0 +1,50 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "580c2318254613ae9bcd35077b18db3bccb3b64da9cfdab8f40c8d7d999b9745",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2025-02-28T08:44:52Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "DowntimeID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ReasonID",
+        "sqlType": 1
+      },
+      {
+        "type": "Parameter",
+        "identifier": "CommentID",
+        "sqlType": 1
+      }
+    ]
+  }
+}

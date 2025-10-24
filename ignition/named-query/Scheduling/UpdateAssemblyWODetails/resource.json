@@ -1,0 +1,70 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "c226b14fb81d32eda60d27d2d15629b0008d7ecaa40b3a99fb305d67cc240c6c",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-06-13T16:04:20Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "ID",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "PartNumber",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ChangeoverTime",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ProductionLineID",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ProductFamily",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "NumberOfPeople",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "RatePerHour",
+        "sqlType": 5
+      }
+    ]
+  }
+}

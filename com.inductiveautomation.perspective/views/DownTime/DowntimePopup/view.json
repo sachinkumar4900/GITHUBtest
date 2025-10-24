@@ -1,0 +1,163 @@
+{
+  "custom": {},
+  "params": {
+    "EquipmentID": 19,
+    "ReasonGroupID": 2
+  },
+  "propConfig": {
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ReasonGroupID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 271,
+      "width": 506
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Question_Label"
+        },
+        "position": {
+          "height": 0.5062,
+          "width": 0.9842,
+          "x": 0.0079
+        },
+        "props": {
+          "style": {
+            "borderBottomStyle": "hidden",
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden"
+          },
+          "text": "Is the equipment down?",
+          "textStyle": {
+            "fontSize": "1.5rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tpID \u003d None\n\tpEquipmentID \u003d self.view.params.EquipmentID\n\tpReasonID \u003d None\n\tpStartTime \u003d system.date.now()\n\tpCommentID \u003d None\n\tpAndonHeaderID \u003d None\n\tpImpactAvailability \u003d system.db.runNamedQuery(\"Downtime/GetLineActiveDowntimeEventsImpactAvailability\", {\"equipmentID\": pEquipmentID})\n\t\n\tparams \u003d {\"pID\": pID, \"pEquipmentID\": pEquipmentID, \"pReasonID\": pReasonID, \"pStartTime\": pStartTime, \"pEndTime\": None, \"pCommentID\": pCommentID, \"pAndonHeaderID\": pAndonHeaderID, \"pImpactAvailability\": pImpactAvailability, \"pIsDelete\": False}\n\tsystem.db.runNamedQuery(\"Downtime/sp_GEN_DowntimeEvent\", params)\n\t\n\tsystem.perspective.sendMessage(\"refresh-OperatorInterfaceAssembly-DT-Status\", {})\n\t\n\tsystem.perspective.closePopup(\u0027Z1NPq-rb\u0027)"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Yes_Down"
+        },
+        "position": {
+          "height": 0.3375,
+          "width": 0.3642,
+          "x": 0.1211,
+          "y": 0.5059
+        },
+        "propConfig": {
+          "custom.DateTime": {
+            "binding": {
+              "config": {
+                "expression": "now()"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "primary": false,
+          "text": "Yes",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tsystem.perspective.closePopup(\u0027\u0027)"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "No_Down"
+        },
+        "position": {
+          "height": 0.3375,
+          "width": 0.3642,
+          "x": 0.5152,
+          "y": 0.5059
+        },
+        "props": {
+          "primary": false,
+          "text": "No",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.1181,
+          "width": 0.5119,
+          "x": 0.0968,
+          "y": 0.3506
+        },
+        "propConfig": {
+          "custom.key": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "equipmentID": "{view.params.EquipmentID}"
+                },
+                "queryPath": "Downtime/GetLineActiveDowntimeEventsImpactAvailability",
+                "returnFormat": "scalar"
+              },
+              "type": "query"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"eqID \" + {view.params.EquipmentID} + \" rgID \" + {view.params.ReasonGroupID}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

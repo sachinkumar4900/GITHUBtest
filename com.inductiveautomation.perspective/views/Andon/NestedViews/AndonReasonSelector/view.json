@@ -1,0 +1,97 @@
+{
+  "custom": {},
+  "params": {
+    "EquipmentID": 1,
+    "ProcessArea": "Molding",
+    "ReasonGroupID": 2
+  },
+  "propConfig": {
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ProcessArea": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ReasonGroupID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.1125,
+          "width": 1
+        },
+        "props": {
+          "text": "Select Andon Reason",
+          "textStyle": {
+            "backgroundColor": "#FFFFFF",
+            "fontSize": "30px",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "height": 0.875,
+          "width": 1,
+          "y": 0.12
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "EquipmentID": "{view.params.EquipmentID}",
+                  "Level": "1",
+                  "ProcessArea": "{view.params.ProcessArea}",
+                  "ReasonGroupID": "{view.params.ReasonGroupID}"
+                },
+                "queryPath": "Downtime/GetDowntimeReasonIDsByDTReasonTypeID",
+                "returnFormat": "json"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "alignContent": "flex-start",
+          "alignItems": "flex-start",
+          "elementStyle": {
+            "boxShadow": "2px 2px 5px",
+            "marginBottom": "0.5rem",
+            "marginLeft": "0.25rem",
+            "marginRight": "0.25rem",
+            "marginTop": "0.5rem"
+          },
+          "justify": "space-around",
+          "path": "Andon/NestedViews/AndonReason",
+          "style": {
+            "backgroundColor": "#EEEEEE"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.display.flex-repeater"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "custom": {},
+  "params": {
+    "id": 30
+  },
+  "propConfig": {
+    "params.id": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 501,
+      "width": 796
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "PDFViewer"
+        },
+        "position": {
+          "height": 0.9401,
+          "width": 1,
+          "y": 0.0519
+        },
+        "propConfig": {
+          "props.source": {
+            "binding": {
+              "config": {
+                "expression": "\"https://connectedfactory.pentair.com/system/blob/ConnectedFactory/Documents/GetPDF?ID\u003d\" + {view.params.id}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "page": 1,
+          "pageCount": 1,
+          "style": {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 8
+          }
+        },
+        "type": "ia.display.pdf-viewer"
+      },
+      {
+        "meta": {
+          "name": "Link"
+        },
+        "position": {
+          "height": 0.0419,
+          "width": 0.3807,
+          "x": 0.0025,
+          "y": 0.0059
+        },
+        "propConfig": {
+          "props.url": {
+            "binding": {
+              "config": {
+                "path": "../PDFViewer.props.source"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "target": "tab",
+          "text": "View Document in Separate Window"
+        },
+        "type": "ia.navigation.link"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.0439,
+          "width": 0.559,
+          "x": 0.4346,
+          "y": 0.004
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "id": "{view.params.id}"
+                },
+                "queryPath": "Documents/GetDocumentNameByID",
+                "returnFormat": "scalar"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

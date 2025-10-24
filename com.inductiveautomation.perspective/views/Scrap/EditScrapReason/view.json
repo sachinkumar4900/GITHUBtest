@@ -1,0 +1,326 @@
+{
+  "custom": {
+    "ReasonData": [
+      {
+        "ConsecutiveDefects": 3,
+        "DefectsPerHour": 4,
+        "ID": 58,
+        "Name": "test",
+        "ProductionLineTypeID": 1
+      }
+    ]
+  },
+  "params": {
+    "ID": 58
+  },
+  "propConfig": {
+    "custom.ReasonData": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "ID": "{view.params.ID}"
+          },
+          "queryPath": "Scrap/GetScrapReasonByID",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.ID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 280,
+      "width": 459
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Reason Group Dropdown"
+        },
+        "position": {
+          "height": 0.1286,
+          "width": 0.5577,
+          "x": 0.341,
+          "y": 0.5428
+        },
+        "propConfig": {
+          "props.options": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "siteID": "{session.custom.ProductionSiteID}"
+                },
+                "queryPath": "ProductionLine/GetProductionLineTypesForDropdownBySiteID"
+              },
+              "type": "query"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ReasonData[0].ProductionLineTypeID"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tparams \u003d {\"pID\": self.view.params.ID, \"pName\": self.getSibling(\"Reason TextField\").props.text, \"pConsecutiveDefects\": self.getSibling(\"Consecutive NumericEntryField\").props.value, \"pDefectsPerHour\": self.getSibling(\"Defects NumericEntryField\").props.value, \"pProductionLineTypeID\": self.getSibling(\"Reason Group Dropdown\").props.value, \"pIsDelete\": False}\n\tsystem.db.runNamedQuery(\"Scrap/sp_MD_ScrapReason\", params)"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.sendMessage(\"refresh-Scrap-Reason-Table\", {})\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Save Button"
+        },
+        "position": {
+          "height": 0.1214,
+          "width": 0.1743,
+          "x": 0.5954,
+          "y": 0.7893
+        },
+        "propConfig": {
+          "custom.DefectsSet": {
+            "binding": {
+              "config": {
+                "expression": "{../Defects NumericEntryField.props.value} \u003e 0\r\n\u0026\u0026\r\n{../Consecutive NumericEntryField.props.value} \u003e 0"
+              },
+              "type": "expr"
+            }
+          },
+          "custom.ReasonGroupSet": {
+            "binding": {
+              "config": {
+                "expression": "{../Reason Group Dropdown.props.value} !\u003d \"\""
+              },
+              "type": "expr"
+            }
+          },
+          "custom.ReasonSet": {
+            "binding": {
+              "config": {
+                "expression": "len({../Reason TextField.props.text}) \u003e 0"
+              },
+              "type": "expr"
+            }
+          },
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "{this.custom.ReasonGroupSet}\r\n\u0026\u0026\r\n{this.custom.ReasonSet}\r\n\u0026\u0026\r\n{this.custom.DefectsSet}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "path": "this.props.enabled"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "text": "Save"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "Defects NumericEntryField"
+        },
+        "position": {
+          "height": 0.1143,
+          "width": 0.5556,
+          "x": 0.3421,
+          "y": 0.3677
+        },
+        "propConfig": {
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ReasonData[0].DefectsPerHour"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.input.numeric-entry-field"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tself.getSibling(\"Reason TextField\").props.text \u003d self.view.custom.ReasonData[0].Name\n\tself.getSibling(\"Consecutive NumericEntryField\").props.value \u003d self.view.custom.ReasonData[0].ConsecutiveDefects\n\tself.getSibling(\"Defects NumericEntryField\").props.value \u003d self.view.custom.ReasonData[0].DefectsPerHour\n\tself.getSibling(\"Reason Group Dropdown\").props.value \u003d self.view.custom.ReasonData[0].ProductionLineTypeID"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Reset Button"
+        },
+        "position": {
+          "height": 0.1214,
+          "width": 0.1743,
+          "x": 0.2305,
+          "y": 0.7893
+        },
+        "props": {
+          "text": "Reset"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "Consecutive NumericEntryField"
+        },
+        "position": {
+          "height": 0.1143,
+          "width": 0.5556,
+          "x": 0.341,
+          "y": 0.1928
+        },
+        "propConfig": {
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ReasonData[0].ConsecutiveDefects"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.input.numeric-entry-field"
+      },
+      {
+        "meta": {
+          "name": "Label_2"
+        },
+        "position": {
+          "height": 0.1142,
+          "width": 0.2854,
+          "x": 0.0109,
+          "y": 0.5571
+        },
+        "props": {
+          "style": {
+            "textAlign": "right"
+          },
+          "text": "Reason Group:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "height": 0.1142,
+          "width": 0.2854,
+          "x": 0.0109,
+          "y": 0.1929
+        },
+        "props": {
+          "style": {
+            "textAlign": "right"
+          },
+          "text": "Consecutive Defects:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_3"
+        },
+        "position": {
+          "height": 0.1571,
+          "width": 0.2854,
+          "x": 0.0109,
+          "y": 0.3571
+        },
+        "props": {
+          "style": {
+            "textAlign": "right"
+          },
+          "text": "Defects Per Hour:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Reason TextField"
+        },
+        "position": {
+          "height": 0.1142,
+          "width": 0.5577,
+          "x": 0.341,
+          "y": 0.0179
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ReasonData[0].Name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.input.text-field"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.1142,
+          "width": 0.2854,
+          "x": 0.0109,
+          "y": 0.0179
+        },
+        "props": {
+          "style": {
+            "textAlign": "right"
+          },
+          "text": "Reason:"
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

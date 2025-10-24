@@ -1,0 +1,138 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 192,
+      "width": 606
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "component": {
+            "onFileReceived": {
+              "config": {
+                "script": "\tpath \u003d \"C:\\\\\" + event.file.name\n\tevent.file.copyTo(path)\n\t\t\n\tself.getSibling(\"Label_1\").props.text \u003d path\n\tself.getSibling(\"Button\").props.enabled \u003d True"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "FileUpload"
+        },
+        "position": {
+          "height": 0.3698,
+          "width": 0.2822,
+          "x": 0.0243,
+          "y": 0.0494
+        },
+        "type": "ia.input.fileupload"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tself.getSibling(\"Label\").props.text \u003d \"Start: \" + str(system.date.now())\n\tself.getSibling(\"Label_0\").props.text \u003d \"\""
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tpath \u003d self.getSibling(\"Label_1\").props.text\n\t\n\tresult \u003d Import.ImportSchedule(path)\n\tself.getSibling(\"Label_1\").props.text \u003d \"Import Successful!\"\n\t#system.perspective.openPopup(\"ImportResultWindow\",\u0027ShopOrder/ImportResult\u0027, params \u003d {\u0027Result\u0027:result})\n\t\n\t#self.props.enabled \u003d False"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tself.getSibling(\"Label_0\").props.text \u003d \"End: \" + str(system.date.now())"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "height": 0.2917,
+          "width": 0.1766,
+          "x": 0.0347,
+          "y": 0.4896
+        },
+        "propConfig": {
+          "props.primary": {
+            "binding": {
+              "config": {
+                "path": "this.props.enabled"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "text": "Import"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "height": 0.2552,
+          "width": 0.2954,
+          "x": 0.6683,
+          "y": 0.3776
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.349,
+          "width": 0.1869,
+          "x": 0.4225,
+          "y": 0.0493
+        },
+        "props": {
+          "text": "Start: "
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.5208,
+          "width": 0.1869,
+          "x": 0.4224,
+          "y": 0.4035
+        },
+        "props": {
+          "text": "End: "
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

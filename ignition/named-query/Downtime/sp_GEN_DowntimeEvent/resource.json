@@ -1,0 +1,80 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "ce22169dd28995dd845ff4687771f408e55119ada2986cd9204f14fe19a288b3",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-05-22T20:40:11Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "pID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pEquipmentID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pReasonID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pStartTime",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pEndTime",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pCommentID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pAndonHeaderID",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pImpactAvailability",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pIsDelete",
+        "sqlType": 6
+      }
+    ]
+  }
+}

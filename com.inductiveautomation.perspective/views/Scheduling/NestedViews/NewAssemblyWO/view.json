@@ -1,0 +1,623 @@
+{
+  "custom": {},
+  "params": {
+    "ProductionLine": {
+      "ID": 5,
+      "Name": "P08",
+      "ProductionLineTypeID": 1
+    }
+  },
+  "propConfig": {
+    "params.ProductionLine": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "WODetails"
+        },
+        "position": {
+          "basis": "400px",
+          "display": false,
+          "grow": 1
+        },
+        "props": {
+          "columns": [
+            {
+              "align": "center",
+              "boolean": "checkbox",
+              "dateFormat": "MM/DD/YYYY",
+              "editable": false,
+              "field": "Fields",
+              "filter": {
+                "boolean": {
+                  "condition": ""
+                },
+                "date": {
+                  "condition": "",
+                  "value": ""
+                },
+                "enabled": false,
+                "number": {
+                  "condition": "",
+                  "value": ""
+                },
+                "string": {
+                  "condition": "",
+                  "value": ""
+                },
+                "visible": "on-hover"
+              },
+              "footer": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "header": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": "Field"
+              },
+              "justify": "auto",
+              "nullFormat": {
+                "includeNullStrings": false,
+                "nullFormatValue": "",
+                "strict": false
+              },
+              "number": "value",
+              "numberFormat": "0,0.##",
+              "progressBar": {
+                "bar": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "max": 100,
+                "min": 0,
+                "track": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "value": {
+                  "enabled": true,
+                  "format": "0,0.##",
+                  "justify": "center",
+                  "style": {
+                    "classes": ""
+                  }
+                }
+              },
+              "render": "auto",
+              "resizable": true,
+              "sort": "none",
+              "sortable": true,
+              "strictWidth": false,
+              "style": {
+                "classes": "Tables/TableRow"
+              },
+              "toggleSwitch": {
+                "color": {
+                  "selected": "",
+                  "unselected": ""
+                }
+              },
+              "viewParams": {},
+              "viewPath": "",
+              "visible": true,
+              "width": ""
+            },
+            {
+              "align": "center",
+              "boolean": "checkbox",
+              "dateFormat": "MM/DD/YYYY",
+              "editable": true,
+              "field": "Values",
+              "filter": {
+                "boolean": {
+                  "condition": ""
+                },
+                "date": {
+                  "condition": "",
+                  "value": ""
+                },
+                "enabled": false,
+                "number": {
+                  "condition": "",
+                  "value": ""
+                },
+                "string": {
+                  "condition": "",
+                  "value": ""
+                },
+                "visible": "on-hover"
+              },
+              "footer": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "header": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "justify": "auto",
+              "nullFormat": {
+                "includeNullStrings": false,
+                "nullFormatValue": "",
+                "strict": false
+              },
+              "number": "value",
+              "numberFormat": "0,0.##",
+              "progressBar": {
+                "bar": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "max": 100,
+                "min": 0,
+                "track": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "value": {
+                  "enabled": true,
+                  "format": "0,0.##",
+                  "justify": "center",
+                  "style": {
+                    "classes": ""
+                  }
+                }
+              },
+              "render": "auto",
+              "resizable": true,
+              "sort": "none",
+              "sortable": true,
+              "strictWidth": false,
+              "style": {
+                "classes": ""
+              },
+              "toggleSwitch": {
+                "color": {
+                  "selected": "",
+                  "unselected": ""
+                }
+              },
+              "viewParams": {
+                "InputValue": null,
+                "value": "int"
+              },
+              "viewPath": "Scheduling/NestedViews/FieldInputBox",
+              "visible": true,
+              "width": ""
+            }
+          ],
+          "data": {
+            "$": [
+              "ds",
+              192,
+              1711472019338
+            ],
+            "$columns": [
+              {
+                "data": [
+                  "ID",
+                  "Part Number",
+                  "Mold Number",
+                  "Resin Part Number",
+                  "Process Sheet Location",
+                  "BOM Weight",
+                  "Cavities",
+                  "Cycle Time",
+                  "Scrap Rate",
+                  "Changeover Time"
+                ],
+                "name": "Fields",
+                "type": "String"
+              },
+              {
+                "data": [
+                  "str",
+                  "int",
+                  "int",
+                  "int",
+                  "str",
+                  "float",
+                  "int",
+                  "int",
+                  "float",
+                  "int"
+                ],
+                "name": "Values",
+                "type": "String"
+              }
+            ]
+          },
+          "selection": {
+            "enableRowSelection": false
+          }
+        },
+        "type": "ia.display.table"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "FieldLabel"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "parent.meta.name"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/TableRow"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "String",
+                      "style": {
+                        "textAlign": "end"
+                      },
+                      "text": "IF3"
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "ProductFamily"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "FieldLabel"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "parent.meta.name"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/TableRow"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "NumericEntryField"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "format": "none",
+                      "placeholder": "int",
+                      "style": {
+                        "textAlign": "end"
+                      },
+                      "value": 123456
+                    },
+                    "type": "ia.input.numeric-entry-field"
+                  }
+                ],
+                "meta": {
+                  "name": "PartNumber"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "FieldLabel"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "parent.meta.name"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/TableRow"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "NumericEntryField"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "format": "none",
+                      "placeholder": "int",
+                      "style": {
+                        "textAlign": "end"
+                      },
+                      "value": 9
+                    },
+                    "type": "ia.input.numeric-entry-field"
+                  }
+                ],
+                "meta": {
+                  "name": "Number of People"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "FieldLabel"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "parent.meta.name"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/TableRow"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "NumericEntryField"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "float",
+                      "style": {
+                        "textAlign": "end"
+                      },
+                      "value": 60
+                    },
+                    "type": "ia.input.numeric-entry-field"
+                  }
+                ],
+                "meta": {
+                  "name": "Rate Per Hour"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "FieldLabel"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "parent.meta.name"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/TableRow"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "NumericEntryField"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "int",
+                      "style": {
+                        "textAlign": "end"
+                      },
+                      "value": 45
+                    },
+                    "type": "ia.input.numeric-entry-field"
+                  }
+                ],
+                "meta": {
+                  "name": "ChangeoverTime"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Fields"
+            },
+            "position": {
+              "basis": "200px",
+              "grow": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "overflow": "hidden"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "DataEntry"
+        },
+        "position": {
+          "basis": "200px",
+          "grow": 1
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tpartId \u003d self.custom.PartId\n\tpartNum \u003d self.parent.getChild(\"DataEntry\").getChild(\"Fields\").getChild(\"PartNumber\").getChild(\"NumericEntryField\").props.value\n\tchange \u003d self.parent.getChild(\"DataEntry\").getChild(\"Fields\").getChild(\"ChangeoverTime\").getChild(\"NumericEntryField\").props.value\n\tpFam \u003d self.parent.getChild(\"DataEntry\").getChild(\"Fields\").getChild(\"ProductFamily\").getChild(\"TextField\").props.text\n\tnumP \u003d self.parent.getChild(\"DataEntry\").getChild(\"Fields\").getChild(\"Number of People\").getChild(\"NumericEntryField\").props.value\n\trate \u003d self.parent.getChild(\"DataEntry\").getChild(\"Fields\").getChild(\"Rate Per Hour\").getChild(\"NumericEntryField\").props.value\n\tpID \u003d self.view.params.ProductionLine.ID\n\t\n\tparams \u003d {\n\t\"ID\":partId,\n\t\"ProductionLineID\":pID,\n\t\"ProductFamily\":pFam,\n\t\"PartNumber\":partNum,\n\t\"NumberOfPeople\":numP,\n\t\n\t\"RatePerHour\":rate,\n\t\n\t\"ChangeoverTime\":change\n\t}\n\tsystem.db.runNamedQuery(\"Scheduling/InsertAssemblyWO\",params)\n\tsystem.perspective.closePopup(\u0027\u0027)"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Add Assembly WO"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "custom.PartId": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.ProductionLine.Name} + \"-\" + \r\n{../DataEntry/Fields/ProductFamily/TextField.props.text} + \"-\" + \r\n{../DataEntry/Fields/PartNumber/NumericEntryField.props.value} + \"-\" + \r\n{../DataEntry/Fields/Number of People/NumericEntryField.props.value}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "{../DataEntry/Fields/ProductFamily/TextField.props.text} !\u003d \"\" \u0026\u0026\r\n{../DataEntry/Fields/PartNumber/NumericEntryField.props.value} !\u003d \"\" \u0026\u0026\r\n{../DataEntry/Fields/Number of People/NumericEntryField.props.value} !\u003d \"\" \u0026\u0026\r\n{../DataEntry/Fields/Rate Per Hour/NumericEntryField.props.value} !\u003d \"\" \u0026\u0026\r\n{../DataEntry/Fields/ChangeoverTime/NumericEntryField.props.value} !\u003d \"\" "
+              },
+              "overlayOptOut": true,
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "1baeeb07a67f5e5242e859b7680472882c95ac588325500adc7f1e025fbe72a4",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-10-23T11:10:45Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "Equipment",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "startTime",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "endtime",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "Switch1",
+        "sqlType": 2
+      }
+    ]
+  }
+}

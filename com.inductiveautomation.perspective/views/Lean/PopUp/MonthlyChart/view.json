@@ -1,0 +1,758 @@
+{
+  "custom": {
+    "EndDate": {
+      "$": [
+        "ts",
+        192,
+        1745399768695
+      ],
+      "$ts": 1745625600000
+    },
+    "StartDate": {
+      "$": [
+        "ts",
+        192,
+        1745399768695
+      ],
+      "$ts": 1743465600000
+    },
+    "TargetOTD": 86
+  },
+  "params": {
+    "ProductionLineID": 5,
+    "TargetOTD": 95
+  },
+  "propConfig": {
+    "custom.EndDate": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{/root/FlexContainer/FlexContainer/Dropdown.props.value}",
+            "ProductionSiteID": "{session.custom.ProductionSiteID}",
+            "Year": "{/root/FlexContainer/FlexContainer_1/Dropdown.props.value}"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,1]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.StartDate": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{/root/FlexContainer/FlexContainer/Dropdown.props.value}",
+            "ProductionSiteID": "{session.custom.ProductionSiteID}",
+            "Year": "{/root/FlexContainer/FlexContainer_1/Dropdown.props.value}"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,0]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.TargetOTD": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{/root/FlexContainer/FlexContainer/Dropdown.props.value}",
+            "ProductionSiteID": "{session.custom.ProductionSiteID}",
+            "Year": "{/root/FlexContainer/FlexContainer_1/Dropdown.props.value}"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,4]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.ProductionLineID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.TargetOTD": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 700,
+      "width": 1400
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "70px"
+            },
+            "props": {
+              "style": {
+                "fontWeight": "bold",
+                "marginLeft": "10px"
+              },
+              "text": "From:"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Start DateTimeInput"
+            },
+            "position": {
+              "basis": "140px"
+            },
+            "propConfig": {
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.StartDate"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "enabled": false,
+              "format": "MM-DD-YYYY",
+              "formattedValue": "04-01-2025",
+              "inputProps": {
+                "style": {
+                  "backgroundColor": "#D5D5D5"
+                }
+              },
+              "pickerType": "date"
+            },
+            "type": "ia.input.date-time-input"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "80px"
+            },
+            "props": {
+              "style": {
+                "fontWeight": "bold",
+                "textAlign": "center"
+              },
+              "text": "To:"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "End DateTimeInput"
+            },
+            "position": {
+              "basis": "140px"
+            },
+            "propConfig": {
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.EndDate"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "enabled": false,
+              "format": "MM-DD-YYYY",
+              "formattedValue": "04-26-2025",
+              "inputProps": {
+                "style": {
+                  "backgroundColor": "#D5D5D5"
+                }
+              },
+              "pickerType": "date"
+            },
+            "type": "ia.input.date-time-input"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "130px"
+                },
+                "props": {
+                  "style": {
+                    "fontWeight": "bold",
+                    "marginLeft": "10px"
+                  },
+                  "text": "Pentair Month"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Dropdown"
+                },
+                "position": {
+                  "basis": "70px"
+                },
+                "propConfig": {
+                  "custom.Month": {
+                    "binding": {
+                      "config": {
+                        "expression": "getMonth(Now(0))"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\treturn value+1",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "expr"
+                    }
+                  },
+                  "props.value": {
+                    "binding": {
+                      "config": {
+                        "expression": "{this.custom.Month}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "options": [
+                    {
+                      "label": 1,
+                      "value": 1
+                    },
+                    {
+                      "label": 2,
+                      "value": 2
+                    },
+                    {
+                      "label": 3,
+                      "value": 3
+                    },
+                    {
+                      "label": 4,
+                      "value": 4
+                    },
+                    {
+                      "label": 5,
+                      "value": 5
+                    },
+                    {
+                      "label": 6,
+                      "value": 6
+                    },
+                    {
+                      "label": 7,
+                      "value": 7
+                    },
+                    {
+                      "label": 8,
+                      "value": 8
+                    },
+                    {
+                      "label": 9,
+                      "value": 9
+                    },
+                    {
+                      "label": 10,
+                      "value": 10
+                    },
+                    {
+                      "label": 11,
+                      "value": 11
+                    },
+                    {
+                      "label": 12,
+                      "value": 12
+                    }
+                  ]
+                },
+                "type": "ia.input.dropdown"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "218px"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "47px"
+                },
+                "props": {
+                  "style": {
+                    "fontWeight": "bold",
+                    "marginLeft": "10px"
+                  },
+                  "text": "Year"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Dropdown"
+                },
+                "position": {
+                  "basis": "88px"
+                },
+                "propConfig": {
+                  "custom.Month": {
+                    "binding": {
+                      "config": {
+                        "expression": "getMonth(Now(0))"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\treturn value+1",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "options": [
+                    {
+                      "label": "\u00272024\u0027",
+                      "value": 2024
+                    },
+                    {
+                      "label": "\u00272025\u0027",
+                      "value": 2025
+                    }
+                  ],
+                  "value": 2025
+                },
+                "type": "ia.input.dropdown"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_1"
+            },
+            "position": {
+              "basis": "145px"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "130px"
+                },
+                "props": {
+                  "style": {
+                    "fontWeight": "bold",
+                    "marginLeft": "10px"
+                  },
+                  "text": "OTD Target %"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Label_0"
+                },
+                "position": {
+                  "basis": "50px"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.TargetOTD"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "basis": "200px"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "basis": "40px"
+        },
+        "props": {
+          "style": {
+            "borderStyle": "solid",
+            "marginLeft": "10px",
+            "marginRight": "10px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TimeSeriesChart_0"
+            },
+            "position": {
+              "grow": 1
+            },
+            "propConfig": {
+              "props.series[0].data": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "ProductionLineID": "{view.params.ProductionLineID}",
+                      "endTime": "{view.custom.EndDate}",
+                      "resetOption": "0",
+                      "startTime": "{view.custom.StartDate}",
+                      "targetPercent": "95",
+                      "targetPercentPlanned": "{view.custom.TargetOTD}"
+                    },
+                    "queryPath": "Lean_Query/MDI_Graphs_Month"
+                  },
+                  "type": "query"
+                }
+              }
+            },
+            "props": {
+              "defaultStyles": {
+                "colorScheme": "RdPu"
+              },
+              "legend": {
+                "style": {
+                  "color": "#555555",
+                  "fontFamily": "Roboto",
+                  "fontSize": 22,
+                  "fontWeight": "normal",
+                  "textAlign": "center"
+                },
+                "visible": true
+              },
+              "plots": [
+                {
+                  "axes": [
+                    {
+                      "alignment": "left",
+                      "grid": {
+                        "color": "#0000D9",
+                        "dashArray": 0,
+                        "opacity": 0.9,
+                        "style": {
+                          "classes": ""
+                        },
+                        "visible": false
+                      },
+                      "label": {
+                        "font": {
+                          "color": "#0000D9",
+                          "size": 16
+                        },
+                        "offset": -20,
+                        "style": {
+                          "classes": "",
+                          "color": "#0000D9",
+                          "fontFamily": "Roboto",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                          "textAlign": "center"
+                        },
+                        "text": "Planned vs Actual",
+                        "verticalCenter": "middle\n",
+                        "visible": false
+                      },
+                      "max": "",
+                      "min": "",
+                      "name": "Value",
+                      "style": {
+                        "classes": "",
+                        "stroke": "#0000D9"
+                      },
+                      "tick": {
+                        "color": "#0000D9",
+                        "count": "Auto",
+                        "label": {
+                          "font": {
+                            "color": "#0000D9",
+                            "size": 15
+                          },
+                          "format": "Auto",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "style": {
+                          "classes": ""
+                        }
+                      },
+                      "width": 75
+                    }
+                  ],
+                  "markers": [],
+                  "relativeWeight": 1,
+                  "trends": [
+                    {
+                      "axis": "Value",
+                      "baselines": [],
+                      "breakLine": true,
+                      "columns": [
+                        {
+                          "color": "#000000",
+                          "key": "CurrentMonthMissed",
+                          "styles": {
+                            "highlighted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "muted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "normal": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": 4
+                              }
+                            },
+                            "selected": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "color": "#D90000",
+                          "key": "DailyTargetMissed",
+                          "styles": {
+                            "highlighted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "muted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "normal": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": 4
+                              }
+                            },
+                            "selected": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "interpolation": "curveBasis",
+                      "radius": 2,
+                      "series": "Production",
+                      "stack": true,
+                      "type": "line",
+                      "visible": true
+                    }
+                  ]
+                }
+              ],
+              "series": [
+                {
+                  "name": "Production"
+                }
+              ],
+              "style": {
+                "backgroundColor": "rgba(250,250,250,1)",
+                "borderColor": "rgba(120,150,150,1)",
+                "overflow": "hidden"
+              },
+              "timeAxis": {
+                "color": "#0000D9",
+                "tick": {
+                  "color": "#0000D9",
+                  "label": {
+                    "font": {
+                      "color": "#0000D9",
+                      "size": 15
+                    },
+                    "format": "MM-DD"
+                  }
+                },
+                "tickCount": 15
+              },
+              "timeRange": {
+                "dateFormat": "MMM Do",
+                "timeFormat": "None",
+                "visible": false
+              },
+              "title": {
+                "font": {
+                  "color": "#0000D9",
+                  "size": 16
+                },
+                "height": 35,
+                "style": {
+                  "color": "#0000D9",
+                  "fontFamily": "Roboto",
+                  "fontSize": 22,
+                  "fontWeight": "bold",
+                  "textAlign": "center"
+                },
+                "text": "Production History"
+              },
+              "xTrace": {
+                "infoBox": {
+                  "font": {
+                    "size": 22
+                  }
+                },
+                "line": {
+                  "color": "#FF0000",
+                  "width": 5
+                }
+              }
+            },
+            "type": "ia.chart.timeseries"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_3"
+        },
+        "position": {
+          "basis": "450px",
+          "grow": 1
+        },
+        "props": {
+          "alignContent": "flex-start",
+          "alignItems": "flex-start",
+          "direction": "column",
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "groove",
+            "marginBottom": "5px",
+            "marginLeft": "10px",
+            "marginRight": "10px"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "borderColor": "#000000",
+        "borderStyle": "solid",
+        "overflow": "visible"
+      },
+      "wrap": "wrap"
+    },
+    "type": "ia.container.flex"
+  }
+}

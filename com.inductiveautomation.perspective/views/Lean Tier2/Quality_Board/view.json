@@ -1,0 +1,2982 @@
+{
+  "custom": {
+    "EndDate": {
+      "$": [
+        "ts",
+        192,
+        1734522881620
+      ],
+      "$ts": 1735603200000
+    },
+    "LEndDate": {
+      "$": [
+        "ts",
+        192,
+        1734522880735
+      ],
+      "$ts": 1732406400000
+    },
+    "LMonth": 11,
+    "LStartDate": {
+      "$": [
+        "ts",
+        192,
+        1734522880735
+      ],
+      "$ts": 1730073600000
+    },
+    "Month": 12,
+    "StartDate": {
+      "$": [
+        "ts",
+        192,
+        1734522881620
+      ],
+      "$ts": 1732492800000
+    }
+  },
+  "params": {
+    "ValueStreamID": 1
+  },
+  "propConfig": {
+    "custom.EndDate": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{view.custom.Month}"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,1]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.LEndDate": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{view.custom.LMonth}"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,1]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.LMonth": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "DateNow": "addMonths(now(),-1)"
+          },
+          "queryPath": "Lean_Query/CurrentMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,0]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.LStartDate": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{view.custom.LMonth}"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,0]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.Month": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "DateNow": "addMonths(now(),0)"
+          },
+          "queryPath": "Lean_Query/CurrentMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,0]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.StartDate": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "Month": "{view.custom.Month}"
+          },
+          "queryPath": "Lean_Query/FiscalMonth"
+        },
+        "transforms": [
+          {
+            "expression": "{value}[0,0]",
+            "type": "expression"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.ValueStreamID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 1163,
+      "width": 1110
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "basis": "250px"
+            },
+            "props": {
+              "style": {
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "100px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "alignItems": "center",
+                "justifyContent": "center"
+              },
+              "text": "QUALITY",
+              "textStyle": {
+                "color": "#0000D9",
+                "fontSize": 25,
+                "fontWeight": "bold",
+                "marginBottom": "5px",
+                "marginTop": "5px"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "120px"
+                },
+                "props": {
+                  "style": {
+                    "alignItems": "flex-end",
+                    "justifyContent": "center"
+                  },
+                  "text": "FPY Target",
+                  "textStyle": {
+                    "color": "#FF8C00",
+                    "fontSize": 22,
+                    "fontWeight": "bold",
+                    "key": "value",
+                    "marginBottom": "5px",
+                    "marginTop": "5px"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "NumericEntryField"
+                },
+                "position": {
+                  "basis": "53px"
+                },
+                "props": {
+                  "format": "###",
+                  "inputBounds": {
+                    "maximum": 100,
+                    "minimum": 0
+                  },
+                  "style": {
+                    "borderStyle": "none",
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": 22,
+                    "fontWeight": "bold",
+                    "textAlign": "center"
+                  },
+                  "value": 95
+                },
+                "type": "ia.input.numeric-entry-field"
+              },
+              {
+                "meta": {
+                  "name": "Label_0"
+                },
+                "position": {
+                  "basis": "20px"
+                },
+                "props": {
+                  "style": {
+                    "alignItems": "flex-start",
+                    "justifyContent": "flex-start"
+                  },
+                  "text": "%",
+                  "textStyle": {
+                    "color": "#FF8C00",
+                    "fontSize": 22,
+                    "fontWeight": "bold",
+                    "key": "value",
+                    "marginBottom": "5px",
+                    "marginTop": "5px"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "210px"
+            },
+            "props": {
+              "style": {
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "FlexContainer_1"
+            },
+            "position": {
+              "basis": "20px"
+            },
+            "props": {
+              "style": {
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_0"
+        },
+        "position": {
+          "basis": "100px",
+          "grow": 1
+        },
+        "props": {
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "solid",
+            "borderWidth": 3,
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 25,
+                        "textAlign": "center"
+                      },
+                      "text": "Target",
+                      "textStyle": {
+                        "color": "#000000"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "position": {
+                  "basis": "56px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderColor": "#000000",
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\" ",
+                              "resetOption": "0",
+                              "startTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        return \u0027#000000\u0027  # Black\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "0",
+                              "startTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount()-1, \"CumulativeTargetScrap\")\n        return round(latest_row,0)\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "backgroundColor": "#FFFFFF",
+                        "fontFamily": "Roboto",
+                        "fontSize": 52,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_0"
+                },
+                "position": {
+                  "basis": "90px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "30px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 24,
+                        "textAlign": "center"
+                      },
+                      "text": "Month to Date Target"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_1"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderColor": "#000000",
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "20px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "{view.custom.EndDate}",
+                              "resetOption": "1",
+                              "startTime": "{view.custom.StartDate}",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        return \u0027#000000\u0027  # Black\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "{view.custom.EndDate}",
+                              "resetOption": "1",
+                              "startTime": "{view.custom.StartDate}",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount()-1, \"CumulativeTargetSCrap\")\n        return round(latest_row,0)\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 26,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_2"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 24,
+                        "textAlign": "center"
+                      },
+                      "text": "Year to Date Target"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_3"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderColor": "#000000",
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "2",
+                              "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        return \u0027#000000\u0027  # Black\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "2",
+                              "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount()-1, \"CumulativeTargetScrap\")\n        return round(latest_row,0)\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 26,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_4"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "basis": "276px",
+              "grow": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "borderColor": "#000000",
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 25,
+                        "textAlign": "center"
+                      },
+                      "text": "Actual"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "position": {
+                  "basis": "56px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderColor": "#000000",
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.backgroundColor": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "0",
+                              "startTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        # Fetch the last row index\n        last_row_index \u003d value.getRowCount() - 1\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(last_row_index, \u0027CumulativeActualScrap\u0027)\n        value2 \u003d value.getValueAt(last_row_index, \u0027CumulativeTargetScrap\u0027)\n        \n        # Compare the values and return the corresponding color\n        if(value1 \u003e value2):\n            return \u0027#FFCCCC\u0027  # Red\n        elif (value1 \u003d\u003d value2):\n        \treturn \u0027#FFFFFF\u0027 #White\n        else:\n            return \u0027#CCFFCC\u0027  # Green\n    else:\n        return \u0027#FFFFFF\u0027  # White for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "0",
+                              "startTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        # Fetch the last row index\n        last_row_index \u003d value.getRowCount() - 1\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(last_row_index, \u0027CumulativeActualScrap\u0027)\n        value2 \u003d value.getValueAt(last_row_index, \u0027CumulativeTargetScrap\u0027)\n        \n        # Compare the values and return the corresponding color\n        if value1 \u003e value2:\n            return \u0027#FF0000\u0027  # Red\n     \telif value1 \u003d\u003d value2:\n            return \u0027#000000\u0027  # Black\n        else:\n            return \u0027#008000\u0027  # Green\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "dateFormat(addDays(now(), 0), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "0",
+                              "startTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount() - 1, \"CumulativeActualScrap\")\n        return latest_row\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 52,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_0"
+                },
+                "position": {
+                  "basis": "90px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "backgroundColor": "#FFFFFF",
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "borderStyle": "solid",
+                        "fontFamily": "Roboto",
+                        "fontSize": 24,
+                        "textAlign": "center"
+                      },
+                      "text": "Month to Date Actual"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_1"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.backgroundColor": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "{view.custom.EndDate}",
+                              "resetOption": "1",
+                              "startTime": "{view.custom.StartDate}",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        # Fetch the last row index\n        last_row_index \u003d value.getRowCount() - 1\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(last_row_index, \u0027CumulativeActualScrap\u0027)\n        value2 \u003d value.getValueAt(last_row_index, \u0027CumulativeTargetScrap\u0027)\n        \n        # Compare the values and return the corresponding color\n        if(value1 \u003e value2):\n            return \u0027#FFCCCC\u0027  # Red\n        elif (value1 \u003d\u003d value2):\n        \treturn \u0027#FFFFFF\u0027 #White\n        else:\n            return \u0027#CCFFCC\u0027  # Green\n    else:\n        return \u0027#FFFFFF\u0027  # White for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "{view.custom.EndDate}",
+                              "resetOption": "1",
+                              "startTime": "{view.custom.StartDate}",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        # Fetch the last row index\n        last_row_index \u003d value.getRowCount() - 1\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(last_row_index, \u0027CumulativeActualScrap\u0027)\n        value2 \u003d value.getValueAt(last_row_index, \u0027CumulativeTargetScrap\u0027)\n        \n        # Compare the values and return the corresponding color\n        if value1 \u003e value2:\n            return \u0027#FF0000\u0027  # Red\n     \telif value1 \u003d\u003d value2:\n            return \u0027#000000\u0027  # Black\n        else:\n            return \u0027#008000\u0027  # Green\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "{view.custom.EndDate}",
+                              "resetOption": "1",
+                              "startTime": "{view.custom.StartDate}",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount()-1, \"CumulativeActualScrap\")\n        return latest_row\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 26,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_2"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "backgroundColor": "#FFFFFF",
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 24,
+                        "textAlign": "center"
+                      },
+                      "text": "Year to Date Actual"
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_3"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "borderColor": "#000000",
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.style.backgroundColor": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "2",
+                              "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(value.getRowCount()-1, \"CumulativeActualScrap\")\n        value2 \u003d value.getValueAt(value.getRowCount()-1, \"CumulativeTargetScrap\")\n        # Compare the values and return the corresponding color\n        if(value1 \u003e value2):\n            return \u0027#FFCCCC\u0027  # Red\n        elif (value1 \u003d\u003d value2):\n        \treturn \u0027#FFFFFF\u0027 #White\n        else:\n            return \u0027#CCFFCC\u0027  # Green\n    else:\n        return \u0027#FFFFFF\u0027  # White for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.style.color": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "2",
+                              "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    if value.getRowCount() \u003e 0:  # Check if the dataset has rows\n        \n        # Get the planned and actual parts values from the last row\n        value1 \u003d value.getValueAt(value.getRowCount()-1, \"CumulativeActualScrap\")\n        value2 \u003d value.getValueAt(value.getRowCount()-1, \"CumulativeTargetScrap\")\n        # Compare the values and return the corresponding color\n        if(value1 \u003e value2):\n            return \u0027#FF0000\u0027  # Red\n        elif (value1 \u003d\u003d value2):\n        \treturn \u0027#000000\u0027 #Black\n        else:\n            return \u0027#008000\u0027  # Green\n    else:\n        return \u0027#D5D5D5\u0027  # Gray for error or invalid data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      },
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "ValueStream": "{view.params.ValueStreamID}",
+                              "endTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                              "resetOption": "2",
+                              "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                              "targetPercent": "{...../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                              "targetPercentPlanned": "95"
+                            },
+                            "queryPath": "Lean_Query/MDI_Board_Tier2"
+                          },
+                          "transforms": [
+                            {
+                              "code": "    # Assuming \u0027value\u0027 is the dataset returned by the Named Query\n    if value.getRowCount() \u003e 0:\n        # Fetch the last row if the data is sorted in ascending order\n        # Use `value.getValueAt(rowIndex, columnName)` to get specific data\n        latest_row \u003d value.getValueAt(value.getRowCount()-1, \"CumulativeActualScrap\")\n        return latest_row\n    else:\n        # Return a default or placeholder value if the dataset is empty\n        return \"No Data\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 26,
+                        "fontWeight": "bolder",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_4"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "backgroundColor": "#FFFFFF",
+                    "borderStyle": "solid",
+                    "overflow": "visible"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_1"
+            },
+            "position": {
+              "basis": "297px",
+              "grow": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "borderColor": "#000000",
+                "overflow": "visible"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_1"
+        },
+        "position": {
+          "basis": "700px",
+          "grow": 1
+        },
+        "props": {
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "solid",
+            "marginBottom": "5px",
+            "marginLeft": "10px",
+            "marginRight": "10px",
+            "marginTop": "10px",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TimeSeriesChart_0"
+            },
+            "position": {
+              "basis": "682px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.series[0].data": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "ValueStream": "{view.params.ValueStreamID}",
+                      "endTime": "dateFormat(addDays(now(), -1), \"yyyy-MM-dd\") + \" 00:00:00\"",
+                      "resetOption": "2",
+                      "startTime": "dateFormat(addYears(now(), 0), \"yyyy\") + \"-01-01 00:00:00\"",
+                      "targetPercent": "{.../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                      "targetPercentPlanned": "95"
+                    },
+                    "queryPath": "Lean_Query/MDI_Board_Tier2"
+                  },
+                  "type": "query"
+                }
+              },
+              "props.series[1].data": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "ValueStream": "{view.params.ValueStreamID}",
+                      "endTime": "dateFormat(addYears(now(), -1), \"yyyy\") + \"-12-31 00:00:00\"",
+                      "resetOption": "2",
+                      "startTime": "dateFormat(addYears(now(), -1), \"yyyy\") + \"-01-01 00:00:00\"",
+                      "targetPercent": "{.../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                      "targetPercentPlanned": "95"
+                    },
+                    "queryPath": "Lean_Query/MDI_Board_Tier2"
+                  },
+                  "type": "query"
+                }
+              }
+            },
+            "props": {
+              "defaultStyles": {
+                "colorScheme": "RdPu"
+              },
+              "plots": [
+                {
+                  "axes": [
+                    {
+                      "alignment": "left",
+                      "grid": {
+                        "color": "#0000D9",
+                        "dashArray": 0,
+                        "opacity": 0.9,
+                        "style": {
+                          "classes": ""
+                        },
+                        "visible": false
+                      },
+                      "label": {
+                        "font": {
+                          "color": "#0000D9",
+                          "size": 16
+                        },
+                        "offset": -15,
+                        "style": {
+                          "classes": "",
+                          "color": "#0000D9",
+                          "fontFamily": "Roboto",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                          "textAlign": "center"
+                        },
+                        "text": "YoY Scrap",
+                        "visible": true
+                      },
+                      "max": "",
+                      "min": "",
+                      "name": "Value",
+                      "style": {
+                        "classes": "",
+                        "stroke": "#0000D9"
+                      },
+                      "tick": {
+                        "color": "#0000D9",
+                        "count": 3,
+                        "label": {
+                          "font": {
+                            "color": "#0000D9",
+                            "size": 15
+                          },
+                          "format": "Auto",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "style": {
+                          "classes": ""
+                        }
+                      },
+                      "width": 70
+                    }
+                  ],
+                  "markers": [],
+                  "relativeWeight": 1,
+                  "trends": [
+                    {
+                      "axis": "Value",
+                      "baselines": [],
+                      "breakLine": true,
+                      "columns": [
+                        {
+                          "color": "#000000",
+                          "key": "CumulativeActualScrap",
+                          "styles": {
+                            "highlighted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "muted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "normal": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": 4
+                              }
+                            },
+                            "selected": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "interpolation": "curveBasis",
+                      "radius": 2,
+                      "series": "Production",
+                      "stack": true,
+                      "type": "line",
+                      "visible": true
+                    },
+                    {
+                      "axis": "Value",
+                      "baselines": [],
+                      "breakLine": true,
+                      "columns": [
+                        {
+                          "color": "#0000FF",
+                          "key": "CumulativeActualScrap",
+                          "styles": {
+                            "highlighted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "muted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "normal": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "selected": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "interpolation": "curveBasis",
+                      "radius": 2,
+                      "series": "LastProduction",
+                      "stack": true,
+                      "type": "line",
+                      "visible": true
+                    }
+                  ]
+                }
+              ],
+              "series": [
+                {
+                  "name": "Production"
+                },
+                {
+                  "name": "LastProduction"
+                }
+              ],
+              "style": {
+                "backgroundColor": "rgba(250,250,250,1)",
+                "borderColor": "rgba(120,150,150,1)",
+                "borderStyle": "solid",
+                "borderWidth": "2px",
+                "overflow": "hidden"
+              },
+              "timeAxis": {
+                "color": "#0000D9",
+                "tick": {
+                  "color": "#0000D9",
+                  "label": {
+                    "font": {
+                      "color": "#0000D9",
+                      "size": 15
+                    },
+                    "format": "MMM"
+                  }
+                },
+                "tickCount": 12
+              },
+              "timeRange": {
+                "dateFormat": "MMM",
+                "timeFormat": "None",
+                "visible": false
+              },
+              "title": {
+                "font": {
+                  "color": "#0000D9",
+                  "size": 16
+                },
+                "height": 35,
+                "style": {
+                  "color": "#0000D9",
+                  "fontFamily": "Roboto",
+                  "fontSize": 22,
+                  "fontWeight": "bold",
+                  "textAlign": "center"
+                },
+                "text": "Production History"
+              },
+              "xTrace": {
+                "line": {
+                  "color": "#FF0000",
+                  "width": 5
+                }
+              }
+            },
+            "type": "ia.chart.timeseries"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_4"
+        },
+        "position": {
+          "basis": "540px",
+          "grow": 1
+        },
+        "props": {
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "solid",
+            "borderWidth": 3,
+            "margin": "10px",
+            "marginBottom": "5px",
+            "marginLeft": "10px",
+            "marginRight": "10px",
+            "marginTop": "5px",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TimeSeriesChart_0"
+            },
+            "position": {
+              "basis": "900px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.series[0].data": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "ValueStream": "{view.params.ValueStreamID}",
+                      "endTime": "{view.custom.LEndDate}",
+                      "resetOption": "1",
+                      "startTime": "{view.custom.LStartDate}",
+                      "targetPercent": "{.../FlexContainer_0/FlexContainer/NumericEntryField.props.value}",
+                      "targetPercentPlanned": "95"
+                    },
+                    "queryPath": "Lean_Query/MDI_Board_Tier2"
+                  },
+                  "type": "query"
+                }
+              }
+            },
+            "props": {
+              "defaultStyles": {
+                "colorScheme": "RdPu"
+              },
+              "legend": {
+                "style": {
+                  "color": "#555555",
+                  "fontFamily": "Roboto",
+                  "fontSize": 22,
+                  "fontWeight": "normal",
+                  "textAlign": "center"
+                },
+                "visible": true
+              },
+              "plots": [
+                {
+                  "axes": [
+                    {
+                      "alignment": "left",
+                      "grid": {
+                        "color": "#0000D9",
+                        "dashArray": 0,
+                        "opacity": 0.9,
+                        "style": {
+                          "classes": ""
+                        },
+                        "visible": false
+                      },
+                      "label": {
+                        "font": {
+                          "color": "#0000D9",
+                          "size": 12
+                        },
+                        "offset": -15,
+                        "style": {
+                          "classes": "",
+                          "color": "#0000D9",
+                          "fontFamily": "Roboto",
+                          "fontSize": 14,
+                          "fontWeight": "normal",
+                          "textAlign": "center"
+                        },
+                        "text": "Actual vs Scrap",
+                        "visible": false
+                      },
+                      "max": "",
+                      "min": "",
+                      "name": "Value",
+                      "style": {
+                        "classes": "",
+                        "stroke": "#0000D9"
+                      },
+                      "tick": {
+                        "color": "#0000D9",
+                        "count": 3,
+                        "label": {
+                          "font": {
+                            "color": "#0000D9",
+                            "size": 15
+                          },
+                          "format": "Auto",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "style": {
+                          "classes": ""
+                        }
+                      },
+                      "width": 70
+                    }
+                  ],
+                  "markers": [],
+                  "relativeWeight": 1,
+                  "trends": [
+                    {
+                      "axis": "Value",
+                      "baselines": [],
+                      "breakLine": true,
+                      "columns": [
+                        {
+                          "color": "#000000",
+                          "key": "CumulativeTargetScrap",
+                          "styles": {
+                            "highlighted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "muted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "normal": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": 4
+                              }
+                            },
+                            "selected": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "color": "#D90000",
+                          "key": "CumulativeActualScrap",
+                          "styles": {
+                            "highlighted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "muted": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            },
+                            "normal": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": 4
+                              }
+                            },
+                            "selected": {
+                              "fill": {
+                                "color": "",
+                                "opacity": null
+                              },
+                              "stroke": {
+                                "color": "",
+                                "dashArray": null,
+                                "opacity": null,
+                                "width": null
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "interpolation": "curveBasis",
+                      "radius": 2,
+                      "series": "Production",
+                      "stack": true,
+                      "type": "line",
+                      "visible": true
+                    }
+                  ]
+                }
+              ],
+              "series": [
+                {
+                  "name": "Production"
+                }
+              ],
+              "style": {
+                "backgroundColor": "rgba(250,250,250,1)",
+                "borderColor": "rgba(120,150,150,1)",
+                "borderStyle": "solid",
+                "borderWidth": "2px",
+                "overflow": "hidden"
+              },
+              "timeAxis": {
+                "color": "#0000D9",
+                "tick": {
+                  "color": "#0000D9",
+                  "label": {
+                    "font": {
+                      "color": "#0000D9",
+                      "size": 15
+                    },
+                    "format": "MM-DD"
+                  }
+                },
+                "tickCount": 15
+              },
+              "timeRange": {
+                "dateFormat": "MMM Do",
+                "timeFormat": "None",
+                "visible": false
+              },
+              "title": {
+                "font": {
+                  "color": "#0000D9",
+                  "size": 16
+                },
+                "height": 35,
+                "style": {
+                  "color": "#0000D9",
+                  "fontFamily": "Roboto",
+                  "fontSize": 22,
+                  "fontWeight": "bold",
+                  "textAlign": "center"
+                },
+                "text": "Production History"
+              },
+              "xTrace": {
+                "line": {
+                  "color": "#FF0000",
+                  "width": 5
+                }
+              }
+            },
+            "type": "ia.chart.timeseries"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onDoubleClick": {
+              "config": {
+                "draggable": true,
+                "id": "sAoC3-jv",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "title": "Monthly Scrap",
+                "type": "open",
+                "viewParams": {
+                  "ProductionLineID": "{view.params.ValueStreamID}"
+                },
+                "viewPath": "Lean Tier2/PopUp/MonthlyChartQuality",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_2"
+        },
+        "position": {
+          "basis": "540px",
+          "grow": 1
+        },
+        "props": {
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "solid",
+            "borderWidth": 3,
+            "marginBottom": "5px",
+            "marginLeft": "10px",
+            "marginRight": "10px",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "XYChart_1"
+            },
+            "position": {
+              "grow": 1
+            },
+            "propConfig": {
+              "props.dataSources.example": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "ProductionLineID": "{view.params.ValueStreamID}",
+                      "TopSelect": "1",
+                      "endDate": "{view.custom.EndDate}",
+                      "startDate": "{view.custom.StartDate}"
+                    },
+                    "queryPath": "Lean_Query/Quality_Scrap Tier2"
+                  },
+                  "type": "query"
+                }
+              }
+            },
+            "props": {
+              "background": {
+                "color": "#0000FF"
+              },
+              "cursor": {
+                "lineX": {
+                  "stroke": {
+                    "color": "#0000FF"
+                  }
+                }
+              },
+              "dataSources": {},
+              "legend": {
+                "labels": {
+                  "font": {
+                    "size": 22,
+                    "weight": 500
+                  },
+                  "text": "{name}[/]"
+                }
+              },
+              "series": [
+                {
+                  "candlestick": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      }
+                    },
+                    "high": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "low": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "column": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "#D90000",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "height": null,
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      },
+                      "width": null
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "data": {
+                    "source": "example",
+                    "x": "Code",
+                    "y": "TotalScrap"
+                  },
+                  "defaultState": {
+                    "visible": true
+                  },
+                  "hiddenInLegend": false,
+                  "label": {
+                    "text": "Scrap Counts"
+                  },
+                  "line": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": false,
+                          "fill": {
+                            "color": "",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": 0,
+                              "dy": 0
+                            },
+                            "text": "{value}"
+                          },
+                          "render": "circle",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "fill": {
+                        "color": "",
+                        "opacity": 0
+                      },
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 3
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "name": "Scrap Count",
+                  "render": "column",
+                  "stepLine": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": true,
+                          "fill": {
+                            "color": "",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": 0,
+                              "dy": 0
+                            },
+                            "text": "{value}"
+                          },
+                          "render": "circle",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "fill": {
+                        "color": "",
+                        "opacity": 0
+                      },
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 3
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "pointerLength": 4,
+                    "text": "{Code}:[bold]{valueY}[/]"
+                  },
+                  "visible": true,
+                  "xAxis": "defect",
+                  "yAxis": "Defect Count",
+                  "zIndex": 0
+                },
+                {
+                  "candlestick": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      }
+                    },
+                    "high": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "low": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "column": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      }
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "data": {
+                    "source": "example",
+                    "x": "Code",
+                    "y": "CumulativePercentage"
+                  },
+                  "defaultState": {
+                    "visible": true
+                  },
+                  "hiddenInLegend": false,
+                  "label": {
+                    "text": "Scrap %"
+                  },
+                  "line": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": true,
+                          "fill": {
+                            "color": "",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": 0,
+                              "dy": 0
+                            },
+                            "text": "{value}"
+                          },
+                          "render": "circle",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "#FF8C00",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 3
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "name": "Defect Percent",
+                  "render": "line",
+                  "stepLine": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": true,
+                          "fill": {
+                            "color": "",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": 0,
+                              "dy": 0
+                            },
+                            "text": "{value}"
+                          },
+                          "render": "circle",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 3
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "pointerLength": 4,
+                    "text": "{name}: [bold]{valueY}[/]"
+                  },
+                  "visible": true,
+                  "xAxis": "defect",
+                  "yAxis": "Defect Percent",
+                  "zIndex": 0
+                },
+                {
+                  "candlestick": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      }
+                    },
+                    "high": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "low": {
+                      "x": "",
+                      "y": ""
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "column": {
+                    "appearance": {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": "",
+                        "min": ""
+                      },
+                      "height": null,
+                      "stacked": false,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      },
+                      "width": null
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "data": {
+                    "source": "example",
+                    "x": "Code",
+                    "y": "TotalScrap"
+                  },
+                  "defaultState": {
+                    "visible": true
+                  },
+                  "hiddenInLegend": false,
+                  "label": {
+                    "text": " "
+                  },
+                  "line": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": true,
+                          "fill": {
+                            "color": "",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": -20,
+                              "dy": -5
+                            },
+                            "text": "[Bold]{TotalScrap}"
+                          },
+                          "render": "label",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "fill": {
+                        "color": "",
+                        "opacity": 0
+                      },
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 0
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "name": "Scrap Count",
+                  "render": "line",
+                  "stepLine": {
+                    "appearance": {
+                      "bullets": [
+                        {
+                          "deriveFieldsFromData": {
+                            "fill": {
+                              "color": "",
+                              "opacity": ""
+                            },
+                            "rotation": "",
+                            "stroke": {
+                              "color": "",
+                              "opacity": "",
+                              "width": ""
+                            }
+                          },
+                          "enabled": true,
+                          "fill": {
+                            "color": "",
+                            "opacity": 1
+                          },
+                          "heatRules": {
+                            "dataField": "",
+                            "enabled": false,
+                            "max": 100,
+                            "min": 2
+                          },
+                          "height": 10,
+                          "label": {
+                            "position": {
+                              "dx": 0,
+                              "dy": 0
+                            },
+                            "text": "{value}"
+                          },
+                          "render": "circle",
+                          "rotation": 0,
+                          "stroke": {
+                            "color": "",
+                            "opacity": 1,
+                            "width": 1
+                          },
+                          "tooltip": {
+                            "background": {
+                              "color": "",
+                              "opacity": 1
+                            },
+                            "cornerRadius": 3,
+                            "enabled": true,
+                            "pointerLength": 4,
+                            "text": "{name}: [bold]{valueY}[/]"
+                          },
+                          "width": 10
+                        }
+                      ],
+                      "connect": true,
+                      "fill": {
+                        "color": "",
+                        "opacity": 0
+                      },
+                      "minDistance": 0.5,
+                      "stroke": {
+                        "color": "",
+                        "dashArray": "",
+                        "opacity": 1,
+                        "width": 3
+                      },
+                      "tensionX": 1,
+                      "tensionY": 1
+                    },
+                    "open": {
+                      "x": "",
+                      "y": ""
+                    }
+                  },
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "pointerLength": 4,
+                    "text": "{Code}:[bold]{valueY}[/]"
+                  },
+                  "visible": true,
+                  "xAxis": "defect",
+                  "yAxis": "Defect Count",
+                  "zIndex": 0
+                }
+              ],
+              "style": {
+                "borderColor": "rgba(120,150,150,1)",
+                "borderStyle": "solid",
+                "borderWidth": "2px",
+                "fontFamily": "Roboto",
+                "fontSize": 22
+              },
+              "subtitle": {
+                "appearance": {
+                  "color": "#0000FF"
+                }
+              },
+              "title": {
+                "appearance": {
+                  "color": "#0000FF"
+                }
+              },
+              "xAxes": [
+                {
+                  "appearance": {
+                    "font": {
+                      "size": 14,
+                      "weight": 600
+                    },
+                    "grid": {
+                      "color": "#0000FF",
+                      "dashArray": "",
+                      "minDistance": 60,
+                      "opacity": 1,
+                      "position": 0.5
+                    },
+                    "inside": false,
+                    "labels": {
+                      "color": "#0000FF",
+                      "horizontalCenter": "middle",
+                      "opacity": 1,
+                      "rotation": 0,
+                      "verticalCenter": "middle"
+                    },
+                    "opposite": false
+                  },
+                  "category": {
+                    "break": {
+                      "enabled": false,
+                      "endCategory": "",
+                      "size": 0.03,
+                      "startCategory": ""
+                    }
+                  },
+                  "date": {
+                    "baseInterval": {
+                      "count": 1,
+                      "enabled": false,
+                      "skipEmptyPeriods": false,
+                      "timeUnit": "hour"
+                    },
+                    "break": {
+                      "enabled": false,
+                      "endDate": "",
+                      "size": 0.05,
+                      "startDate": ""
+                    },
+                    "format": "M/d",
+                    "inputFormat": "yyyy-MM-dd kk:mm:ss",
+                    "range": {
+                      "max": "",
+                      "min": "",
+                      "useStrict": false
+                    }
+                  },
+                  "inversed": false,
+                  "label": {
+                    "color": "#0000FF",
+                    "enabled": false,
+                    "text": "Category"
+                  },
+                  "name": "defect",
+                  "render": "category",
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "format": "value",
+                    "pointerLength": 4,
+                    "text": ""
+                  },
+                  "value": {
+                    "break": {
+                      "enabled": false,
+                      "endValue": 100,
+                      "size": 0.05,
+                      "startValue": 0
+                    },
+                    "format": "#,###.0000",
+                    "logarithmic": false,
+                    "range": {
+                      "max": "",
+                      "min": "",
+                      "useStrict": false
+                    }
+                  },
+                  "visible": true
+                }
+              ],
+              "yAxes": [
+                {
+                  "appearance": {
+                    "font": {
+                      "size": "",
+                      "weight": 500
+                    },
+                    "grid": {
+                      "color": "#0000FF",
+                      "dashArray": "",
+                      "minDistance": null,
+                      "opacity": 1,
+                      "position": 0.5
+                    },
+                    "inside": false,
+                    "labels": {
+                      "color": "#0000FF",
+                      "horizontalCenter": "middle",
+                      "opacity": 1,
+                      "rotation": 0,
+                      "verticalCenter": "top"
+                    },
+                    "opposite": false
+                  },
+                  "category": {
+                    "break": {
+                      "enabled": false,
+                      "endCategory": "",
+                      "size": 0.05,
+                      "startCategory": ""
+                    }
+                  },
+                  "date": {
+                    "baseInterval": {
+                      "count": 1,
+                      "enabled": false,
+                      "skipEmptyPeriods": false,
+                      "timeUnit": "hour"
+                    },
+                    "break": {
+                      "enabled": false,
+                      "endDate": "",
+                      "size": 0.05,
+                      "startDate": ""
+                    },
+                    "format": "M/d/yyyy HH:mm:ss",
+                    "inputFormat": "yyyy-MM-dd kk:mm:ss",
+                    "range": {
+                      "max": "",
+                      "min": "",
+                      "useStrict": false
+                    }
+                  },
+                  "inversed": false,
+                  "label": {
+                    "color": "#0000FF",
+                    "enabled": true,
+                    "text": "Scrap Counts"
+                  },
+                  "name": "Defect Count",
+                  "render": "value",
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "format": "",
+                    "pointerLength": 4,
+                    "text": ""
+                  },
+                  "value": {
+                    "break": {
+                      "enabled": false,
+                      "endValue": 100,
+                      "size": 0.05,
+                      "startValue": 0
+                    },
+                    "format": "#,###.##",
+                    "logarithmic": false,
+                    "range": {
+                      "max": "auto",
+                      "min": 0,
+                      "useStrict": false
+                    }
+                  },
+                  "visible": true
+                },
+                {
+                  "appearance": {
+                    "font": {
+                      "size": "",
+                      "weight": 500
+                    },
+                    "grid": {
+                      "color": "#0000FF",
+                      "dashArray": "4,4",
+                      "minDistance": null,
+                      "opacity": 1,
+                      "position": 0.5
+                    },
+                    "inside": false,
+                    "labels": {
+                      "color": "#0000FF",
+                      "opacity": 1
+                    },
+                    "opposite": true
+                  },
+                  "category": {
+                    "break": {
+                      "enabled": false,
+                      "endCategory": "",
+                      "size": 0.05,
+                      "startCategory": ""
+                    }
+                  },
+                  "date": {
+                    "baseInterval": {
+                      "count": 1,
+                      "enabled": false,
+                      "skipEmptyPeriods": false,
+                      "timeUnit": "hour"
+                    },
+                    "break": {
+                      "enabled": false,
+                      "endDate": "",
+                      "size": 0.05,
+                      "startDate": ""
+                    },
+                    "format": "M/d/yyyy",
+                    "inputFormat": "yyyy-MM-dd kk:mm:ss",
+                    "range": {
+                      "max": "",
+                      "min": "",
+                      "useStrict": false
+                    }
+                  },
+                  "label": {
+                    "color": "#0000FF",
+                    "enabled": true,
+                    "text": "Scrap %"
+                  },
+                  "name": "Defect Percent",
+                  "render": "value",
+                  "tooltip": {
+                    "background": {
+                      "color": "",
+                      "opacity": 1
+                    },
+                    "cornerRadius": 3,
+                    "enabled": true,
+                    "format": "",
+                    "pointerLength": 4
+                  },
+                  "value": {
+                    "break": {
+                      "enabled": false,
+                      "endValue": 100,
+                      "size": 0.05,
+                      "startValue": 0
+                    },
+                    "format": "#,###.##",
+                    "logarithmic": false,
+                    "range": {
+                      "max": 100,
+                      "min": 0,
+                      "useStrict": true
+                    }
+                  },
+                  "visible": true
+                }
+              ]
+            },
+            "type": "ia.chart.xy"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onDoubleClick": {
+              "config": {
+                "draggable": true,
+                "id": "ogDnpjGJ",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "ProductionLineID": "{view.params.ValueStreamID}"
+                },
+                "viewPath": "Lean Tier2/PopUp/QualityPareto",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_3"
+        },
+        "position": {
+          "basis": "560px",
+          "grow": 1
+        },
+        "props": {
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "solid",
+            "borderWidth": "3px",
+            "marginBottom": "5px",
+            "marginLeft": "10px",
+            "marginRight": "10px",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "borderColor": "#000000",
+        "borderStyle": "solid",
+        "borderWidth": 5
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "custom": {
+    "ButtonAccess": true
+  },
+  "params": {},
+  "propConfig": {
+    "custom.ButtonAccess": {
+      "binding": {
+        "config": {
+          "expression": "{session.custom.Roles.Planner} || {session.custom.Roles.ValueStreamLead} || {session.custom.Roles.Admin} || {session.custom.Roles.TeamLead}"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 72,
+      "width": 299
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "page": "/WorkOrderScheduling"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Schedule Dispatch\""
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Dispatch"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Scheduling/NestedViews/Import"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Schedule Import\""
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Import"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "page": "/RecipeManagement"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Recipe Management\""
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Recipe Management"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

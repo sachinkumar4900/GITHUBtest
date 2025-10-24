@@ -1,0 +1,55 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "bb152ed8c26c684807d2b640c67d5a09131fdab025835aad65b58a87d290402a",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-07-22T15:28:33Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "WorkOrderID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "StatusID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "plID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "Offset",
+        "sqlType": 2
+      }
+    ]
+  }
+}

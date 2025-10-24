@@ -1,0 +1,582 @@
+{
+  "custom": {
+    "ButtonAccess": true
+  },
+  "params": {},
+  "propConfig": {
+    "custom.ButtonAccess": {
+      "binding": {
+        "config": {
+          "expression": "{session.custom.Roles.TeamLead} || {session.custom.Roles.GroupLead} || {session.custom.Roles.Planner} || {session.custom.Roles.ValueStreamLead} || {session.custom.Roles.Admin} || {session.custom.Roles.SystemUser}"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 186,
+      "width": 299
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "page": "/OEE/:Site"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Site Overview\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Site Dashboard"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "OEE/OeeProcessArea"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Value Stream Overview\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Value Stream Dashboard"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "OEE/HourByHourOEE"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Hour By Hour Overview\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Hour by Hour"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Overview/InterfaceSelection"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Equipment Overview\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Equipment Overview"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "OEE/HourByHourMDI"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Hour By Hour MDI Overview\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Hour by Hour MDI"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Lean Tier2/MDI_MainBoard"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"MDI Board - Tier2\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "MDI Q \u0026 D"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Demo/Analysis"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Analysis\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Analysis"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Demo/Efficiency"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Efficency %\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Efficiency"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Demo/OEE_Demo"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"OEE Calendar\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "OEE Calendar"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,522 @@
+{
+  "custom": {
+    "Availability": 0.12795138888888888,
+    "CountResetTime": {
+      "$": [
+        "ts",
+        192,
+        1751450194737
+      ],
+      "$ts": 1724126400000
+    },
+    "OEE": 0.9902777777777776,
+    "Performance": 7.7394843962008135,
+    "Quality": 1,
+    "ScrapCount": "value",
+    "countTagFormat": [
+      {
+        "aggregate": "LastValue",
+        "alias": "value"
+      }
+    ],
+    "downtimeTagFormat": [
+      {
+        "aggregate": "LastValue",
+        "alias": "value"
+      }
+    ],
+    "offset": -4,
+    "scrapTagFormat": [
+      {
+        "aggregate": "LastValue",
+        "alias": "value"
+      }
+    ]
+  },
+  "params": {
+    "End": "2024-08-20 13:20:00",
+    "Start": "2024-08-20 05:20:00",
+    "tagPath": "[default]Moorpark/Molding/IM43"
+  },
+  "propConfig": {
+    "custom.Availability": {
+      "binding": {
+        "config": {
+          "expression": "now(10000)"
+        },
+        "transforms": [
+          {
+            "code": "\ttagPath \u003d self.params.tagPath\n\tstart \u003d self.params.Start\n\tend \u003d self.params.End\n\toee \u003d OEE.getAvailability(tagPath, start, end)\n\treturn oee",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.CountResetTime": {
+      "binding": {
+        "config": {
+          "expression": "addHours(midnight({view.params.Start}), {view.custom.offset} * -1)"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.OEE": {
+      "binding": {
+        "config": {
+          "expression": "{view.custom.Availability} * {view.custom.Performance} * {view.custom.Quality}"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.Performance": {
+      "binding": {
+        "config": {
+          "expression": "now(10000)"
+        },
+        "transforms": [
+          {
+            "code": "\ttagPath \u003d self.params.tagPath\n\tstart \u003d system.date.parse( self.params.Start)\n\tend \u003d system.date.parse( self.params.End)\n\toee \u003d OEE.getPerformance(tagPath, start, end)\n\treturn oee",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.Quality": {
+      "binding": {
+        "config": {
+          "expression": "now(10000)"
+        },
+        "transforms": [
+          {
+            "code": "\ttagPath \u003d self.params.tagPath\n\tstart \u003d system.date.parse( self.params.Start)\n\tend \u003d system.date.parse( self.params.End)\n\toee \u003d OEE.getQuality(tagPath, start, end)\n\treturn oee",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.ScrapCount": {
+      "persistent": true
+    },
+    "custom.countTagFormat": {
+      "persistent": true
+    },
+    "custom.countTagFormat[0].path": {
+      "binding": {
+        "config": {
+          "expression": "replace({view.params.tagPath}, \u0027[\u0027, \u0027[ConnectedFactoryPilot_Historian/ignition-uschisap401:\u0027) + \u0027/oee/quality/Total Daily Count\u0027"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.downtimeTagFormat": {
+      "persistent": true
+    },
+    "custom.downtimeTagFormat[0].path": {
+      "binding": {
+        "config": {
+          "expression": "replace({view.params.tagPath}, \u0027[\u0027, \u0027[ConnectedFactoryPilot_Historian/ignition-uschisap401:\u0027) + \u0027/oee/availability/Unplanned Downtime\u0027"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.offset": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "1": "{session.custom.ProductionSite}"
+          },
+          "tagPath": "General/{1} UTC offset"
+        },
+        "type": "tag"
+      },
+      "persistent": true
+    },
+    "custom.scrapTagFormat": {
+      "persistent": true
+    },
+    "custom.scrapTagFormat[0].path": {
+      "binding": {
+        "config": {
+          "expression": "replace({view.params.tagPath}, \u0027[\u0027, \u0027[ConnectedFactoryPilot_Historian/ignition-uschisap401:\u0027) + \u0027/oee/quality/Scrap Count\u0027"
+        },
+        "type": "expr"
+      }
+    },
+    "params.End": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.Start": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 87,
+      "width": 1646
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "EmbeddedView"
+        },
+        "position": {
+          "basis": "320px"
+        },
+        "propConfig": {
+          "props.params.tagPath": {
+            "binding": {
+              "config": {
+                "path": "view.params.tagPath"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "path": "OEE/NestedViews/AssetWOData"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "EmbeddedView_0"
+        },
+        "position": {
+          "basis": "320px"
+        },
+        "propConfig": {
+          "props.params.value": {
+            "binding": {
+              "config": {
+                "path": "view.custom.OEE"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "ExtraInfo": ""
+          },
+          "path": "OEE/NestedViews/AssetOEEData"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "EmbeddedView_1"
+        },
+        "position": {
+          "basis": "320px"
+        },
+        "propConfig": {
+          "custom.ActiveDowntimeSeconds": {
+            "binding": {
+              "config": {
+                "expression": "now(10000)"
+              },
+              "transforms": [
+                {
+                  "code": "\tplIDPath \u003d self.view.params.tagPath + \"/OEE/ProductionLineID\"\n\tplID \u003d system.tag.readBlocking([plIDPath])[0].value\n\tstart \u003d self.view.params.Start\n\tend \u003d self.view.params.End\n\tdurationSeconds \u003d system.db.runNamedQuery(\u0027Downtime/GetActiveDowntimeDurationByProductionLineID\u0027, {\"plID\": plID, \"start\": start, \"end\": end})\n\treturn durationSeconds",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          },
+          "custom.PlannedSeconds": {
+            "binding": {
+              "config": {
+                "expression": "now(10000)"
+              },
+              "transforms": [
+                {
+                  "code": "\tplIDPath \u003d self.view.params.tagPath + \"/OEE/ProductionLineID\"\n\tplID \u003d system.tag.readBlocking([plIDPath])[0].value\n\tstart \u003d self.view.params.Start\n\tend \u003d self.view.params.End\n\tdurationSeconds \u003d system.db.runNamedQuery(\"Downtime/GetPlannedDowntimeByProductionLineID\", {\"productionLineID\": plID, \"start\": start, \"end\": end})\n\treturn durationSeconds",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          },
+          "custom.UnplannedSeconds": {
+            "binding": {
+              "config": {
+                "expression": "now(10000)"
+              },
+              "transforms": [
+                {
+                  "code": "\tplIDPath \u003d self.view.params.tagPath + \"/OEE/ProductionLineID\"\n\tplID \u003d system.tag.readBlocking([plIDPath])[0].value\n\tstart \u003d self.view.params.Start\n\tend \u003d self.view.params.End\n\tdurationSeconds \u003d system.db.runNamedQuery(\"Downtime/GetUnplannedDowntimeByProductionLineID\", {\"productionLineID\": plID, \"start\": start, \"end\": end})\n\treturn durationSeconds",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          },
+          "props.params.ExtraInfo": {
+            "binding": {
+              "config": {
+                "expression": "numberFormat((({this.custom.UnplannedSeconds} + {this.custom.PlannedSeconds} + {this.custom.ActiveDowntimeSeconds}) /  60.0), \u00270.0#\u0027) + \" min downtime\""
+              },
+              "overlayOptOut": true,
+              "type": "expr"
+            }
+          },
+          "props.params.value": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Availability"
+              },
+              "overlayOptOut": true,
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "path": "OEE/NestedViews/AssetOEEData"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "EmbeddedView_2"
+        },
+        "position": {
+          "basis": "320px"
+        },
+        "propConfig": {
+          "custom.endCount": {
+            "binding": {
+              "config": {
+                "aggregate": "MinMax",
+                "avoidScanClassValidation": true,
+                "dateRange": {
+                  "endDate": "{view.params.End}",
+                  "startDate": "{view.params.End}"
+                },
+                "enableValueCache": true,
+                "ignoreBadQuality": false,
+                "preventInterpolation": false,
+                "returnFormat": "Wide",
+                "returnSize": {
+                  "numRows": "1",
+                  "type": "FIXED"
+                },
+                "tags": "{view.custom.countTagFormat}",
+                "valueFormat": "DATASET"
+              },
+              "overlayOptOut": true,
+              "transforms": [
+                {
+                  "code": "\treturn float(value.getValueAt(0,1))",
+                  "type": "script"
+                }
+              ],
+              "type": "tag-history"
+            }
+          },
+          "custom.resetCount": {
+            "binding": {
+              "config": {
+                "aggregate": "MinMax",
+                "avoidScanClassValidation": true,
+                "dateRange": {
+                  "endDate": "{view.custom.CountResetTime}",
+                  "startDate": "{view.custom.CountResetTime}"
+                },
+                "enableValueCache": true,
+                "ignoreBadQuality": false,
+                "preventInterpolation": false,
+                "returnFormat": "Wide",
+                "returnSize": {
+                  "numRows": "1",
+                  "type": "FIXED"
+                },
+                "tags": "{view.custom.countTagFormat}",
+                "valueFormat": "DATASET"
+              },
+              "overlayOptOut": true,
+              "transforms": [
+                {
+                  "code": "\treturn float(value.getValueAt(0,1))",
+                  "type": "script"
+                }
+              ],
+              "type": "tag-history"
+            }
+          },
+          "custom.startCount": {
+            "binding": {
+              "config": {
+                "aggregate": "MinMax",
+                "avoidScanClassValidation": true,
+                "dateRange": {
+                  "endDate": "addMinutes({view.params.Start}, 1)",
+                  "startDate": "addMinutes({view.params.Start}, 1)"
+                },
+                "enableValueCache": true,
+                "ignoreBadQuality": false,
+                "preventInterpolation": false,
+                "returnFormat": "Wide",
+                "returnSize": {
+                  "numRows": "1",
+                  "type": "FIXED"
+                },
+                "tags": "{view.custom.countTagFormat}",
+                "valueFormat": "DATASET"
+              },
+              "overlayOptOut": true,
+              "transforms": [
+                {
+                  "code": "\treturn float(value.getValueAt(0,1))",
+                  "type": "script"
+                }
+              ],
+              "type": "tag-history"
+            }
+          },
+          "props.params.ExtraInfo": {
+            "binding": {
+              "config": {
+                "expression": "if(dateIsBetween({view.custom.CountResetTime}, {view.params.Start}, {view.params.End}) \u0026\u0026 dateIsAfter({view.custom.CountResetTime}, {view.params.Start}) , \r\n{this.custom.endCount} +({this.custom.resetCount} - {this.custom.startCount}),\r\n{this.custom.endCount} - {this.custom.startCount})"
+              },
+              "overlayOptOut": true,
+              "transforms": [
+                {
+                  "code": "\tstartDT \u003d system.date.parse(self.view.params.Start)\n\tendDT \u003d system.date.parse(self.view.params.End)\n\t\n\thours \u003d system.date.secondsBetween(startDT, endDT) / 3600.0\n\treturn str(\"%.2f\" % (value / hours)) + \" parts per hour\"",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          },
+          "props.params.value": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Performance"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "path": "OEE/NestedViews/AssetOEEData"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "EmbeddedView_3"
+        },
+        "position": {
+          "basis": "320px"
+        },
+        "propConfig": {
+          "custom.ScrapEnd": {
+            "binding": {
+              "config": {
+                "aggregate": "MinMax",
+                "avoidScanClassValidation": true,
+                "dateRange": {
+                  "endDate": "{view.params.End}",
+                  "startDate": "{view.params.End}"
+                },
+                "enableValueCache": true,
+                "ignoreBadQuality": false,
+                "preventInterpolation": false,
+                "returnFormat": "Wide",
+                "returnSize": {
+                  "numRows": "1",
+                  "type": "FIXED"
+                },
+                "tags": "{view.custom.scrapTagFormat}",
+                "valueFormat": "DATASET"
+              },
+              "transforms": [
+                {
+                  "expression": "{value}[0,1]",
+                  "type": "expression"
+                }
+              ],
+              "type": "tag-history"
+            }
+          },
+          "custom.ScrapStart": {
+            "binding": {
+              "config": {
+                "aggregate": "MinMax",
+                "avoidScanClassValidation": true,
+                "dateRange": {
+                  "endDate": "{view.params.Start}",
+                  "startDate": "{view.params.Start}"
+                },
+                "enableValueCache": true,
+                "ignoreBadQuality": false,
+                "preventInterpolation": false,
+                "returnFormat": "Wide",
+                "returnSize": {
+                  "numRows": "1",
+                  "type": "FIXED"
+                },
+                "tags": "{view.custom.scrapTagFormat}",
+                "valueFormat": "DATASET"
+              },
+              "transforms": [
+                {
+                  "expression": "{value}[0,1]",
+                  "type": "expression"
+                }
+              ],
+              "type": "tag-history"
+            }
+          },
+          "props.params.ExtraInfo": {
+            "binding": {
+              "config": {
+                "expression": "{this.custom.ScrapEnd} - {this.custom.ScrapStart} + \" scrap\""
+              },
+              "overlayOptOut": true,
+              "type": "expr"
+            }
+          },
+          "props.params.value": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Quality"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "path": "OEE/NestedViews/AssetOEEData"
+        },
+        "type": "ia.display.view"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "justify": "space-between"
+    },
+    "type": "ia.container.flex"
+  }
+}

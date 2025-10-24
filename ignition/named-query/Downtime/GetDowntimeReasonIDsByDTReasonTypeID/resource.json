@@ -1,0 +1,55 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "8193aab533544d3cd9e7663d48354cbe7c5aef29ae370f0c408f11eabfc70913",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2025-01-17T15:31:55Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "EquipmentID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ProcessArea",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ReasonGroupID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "Level",
+        "sqlType": 2
+      }
+    ]
+  }
+}

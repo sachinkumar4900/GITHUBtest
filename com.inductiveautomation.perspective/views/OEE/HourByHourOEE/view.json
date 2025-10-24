@@ -1,0 +1,440 @@
+{
+  "custom": {},
+  "events": {
+    "system": {
+      "onStartup": {
+        "config": {
+          "script": "\tself.getChild(\"root\").getChild(\"Dropdown\").props.value \u003d 1"
+        },
+        "scope": "G",
+        "type": "script"
+      }
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.Site": {
+      "binding": {
+        "config": {
+          "path": "session.custom.ProductionSite"
+        },
+        "type": "property"
+      },
+      "persistent": false
+    },
+    "custom.offset": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "1": "{view.custom.Site}"
+          },
+          "tagPath": "General/{1} UTC offset"
+        },
+        "type": "tag"
+      },
+      "persistent": false
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 783,
+      "width": 975
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "FlexRepeater",
+          "visible": false
+        },
+        "position": {
+          "height": 0.9349,
+          "width": 0.9918,
+          "x": 0.0062,
+          "y": 0.0607
+        },
+        "propConfig": {
+          "props.instances": {
+            "persistent": false
+          }
+        },
+        "props": {
+          "path": "OEE/NestedViews/HourGauge",
+          "wrap": "wrap"
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "meta": {
+          "name": "Process Area Label"
+        },
+        "position": {
+          "height": 0.0409,
+          "width": 0.1138,
+          "x": 0.041,
+          "y": 0.0153
+        },
+        "props": {
+          "text": "Process Area",
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Dropdown"
+        },
+        "position": {
+          "height": 0.046,
+          "width": 0.2626,
+          "x": 0.1621,
+          "y": 0.0128
+        },
+        "propConfig": {
+          "props.options": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "SiteID": "{session.custom.ProductionSiteID}"
+                },
+                "queryPath": "ProductionLine/GetProductionLinesForDropdownBySiteID"
+              },
+              "type": "query"
+            }
+          },
+          "props.value": {
+            "onChange": {
+              "enabled": null,
+              "script": "\ti \u003d 0\n\tassetFound \u003d False\n\tds \u003d self.props.options\n\t\n\twhile(assetFound \u003d\u003d False):\n\t\tif ds.getValueAt(i, 0) \u003d\u003d currentValue.value:\n\t\t\tassetFound \u003d True\n\t\telse:\n\t\t\ti +\u003d 1\n\tself.getSibling(\"ProcessAreaLabel\").props.text \u003d ds.getValueAt(i, 1)"
+            }
+          }
+        },
+        "props": {
+          "search": {
+            "enabled": false
+          },
+          "value": 8
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "meta": {
+          "name": "Dropdown_0",
+          "visible": false
+        },
+        "position": {
+          "height": 0.046,
+          "width": 0.2626,
+          "x": 0.721,
+          "y": 0.0115
+        },
+        "propConfig": {
+          "custom.end": {
+            "binding": {
+              "config": {
+                "expression": "now(10000)//addHours({this.custom.start}, 12)\r\n\t"
+              },
+              "type": "expr"
+            }
+          },
+          "custom.start": {
+            "binding": {
+              "config": {
+                "expression": "addHours({this.custom.end}, -13)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "options": [
+            {
+              "label": "Shift",
+              "value": 1
+            },
+            {
+              "label": "Day",
+              "value": 2
+            }
+          ],
+          "search": {
+            "enabled": false
+          },
+          "value": 2
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "meta": {
+          "name": "Process Area Label_0",
+          "visible": false
+        },
+        "position": {
+          "height": 0.0409,
+          "width": 0.1138,
+          "x": 0.6,
+          "y": 0.014
+        },
+        "props": {
+          "text": "Filter By",
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "FlexRepeater_0"
+        },
+        "position": {
+          "height": 0.675,
+          "width": 0.9725,
+          "x": 0.0164,
+          "y": 0.3115
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "ProductionLineID": "{../Dropdown.props.value}"
+                },
+                "queryPath": "HourByHour/GetLastIDsByProductionLineID",
+                "returnFormat": "json"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "path": "OEE/NestedViews/HourRow",
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "meta": {
+          "name": "Progress"
+        },
+        "position": {
+          "height": 0.0485,
+          "width": 0.5836,
+          "x": 0.2339,
+          "y": 0.0651
+        },
+        "propConfig": {
+          "custom.Counts": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "ProductionLineID": "{../Dropdown.props.value}",
+                  "end": "{../Dropdown_0.custom.end}",
+                  "start": "{../Dropdown_0.custom.start}"
+                },
+                "queryPath": "HourByHour/GetCumulativeCounts",
+                "returnFormat": "json"
+              },
+              "transforms": [
+                {
+                  "code": "\tcounts \u003d value\n\tif value[0][\"Planned\"] \u003d\u003d None and value[0][\"Actual\"] \u003d\u003d None:\n\t\tplannedCount \u003d 0\n\t\tactualCount \u003d 0\n\telse:\n\t\tplannedCount \u003d value[0][\"Planned\"]\n\t\tactualCount \u003d value[0][\"Actual\"]\n\tcounts[0][\"Planned\"] \u003d plannedCount + self.getSibling(\"CurrentHourRow\").props.params.Target\n\tcounts[0][\"Actual\"] \u003d actualCount + self.getSibling(\"CurrentHourRow\").props.params.Actual\n\t\n\treturn counts",
+                  "type": "script"
+                }
+              ],
+              "type": "query"
+            }
+          },
+          "props.max": {
+            "binding": {
+              "config": {
+                "path": "this.custom.Counts[0].Planned"
+              },
+              "type": "property"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "this.custom.Counts[0].Actual"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.progress"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.0677,
+          "width": 0.3364,
+          "x": 0.0067,
+          "y": 0.0536
+        },
+        "props": {
+          "text": "Cumulative Progress:",
+          "textStyle": {
+            "fontSize": "2rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.0473,
+          "width": 0.1713,
+          "x": 0.8251,
+          "y": 0.0664
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{../Progress.custom.Counts[0].Actual} + \" / \" +{../Progress.custom.Counts[0].Planned}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "2rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "HourRowHeader"
+        },
+        "position": {
+          "height": 0.0996,
+          "width": 0.9725,
+          "x": 0.0164,
+          "y": 0.1346
+        },
+        "props": {
+          "path": "OEE/NestedViews/HourRowHeader"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "CurrentHourRow"
+        },
+        "position": {
+          "height": 0.0765,
+          "width": 0.9725,
+          "x": 0.0164,
+          "y": 0.235
+        },
+        "propConfig": {
+          "props.params.ProductionLineID": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown.props.value"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.StartTime": {
+            "binding": {
+              "config": {
+                "expression": "if(toInt({session.props.device.timezone.utcOffset}) \u003d toFloat({session.props.device.timezone.utcOffset}),\r\ndateFormat(addMinutes( now(), {session.props.device.timezone.utcOffset} * 60), \"HH:00\"),\r\ndateFormat(addMinutes( now(), {session.props.device.timezone.utcOffset} * 60), \"HH:30\")\r\n)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "Actual": 144,
+            "EndTime": "value",
+            "ID": 5,
+            "Target": 156
+          },
+          "path": "OEE/NestedViews/CurrentHourRow"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "Site_Label"
+        },
+        "position": {
+          "height": 0.0383,
+          "width": 0.1307,
+          "x": 0.849,
+          "y": 0.0419
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "session.custom.ProductionSite"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "classes": "Barlow",
+            "color": "#000000",
+            "fontSize": "16px",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "ProcessAreaLabel"
+        },
+        "position": {
+          "height": 0.046,
+          "width": 0.1867,
+          "x": 0.8092,
+          "y": 0.0019
+        },
+        "props": {
+          "style": {
+            "fontSize": "24px",
+            "textAlign": "right"
+          },
+          "text": "IM50",
+          "textStyle": {
+            "classes": "Barlow",
+            "color": "#000000",
+            "fontSize": "2.75rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": 0.0021,
+      "y": -0.0089
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

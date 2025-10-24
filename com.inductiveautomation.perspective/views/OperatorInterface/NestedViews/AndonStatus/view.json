@@ -1,0 +1,479 @@
+{
+  "custom": {
+    "AndonGroup": "Team Lead                                         ",
+    "AndonGroupID": 5,
+    "AndonReason": "Damaged Motor",
+    "DTReason": null,
+    "EquipmentStatus": -1,
+    "EventHeader": "93F9F59A-9BDE-4008-A0B9-95B4601BBB90",
+    "NotifiedDate": {
+      "$": [
+        "ts",
+        192,
+        1736785547793
+      ],
+      "$ts": 1722007524980
+    },
+    "ProductionLineID": 11
+  },
+  "params": {
+    "AndonHeader": "F0EB5919-C2EC-47F1-BBE0-B1EDE8D9000F",
+    "AndonStatus": 4,
+    "DowntimeEventID": -1,
+    "EquipmentID": 11,
+    "WorkOrderID": 1373
+  },
+  "propConfig": {
+    "custom.AndonGroup": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "ID": "{view.custom.AndonGroupID}"
+          },
+          "queryPath": "Andon/GetAndonGroupNameByID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.AndonGroupID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "ProductionLineID": "{view.custom.ProductionLineID}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "3"
+          },
+          "queryPath": "Andon/GetAndonGroupByProductionLineID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.AndonReason": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "AndonHeader": "{view.custom.EventHeader}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "1"
+          },
+          "queryPath": "Andon/GetActiveEventReasonByHeaderID",
+          "returnFormat": "scalar"
+        },
+        "transforms": [
+          {
+            "code": "\tif value \u003d\u003d None:\n\t\treturn value\n\telse:\n\t\treason \u003d system.db.runNamedQuery(\"Downtime/GetDowntimeReasonByID\", {\"ReasonID\": value})\n\t\treturn reason[0][0]",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.DTReason": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EventID": "{view.params.DowntimeEventID}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "1"
+          },
+          "queryPath": "Downtime/GetDowntimeEventReasonByDowntimeID",
+          "returnFormat": "scalar"
+        },
+        "transforms": [
+          {
+            "code": "\tif value \u003d\u003d None:\n\t\treturn value\n\telse:\n\t\treason \u003d system.db.runNamedQuery(\"Downtime/GetDowntimeReasonByID\", {\"ReasonID\": value})\n\t\treturn reason[0][0]",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.EventHeader": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "productionLineID": "{view.custom.ProductionLineID}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "3"
+          },
+          "queryPath": "Andon/GetEventHeaderByProductionLineID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.NotifiedDate": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EventHeaderID": "{view.params.AndonHeader}",
+            "offset": "{session.props.device.timezone.utcOffset}"
+          },
+          "queryPath": "Andon/GetAndonStartByEventheaderID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.ProductionLineID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.EquipmentID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineIDByEquipmentID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.AndonHeader": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.AndonStatus": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.DowntimeEventID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.WorkOrderID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 75
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "InitialAndonTimestamp_Label"
+        },
+        "position": {
+          "height": 0.48,
+          "width": 0.3275,
+          "x": 0.0422,
+          "y": 0.4133
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.AndonStatus} \u003d 6, false, true)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if(\r\n\t{view.custom.NotifiedDate} \u003d null,\r\n\t\"\",\r\n\tdateFormat(\r\n\t\t{view.custom.NotifiedDate},\r\n\t\t\"MM/dd/YY hh:mm:ss a\")\r\n\t)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.textStyle.color": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.DTReason} \u003d \"Mold Change\" || {view.custom.DTReason} \u003d \"Changeover\", \"#000000\", \"#E52C4F\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "classes": "OverviewHeader/AndonStatusData"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "AndonNotified"
+        },
+        "position": {
+          "height": 0.48,
+          "width": 0.35,
+          "x": 0.6436,
+          "y": 0.4133
+        },
+        "propConfig": {
+          "custom.EventData": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "ProductionLineID": "{view.custom.ProductionLineID}",
+                  "offset": "{session.props.device.timezone.utcOffset}"
+                },
+                "polling": {
+                  "enabled": true,
+                  "rate": "3"
+                },
+                "queryPath": "Andon/GetLastNotificationTimestampsByProductionLineID",
+                "returnFormat": "json"
+              },
+              "type": "query"
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.AndonStatus} \u003d 6, false, true)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if(len({this.custom.EventData}) \u003e 0, dateFormat({this.custom.EventData[0].Timestamp}, \"MM/dd/YY hh:mm:ss a\"), \"\")"
+              },
+              "type": "expr"
+            }
+          },
+          "props.textStyle.color": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.DTReason} \u003d \"Mold Change\" || {view.custom.DTReason} \u003d \"Changeover\", \"#000000\", \"#E52C4F\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden",
+            "fontWeight": "bold",
+            "textAlign": "right"
+          },
+          "textStyle": {
+            "classes": "OverviewHeader/AndonStatusData",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "CoordinateContainer"
+        },
+        "position": {
+          "height": 1,
+          "width": 0.025
+        },
+        "propConfig": {
+          "props.style.backgroundColor": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.DTReason} \u003d \"Mold Change\" || {view.custom.DTReason} \u003d \"Changeover\", \u0027#006E96\u0027,\r\n\tif({view.params.AndonStatus} !\u003d 6 \u0026\u0026 {view.params.DowntimeEventID} \u003d -1 \u0026\u0026 {view.params.AndonStatus} !\u003d null, \u0027#FFE040\u0027,\r\n\t\tif({view.params.WorkOrderID} \u003d 0, \u0027#006E96\u0027,\r\n\t\t\tif({view.params.DowntimeEventID} !\u003d -1, \"#E52C4F\", \"#FFFFFF\"))))"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "mode": "percent"
+        },
+        "type": "ia.container.coord"
+      },
+      {
+        "meta": {
+          "name": "HelpRequested_Label"
+        },
+        "position": {
+          "height": 0.4267,
+          "width": 0.3575,
+          "x": 0.042,
+          "y": 0.0731
+        },
+        "propConfig": {
+          "custom.DowntimeEquipment": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "dtID": "{view.params.DowntimeEventID}"
+                },
+                "queryPath": "Downtime/GetActiveDowntimeEventEquipmentByEventID",
+                "returnFormat": "scalar"
+              },
+              "type": "query"
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.AndonStatus} \u003d 6 || {view.params.AndonStatus} \u003d null, false, true)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({this.custom.DowntimeEquipment} !\u003d null, \"Help Requested at \" + {this.custom.DowntimeEquipment} + \" Station\", \"Help Requested\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "1rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "AndonNotified_Label"
+        },
+        "position": {
+          "height": 0.4,
+          "width": 0.35,
+          "x": 0.6436,
+          "y": 0.1
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.AndonStatus} \u003d 6 || {view.params.AndonStatus} \u003d null, false, true)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.AndonGroup} \r\n+ \" Notified\" \r\n//+ {view.params.DowntimeEventID}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden",
+            "fontWeight": "bold",
+            "textAlign": "right"
+          },
+          "textStyle": {
+            "classes": "OverviewHeader/AndonStatusData",
+            "fontSize": "1rem",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Reason_Label"
+        },
+        "position": {
+          "height": 0.8133,
+          "width": 0.1412,
+          "x": 0.4306,
+          "y": 0.0997
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.DTReason} !\u003d null, {view.custom.DTReason},\r\n\tif({view.custom.AndonReason} !\u003d null \u0026\u0026 {view.params.AndonStatus} \u003c 6 \u0026\u0026 {view.params.AndonStatus} \u003e 3, {view.custom.AndonReason},\r\n\t\t\"\"))"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d None:\n\t\treturn \"\"\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          },
+          "props.textStyle.color": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.DTReason} \u003d \"Mold Change\" || {view.custom.DTReason} \u003d \"Changeover\", \"#000000\", \"#E52C4F\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/AndonStatusData",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": -0.0088,
+      "y": -0.0267
+    },
+    "propConfig": {
+      "props.style.backgroundColor": {
+        "binding": {
+          "config": {
+            "expression": "if({view.params.DowntimeEventID} \u003d -1 || {view.custom.DTReason} \u003d \"Mold Change\" || {view.custom.DTReason} \u003d \"Changeover\", \"#FFFFFF\", \"#FCE6EB\")"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "update-andon-status",
+          "pageScope": true,
+          "script": "\tplID \u003d payload[\"plID\"]\n\t\n\tif plID \u003d\u003d self.view.custom.ProductionLineID:\n\t\tself.view.params.DowntimeEventID \u003d -1",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.coord"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 60,
+    "cacheEnabled": true,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "3637320e3c1579c16b96f5406dbde8ee65155b99c49fe94cad93775d706cb3b8",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2025-07-02T09:39:17Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "ProductionLineID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "Reason",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "StartTime",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "EndTime",
+        "sqlType": 8
+      }
+    ]
+  }
+}

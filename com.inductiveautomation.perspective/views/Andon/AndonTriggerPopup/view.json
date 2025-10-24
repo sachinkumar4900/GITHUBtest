@@ -1,0 +1,534 @@
+{
+  "custom": {
+    "AndonGroup": "Team Lead                                         ",
+    "AndonGroupID": 5,
+    "AndonHeader": "E04D4BEF-E2E7-4CDD-ADC8-C27B9E71305A",
+    "AndonStatus": 2,
+    "DateTimeNow": {
+      "$": [
+        "ts",
+        192,
+        1745388204330
+      ],
+      "$ts": 1745388204330
+    },
+    "Equipment": "SB03",
+    "ProductionLineID": 3,
+    "ReasonGroupID": 2,
+    "Status": 0,
+    "WorkOrderID": 1298
+  },
+  "params": {
+    "EquipmentID": 3,
+    "ProcessArea": "Molding"
+  },
+  "propConfig": {
+    "custom.AndonGroup": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "ID": "{view.custom.AndonGroupID}"
+          },
+          "queryPath": "Andon/GetAndonGroupNameByID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.AndonGroupID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "ProductionLineID": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "Andon/GetAndonGroupByProductionLineID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.AndonHeader": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "productionLineID": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "Andon/GetEventHeaderByProductionLineID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.AndonStatus": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EventHeaderID": "{view.custom.AndonHeader}"
+          },
+          "queryPath": "Andon/GetEventStatusByEventHeaderID",
+          "returnFormat": "scalar"
+        },
+        "transforms": [
+          {
+            "code": "\tif self.custom.AndonHeader \u003d\u003d None:\n\t\treturn 7\n\telse:\n\t\treturn value",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.DateTimeNow": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.Equipment": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "id": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineNameByID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.ProductionLineID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.EquipmentID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineIDByEquipmentID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.ReasonGroupID": {
+      "binding": {
+        "config": {
+          "expression": "if({view.params.ProcessArea} \u003d \u0027Molding\u0027, 2, 1)"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.Status": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "Equipment": "{view.custom.Equipment}",
+            "ProcessArea": "{view.params.ProcessArea}",
+            "ProductionSiteID": "if({session.custom.ProductionSiteID} \u003d 1, \u0027Sanford\u0027, \u0027Moorpark\u0027)"
+          },
+          "tagPath": "[default]{ProductionSiteID}/{ProcessArea}/{Equipment}/Status"
+        },
+        "type": "tag"
+      },
+      "persistent": true
+    },
+    "custom.WorkOrderID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "productionLineID": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "WorkOrder/GetActiveWorkOrderIDForAsset",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ProcessArea": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 400,
+      "width": 600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.15,
+          "width": 1
+        },
+        "propConfig": {
+          "props.style.backgroundColor": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.Status} \u003d 1, \u0027#CCCC00\u0027, \u0027#B22222\u0027)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.textStyle.color": {
+            "binding": {
+              "config": {
+                "expression": "if({this.props.style.backgroundColor} \u003d \u0027#CCCC00\u0027, \u0027#000000\u0027, \u0027#D5D5D5\u0027)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderBottomStyle": "solid",
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden"
+          },
+          "text": "Andon Event",
+          "textStyle": {
+            "paddingLeft": "1rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Calling_Label"
+        },
+        "position": {
+          "height": 0.3,
+          "width": 1,
+          "y": 0.15
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.AndonGroup} \u003d \u0027-1\u0027, \r\n\u0027Calling Team Lead for Help\u0027,\r\n\u0027Calling \u0027 + {view.custom.AndonGroup} + \u0027 for Help\u0027)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderBottomStyle": "solid",
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden"
+          },
+          "textStyle": {
+            "fontSize": "1.5rem",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Question_Label"
+        },
+        "position": {
+          "height": 0.255,
+          "width": 1,
+          "y": 0.4475
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.AndonStatus} !\u003d 6 \u0026\u0026 {view.custom.AndonStatus} !\u003d null, \r\n\t\"Was the problem resolved?\", \r\n\t\"Is the equipment down?\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderBottomStyle": "hidden",
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden"
+          },
+          "textStyle": {
+            "fontSize": "1.5rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tequipment \u003d self.view.custom.Equipment\n\tprocessArea \u003d self.view.params.ProcessArea\n\tplID \u003d self.view.custom.ProductionLineID\n\t\n\tsite \u003d self.session.custom.ProductionSite + \"/\"\n\t\n\tsystem.tag.writeBlocking(\"[default]\" + site + processArea + \"/\" + equipment + \"/Status\", 0)\n\tsystem.tag.writeBlocking(\"[default]\" + site +  processArea + \"/\" + equipment + \"/Andon/Andon Status\", 2)\n\t\n\t# Activate Andon Event\n\tpEventHeaderID \u003d None\n\tpID \u003d None\n\tpNotificationGroupID \u003d 5\n\tpTimestamp \u003d system.db.runNamedQuery(\u0027Downtime/GetUTC\u0027)[0][0]\n\tpProductionLineID \u003d self.view.custom.ProductionLineID\n\tpStatusID \u003d 2\n\tpIsDelete \u003d False\n\t\n\tparams \u003d {\"pEventHeaderID\": pEventHeaderID, \"pID\": pID, \"pNotificationGroupID\": pNotificationGroupID, \"pTimestamp\": pTimestamp, \"pProductionLineID\": pProductionLineID, \"pStatusID\": pStatusID, \"pIsDelete\": pIsDelete}\n\tsystem.db.runNamedQuery(\"Andon/sp_ANDON_AndonEvent\", params)\n\t\n\t#Activate Downtime and tie to Andon Event\n\tpID \u003d None\n\tpEquipmentID \u003d self.view.params.EquipmentID\n\tpReasonID \u003d None\n\tpStartTime \u003d pTimestamp\n\tpCommentID \u003d None\n\tpAndonHeaderID \u003d system.db.runNamedQuery(\"Andon/GetAndonHeaderByTime\", {\"Timestamp\": pStartTime})\n\t\n\tparams \u003d {\"pID\": pID, \"pEquipmentID\": pEquipmentID, \"pReasonID\": pReasonID, \"pStartTime\": pStartTime, \"pEndTime\": None, \"pCommentID\": pCommentID, \"pAndonHeaderID\": pAndonHeaderID[0][0], \"pIsDelete\": False}\n\tsystem.db.runNamedQuery(\"Downtime/sp_GEN_DowntimeEvent\", params)\n\t\n\t#Set Work Order Status\n\twoID \u003d self.view.custom.WorkOrderID\n\tif woID !\u003d -1:\n\t\tsystem.db.runNamedQuery(\"WorkOrder/UpdateWorkOrderScheduleStatus\", {\"WorkOrderID\": woID, \"StatusID\": 4, \"plID\": plID, \"Offset\": self.session.props.device.timezone.utcOffset})\n\t"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.closePopup(\u0027AndonTrigger\u0027)\n\t#system.perspective.refresh()"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Yes_Down"
+        },
+        "position": {
+          "height": 0.17,
+          "width": 0.2667,
+          "x": 0.12,
+          "y": 0.715
+        },
+        "propConfig": {
+          "custom.DateTime": {
+            "binding": {
+              "config": {
+                "expression": "now()"
+              },
+              "type": "expr"
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.AndonStatus} \u003d 6 || {view.custom.AndonStatus} \u003d null, true,false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "primary": false,
+          "text": "Yes",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tequipment \u003d self.view.custom.Equipment\n\tprocessArea \u003d self.view.params.ProcessArea\n\t\n\t#Set UDT status values\n\tsite \u003d self.session.custom.ProductionSite + \"/\"\n\tsystem.tag.writeBlocking(\"[default]\" + site + processArea + \"/\" + equipment + \"/Andon/Andon Status\", 1)\n\n\tpEventHeaderID \u003d None\n\tpID \u003d None\n\tpNotificationGroupID \u003d 5\n\tpTimestamp \u003d system.db.runNamedQuery(\u0027Downtime/GetUTC\u0027)[0][0]\n\tpProductionLineID \u003d self.view.custom.ProductionLineID\n\tpStatusID \u003d 1\n\tpIsDelete \u003d False\n\t    \n\tparams \u003d {\"pEventHeaderID\": pEventHeaderID, \"pID\": pID, \"pNotificationGroupID\": pNotificationGroupID, \"pTimestamp\": pTimestamp, \"pProductionLineID\": pProductionLineID, \"pStatusID\": pStatusID, \"pCommentID\": None, \"pReasonID\": None, \"pIsDelete\": pIsDelete}\n\tsystem.db.runNamedQuery(\"Andon/sp_ANDON_AndonEvent\", params)\n\t\n\t#system.perspective.refresh()"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.closePopup(\"\")"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "No_Down"
+        },
+        "position": {
+          "height": 0.17,
+          "width": 0.2667,
+          "x": 0.5867,
+          "y": 0.715
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.AndonStatus} \u003d 6 || {view.custom.AndonStatus} \u003d null, true,false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "primary": false,
+          "text": "No",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tequipment \u003d self.view.custom.Equipment\n\tprocessArea \u003d self.view.params.ProcessArea\n\tsite \u003d self.session.custom.ProductionSite + \"/\"\n\tandonGroup \u003d self.view.custom.AndonGroupID\n\t\n\tsystem.tag.writeBlocking(\u0027[default]\u0027 + site + processArea + \u0027/\u0027 + equipment +\u0027/Andon/Andon Status\u0027, 4)\n\tsystem.tag.writeBlocking(\u0027[default]\u0027 + site + processArea + \u0027/\u0027 + equipment +\u0027/Andon/Andon Group\u0027, andonGroup)"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.closePopup(\"AndonTriggerResolved\")"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "No_Resolved"
+        },
+        "position": {
+          "height": 0.17,
+          "width": 0.2667,
+          "x": 0.5867,
+          "y": 0.715
+        },
+        "propConfig": {
+          "custom.DateTimeNow": {
+            "binding": {
+              "config": {
+                "expression": "now()"
+              },
+              "type": "expr"
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.AndonStatus} !\u003d 6 \u0026\u0026 {view.custom.AndonStatus} !\u003d null, true,false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "primary": false,
+          "text": "No",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tequipment \u003d self.view.custom.Equipment\n\tprocessArea \u003d self.view.params.ProcessArea\n\tsite \u003d self.session.custom.ProductionSite\n\t\n\tsystem.tag.writeBlocking(\u0027[default]\u0027 + site + processArea + \u0027/\u0027 + equipment +\u0027/Andon/Andon Status\u0027, 3)"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "draggable": true,
+                  "id": "Reason2",
+                  "modal": true,
+                  "overlayDismiss": false,
+                  "resizable": true,
+                  "showCloseIcon": true,
+                  "type": "open",
+                  "viewParams": {
+                    "EquipmentID": "{view.params.EquipmentID}",
+                    "ProcessArea": "{view.params.ProcessArea}",
+                    "ReasonGroupID": "{view.custom.ReasonGroupID}"
+                  },
+                  "viewPath": "Andon/NestedViews/AndonReasonSelector2",
+                  "viewportBound": false
+                },
+                "scope": "C",
+                "type": "popup"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.closePopup(\"AndonTriggerResolved\")"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Yes_Resolved"
+        },
+        "position": {
+          "height": 0.17,
+          "width": 0.2667,
+          "x": 0.12,
+          "y": 0.715
+        },
+        "propConfig": {
+          "custom.DateTimeNow": {
+            "binding": {
+              "config": {
+                "expression": "now()"
+              },
+              "type": "expr"
+            }
+          },
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "if({view.custom.AndonStatus} !\u003d 6 \u0026\u0026 {view.custom.AndonStatus} !\u003d null, true,false)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "primary": false,
+          "text": "Yes",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": -0.2617,
+      "y": -0.0975
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

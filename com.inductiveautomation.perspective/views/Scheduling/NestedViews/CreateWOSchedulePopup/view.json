@@ -1,0 +1,87 @@
+{
+  "custom": {},
+  "params": {
+    "params": "value"
+  },
+  "propConfig": {
+    "params.params": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 263,
+      "width": 470
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px",
+          "grow": 1
+        },
+        "props": {
+          "style": {
+            "classes": "OverviewHeader/H2",
+            "paddingBottom": 10,
+            "paddingLeft": 10,
+            "paddingRight": 10,
+            "paddingTop": 10
+          },
+          "text": "Update Start Time?"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Yes"
+            },
+            "position": {
+              "basis": "80px",
+              "grow": 1
+            },
+            "props": {
+              "text": "Yes"
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "meta": {
+              "name": "No"
+            },
+            "position": {
+              "basis": "80px",
+              "grow": 1
+            },
+            "props": {
+              "primary": false,
+              "text": "No"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "basis": "200px"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

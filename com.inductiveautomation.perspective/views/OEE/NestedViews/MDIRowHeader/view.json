@@ -1,0 +1,547 @@
+{
+  "custom": {
+    "Data": [
+      {
+        "ActualParts": 0,
+        "ActualPartsModifiedBy": null,
+        "AvgSpeed": 0,
+        "Downtime": 3599,
+        "ID": 1510,
+        "MoorparkCumulativeActualParts": 0,
+        "MoorparkCumulativePlannedParts": 1102,
+        "MoorparkTime": 1737309616609,
+        "PartNumber": "24900-0504",
+        "PlannedParts": 58,
+        "PlannedPartsModifiedBy": null,
+        "ProductionLineID": 3,
+        "ProductionLineTypeID": 2,
+        "Recovery": null,
+        "RecoveryModifiedBy": null,
+        "SanfordCumulativeActualParts": 0,
+        "SanfordCumulativePlannedParts": 1276,
+        "SanfordTime": 1737320416609,
+        "Scrap": 0,
+        "Shift": "2nd Shift",
+        "ShiftScheduleID": 5236,
+        "StartTime": 1737334816609,
+        "WorkOrderID": 1301
+      }
+    ],
+    "DateDiff": "value",
+    "EndTime": {
+      "$": [
+        "ts",
+        192,
+        1749702556853
+      ],
+      "$ts": 1722175224128
+    },
+    "Performance": 0
+  },
+  "params": {
+    "Font": 18,
+    "ID": 1510,
+    "Toggle": 1
+  },
+  "propConfig": {
+    "custom.Data": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "ID": "{view.params.ID}"
+          },
+          "queryPath": "HourByHour/GetHourByHourMDIByID",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.DateDiff": {
+      "persistent": true
+    },
+    "custom.EndTime": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "id": "{view.params.ID}"
+          },
+          "queryPath": "HourByHour/GetNextStartTimeByID"
+        },
+        "transforms": [
+          {
+            "code": "\treturn value if value is not None else system.date.addHours(system.date.fromMillis(self.custom.Data[0].StartTime), 1)",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.Performance": {
+      "binding": {
+        "config": {
+          "expression": "{view.custom.Data[0].ActualParts} / {view.custom.Data[0].PlannedParts}"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "params.Font": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.Toggle": {
+      "paramDirection": "output",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 85,
+      "width": 1442
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Hour Label"
+        },
+        "position": {
+          "height": 0.6538,
+          "width": 0.0759,
+          "x": 0.008,
+          "y": 0.1949
+        },
+        "propConfig": {
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Time",
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.0989,
+          "x": 0.0914,
+          "y": 0.156
+        },
+        "propConfig": {
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Part #",
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number_0"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.0739,
+          "x": 0.1941,
+          "y": 0.1696
+        },
+        "propConfig": {
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Planned Parts",
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number_1"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.055,
+          "x": 0.2787,
+          "y": 0.0934
+        },
+        "propConfig": {
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Cumulative Planned Parts",
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number_2"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.0446,
+          "x": 0.4405,
+          "y": 0.0826
+        },
+        "propConfig": {
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Cumulative Actual Parts",
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number_3"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.0564,
+          "x": 0.3698,
+          "y": 0.1612
+        },
+        "propConfig": {
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Actual Parts",
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number_4"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.0724,
+          "x": 0.833,
+          "y": 0.1001
+        },
+        "propConfig": {
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Recovery",
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number_5"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.0731,
+          "x": 0.9232,
+          "y": 0.2059
+        },
+        "propConfig": {
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Modified By",
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number_6"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.0627,
+          "x": 0.5183,
+          "y": 0.1131
+        },
+        "propConfig": {
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Reason",
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number_7"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.064,
+          "x": 0.5823,
+          "y": 0.1142
+        },
+        "propConfig": {
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Missed Parts",
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number_8"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.0872,
+          "x": 0.648,
+          "y": 0.0966
+        },
+        "propConfig": {
+          "props.textStyle.fontSize": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Font}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Countermeasure",
+          "textStyle": {
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tself.view.params.Toggle \u003d 0"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "height": 0.3896,
+          "rotate": {
+            "anchor": "-50% 0%"
+          },
+          "width": 0.0174,
+          "x": 0.0425,
+          "y": 0.3256
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Toggle}"
+              },
+              "transforms": [
+                {
+                  "fallback": null,
+                  "inputType": "scalar",
+                  "mappings": [
+                    {
+                      "input": 0,
+                      "output": false
+                    },
+                    {
+                      "input": 1,
+                      "output": true
+                    }
+                  ],
+                  "outputType": "scalar",
+                  "type": "map"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "path": "material/arrow_upward"
+        },
+        "type": "ia.display.icon"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tself.view.params.Toggle \u003d 1"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Icon_0"
+        },
+        "position": {
+          "height": 0.3896,
+          "rotate": {
+            "anchor": "-50% 0%"
+          },
+          "width": 0.0174,
+          "x": 0.0411,
+          "y": 0.2886
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Toggle}"
+              },
+              "transforms": [
+                {
+                  "fallback": null,
+                  "inputType": "scalar",
+                  "mappings": [
+                    {
+                      "input": 0,
+                      "output": true
+                    },
+                    {
+                      "input": 1,
+                      "output": false
+                    }
+                  ],
+                  "outputType": "scalar",
+                  "type": "map"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "path": "material/arrow_downward"
+        },
+        "type": "ia.display.icon"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "borderStyle": "solid",
+        "borderWidth": 2,
+        "overflowY": "hidden"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

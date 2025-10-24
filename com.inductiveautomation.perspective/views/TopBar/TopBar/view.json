@@ -1,0 +1,94 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 106,
+      "width": 908
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "basis": "50px",
+          "grow": 1,
+          "height": 0.7736,
+          "width": 0.6189,
+          "x": 0.1905,
+          "y": 0.1132
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "session.custom.ActiveWindow"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "color": "#0C3471",
+            "fontSize": "3rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "UserDisplay"
+        },
+        "position": {
+          "basis": "208px",
+          "height": 0.5377,
+          "width": 0.1597,
+          "x": 0.8304,
+          "y": 0.0277
+        },
+        "props": {
+          "path": "TopBar/UserDisplay"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {},
+              "scope": "C",
+              "type": "logout"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "basis": "80px",
+          "height": 0.3208,
+          "width": 0.0639,
+          "x": 0.9262,
+          "y": 0.5943
+        },
+        "props": {
+          "text": "Logout"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

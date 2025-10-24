@@ -1,0 +1,385 @@
+{
+  "custom": {
+    "ParentReasonID": null,
+    "ProductionLine": "SB01",
+    "ProductionLineID": 1
+  },
+  "params": {
+    "EquipmentID": 1,
+    "ProcessArea": "Molding",
+    "ReasonGroupID": 1
+  },
+  "propConfig": {
+    "custom.ParentReasonID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "ProductionLineID": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "Andon/GetParentReasonIDByProductionLineID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.ProductionLine": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "id": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineNameByID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.ProductionLineID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.EquipmentID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineIDByEquipmentID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ProcessArea": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ReasonGroupID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 900,
+      "width": 900
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.1125,
+          "width": 1
+        },
+        "props": {
+          "text": "Select Reason",
+          "textStyle": {
+            "backgroundColor": "#FFFFFF",
+            "fontSize": "30px",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "height": 0.73,
+          "width": 1,
+          "y": 0.12
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "EquipmentID": "{view.params.EquipmentID}",
+                  "ParentReasonID": "{view.custom.ParentReasonID}",
+                  "ProcessArea": "{view.params.ProcessArea}"
+                },
+                "queryPath": "Downtime/GetDowntimeReasonIDsByParentReasonID",
+                "returnFormat": "json"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "alignContent": "flex-start",
+          "alignItems": "flex-start",
+          "elementStyle": {
+            "boxShadow": "2px 2px 5px",
+            "marginBottom": "0.5rem",
+            "marginLeft": "0.25rem",
+            "marginRight": "0.25rem",
+            "marginTop": "0.5rem"
+          },
+          "justify": "space-around",
+          "path": "Andon/NestedViews/AndonReason2",
+          "style": {
+            "backgroundColor": "#EEEEEE"
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\t#increment status\n\tsite \u003d \"Sanford/\" if self.session.custom.ProductionSiteID \u003d\u003d 1 else \"Moorpark/\"\n\t\n\tequipment \u003d self.view.custom.ProductionLine\n\tprocessArea \u003d self.view.params.ProcessArea\n\t\n\tsystem.tag.writeBlocking(\"[default]\" + site + processArea + \"/\" + equipment + \"/Andon/Andon Status\", 0)\n\tsystem.tag.writeAsync(\"[default]\" + site + processArea + \"/\" + equipment + \"/Andon/Andon Status\", 3)\n\t\n\t#set reason 1\n\treason \u003d self.getSibling(\"AndonReason1_Select\").props.value\n\tsystem.tag.writeBlocking(\"[default]\" + processArea + \"/\" + equipment + \"/Andon/Reason01\", reason)\n\tsystem.tag.writeBlocking(\"[default]\" + site + processArea + \"/\" + equipment + \"/Andon/Reason01\", reason)\n\n\t#Create Comment and get the newly created CommentID\n\ttext \u003d self.getSibling(\"CommentArea\").props.text\n\tpID \u003d None\n\ttimestamp \u003d self.view.custom.DateTimeNow\n\tisDelete \u003d False\n\t\n\tif text:\n\t\tparams \u003d {\"pID\": pID, \"pText\": text, \"pTimestamp\": timestamp, \"pIsDelete\": isDelete}\n\t\tsystem.db.runNamedQuery(\"Comment/sp_GEN_Comment\", params)\n\t\tcommentIDQuery \u003d system.db.runNamedQuery(\"Comment/GetCommentByTimeStamp\", {\"timeStamp\": timestamp})\n\t\n\tcommentID \u003d commentIDQuery[0][0] if text else None\n\t\n\t#Update Andon Event to \u0027Notified\u0027\n\tProductionLineID \u003d system.db.runNamedQuery(\"ProductionLine/GetProductionLineIDByName\", {\"Name\": equipment})\n\tEventHeader \u003d system.db.runNamedQuery(\"Andon/GetEventHeaderByProductionLineID\", {\"productionLineID\": ProductionLineID[0][0]})\n\tEventStatus \u003d system.db.runNamedQuery(\"Andon/GetEventStatusByEventHeaderID\", {\"EventHeaderID\": EventHeader[0][0]})\n\tAndonGroup \u003d system.db.runNamedQuery(\"Andon/GetAndonGroupIDByReasonID\", {\"ReasonID\": reason})\n\t\n\tif EventStatus !\u003d 4:\n\t\tpEventHeaderID \u003d EventHeader[0][0]\n\t\tpID \u003d None\n\t\tpNotificationGroupID \u003d AndonGroup[0][0]\n\t\tpTimestamp \u003d self.view.custom.DateTimeNow\n\t\tpProductionLineID \u003d ProductionLineID[0][0]\n\t\tpStatusID \u003d 4\n\t\tpCommentID \u003d commentID\n\t\tpReasonID \u003d self.getSibling(\"AndonReason1_Select\").props.value\n\t\tpIsDelete \u003d False\n\t    \n\t\tparams \u003d {\"pEventHeaderID\": pEventHeaderID, \"pID\": pID, \"pNotificationGroupID\": pNotificationGroupID, \"pTimestamp\": pTimestamp, \"pProductionLineID\": pProductionLineID, \"pStatusID\": pStatusID, \"pCommentID\": pCommentID, \"pReasonID\": pReasonID, \"pIsDelete\": pIsDelete}\n\t\tsystem.db.runNamedQuery(\"Andon/sp_ANDON_AndonEvent\", params)\n\t\n\t\n\tsystem.db.runPrepUpdate(\"UPDATE DowntimeEvent SET ReasonID \u003d ?, CommentID \u003d ? FROM DowntimeEvent de JOIN Equipment e ON e.ID \u003d de.EquipmentID WHERE e.ProductionLineID \u003d ? AND EndTime IS NULL\", [pReasonID, pCommentID, ProductionLineID[0][0]])"
+                },
+                "enabled": false,
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "draggable": true,
+                  "id": "AndonTriggerResolved",
+                  "modal": true,
+                  "overlayDismiss": false,
+                  "resizable": true,
+                  "showCloseIcon": true,
+                  "type": "open",
+                  "viewParams": {
+                    "Equipment": "{view.params.Equipment}",
+                    "EquipmentID": "{view.params.EquipmentID}",
+                    "EscalationPath": "{view.params.EscalationPath}",
+                    "NotifiedDate": "{view.params.NotifiedDate}",
+                    "ProcessArea": "{view.params.ProcessArea}"
+                  },
+                  "viewPath": "Andon/AndonTriggerPopup",
+                  "viewportBound": false
+                },
+                "enabled": false,
+                "scope": "C",
+                "type": "popup"
+              },
+              {
+                "config": {
+                  "draggable": true,
+                  "id": "AndonComment1",
+                  "modal": true,
+                  "overlayDismiss": false,
+                  "position": {
+                    "height": 700,
+                    "width": 700
+                  },
+                  "positionType": "exact",
+                  "resizable": true,
+                  "showCloseIcon": true,
+                  "type": "open",
+                  "viewParams": {
+                    "EquipmentID": "{view.params.EquipmentID}",
+                    "ProcessArea": "{view.params.ProcessArea}",
+                    "Reason": "{/root/AndonReason1_Select.props.value}"
+                  },
+                  "viewPath": "Andon/AndonReasonSelect01",
+                  "viewportBound": false
+                },
+                "scope": "C",
+                "type": "popup"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.closePopup(\u0027Reason2\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Reassign_Btn"
+        },
+        "position": {
+          "height": 0.1189,
+          "width": 0.2933,
+          "x": 0.6944,
+          "y": 0.8667
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "if({../AndonReason1_Select.props.value} \u003d -1, false, true)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Reassign",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "AndonReason1_Select"
+        },
+        "position": {
+          "height": 0.0678,
+          "width": 0.6467,
+          "x": 0.0278,
+          "y": 0.9167
+        },
+        "propConfig": {
+          "props.options": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "ProcessArea": "{view.params.ReasonGroupID}"
+                },
+                "queryPath": "OperatorInterface/GetDTReasons1ByProcessArea"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "dropdownOptionStyle": {
+            "fontSize": "3rem"
+          },
+          "search": {
+            "enabled": false
+          },
+          "style": {
+            "fontSize": "1.5rem"
+          },
+          "value": -1
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "meta": {
+          "name": "Reassign_Label"
+        },
+        "position": {
+          "height": 0.0356,
+          "width": 0.6422,
+          "x": 0.0278,
+          "y": 0.8667
+        },
+        "props": {
+          "text": "Reassign Andon Reason 1",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Divider"
+        },
+        "position": {
+          "height": 0.0056,
+          "width": 1,
+          "y": 0.8489
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#534C4C"
+          }
+        },
+        "type": "ia.container.coord"
+      },
+      {
+        "meta": {
+          "name": "Label_0",
+          "visible": false
+        },
+        "position": {
+          "height": 0.0356,
+          "width": 0.0556,
+          "x": 0.1033,
+          "y": 0.0111
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.EquipmentID"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1",
+          "visible": false
+        },
+        "position": {
+          "height": 0.0356,
+          "width": 0.0556,
+          "x": 0.1011,
+          "y": 0.0455
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ParentReasonID"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_2",
+          "visible": false
+        },
+        "position": {
+          "height": 0.0356,
+          "width": 0.0556,
+          "x": 0.0978,
+          "y": 0.0799
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.ProcessArea"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": 0.0575,
+      "y": -0.78
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

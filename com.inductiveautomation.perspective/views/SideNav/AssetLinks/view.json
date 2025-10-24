@@ -1,0 +1,246 @@
+{
+  "custom": {
+    "ButtonAccess": true
+  },
+  "params": {},
+  "propConfig": {
+    "custom.ButtonAccess": {
+      "binding": {
+        "config": {
+          "expression": "{session.custom.Roles.Operator} || {session.custom.Roles.TeamLead} || {session.custom.Roles.GroupLead} || {session.custom.Roles.ValueStreamLead} || {session.custom.Roles.Admin}"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 98,
+      "width": 299
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "OperatorInterface/AssemblyStationSelection"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Assembly\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Assembly"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "session.custom.ProductionSiteID"
+              },
+              "transforms": [
+                {
+                  "fallback": null,
+                  "inputType": "scalar",
+                  "mappings": [
+                    {
+                      "input": 1,
+                      "output": true
+                    },
+                    {
+                      "input": 2,
+                      "output": false
+                    }
+                  ],
+                  "outputType": "scalar",
+                  "type": "map"
+                }
+              ],
+              "type": "property"
+            }
+          },
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          },
+          "textStyle": {
+            "textAlign": "left"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "OperatorInterface/InterfaceSelection"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Molding\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Injection Molding"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "Lean/MDI_MainBoard"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\tself.session.custom.ActiveWindow \u003d \"MDI Board - Tier3\"\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Lean_QD"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

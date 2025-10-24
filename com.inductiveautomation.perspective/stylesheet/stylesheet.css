@@ -1,0 +1,102 @@
+/* Direct stylesheet authoring is an advanced feature. Knowledge of CSS required.*/
+
+.ia_accordionComponent__body {
+	border-bottom: none;
+}
+
+.docked-view-left {
+	z-index: 90000 !important; /* Put the navbar always on top of the topbar */
+	/*box-shadow: 5px 0 10px #ebebeb;*/
+}
+
+
+/*Loader 28*/
+.psc-loader-28 {
+  position: relative;
+  width: 90px !important;
+  height: 90px !important;
+  border-radius: 60% !important ;
+  -webkit-box-shadow: inset 0px 0px 0px 10px transparent, 0px 0px 0px 5px #f1f1f1;
+          box-shadow: inset 0px 0px 0px 10px transparent, 0px 0px 0px 5px #f1f1f1;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f07e6e), color-stop(#84cdfa), to(#5ad1cd));
+  background: -o-linear-gradient(#f07e6e, #84cdfa, #5ad1cd);
+  background: linear-gradient(#f07e6e,  #00008B, #5ad1cd);
+  -webkit-animation: animate28 1.2s linear infinite;
+          animation: animate28 1.2s linear infinite;
+}
+
+.psc-loader-28:before,
+.psc-loader-28:after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  border-radius: inherit;
+  -webkit-box-shadow: inherit;
+          box-shadow: inherit;
+  -webkit-animation: inherit;
+          animation: inherit;
+}
+
+.psc-loader-28:before {
+  z-index: -1;
+  -webkit-filter: blur(5px);
+          filter: blur(5px);
+}
+
+.psc-loader-28:after {
+  z-index: -2;
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
+}
+
+.psc-loader-28:before:before {
+  z-index: -3;
+  -webkit-filter: blur(25px);
+          filter: blur(25px);
+}
+
+.psc-loader-28:after:before {
+  z-index: -4;
+  -webkit-filter: blur(50px);
+          filter: blur(50px);
+}
+
+.psc-loader-28:after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    background: #f1f1f1;
+    border: solid white 3px;
+    border-radius: 50%;
+}
+
+@-webkit-keyframes animate28 {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes animate28 {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+
+

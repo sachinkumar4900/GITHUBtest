@@ -1,0 +1,45 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "db7a04c6202a6dea5acb37bbd1a444f2ca3961dfe2e79be3e2863c8affbd242c",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-07-19T16:47:18Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "EventHeaderID",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "offset",
+        "sqlType": 4
+      }
+    ]
+  }
+}

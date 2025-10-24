@@ -1,0 +1,2141 @@
+{
+  "custom": {
+    "AssemblyShiftTimes": [],
+    "DriveAvg": 99.92,
+    "DriveMax": 99.92,
+    "DriveMin": 99.92,
+    "EndDate": {
+      "$": [
+        "ts",
+        192,
+        1750742736582
+      ],
+      "$ts": 1735693200000
+    },
+    "HousingAvg": 5,
+    "HousingMax": 5,
+    "HousingMin": 5,
+    "ImpellerAvg": 47.79,
+    "ImpellerMax": 47.79,
+    "ImpellerMin": 47.79,
+    "LabelAvg": 53.59,
+    "LabelMax": 53.59,
+    "LabelMin": 53.59,
+    "MotorLoadingAvg": 18.24,
+    "MotorLoadingMax": 18,
+    "MotorLoadingMin": 18,
+    "SealPlateAvg": 155.34,
+    "SealPlateMax": 155.34,
+    "SealPlateMin": 155.34,
+    "ShroudAvg": 5,
+    "ShroudMax": 5,
+    "ShroudMin": 5,
+    "StartDate": "2025-01-01 00:00:00",
+    "TesterAvg": 60.43,
+    "TesterMax": 60.43,
+    "TesterMin": 60.43,
+    "TopCoverAvg": 38.09,
+    "TopCoverMax": 38.09,
+    "TopCoverMin": 38.09,
+    "offset": null
+  },
+  "params": {
+    "StartDate": "2025-01-01 00:00:00"
+  },
+  "propConfig": {
+    "custom.AssemblyShiftTimes": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "siteID": "{session.custom.ProductionSiteID}",
+            "vsType": "\u0027Assembly\u0027"
+          },
+          "queryPath": "Overview/GetValueStreamShiftTimes",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.DriveAvg": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Drive Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Average\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.DriveMax": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Drive Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Maximum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.DriveMin": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Drive Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Minimum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.EndDate": {
+      "binding": {
+        "config": {
+          "expression": "if({/root/FlexContainer/Dropdown_0.props.value} \u003d \"Default\", (addHours({view.custom.StartDate},1)),{/root/FlexContainer/Dropdown_0.custom.AssemblyEnd})"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.HousingAvg": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Housing Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Average\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.HousingMax": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Housing Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Maximum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.HousingMin": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Housing Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Minimum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.ImpellerAvg": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Impeller and Diffuser Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Average\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2) # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.ImpellerMax": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Impeller and Diffuser Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Maximum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2) # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.ImpellerMin": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Impeller and Diffuser Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Minimum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2) # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.LabelAvg": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Label Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Average\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.LabelMax": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Label Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Maximum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.LabelMin": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Label Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Minimum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.MotorLoadingAvg": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Motor Loading Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d (self.custom.StartDate)\n    endTime \u003d  (self.custom.EndDate)\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Average\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(avgCycleTime/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.MotorLoadingMax": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Motor Loading Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d (self.custom.StartDate)\n    endTime \u003d  (self.custom.EndDate)\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Maximum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(avgCycleTime/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.MotorLoadingMin": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Motor Loading Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Minimum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(avgCycleTime/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.SealPlateAvg": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Seal Plate Installation Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d (self.custom.StartDate)\n    endTime \u003d  (self.custom.EndDate)\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Average\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.SealPlateMax": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Seal Plate Installation Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d (self.custom.StartDate)\n    endTime \u003d  (self.custom.EndDate)\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Maximum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.SealPlateMin": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Seal Plate Installation Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d (self.custom.StartDate)\n    endTime \u003d  (self.custom.EndDate)\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Minimum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.ShroudAvg": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Shroud Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Average\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.ShroudMax": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Shroud Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Maximum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.ShroudMin": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Shroud Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Minimum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.StartDate": {
+      "binding": {
+        "config": {
+          "expression": "if({/root/FlexContainer/Dropdown_0.props.value} \u003d \"Default\",{view.params.StartDate},{/root/FlexContainer/Dropdown_0.custom.AssemblyStart})"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.TesterAvg": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Tester Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Average\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.TesterMax": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Tester Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Maximum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.TesterMin": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Tester Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d self.custom.StartDate\n    endTime \u003d  self.custom.EndDate\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Minimum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.TopCoverAvg": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Top Cover Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d (self.custom.StartDate)\n    endTime \u003d  (self.custom.EndDate)\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Average\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.TopCoverMax": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Top Cover Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d (self.custom.StartDate)\n    endTime \u003d  (self.custom.EndDate)\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Maximum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.TopCoverMin": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "transforms": [
+          {
+            "code": "    #import system  # Ensure system functions are available\n\n    # Define tag path and time range\n    tagPath \u003d \"[default]Sanford/Assembly/P08 Cycle Times/Top Cover Install Last Cycle Time\"  # Ensure this is correct\n    startTime \u003d (self.custom.StartDate)\n    endTime \u003d  (self.custom.EndDate)\n\n    # Query historical data\n    dataSet \u003d system.tag.queryTagHistory(\n        paths\u003d[tagPath], \n        startDate\u003dstartTime, \n        endDate\u003dendTime, \n        aggregationMode\u003d\"Minimum\", \n        returnSize\u003d1\n    )\n\n    # Extract the average value\n    if dataSet.getRowCount() \u003e 0:\n        avgCycleTime \u003d dataSet.getValueAt(0, 1)  # Column index 1 is typically the value column\n        return round(float(avgCycleTime)/1000,2)  # Ensure you return this value\n    else:\n        return 0  # Return a default value if no data is available",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.offset": {
+      "binding": {
+        "config": {
+          "path": "session.custom.ProductionSiteID"
+        },
+        "transforms": [
+          {
+            "fallback": null,
+            "inputType": "scalar",
+            "mappings": [
+              {
+                "input": 1,
+                "output": -5
+              },
+              {
+                "input": 2,
+                "output": null
+              }
+            ],
+            "outputType": "scalar",
+            "type": "map"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "params.StartDate": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 160,
+      "width": 1000
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "CycleTime"
+            },
+            "position": {
+              "basis": "100px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "P08 - Assembly Line Cycle Time (in Sec)"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "CycleTime_0"
+            },
+            "position": {
+              "basis": "90px"
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "right"
+              },
+              "text": "From Date"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "CycleTime_1"
+            },
+            "position": {
+              "basis": "10px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.StartDate"
+                  },
+                  "transforms": [
+                    {
+                      "formatType": "datetime",
+                      "formatValue": {
+                        "date": "short",
+                        "time": "short"
+                      },
+                      "type": "format"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "CycleTime_2"
+            },
+            "position": {
+              "basis": "80px"
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "right"
+              },
+              "text": "To Date"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "CycleTime_3"
+            },
+            "position": {
+              "basis": "10px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.EndDate"
+                  },
+                  "transforms": [
+                    {
+                      "formatType": "datetime",
+                      "formatValue": {
+                        "date": "short",
+                        "time": "short"
+                      },
+                      "type": "format"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Dropdown_0"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "propConfig": {
+              "custom.AssemblyEnd": {
+                "binding": {
+                  "config": {
+                    "expression": "now(10000)//if({this.props.value} \u003d \u0027Day\u0027, now(10000), fromMillis({view.custom.AssemblyShiftTimes[0].EndTime}))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "custom.AssemblyStart": {
+                "binding": {
+                  "config": {
+                    "expression": "if(\t{this.props.value} \u003d \u0027Day\u0027,\r\n\tif( getHour24(now(10000)) \u003c ({view.custom.offset} * -1), \r\n\t\taddMinutes( midnight(addDays(now(10000), -1)), {view.custom.offset} * -60) ,\r\n\t\taddMinutes( midnight(now(10000)), {view.custom.offset} * -60) \r\n\t),  \r\n\tfromMillis({view.custom.AssemblyShiftTimes[0].StartTime})\r\n)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "custom.MoldingEnd": {
+                "binding": {
+                  "config": {
+                    "expression": "now(10000)//if({this.props.value} \u003d \u0027Day\u0027, now(10000), fromMillis({view.custom.MoldingShiftTimes[0].EndTime}))"
+                  },
+                  "type": "expr"
+                }
+              },
+              "custom.MoldingStart": {
+                "binding": {
+                  "config": {
+                    "expression": "\r\nif(\t{this.props.value} \u003d \u0027Day\u0027,\r\n\tif( getHour24(now(10000)) \u003c ({view.custom.offset} * -1), \r\n\t\taddMinutes( midnight(addDays(now(10000), -1)), {view.custom.offset} * -60) ,\r\n\t\taddMinutes( midnight(now(10000)), {view.custom.offset} * -60) \r\n\t),  \r\n\tfromMillis({view.custom.MoldingShiftTimes[0].StartTime})\r\n)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Day",
+                  "value": "Day"
+                },
+                {
+                  "label": "Shift",
+                  "value": "Shift"
+                },
+                {
+                  "label": "Default",
+                  "value": "Default"
+                }
+              ],
+              "search": {
+                "enabled": false
+              },
+              "style": {
+                "fontSize": 16
+              },
+              "value": "Default"
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "height": 0.2308,
+          "width": 0.999
+        },
+        "props": {
+          "style": {
+            "borderStyle": "double",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Stations"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_2"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Average"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Maximum"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Minimum"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_0"
+        },
+        "position": {
+          "height": 0.75,
+          "rotate": {
+            "anchor": "75% -70%"
+          },
+          "width": 0.1,
+          "y": 0.24
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "borderStyle": "double",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Motor Loading"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_2"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.MotorLoadingAvg"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.MotorLoadingMax"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.MotorLoadingMin"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "Cycletime",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndTime": "{view.custom.EndDate}",
+                  "Name": "Motor Loading",
+                  "StartDate": "{view.custom.StartDate}",
+                  "TagPath": "[default]Sanford/Assembly/P08 Cycle Times/Motor Loading Last Cycle Time"
+                },
+                "viewPath": "OEE/NestedViews/StationCycleTime",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_5"
+        },
+        "position": {
+          "height": 0.75,
+          "rotate": {
+            "anchor": "75% -70%"
+          },
+          "width": 0.126,
+          "x": 0.0989,
+          "y": 0.2399
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "borderStyle": "double",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Seal Plate"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_2"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.SealPlateAvg"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.SealPlateMax"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.SealPlateMin"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "Cycletime",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndTime": "{view.custom.EndDate}",
+                  "Name": "Seal Plate",
+                  "StartDate": "{view.custom.StartDate}",
+                  "TagPath": "[default]Sanford/Assembly/P08 Cycle Times/Seal Plate Installation Last Cycle Time"
+                },
+                "viewPath": "OEE/NestedViews/StationCycleTime",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_6"
+        },
+        "position": {
+          "height": 0.75,
+          "rotate": {
+            "anchor": "75% -70%"
+          },
+          "width": 0.1,
+          "x": 0.2239,
+          "y": 0.2399
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "borderStyle": "double",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Shroud"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_2"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.ShroudAvg"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.ShroudMax"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.ShroudMin"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "Cycletime",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndTime": "{view.custom.EndDate}",
+                  "Name": "Shroud",
+                  "StartDate": "{view.custom.StartDate}",
+                  "TagPath": "[default]Sanford/Assembly/P08 Cycle Times/Shroud Install Last Cycle Time"
+                },
+                "viewPath": "OEE/NestedViews/StationCycleTime",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_7"
+        },
+        "position": {
+          "height": 0.75,
+          "rotate": {
+            "anchor": "75% -70%"
+          },
+          "width": 0.1,
+          "x": 0.3228,
+          "y": 0.2399
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "borderStyle": "double",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Drive"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_2"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.DriveAvg"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.DriveMax"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.DriveMin"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "gp6yBL0F",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndTime": "{view.custom.EndDate}",
+                  "Name": "Drive",
+                  "StartDate": "{view.custom.StartDate}",
+                  "TagPath": "[default]Sanford/Assembly/P08 Cycle Times/Drive Install Last Cycle Time"
+                },
+                "viewPath": "OEE/NestedViews/StationCycleTime",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_8"
+        },
+        "position": {
+          "height": 0.75,
+          "rotate": {
+            "anchor": "75% -70%"
+          },
+          "width": 0.1,
+          "x": 0.4202,
+          "y": 0.2399
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "borderStyle": "double",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Impeller"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_2"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.ImpellerAvg"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.ImpellerMax"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.ImpellerMin"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "cLiLuCfJ",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndTime": "{view.custom.EndDate}",
+                  "Name": "Impeller",
+                  "StartDate": "{view.custom.StartDate}",
+                  "TagPath": "[default]Sanford/Assembly/P08 Cycle Times/Impeller and Diffuser Install Last Cycle Time"
+                },
+                "viewPath": "OEE/NestedViews/StationCycleTime",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_9"
+        },
+        "position": {
+          "height": 0.75,
+          "rotate": {
+            "anchor": "75% -70%"
+          },
+          "width": 0.1,
+          "x": 0.5166,
+          "y": 0.2399
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "borderStyle": "double",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Housing"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_2"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.HousingAvg"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.HousingMax"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.HousingMin"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "08QiaY7o",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndTime": "{view.custom.EndDate}",
+                  "Name": "Housing",
+                  "StartDate": "{view.custom.StartDate}",
+                  "TagPath": "[default]Sanford/Assembly/P08 Cycle Times/Housing Install Last Cycle Time"
+                },
+                "viewPath": "OEE/NestedViews/StationCycleTime",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_10"
+        },
+        "position": {
+          "height": 0.75,
+          "rotate": {
+            "anchor": "75% -70%"
+          },
+          "width": 0.1,
+          "x": 0.6135,
+          "y": 0.2399
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "borderStyle": "double",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Tester"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_2"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.TesterAvg"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.TesterMax"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.TesterMin"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "GbrnpV_x",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndTime": "{view.custom.EndDate}",
+                  "Name": "Tester",
+                  "StartDate": "{view.custom.StartDate}",
+                  "TagPath": "[default]Sanford/Assembly/P08 Cycle Times/Tester Last Cycle Time"
+                },
+                "viewPath": "OEE/NestedViews/StationCycleTime",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_11"
+        },
+        "position": {
+          "height": 0.75,
+          "rotate": {
+            "anchor": "75% -70%"
+          },
+          "width": 0.1,
+          "x": 0.8078,
+          "y": 0.2399
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "borderStyle": "double",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Top Cover"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_2"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.TopCoverAvg"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.TopCoverMax"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.TopCoverMin"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "cZXRU7bU",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndTime": "{view.custom.EndDate}",
+                  "Name": "Top Cover",
+                  "StartDate": "{view.custom.StartDate}",
+                  "TagPath": "[default]Sanford/Assembly/P08 Cycle Times/Top Cover Install Last Cycle Time"
+                },
+                "viewPath": "OEE/NestedViews/StationCycleTime",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_12"
+        },
+        "position": {
+          "height": 0.75,
+          "rotate": {
+            "anchor": "75% -70%"
+          },
+          "width": 0.1,
+          "x": 0.9049,
+          "y": 0.2399
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "borderStyle": "none",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              },
+              "text": "Label"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_2"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.LabelAvg"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.LabelMax"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#D5D5D5",
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "35px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.LabelMin"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "borderStyle": "none",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "v6Oa4mC3",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndTime": "{view.custom.EndDate}",
+                  "Name": "Label",
+                  "StartDate": "{view.custom.StartDate}",
+                  "TagPath": "[default]Sanford/Assembly/P08 Cycle Times/Label Last Cycle Time"
+                },
+                "viewPath": "OEE/NestedViews/StationCycleTime",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "FlexContainer_13"
+        },
+        "position": {
+          "height": 0.75,
+          "rotate": {
+            "anchor": "75% -70%"
+          },
+          "width": 0.1,
+          "x": 0.7113,
+          "y": 0.2399
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "borderStyle": "double",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": 0,
+      "y": 0
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

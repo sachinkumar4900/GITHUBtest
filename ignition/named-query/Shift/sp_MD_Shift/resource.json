@@ -1,0 +1,75 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "26c25b6cf08ea6fd27ebb8be64b32f7a90955c5c91fc2783ca494de517a712a2",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-03-18T16:26:27Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "pID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pName",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pStartTime",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pHours",
+        "sqlType": 4
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pProductionLineID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pDefault",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pEnabled",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pIsDelete",
+        "sqlType": 6
+      }
+    ]
+  }
+}

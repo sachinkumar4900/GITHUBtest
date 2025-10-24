@@ -1,0 +1,665 @@
+{
+  "custom": {},
+  "params": {
+    "Availability": 91,
+    "OEE": 77,
+    "Performance": 88,
+    "Quality": 96
+  },
+  "propConfig": {
+    "params.Availability": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.OEE": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.Performance": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.Quality": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 150,
+      "width": 780
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "custom": {
+          "LowLimit": 33,
+          "WarningLimit": 66
+        },
+        "meta": {
+          "name": "QualityGauge"
+        },
+        "position": {
+          "height": 0.7667,
+          "width": 0.2244,
+          "x": 0.7632,
+          "y": 0.12
+        },
+        "propConfig": {
+          "props.outerAxis.ranges[0].end": {
+            "binding": {
+              "config": {
+                "path": "this.custom.LowLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[1].end": {
+            "binding": {
+              "config": {
+                "path": "this.custom.WarningLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[1].start": {
+            "binding": {
+              "config": {
+                "path": "this.custom.LowLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[2].start": {
+            "binding": {
+              "config": {
+                "path": "this.custom.WarningLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "view.params.Quality"
+              },
+              "overlayOptOut": true,
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "backgroundColor": "",
+          "innerAxis": {
+            "data": "secondaryValue",
+            "maxValue": 80,
+            "percentRadius": 85,
+            "show": false,
+            "width": 1
+          },
+          "outerAxis": {
+            "color": "#D5D5D5",
+            "data": "value",
+            "needle": {
+              "color": "#2B2B2B"
+            },
+            "percentRadius": 100,
+            "ranges": [
+              {
+                "color": "#FF0000",
+                "start": 0,
+                "width": 40
+              },
+              {
+                "color": "#FFE100",
+                "width": 40
+              },
+              {
+                "color": "#6EB70B",
+                "end": 100,
+                "width": 40
+              }
+            ],
+            "show": true,
+            "tickMarks": {
+              "length": 0,
+              "thickness": 0
+            },
+            "width": 8
+          },
+          "style": {
+            "classes": [],
+            "fontSize": 0
+          }
+        },
+        "type": "ia.chart.gauge"
+      },
+      {
+        "meta": {
+          "name": "OEELabel"
+        },
+        "position": {
+          "height": 0.2133,
+          "width": 0.2244,
+          "x": 0.0151,
+          "y": 0.7502
+        },
+        "props": {
+          "style": {
+            "fontSize": "2.75rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          },
+          "text": "OEE"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "custom": {
+          "LowLimit": 33,
+          "WarningLimit": 66
+        },
+        "meta": {
+          "name": "PerformanceGauge"
+        },
+        "position": {
+          "height": 0.7667,
+          "width": 0.2244,
+          "x": 0.5132,
+          "y": 0.12
+        },
+        "propConfig": {
+          "props.outerAxis.ranges[0].end": {
+            "binding": {
+              "config": {
+                "path": "this.custom.LowLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[1].end": {
+            "binding": {
+              "config": {
+                "path": "this.custom.WarningLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[1].start": {
+            "binding": {
+              "config": {
+                "path": "this.custom.LowLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[2].start": {
+            "binding": {
+              "config": {
+                "path": "this.custom.WarningLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "view.params.Performance"
+              },
+              "overlayOptOut": true,
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "backgroundColor": "",
+          "innerAxis": {
+            "data": "secondaryValue",
+            "maxValue": 80,
+            "percentRadius": 85,
+            "show": false,
+            "width": 1
+          },
+          "outerAxis": {
+            "color": "#D5D5D5",
+            "data": "value",
+            "needle": {
+              "color": "#2B2B2B"
+            },
+            "percentRadius": 100,
+            "ranges": [
+              {
+                "color": "#FF0000",
+                "start": 0,
+                "width": 40
+              },
+              {
+                "color": "#FFE100",
+                "width": 40
+              },
+              {
+                "color": "#6EB70B",
+                "end": 100,
+                "width": 40
+              }
+            ],
+            "show": true,
+            "tickMarks": {
+              "length": 0,
+              "thickness": 0
+            },
+            "width": 8
+          },
+          "style": {
+            "classes": [],
+            "fontSize": 0
+          }
+        },
+        "type": "ia.chart.gauge"
+      },
+      {
+        "meta": {
+          "name": "AvailabilityLabel"
+        },
+        "position": {
+          "height": 0.2067,
+          "width": 0.3421,
+          "x": 0.1999,
+          "y": 0.7634
+        },
+        "props": {
+          "style": {
+            "fontSize": "2.75rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          },
+          "text": "Availability"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "custom": {
+          "LowLimit": 33,
+          "WarningLimit": 66
+        },
+        "meta": {
+          "name": "AvailabilityGauge"
+        },
+        "position": {
+          "height": 0.7667,
+          "width": 0.2244,
+          "x": 0.2632,
+          "y": 0.12
+        },
+        "propConfig": {
+          "props.outerAxis.ranges[0].end": {
+            "binding": {
+              "config": {
+                "path": "this.custom.LowLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[1].end": {
+            "binding": {
+              "config": {
+                "path": "this.custom.WarningLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[1].start": {
+            "binding": {
+              "config": {
+                "path": "this.custom.LowLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[2].start": {
+            "binding": {
+              "config": {
+                "path": "this.custom.WarningLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "view.params.Availability"
+              },
+              "overlayOptOut": true,
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "backgroundColor": "",
+          "innerAxis": {
+            "data": "secondaryValue",
+            "maxValue": 80,
+            "percentRadius": 85,
+            "show": false,
+            "width": 1
+          },
+          "outerAxis": {
+            "color": "#D5D5D5",
+            "data": "value",
+            "needle": {
+              "color": "#2B2B2B"
+            },
+            "percentRadius": 100,
+            "ranges": [
+              {
+                "color": "#FF0000",
+                "start": 0,
+                "width": 40
+              },
+              {
+                "color": "#FFE100",
+                "width": 40
+              },
+              {
+                "color": "#6EB70B",
+                "end": 100,
+                "width": 40
+              }
+            ],
+            "show": true,
+            "tickMarks": {
+              "length": 0,
+              "thickness": 0
+            },
+            "width": 8
+          },
+          "style": {
+            "classes": [],
+            "fontSize": 0
+          }
+        },
+        "type": "ia.chart.gauge"
+      },
+      {
+        "meta": {
+          "name": "PerformanceLabel"
+        },
+        "position": {
+          "height": 0.2133,
+          "width": 0.2739,
+          "x": 0.5008,
+          "y": 0.7568
+        },
+        "props": {
+          "style": {
+            "fontSize": "2.75rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          },
+          "text": "Performance"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "custom": {
+          "LowLimit": 33,
+          "WarningLimit": 66
+        },
+        "meta": {
+          "name": "OEEGauge"
+        },
+        "position": {
+          "height": 0.7667,
+          "width": 0.2244,
+          "x": 0.0106,
+          "y": 0.12
+        },
+        "propConfig": {
+          "props.outerAxis.ranges[0].end": {
+            "binding": {
+              "config": {
+                "path": "this.custom.LowLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[1].end": {
+            "binding": {
+              "config": {
+                "path": "this.custom.WarningLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[1].start": {
+            "binding": {
+              "config": {
+                "path": "this.custom.LowLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[2].start": {
+            "binding": {
+              "config": {
+                "path": "this.custom.WarningLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "view.params.OEE"
+              },
+              "overlayOptOut": true,
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "backgroundColor": "",
+          "innerAxis": {
+            "data": "secondaryValue",
+            "maxValue": 80,
+            "percentRadius": 85,
+            "show": false,
+            "width": 1
+          },
+          "outerAxis": {
+            "color": "#D5D5D5",
+            "data": "value",
+            "needle": {
+              "color": "#2B2B2B"
+            },
+            "percentRadius": 100,
+            "ranges": [
+              {
+                "color": "#FF0000",
+                "start": 0,
+                "width": 40
+              },
+              {
+                "color": "#FFE100",
+                "width": 40
+              },
+              {
+                "color": "#6EB70B",
+                "end": 100,
+                "width": 40
+              }
+            ],
+            "show": true,
+            "tickMarks": {
+              "length": 0,
+              "thickness": 0
+            },
+            "width": 8
+          },
+          "style": {
+            "classes": [],
+            "fontSize": 0
+          }
+        },
+        "type": "ia.chart.gauge"
+      },
+      {
+        "meta": {
+          "name": "QualityLabel"
+        },
+        "position": {
+          "height": 0.2133,
+          "width": 0.2244,
+          "x": 0.7599,
+          "y": 0.7568
+        },
+        "props": {
+          "style": {
+            "fontSize": "2.75rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          },
+          "text": "Quality"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "OEENum"
+        },
+        "position": {
+          "height": 0.2133,
+          "width": 0.2244,
+          "x": 0.0106,
+          "y": 0.0165
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.OEE}"
+              },
+              "overlayOptOut": true,
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "3.2rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "AvailabilityNum"
+        },
+        "position": {
+          "height": 0.2133,
+          "width": 0.2244,
+          "x": 0.2632,
+          "y": 0.0165
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Availability}"
+              },
+              "overlayOptOut": true,
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "3.2rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "PerformanceNum"
+        },
+        "position": {
+          "height": 0.2133,
+          "width": 0.2244,
+          "x": 0.5132,
+          "y": 0.0165
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Performance}"
+              },
+              "overlayOptOut": true,
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "3.2rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "QualityNum"
+        },
+        "position": {
+          "height": 0.2133,
+          "width": 0.2244,
+          "x": 0.7632,
+          "y": 0.0165
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.Quality}"
+              },
+              "overlayOptOut": true,
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "3.2rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": -0.0833,
+      "y": -0.5533
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "backgroundColor": "#FFFFFF",
+        "overflowX": "hidden",
+        "overflowY": "hidden"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

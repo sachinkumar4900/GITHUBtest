@@ -1,0 +1,197 @@
+{
+  "custom": {
+    "Auth": "admin",
+    "ProductionLineID": 2
+  },
+  "params": {
+    "eqID": 2,
+    "processArea": "Molding",
+    "tagPath": "[default]Sanford/Molding/SB02",
+    "woID": 1275
+  },
+  "propConfig": {
+    "custom.Auth": {
+      "binding": {
+        "config": {
+          "expression": "{session.props.auth.user.userName}"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.ProductionLineID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.eqID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineIDByEquipmentID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.eqID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.processArea": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.woID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 296,
+      "width": 600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.2027,
+          "width": 1
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#006E96",
+            "borderBottomStyle": "solid",
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden"
+          },
+          "text": "Complete Work Order",
+          "textStyle": {
+            "color": "#EEEEEE",
+            "paddingLeft": "1rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Calling_Label"
+        },
+        "position": {
+          "height": 0.4054,
+          "width": 1,
+          "y": 0.2027
+        },
+        "props": {
+          "style": {
+            "borderBottomStyle": "solid",
+            "borderLeftStyle": "hidden",
+            "borderRightStyle": "hidden",
+            "borderTopStyle": "hidden"
+          },
+          "text": "Would you like to complete this Work Order?",
+          "textStyle": {
+            "fontSize": "1.5rem",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\timport system\n\tfrom datetime import datetime\n\t#Set current work order status to complete\n\tsystem.db.runPrepUpdate(\"INSERT INTO WorkOrderTracking (WorkOrderID, ProductionLineID, EndTime, EndedBy) VALUES (?, ?, ?, ?)\", [self.view.params.woID, self.view.custom.ProductionLineID, system.date.now(), self.view.custom.Auth])\n\twoID \u003d self.view.params.woID\n\tprocessArea \u003d self.view.params.processArea\n\tif woID !\u003d -1:\n\t\tsystem.db.runNamedQuery(\"WorkOrder/UpdateWorkOrderScheduleStatus\", {\"WorkOrderID\": woID, \"StatusID\": 3, \"plID\": self.view.custom.ProductionLineID, \"Offset\": self.session.props.device.timezone.utcOffset})\n\t\n\treasonGroupID \u003d 1 if processArea \u003d\u003d \u0027Assembly\u0027 else 2\n\tparentReason \u003d 8 if processArea \u003d\u003d \u0027Assembly\u0027 else 4\n\t#Start Changeover for next work order\n\tpID \u003d None\n\tpEquipmentID \u003d self.view.params.eqID\n\tpReasonID \u003d system.db.runPrepQuery(\u0027SELECT TOP 1 ID FROM DowntimeReason WHERE (Name \u003d ? OR Name \u003d ?) AND ReasonGroupID \u003d ? AND ParentReasonID \u003d ?\u0027, [\u0027Changeover\u0027, \u0027Mold Change\u0027, reasonGroupID, parentReason])[0][0] \n\tpStartTime \u003d system.db.runNamedQuery(\u0027Downtime/GetUTC\u0027)[0][0]\n\tpCommentID \u003d None\n\tpAndonHeaderID \u003d None\n\t\n\tparams \u003d {\"pID\": pID, \"pEquipmentID\": pEquipmentID, \"pReasonID\": pReasonID, \"pStartTime\": pStartTime, \"pEndTime\": None, \"pCommentID\": pCommentID, \"pAndonHeaderID\": pAndonHeaderID, \"pIsDelete\": False}\n\tsystem.db.runNamedQuery(\"Downtime/sp_GEN_DowntimeEvent\", params)\n\t\n\tsystem.db.runPrepUpdate(\"INSERT INTO WorkOrderTracking (WorkOrderID, ProductionLineID, EndTime, EndedBy) VALUES (?, ?, ?, ?)\", [self.view.params.woID, self.view.custom.ProductionLineID, pStartTime, Resource])"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\t#start \u003d system.db.runScalarPrepQuery(\"SELECT DATEADD(HOUR, -4, GETUTCDATE())\", [])\n\t#Scheduling.updateSchedule(1, start, 8)\n\t#system.perspective.sendMessage(\"refresh-Operator-Interface-Header\", {\"tagPath\": self.view.params.tagPath})\n\t\n\tscheduleData \u003d system.db.runNamedQuery(\u0027WorkOrder/GetWorkOrderScheduleDataByAsset\u0027, {\"ProductionLineID\": self.view.custom.ProductionLineID})[0]\n\t\n\twosID \u003d scheduleData[0]\n\tstart \u003d system.date.parse(scheduleData[1])\n\tend \u003d system.date.now()#system.date.parse(scheduleData[2])\n\tquantity \u003d scheduleData[3]\n\tworkOrder \u003d scheduleData[4]\n\tpath \u003d self.view.params.tagPath\n\t\n\ttotalCountPath \u003d \"[default]\" + path + \"/OEE/Quality/Work Order Count\"\n\tscrapCountPath \u003d \"[default]\" + path + \"/OEE/Quality/Scrap Count\"\n\t\n\tnow \u003d system.db.runScalarPrepQuery(\"SELECT GETUTCDATE()\", [])\n\t\n\tif end \u003e now:\n\t\tend \u003d now\n\t\n\tstart \u003d system.date.addMinutes(system.date.parse(start), 1)\n\tend \u003d system.date.parse(end)\n\tplID \u003d self.view.custom.ProductionLineID\n\t\n\t## NEW\n\tnextScheduleData \u003d system.db.runNamedQuery(\u0027WorkOrder/GetNextWorkOrderScheduleDataByAsset\u0027, {\"ProductionLineID\": self.view.custom.ProductionLineID})\n\tif len(nextScheduleData) \u003e 0:\n\t\tnextWorkOrder \u003d nextScheduleData[4]\n\t\t\n\t\tif nextWorkOrder !\u003d workOrder:\n\t\t\tOEE.addMDIHourPartChange(plID)\n\telse:\n\t\tOEE.addMDIHourPartChange(plID)\n\t\n\t\n\tstartCounts \u003d system.tag.queryTagHistory([totalCountPath, scrapCountPath], startDate \u003d start, endDate \u003d start, returnSize\u003d1, aggregationMode\u003d\"LastValue\", returnFormat\u003d\u0027Wide\u0027)\n\tendCounts \u003d system.tag.queryTagHistory([totalCountPath, scrapCountPath], startDate \u003d start, endDate \u003d end, returnSize\u003d1, aggregationMode\u003d\"LastValue\", returnFormat\u003d\u0027Wide\u0027)\n\t\n\tscrap \u003d system.db.runNamedQuery(\u0027Scrap/GetTotalScrapInTimeFrame\u0027, {\"start\": start, \"end\": end, \"plID\": plID})\n\ttotalStart \u003d startCounts.getValueAt(0, 1)\n\tif totalStart is None:\n\t\ttotalStart \u003d 0\n\t\n#\tscrapStart \u003d startCounts.getValueAt(0, 2)\n#\tif scrapStart is None:\n#\t\tscrapStart \u003d 0\n\t\n\tif endCounts is not None:\n\t\ttotalEnd \u003d endCounts.getValueAt(0, 1)\n\t\tif totalEnd is None:\n\t\t\ttotalEnd \u003d 0\n\telse:\n\t\ttotalEnd \u003d 0\n\t\n#\tscrapEnd \u003d endCounts.getValueAt(0, 2)\n#\tif scrapEnd is None:\n#\t\tscrapEnd \u003d 0\n\t\n\ttotal \u003d totalEnd - totalStart\n\tif total \u003c 0:\n\t\ttotal \u003d 0\n#\tscrap \u003d scrapEnd - scrapStart\n\t\n\tif quantity \u003d\u003d 0:\n\t\tquantity \u003d 1\n\t\n\tpercentage \u003d ((total - scrap) / float(quantity)) * 100\n\tgood \u003d total - scrap\n\tsystem.db.runPrepUpdate(\"INSERT INTO WorkOrderSchedulePercentComplete(WorkOrderScheduleID, PercentComplete, GoodParts) VALUES(?, ?, ?)\", [wosID, percentage, good])\n\t\n\tstart \u003d system.db.runScalarPrepQuery(\"SELECT DATEADD(HOUR, -4, GETUTCDATE())\", [])\n\tScheduling.updateSchedule(1, start, 8)\n\tsystem.perspective.sendMessage(\"refresh-Operator-Interface-Header\", {\"tagPath\": self.view.params.tagPath})"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tpath \u003d self.view.params.tagPath + \"/OEE/Quality/Work Order Count\"\n\tscrapPath \u003d self.view.params.tagPath + \"/OEE/Quality/Scrap Count\"\n\tstatusPath \u003d self.view.params.tagPath + \"/Status\"\n\tsystem.tag.writeBlocking([path], [0])\n\tsystem.tag.writeBlocking([scrapPath], [0])\t\n\tsystem.tag.writeBlocking([statusPath], [0])\t\n\t\n\tsystem.perspective.closePopup(\u0027confirmComplete\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Yes"
+        },
+        "position": {
+          "height": 0.2297,
+          "width": 0.2667,
+          "x": 0.12,
+          "y": 0.6723
+        },
+        "props": {
+          "primary": false,
+          "text": "Yes",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tsystem.perspective.closePopup(\u0027confirmComplete\u0027)"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "No"
+        },
+        "position": {
+          "height": 0.2297,
+          "width": 0.2667,
+          "x": 0.5867,
+          "y": 0.6723
+        },
+        "props": {
+          "primary": false,
+          "text": "No",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": -0.0483,
+      "y": 0.0507
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

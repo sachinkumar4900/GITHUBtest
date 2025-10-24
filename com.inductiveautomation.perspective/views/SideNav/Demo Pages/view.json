@@ -1,0 +1,95 @@
+{
+  "custom": {
+    "ButtonAccess": true
+  },
+  "params": {},
+  "propConfig": {
+    "custom.ButtonAccess": {
+      "binding": {
+        "config": {
+          "expression": "{session.custom.Roles.Admin}"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 33,
+      "width": 299
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "params": {},
+                  "view": "DownTime/Downtime"
+                },
+                "scope": "C",
+                "type": "nav"
+              },
+              {
+                "config": {
+                  "script": "\t\tself.session.custom.ActiveWindow \u003d \"Downtime Analysis\"\n\t\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Downtime Analysis"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ButtonAccess"
+              },
+              "type": "property"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "expression": "!{this.props.enabled}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "this.meta.name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Accordion/NavTab"
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

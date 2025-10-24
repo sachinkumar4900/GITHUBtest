@@ -1,0 +1,110 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "e99b090a5035fb260f4c331ddfab260f0bf7acc1be0804dc8c6fa4d90d77625b",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2025-01-13T20:23:27Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "pID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pProductionLineID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pStartTime",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pWorkOrderID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pPlannedParts",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pActualParts",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pDowntime",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pScrap",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pAvgSpeed",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pShiftScheduleID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pIsDelete",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pPlannedPartsModifiedBy",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pActualPartsModifiedBy",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pRecovery",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pRecoveryModifiedBy",
+        "sqlType": 7
+      }
+    ]
+  }
+}

@@ -1,0 +1,373 @@
+{
+  "custom": {
+    "DateTimeNow": {
+      "$": [
+        "ts",
+        192,
+        1736442753078
+      ],
+      "$ts": 1736442753078
+    },
+    "ProductionLineID": null
+  },
+  "params": {
+    "EquipmentID": 16,
+    "ProductionLineID": 11,
+    "ReasonID": 5,
+    "WorkOrderID": 1258,
+    "tagPath": "[default]Sanford/Assembly/P08"
+  },
+  "propConfig": {
+    "custom.DateTimeNow": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.ProductionLineID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.EquipmentID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineIDByEquipmentID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ProductionLineID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ReasonID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.WorkOrderID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 900,
+      "width": 900
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.1062,
+          "width": 1
+        },
+        "props": {
+          "text": "Scrapping",
+          "textStyle": {
+            "fontSize": "2.5rem",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\n\t#Create Comment and get the newly created CommentID\n\ttext \u003d self.getSibling(\"CommentArea\").props.text\n\tpID \u003d None\n\ttimestamp \u003d self.view.custom.DateTimeNow\n\tisDelete \u003d False\n\t\n\tif text:\n\t\tparams \u003d {\"pID\": pID, \"pText\": text, \"pTimestamp\": timestamp, \"pIsDelete\": isDelete}\n\t\tsystem.db.runNamedQuery(\"Comment/sp_GEN_Comment\", params)\n\t\tcommentIDQuery \u003d system.db.runNamedQuery(\"Comment/GetCommentByTimeStamp\", {\"timeStamp\": timestamp}) \n\t\n\tcommentID \u003d commentIDQuery[0][0] if text else None\n\tscrapQuantity \u003d self.getSibling(\"ScrapQty\").props.value\n\t#Create or Update scrap qty for work order\n\tpWorkOrderID \u003d self.view.params.WorkOrderID\n\tpQuantity \u003d scrapQuantity\n\tpTimestamp \u003d self.view.custom.DateTimeNow\n\tpProductionLineID \u003d self.view.custom.ProductionLineID\n\tpCommentID \u003d commentID\n\tpReasonID \u003d self.view.params.ReasonID\n\tpEquipmentID \u003d self.view.params.EquipmentID\n\t\n\tparams \u003d {\"pID\": None, \"pWorkOrderID\": pWorkOrderID, \"pQuantity\": pQuantity, \"pTimestamp\": pTimestamp, \"pProductionLineID\": pProductionLineID, \"pCommentID\": pCommentID, \"pReasonID\": pReasonID, \"pEquipmentID\": pEquipmentID, \"pIsDelete\": False}\n\tsystem.db.runNamedQuery(\"Scrap/sp_GEN_Scrap\", params)\n\t\n\t#Add part for Assembly to offset lack of part at tape machine\n\tpath \u003d self.view.params.tagPath\n\tif \"Assembly\" in path:\n\t\t#Get the consecutive scrap count\n\t\tcsPath \u003d path + \"/OEE/Quality/Consecutive Scrap\"\n\t\tcs \u003d system.tag.readBlocking(csPath)[0].value\n\t\tcs +\u003d 1\n#\t\tsystem.perspective.print(\"cs Recorded\")\n\t\t\n\t\t#add scrap to total daily count\n\t\ttdcPath \u003d path + \"/OEE/Quality/Total Daily Count\"\n\t\ttdc \u003d system.tag.readBlocking(tdcPath)[0].value\t#Grab total daily count\n\t\ttdcNew \u003d tdc + scrapQuantity #Add Scrap count to get new total daily count\n\t\tsystem.tag.writeBlocking(tdcPath, tdcNew)\n#\t\tsystem.perspective.print(\"tdc written\")\n\n\t\t#add scrap to work order count\n\t\twocPath \u003d path + \"/OEE/Quality/Work Order Count\"\n\t\twoc \u003d system.tag.readBlocking(wocPath)[0].value\t#Grab total daily count\n\t\twocNew \u003d woc + scrapQuantity #Add Scrap count to get new total daily count\n\t\tsystem.tag.writeBlocking(wocPath, wocNew)\t\t\n\t\t\n\t\t#Reset consecutive scrap count\n\t\tsystem.tag.writeBlocking(csPath, cs)\n\t\t\n\t\tsystem.perspective.print(\"cs written\")"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\t#Grab view params\n\tReasonID \u003d self.view.params.ReasonID\n\tEquipmentID \u003d self.view.params.EquipmentID\n\t\n\t#Get datasets for scrap reasons and scrap data\n\tScrapReasonData \u003d system.db.runNamedQuery(\"Scrap/GetScrapReasonByID\", {\"ID\": ReasonID})\n\tdefectsInHourData \u003d system.db.runNamedQuery(\"Scrap/GetDefectsInHourByReasonID\", {\"ScrapReason\": ReasonID, \"EquipmentID\": EquipmentID})\n\t\n\t#Set variables from dataset columns\n\tallowableConsecutiveDefects \u003d ScrapReasonData[0][\"ConsecutiveDefects\"]\n\tallowableDefectsPerHour \u003d ScrapReasonData[0][\"DefectsPerHour\"]\n\tdefectsInHour \u003d defectsInHourData[0][\"ScrapEventCount\"]\n\tconsecutiveDefects \u003d self.custom.ConsecutiveScrap\n\t\n\t#Determine whether DT is necessary or not\n\tisDown \u003d False\n\tif defectsInHour \u003e\u003d (allowableDefectsPerHour):\n\t\tisDown \u003d True\n\tif consecutiveDefects \u003e\u003d (allowableConsecutiveDefects - 1):\n\t\tisDown \u003d True\n\t\n\t#Compare and conditionally trigger DT\n\talreadyDown \u003d system.db.runPrepQuery(\"SELECT * FROM DowntimeEvent WHERE EquipmentID \u003d ? AND (GETDATE() BETWEEN StartTime AND EndTime OR (GETDATE() \u003e StartTime AND EndTime IS NULL))\", [EquipmentID])\n\n\tif len(alreadyDown) \u003d\u003d 0:\n\t\tif isDown:\n\t\t\tsystem.perspective.openPopup(\u0027ScrapDT\u0027, \u0027OperatorInterface/NestedViews/ScrapDowntimeNotification\u0027, params \u003d {\u0027EquipmentID\u0027: self.view.params.EquipmentID, \u0027ProcessArea\u0027: self.custom.ProductionLineType}, showCloseIcon \u003d False, modal \u003d True)"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.closePopup(\"ScrapEntry\")"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.navigate(page\u003dpage.props.pagePath, params\u003dpage.props.params)"
+                },
+                "enabled": false,
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Submit"
+        },
+        "position": {
+          "height": 0.1129,
+          "width": 0.25,
+          "x": 0.7295,
+          "y": 0.8588
+        },
+        "propConfig": {
+          "custom.ConsecutiveScrap": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "ProductionLine": "{this.custom.ProductionLine}",
+                  "ProductionLineType": "{this.custom.ProductionLineType}",
+                  "ProductionSite": "{this.custom.ProductionSite}"
+                },
+                "tagPath": "[default]{ProductionSite}/{ProductionLineType}/{ProductionLine}/OEE/Quality/Consecutive Scrap"
+              },
+              "type": "tag"
+            }
+          },
+          "custom.ProductionLine": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "id": "{view.custom.ProductionLineID}"
+                },
+                "queryPath": "ProductionLine/GetProductionLineNameByID",
+                "returnFormat": "scalar"
+              },
+              "type": "query"
+            }
+          },
+          "custom.ProductionLineType": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "ProductionLineID": "{view.custom.ProductionLineID}"
+                },
+                "queryPath": "ProductionLine/GetProductionLineTypeByID",
+                "returnFormat": "scalar"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d 1:\n\t\treturn \"Assembly\"\n\telse:\n\t\treturn \"Molding\"",
+                  "type": "script"
+                }
+              ],
+              "type": "query"
+            }
+          },
+          "custom.ProductionSite": {
+            "binding": {
+              "config": {
+                "path": "session.custom.ProductionSiteID"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d 1:\n\t\treturn \"Sanford\"\n\telse:\n\t\treturn \"Moorpark\"",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "text": "SUBMIT",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tsystem.perspective.closePopup(\u0027ScrapEntry\u0027)"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Cancel",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "position": {
+          "height": 0.1129,
+          "width": 0.1983,
+          "x": 0.5156,
+          "y": 0.8588
+        },
+        "props": {
+          "primary": false,
+          "text": "CANCEL",
+          "textStyle": {
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "ScrapQty"
+        },
+        "position": {
+          "height": 0.1,
+          "width": 0.1583,
+          "x": 0.0517,
+          "y": 0.3493
+        },
+        "props": {
+          "containerStyle": {
+            "fontSize": "3rem"
+          },
+          "format": "0,0",
+          "style": {
+            "fontSize": "3rem"
+          },
+          "value": 1
+        },
+        "type": "ia.input.numeric-entry-field"
+      },
+      {
+        "meta": {
+          "name": "ScrapQty_Label"
+        },
+        "position": {
+          "height": 0.075,
+          "width": 0.7683,
+          "x": 0.055,
+          "y": 0.2687
+        },
+        "props": {
+          "text": "Scrap Quantity:",
+          "textStyle": {
+            "fontSize": "2.5rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "CommentArea"
+        },
+        "position": {
+          "height": 0.2644,
+          "width": 0.9,
+          "x": 0.05,
+          "y": 0.5548
+        },
+        "props": {
+          "placeholder": "Enter Reason",
+          "style": {
+            "fontSize": "1rem"
+          }
+        },
+        "type": "ia.input.text-area"
+      },
+      {
+        "meta": {
+          "name": "CommentArea_Label"
+        },
+        "position": {
+          "height": 0.075,
+          "width": 0.655,
+          "x": 0.0534,
+          "y": 0.4761
+        },
+        "props": {
+          "text": "Countermeasure:",
+          "textStyle": {
+            "fontSize": "2.5rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Reason_Label"
+        },
+        "position": {
+          "height": 0.075,
+          "width": 0.5817,
+          "x": 0.055,
+          "y": 0.102
+        },
+        "props": {
+          "text": "Scrap Reason:",
+          "textStyle": {
+            "fontSize": "2.5rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Reason_Label_0"
+        },
+        "position": {
+          "height": 0.075,
+          "width": 0.9167,
+          "x": 0.055,
+          "y": 0.1659
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "ScrapReasonID": "{view.params.ReasonID}"
+                },
+                "queryPath": "Scrap/GetScrapReasonNameByID",
+                "returnFormat": "scalar"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "2.5rem"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

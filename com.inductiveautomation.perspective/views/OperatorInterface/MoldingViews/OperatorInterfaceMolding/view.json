@@ -1,0 +1,1205 @@
+{
+  "custom": {
+    "AndonHeader": "D40F9535-32DA-44B5-91FF-926BE9ECDA9D",
+    "AndonStatus": 6,
+    "DowntimeEventID": -1,
+    "Equipment": "IM45",
+    "Hour": 9,
+    "ProductionLineID": 5,
+    "tagPath": "[default]Moorpark/Molding/IM45"
+  },
+  "params": {
+    "EquipmentID": 5,
+    "NotifiedDate": 0,
+    "WorkOrderID": 1332
+  },
+  "propConfig": {
+    "custom.AndonHeader": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "productionLineID": "{view.custom.ProductionLineID}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "1"
+          },
+          "queryPath": "Andon/GetEventHeaderByProductionLineID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.AndonStatus": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EventHeaderID": "{view.custom.AndonHeader}"
+          },
+          "queryPath": "Andon/GetEventStatusByEventHeaderID",
+          "returnFormat": "scalar"
+        },
+        "transforms": [
+          {
+            "code": "\tif self.custom.AndonHeader \u003d\u003d None:\n\t\treturn 7\n\telse:\n\t\treturn value",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.DowntimeEventID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.EquipmentID}"
+          },
+          "polling": {
+            "enabled": true,
+            "rate": "1"
+          },
+          "queryPath": "Downtime/GetActiveDowntimeEventByEquipmentID",
+          "returnFormat": "scalar"
+        },
+        "transforms": [
+          {
+            "code": "\tif value \u003d\u003d None:\n\t\treturn -1\n\telse:\n\t\treturn value",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.Equipment": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "id": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineNameByID"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.Hour": {
+      "binding": {
+        "config": {
+          "expression": "getHour24(now())"
+        },
+        "type": "expr"
+      },
+      "onChange": {
+        "enabled": null,
+        "script": "\tself.getChild(\"root\").getChild(\"HourPerHour\").getChild(\"FlexRepeater\").refreshBinding(\"props.instances\")"
+      },
+      "persistent": true
+    },
+    "custom.ProductionLineID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.EquipmentID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineIDByEquipmentID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.tagPath": {
+      "binding": {
+        "config": {
+          "expression": "now(1000)"
+        },
+        "transforms": [
+          {
+            "code": "\tplID \u003d self.view.custom.ProductionLineID\n\tpaths \u003d system.tag.readBlocking([\u0027TagPaths\u0027])[0].value\n\ti \u003d 0\n\tpathFound \u003d False\n\twhile(pathFound \u003d\u003d False):\n\t\tif paths.getValueAt(i, 0) \u003d\u003d plID:\n\t\t\tpathFound \u003d True\n\t\telse:\n\t\t\ti +\u003d 1\n\treturn paths.getValueAt(i, 1)",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.NotifiedDate": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.WorkOrderID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "draggable": false,
+                    "id": "AndonTrigger",
+                    "modal": true,
+                    "overlayDismiss": true,
+                    "resizable": true,
+                    "showCloseIcon": true,
+                    "type": "open",
+                    "viewParams": {
+                      "EquipmentID": "{view.params.EquipmentID}",
+                      "ProcessArea": "Molding"
+                    },
+                    "viewPath": "Andon/AndonTriggerPopup",
+                    "viewportBound": false
+                  },
+                  "scope": "C",
+                  "type": "popup"
+                }
+              }
+            },
+            "meta": {
+              "name": "CallForHelp_Btn"
+            },
+            "position": {
+              "height": 0.675,
+              "width": 0.2026,
+              "x": 0.7731,
+              "y": 0.1835
+            },
+            "propConfig": {
+              "custom.DateTimeNow": {
+                "binding": {
+                  "config": {
+                    "expression": "now()"
+                  },
+                  "type": "expr"
+                }
+              },
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "if({view.custom.AndonStatus} !\u003d 6 \u0026\u0026 {view.custom.AndonStatus} !\u003d null, false, true)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.DateTime": {
+                "binding": {
+                  "config": {
+                    "expression": "dateArithmetic(now(), 10, \"minute\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.enabled": {
+                "binding": {
+                  "config": {
+                    "expression": "if({../EndDT_Btn.meta.visible} \u003d true, false, true)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.style.backgroundColor": {
+                "binding": {
+                  "config": {
+                    "expression": "if({this.props.enabled} \u003d true, \u0027#FCE6EB\u0027, \u0027#B3B3B3\u0027)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.textStyle.color": {
+                "binding": {
+                  "config": {
+                    "expression": "if({this.props.enabled} \u003d true, \u0027#E52C4F\u0027, \u0027#E6E6E6\u0027)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "image": {
+                "style": {
+                  "backgroundColor": "#FF0000"
+                }
+              },
+              "text": "CALL FOR HELP",
+              "textStyle": {
+                "fontSize": "1.5rem"
+              }
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "custom": {
+              "Comment": ""
+            },
+            "events": {
+              "component": {
+                "onActionPerformed": [
+                  {
+                    "config": {
+                      "script": "\tequipment \u003d self.view.custom.Equipment\n\tProductionLineID \u003d self.view.custom.ProductionLineID\n\tEventHeader \u003d system.db.runNamedQuery(\"Andon/GetEventHeaderByProductionLineID\", {\"productionLineID\": ProductionLineID})\n\tEventStatus \u003d system.db.runNamedQuery(\"Andon/GetEventStatusByEventHeaderID\", {\"EventHeaderID\": EventHeader[0][0]})\n\tnotificationGroupID \u003d 5\n\t\n\t\n\tif EventStatus[0][0] !\u003d 5:\n\t\tpEventHeaderID \u003d EventHeader[0][0]\n\t\tpID \u003d None\n\t\tpNotificationGroupID \u003d notificationGroupID\n\t\tpTimestamp \u003d system.db.runNamedQuery(\u0027Downtime/GetUTC\u0027)[0][0]\n\t\tpProductionLineID \u003d ProductionLineID\n\t\tpStatusID \u003d 3 #Acknowledged\n\t\tpIsDelete \u003d False\n\t\t\n\t\tparams \u003d {\"pEventHeaderID\": pEventHeaderID, \"pID\": pID, \"pNotificationGroupID\": pNotificationGroupID, \"pTimestamp\": pTimestamp, \"pProductionLineID\": pProductionLineID, \"pStatusID\": pStatusID, \"pIsDelete\": pIsDelete}\n\t\tsystem.db.runNamedQuery(\"Andon/sp_ANDON_AndonEvent\", params)\n\t\t\n\t\t# Get the UDT path from the custom property on the view\n\t\tsite \u003d \u0027Moorpark/\u0027 if self.session.custom.ProductionSiteID \u003d\u003d 2 else \u0027Sanford/\u0027\n\t\tudtPath \u003d \"[default]\" + site + \"Molding/\" + equipment + \"/Andon/Andon Status\"\n\t\n\t\t# Get the alarm associated with the UDT\n\t\talarm \u003d system.alarm.queryStatus(source\u003dudtPath, state\u003d[1])\n\t\n\t\t# Check if an active alarm is found\n\t\tif alarm:\n\t\t\t# Acknowledge the first active alarm found\n\t\t    system.alarm.acknowledge(alarm[0].id)\n\t\t    print(equipment + \"Alarm acknowledged successfully.\")\n\t\telse:\n\t\t    print(\"No active alarms found for the specified UDT.\")\n\t\n\t#system.tag.writeAsync(\"[default]Molding/\" + equipment + \"/Andon/Andon Status\", 2)"
+                    },
+                    "scope": "G",
+                    "type": "script"
+                  },
+                  {
+                    "config": {
+                      "draggable": false,
+                      "id": "Reason1",
+                      "modal": true,
+                      "overlayDismiss": true,
+                      "resizable": true,
+                      "showCloseIcon": true,
+                      "type": "open",
+                      "viewParams": {
+                        "EquipmentID": "{view.params.EquipmentID}",
+                        "ProcessArea": "Molding",
+                        "ReasonGroupID": "2"
+                      },
+                      "viewPath": "Andon/NestedViews/AndonReasonSelector",
+                      "viewportBound": false
+                    },
+                    "scope": "C",
+                    "type": "popup"
+                  }
+                ]
+              }
+            },
+            "meta": {
+              "name": "EditAndon1_Btn"
+            },
+            "position": {
+              "height": 0.675,
+              "width": 0.2026,
+              "x": 0.7731,
+              "y": 0.1835
+            },
+            "propConfig": {
+              "custom.DateTimeNow": {
+                "binding": {
+                  "config": {
+                    "expression": "now()"
+                  },
+                  "type": "expr"
+                }
+              },
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "if({view.custom.AndonStatus} \u003e\u003d 1 \u0026\u0026 {view.custom.AndonStatus} \u003c\u003d 3, true, false)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.DateTime": {
+                "binding": {
+                  "config": {
+                    "expression": "now()"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "text": "UPDATE ANDON EVENT",
+              "textStyle": {
+                "fontSize": "1.5rem"
+              }
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": [
+                  {
+                    "config": {
+                      "draggable": false,
+                      "id": "Reason2",
+                      "modal": true,
+                      "overlayDismiss": true,
+                      "resizable": true,
+                      "showCloseIcon": true,
+                      "type": "open",
+                      "viewParams": {
+                        "EquipmentID": "{view.params.EquipmentID}",
+                        "ProcessArea": "Molding",
+                        "ReasonGroupID": "2"
+                      },
+                      "viewPath": "Andon/NestedViews/AndonReasonSelector2",
+                      "viewportBound": false
+                    },
+                    "scope": "C",
+                    "type": "popup"
+                  },
+                  {
+                    "config": {
+                      "script": "\tequipment \u003d self.view.custom.Equipment\n\tsite \u003d \u0027Moorpark/\u0027 if self.session.custom.ProductionSiteID \u003d\u003d 2 else \u0027Sanford/\u0027\n\tsystem.tag.writeAsync(\"[default]\" + site + \"Molding/\" + equipment + \"/Andon/Andon Status\", 4)"
+                    },
+                    "scope": "G",
+                    "type": "script"
+                  }
+                ]
+              }
+            },
+            "meta": {
+              "name": "EditAndon2_Btn"
+            },
+            "position": {
+              "height": 0.675,
+              "width": 0.2026,
+              "x": 0.7731,
+              "y": 0.1835
+            },
+            "propConfig": {
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "if({view.custom.AndonStatus} \u003d 4, true, false)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.DateTime": {
+                "binding": {
+                  "config": {
+                    "expression": "dateArithmetic(now(), 30, \"minute\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "text": "UPDATE ANDON EVENT",
+              "textStyle": {
+                "fontSize": "1.5rem"
+              }
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\tequipment \u003d self.view.custom.Equipment\n\tProductionLineID \u003d self.view.custom.ProductionLineID\n\tEventHeader \u003d system.db.runNamedQuery(\"Andon/GetEventHeaderByProductionLineID\", {\"productionLineID\": ProductionLineID})\n\tnotificationGroupID \u003d 5\n\tsite \u003d self.session.custom.ProductionSite + \"/\"\n\t\n\tsystem.tag.writeAsync(\"[default]\" + site + \"Molding/\" + equipment + \"/Andon/Andon Status\", 0)\n\tsystem.tag.writeAsync(\u0027[default]\u0027 + site + \"Molding/\" + equipment + \u0027/Andon/Andon Group\u0027, 0)\n\t\n\t#Update Andon Event to Resolved Status\n\tpEventHeaderID \u003d EventHeader[0][0]\n\tpID \u003d None\n\tpNotificationGroupID \u003d notificationGroupID\n\tpTimestamp \u003d system.db.runNamedQuery(\u0027Downtime/GetUTC\u0027)[0][0]\n\tpProductionLineID \u003d ProductionLineID\n\tpStatusID \u003d 6 #Resolved\n\tpIsDelete \u003d False\n\t\n\tparams \u003d {\"pEventHeaderID\": pEventHeaderID, \"pID\": pID, \"pNotificationGroupID\": pNotificationGroupID, \"pTimestamp\": pTimestamp, \"pProductionLineID\": pProductionLineID, \"pStatusID\": pStatusID, \"pIsDelete\": pIsDelete}\n\tsystem.db.runNamedQuery(\"Andon/sp_ANDON_AndonEvent\", params)\n\t\n\t#Update Downtime Event End Time and start \"Waiting for Startup\" Downtime Event\n\tif self.view.custom.DowntimeEventID !\u003d -1:\n\t\tequipmentID \u003d self.view.params.EquipmentID\n\t\tsystem.db.runPrepUpdate(\"UPDATE DowntimeEvent SET EndTime \u003d GETDATE() WHERE EndTime IS NULL AND EquipmentID \u003d ?\", [equipmentID])\n\t\t\n\t\tpID \u003d None\n\t\tpEquipmentID \u003d self.view.params.EquipmentID\n\t\tpReasonID \u003d system.db.runPrepQuery(\u0027SELECT TOP 1 ID FROM DowntimeReason WHERE Name \u003d ? AND ReasonGroupID \u003d 2\u0027, [\u0027Waiting on Startup\u0027])[0][0] #63 #Waiting On Startup (Molding)\n\t\tpStartTime \u003d pTimestamp\n\t\tpCommentID \u003d None\n\t\tpAndonHeaderID \u003d pEventHeaderID\n\t\t\n\t\tparams \u003d {\"pID\": pID, \"pEquipmentID\": pEquipmentID, \"pReasonID\": pReasonID, \"pStartTime\": pStartTime, \"pEndTime\": None, \"pCommentID\": pCommentID, \"pAndonHeaderID\": pAndonHeaderID, \"pIsDelete\": False}\n\t\tsystem.db.runNamedQuery(\"Downtime/sp_GEN_DowntimeEvent\", params)\n\t\n\t#Set Work Order Status to Waiting\n#\twoID \u003d self.view.params.WorkOrderID\n#\tif woID !\u003d -1:\n#\t\tsystem.db.runNamedQuery(\"WorkOrder/UpdateWorkOrderScheduleStatus\", {\"WorkOrderID\": woID, \"StatusID\": 1})"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "ResolveAndon_Btn"
+            },
+            "position": {
+              "height": 0.675,
+              "width": 0.2026,
+              "x": 0.7731,
+              "y": 0.1835
+            },
+            "propConfig": {
+              "custom.DateTimeNow": {
+                "binding": {
+                  "config": {
+                    "expression": "now()"
+                  },
+                  "type": "expr"
+                }
+              },
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "if({view.custom.AndonStatus} \u003d 5, true, false)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.DateTime": {
+                "binding": {
+                  "config": {
+                    "expression": "dateArithmetic(now(), 30, \"minute\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#228B22"
+              },
+              "text": "RESOLVE ANDON EVENT",
+              "textStyle": {
+                "fontSize": "1.5rem"
+              }
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "draggable": false,
+                    "id": "UndoScrap",
+                    "modal": true,
+                    "overlayDismiss": true,
+                    "resizable": true,
+                    "showCloseIcon": true,
+                    "type": "open",
+                    "viewParams": {
+                      "EquipmentID": "{view.params.EquipmentID}"
+                    },
+                    "viewPath": "OperatorInterface/NestedViews/UndoScrap",
+                    "viewportBound": false
+                  },
+                  "scope": "C",
+                  "type": "popup"
+                }
+              }
+            },
+            "meta": {
+              "name": "UndoScrap_Btn"
+            },
+            "position": {
+              "height": 0.675,
+              "width": 0.1693,
+              "x": 0.2346,
+              "y": 0.1835
+            },
+            "propConfig": {
+              "props.enabled": {
+                "binding": {
+                  "config": {
+                    "expression": "if({view.params.WorkOrderID} \u003d -1, false, true)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "text": "UNDO SCRAP",
+              "textStyle": {
+                "fontSize": "1.5rem"
+              }
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": [
+                  {
+                    "config": {
+                      "script": "\tequipment \u003d self.view.custom.Equipment\n\tsite \u003d self.session.custom.ProductionSite + \"/\"\n\tsystem.tag.writeAsync(\"[default]\" + site + \"Molding/\" + equipment + \"/Status\", 1)\n\tsystem.tag.writeAsync(\"[default]\" + site + \"Molding/\" + equipment + \"/Andon/Andon Status\", 0)"
+                    },
+                    "scope": "G",
+                    "type": "script"
+                  },
+                  {
+                    "config": {
+                      "script": "\teventHeaderID \u003d self.view.custom.AndonHeader\n\tsystem.db.runPrepUpdate(\"DELETE FROM AndonEvent WHERE EventHeaderID \u003d ?\", [eventHeaderID])\n\tsystem.db.runPrepUpdate(\"DELETE FROM DowntimeEvent WHERE AndonHeaderID \u003d ?\", [eventHeaderID])"
+                    },
+                    "scope": "G",
+                    "type": "script"
+                  }
+                ]
+              }
+            },
+            "meta": {
+              "name": "CancelAndon_Btn"
+            },
+            "position": {
+              "height": 0.675,
+              "width": 0.1693,
+              "x": 0.2356,
+              "y": 0.1835
+            },
+            "propConfig": {
+              "custom.DateTimeNow": {
+                "binding": {
+                  "config": {
+                    "expression": "now()"
+                  },
+                  "type": "expr"
+                }
+              },
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "if(\r\n\t{view.custom.AndonStatus} \u003d 1 || {view.custom.AndonStatus} \u003d 2,\r\n\ttrue, false)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.DateTime": {
+                "binding": {
+                  "config": {
+                    "expression": "dateArithmetic(now(), 30, \"minute\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "text": "CANCEL HELP REQUEST",
+              "textStyle": {
+                "fontSize": "1.5rem"
+              }
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\tProductionLineID \u003d self.view.custom.ProductionLineID\n\t\n\t#Generate Unplanned Downtime Event\n\tpID \u003d None\n\tpEquipmentID \u003d self.view.params.EquipmentID\n\tpReasonID \u003d system.db.runPrepQuery(\u0027SELECT TOP 1 ID FROM DowntimeReason WHERE Name \u003d ? AND ReasonGroupID \u003d 2\u0027, [\u0027Operator Break\u0027])[0][0]\n\tpStartTime \u003d system.db.runNamedQuery(\u0027Downtime/GetUTC\u0027)[0][0]\n\tpCommentID \u003d None\n\tpAndonHeaderID \u003d None\n\t\n\tparams \u003d {\"pID\": pID, \"pEquipmentID\": pEquipmentID, \"pReasonID\": pReasonID, \"pStartTime\": pStartTime, \"pEndTime\": None, \"pCommentID\": pCommentID, \"pAndonHeaderID\": pAndonHeaderID, \"pIsDelete\": False}\n\tsystem.db.runNamedQuery(\"Downtime/sp_GEN_DowntimeEvent\", params)\n\t\n\t# Set status tag down\n\tequipment \u003d self.view.custom.Equipment\n\tsystem.tag.writeAsync(\"[default]\" + self.session.custom.ProductionSite + \"/Molding/\" + equipment + \"/Status\", 0)\n\t\n\twoID \u003d self.view.params.WorkOrderID\n\tif woID !\u003d -1:\n\t\tsystem.db.runNamedQuery(\"WorkOrder/UpdateWorkOrderScheduleStatus\", {\"WorkOrderID\": woID, \"StatusID\": 4, \"plID\": ProductionLineID, \"Offset\": self.session.props.device.timezone.utcOffset})"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "StartBreak_Btn"
+            },
+            "position": {
+              "height": 0.325,
+              "width": 0.195,
+              "x": 0.0278,
+              "y": 0.1835
+            },
+            "propConfig": {
+              "custom.DateTimeNow": {
+                "binding": {
+                  "config": {
+                    "expression": "now()"
+                  },
+                  "type": "expr"
+                }
+              },
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "if({../EndDT_Btn.meta.visible} \u003d false, true, false)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.DateTime": {
+                "binding": {
+                  "config": {
+                    "expression": "dateArithmetic(now(), 30, \"minute\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.enabled": {
+                "binding": {
+                  "config": {
+                    "expression": "if(({view.custom.AndonStatus} !\u003d 6 || {view.custom.DowntimeEventID} !\u003d -1) || {view.params.WorkOrderID} \u003d -1, false, true)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "text": "START BREAK",
+              "textStyle": {
+                "fontSize": "1.5rem"
+              }
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\tplID \u003d self.view.custom.ProductionLineID\n\tequipment \u003d self.view.custom.Equipment\n\t\n\tif self.custom.DowntimeReason \u003d\u003d \"Mold Change\":\n\t\tcurDowntime \u003d system.db.runPrepQuery(\"SELECT de.ID, de.ReasonID, de.StartTime, de.CommentID, de.AndonHeaderID FROM DowntimeEvent de JOIN Equipment e ON e.ID \u003d de.EquipmentID WHERE EndTime IS NULL AND e.ProductionLineID \u003d ?\", [plID])\n\t\treason \u003d system.db.runNamedQuery(\u0027Downtime/GetDowntimeEventReasonByDowntimeID\u0027, {\"EventID\": self.view.custom.DowntimeEventID})\n\t\t\n\t\tsystem.db.runPrepUpdate(\"UPDATE DowntimeEvent SET DowntimeEvent.EndTime \u003d GETDATE() FROM DowntimeEvent de JOIN Equipment e ON e.ID \u003d de.EquipmentID WHERE e.ProductionLineID \u003d ? AND de.EndTime IS NULL\", [plID])\n\n\t\t#Start \u0027Waiting on Startup\u0027 DT reason\n\t\tif reason !\u003d 54 and reason !\u003d 32:\n\t\t\tpID \u003d None\n\t\t\tpEquipmentID \u003d self.view.params.EquipmentID\n\t\t\tpReasonID \u003d system.db.runPrepQuery(\u0027SELECT TOP 1 ID FROM DowntimeReason WHERE Name \u003d ? AND ReasonGroupID \u003d 2\u0027, [\u0027Waiting on Startup\u0027])[0][0] #Waiting On Startup (Assembly)\n\t\t\tpStartTime \u003d system.db.runNamedQuery(\u0027Downtime/GetUTC\u0027)[0][0]\n\t\t\tpCommentID \u003d None\n\t\t\tpAndonHeaderID \u003d curDowntime[0][4]\n\t\t\t\n\t\t\tparams \u003d {\"pID\": pID, \"pEquipmentID\": pEquipmentID, \"pReasonID\": pReasonID, \"pStartTime\": pStartTime, \"pEndTime\": None, \"pCommentID\": pCommentID, \"pAndonHeaderID\": pAndonHeaderID, \"pIsDelete\": False}\n\t\t\tsystem.db.runNamedQuery(\"Downtime/sp_GEN_DowntimeEvent\", params)\n\t\t\tsystem.tag.writeAsync(\"[default]\" + self.session.custom.ProductionSite + \"/Assembly/\" + equipment + \"/Status\", 0)\n\telse:\n\t\t#Complete Active Andon Event\n\t\tsystem.db.runPrepUpdate(\"UPDATE DowntimeEvent SET DowntimeEvent.EndTime \u003d GETDATE() FROM DowntimeEvent de JOIN Equipment e ON e.ID \u003d de.EquipmentID WHERE e.ProductionLineID \u003d ? AND de.EndTime IS NULL\", [plID])\n\n\t\t# Set UDT tags to normal status\n\t\tsite \u003d self.session.custom.ProductionSite + \"/\"\n\t\tsystem.tag.writeAsync(\"[default]\" + site + \"Molding/\" + equipment + \"/Status\", 1)\n\t\tsystem.tag.writeAsync(\"[default]\" + site + \"Molding/\" + equipment + \"/Andon/Andon Status\", 0)\n\t\t\n\t\t#Update Work Order Status\n\t\twoID \u003d self.view.params.WorkOrderID\n\t\tif woID !\u003d -1:\n\t\t\tsystem.db.runNamedQuery(\"WorkOrder/UpdateWorkOrderScheduleStatus\", {\"WorkOrderID\": woID, \"StatusID\": 2, \"plID\": plID, \"Offset\": self.session.props.device.timezone.utcOffset})"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "EndDT_Btn"
+            },
+            "position": {
+              "height": 0.675,
+              "width": 0.1951,
+              "x": 0.0267,
+              "y": 0.1835
+            },
+            "propConfig": {
+              "custom.DowntimeReason": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "EventID": "{view.custom.DowntimeEventID}"
+                    },
+                    "queryPath": "Downtime/GetDowntimeEventReasonByDowntimeID",
+                    "returnFormat": "scalar"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif value is None:\n\t\treturn \u0027\u0027\n\telse:\n\t\treason \u003d system.db.runNamedQuery(\u0027Downtime/GetDowntimeReasonByID\u0027, {\"ReasonID\": value})[0][0]\n\t\treturn reason",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "query"
+                }
+              },
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "if({view.custom.AndonStatus} \u003d 6 \u0026\u0026 {view.custom.DowntimeEventID} !\u003d -1, true, false)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "if({this.custom.DowntimeReason} \u003d \u0027Mold Change\u0027, \u0027FINISH MOLD CHANGE\u0027, \u0027RESUME PRODUCTION\u0027)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#228B22"
+              },
+              "textStyle": {
+                "fontSize": "1.5rem"
+              }
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": [
+                  {
+                    "config": {
+                      "draggable": false,
+                      "id": "confirmComplete",
+                      "modal": true,
+                      "overlayDismiss": true,
+                      "resizable": true,
+                      "showCloseIcon": true,
+                      "type": "open",
+                      "viewParams": {
+                        "eqID": "{view.params.EquipmentID}",
+                        "processArea": "\u0027Molding\u0027",
+                        "tagPath": "{view.custom.tagPath}",
+                        "woID": "{view.params.WorkOrderID}"
+                      },
+                      "viewPath": "OperatorInterface/NestedViews/ConfirmEndWOPopup",
+                      "viewportBound": false
+                    },
+                    "scope": "C",
+                    "type": "popup"
+                  },
+                  {
+                    "config": {
+                      "script": "\t#Set current work order status to complete\n\twoID \u003d self.view.params.WorkOrderID\n\tif woID !\u003d -1:\n\t\tsystem.db.runNamedQuery(\"WorkOrder/UpdateWorkOrderScheduleStatus\", {\"WorkOrderID\": woID, \"StatusID\": 3, \"plID\": self.view.custom.ProductionLineID, \"Offset\": self.session.props.device.timezone.utcOffset})\n\t\n\t#Start Mold Change event for next work order\n\tpID \u003d None\n\tpEquipmentID \u003d self.view.params.EquipmentID\n\tpReasonID \u003d system.db.runPrepQuery(\u0027SELECT TOP 1 ID FROM DowntimeReason WHERE Name \u003d ? AND ReasonGroupID \u003d 2 AND ParentReasonID \u003d 4\u0027, [\u0027Mold Change\u0027])[0][0] \n\tpStartTime \u003d system.db.runNamedQuery(\u0027Downtime/GetUTC\u0027)[0][0]\n\tpCommentID \u003d None\n\tpAndonHeaderID \u003d None\n\t\n\tparams \u003d {\"pID\": pID, \"pEquipmentID\": pEquipmentID, \"pReasonID\": pReasonID, \"pStartTime\": pStartTime, \"pEndTime\": None, \"pCommentID\": pCommentID, \"pAndonHeaderID\": pAndonHeaderID, \"pIsDelete\": False}\n\tsystem.db.runNamedQuery(\"Downtime/sp_GEN_DowntimeEvent\", params)\n\t\n\tpath \u003d self.view.custom.tagPath + \"/OEE/Quality/Work Order Count\"\n\tsystem.tag.writeBlocking([path], [0])"
+                    },
+                    "enabled": false,
+                    "scope": "G",
+                    "type": "script"
+                  },
+                  {
+                    "config": {
+                      "script": "\tstart \u003d system.db.runScalarPrepQuery(\"SELECT DATEADD(HOUR, -4, GETUTCDATE())\", [])\n\tScheduling.updateSchedule(1, start, 8)\n\tsystem.perspective.sendMessage(\"refresh-Operator-Interface-Header\", {\"tagPath\": self.view.custom.tagPath})"
+                    },
+                    "enabled": false,
+                    "scope": "G",
+                    "type": "script"
+                  }
+                ]
+              }
+            },
+            "meta": {
+              "name": "EndWO_Btn"
+            },
+            "position": {
+              "height": 0.3263,
+              "width": 0.195,
+              "x": 0.0278,
+              "y": 0.5309
+            },
+            "propConfig": {
+              "custom.DateTimeNow": {
+                "binding": {
+                  "config": {
+                    "expression": "now()"
+                  },
+                  "type": "expr"
+                }
+              },
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "if({../EndDT_Btn.meta.visible} \u003d true, false, true)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.DateTime": {
+                "binding": {
+                  "config": {
+                    "expression": "dateArithmetic(now(), 30, \"minute\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.enabled": {
+                "binding": {
+                  "config": {
+                    "expression": "if(({session.custom.Roles.TeamLead}|| {session.custom.Roles.GroupLead} ||{session.custom.Roles.Planner} || {session.custom.Roles.Admin}) \u0026\u0026 {view.custom.DowntimeEventID} \u003d -1 \u0026\u0026 {view.params.WorkOrderID} !\u003d -1, true, false)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "text": "FINISH W/O",
+              "textStyle": {
+                "fontSize": "1.5rem"
+              }
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "draggable": false,
+                    "id": "ScrapReasonSelector",
+                    "modal": true,
+                    "overlayDismiss": true,
+                    "resizable": true,
+                    "showCloseIcon": true,
+                    "type": "open",
+                    "viewParams": {
+                      "EquipmentID": "{view.params.EquipmentID}",
+                      "ProductionLineID": "{view.custom.ProductionLineID}",
+                      "ProductionLineTypeID": "2",
+                      "WorkOrderID": "{view.params.WorkOrderID}",
+                      "tagPath": "{view.custom.tagPath}"
+                    },
+                    "viewPath": "OperatorInterface/NestedViews/ScrapSelector",
+                    "viewportBound": true
+                  },
+                  "scope": "C",
+                  "type": "popup"
+                }
+              }
+            },
+            "meta": {
+              "name": "Scrap_Btn"
+            },
+            "position": {
+              "height": 0.675,
+              "width": 0.1538,
+              "x": 0.4139,
+              "y": 0.1835
+            },
+            "propConfig": {
+              "props.enabled": {
+                "binding": {
+                  "config": {
+                    "expression": "if({view.params.WorkOrderID} \u003d -1, false, true)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "text": "ENTER SCRAP",
+              "textStyle": {
+                "fontSize": "1.55rem"
+              }
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "draggable": true,
+                    "id": "uetFQ0Yy",
+                    "modal": true,
+                    "overlayDismiss": true,
+                    "resizable": true,
+                    "showCloseIcon": true,
+                    "type": "open",
+                    "viewParams": {
+                      "ProductionlineID": "{view.params.EquipmentID}"
+                    },
+                    "viewPath": "DownTime/DowntimeUpdate",
+                    "viewportBound": false
+                  },
+                  "scope": "C",
+                  "type": "popup"
+                }
+              }
+            },
+            "meta": {
+              "name": "UpdateDowntimeEvent"
+            },
+            "position": {
+              "height": 0.675,
+              "width": 0.1885,
+              "x": 0.5756,
+              "y": 0.1834
+            },
+            "propConfig": {
+              "props.DateTime": {
+                "binding": {
+                  "config": {
+                    "expression": "dateArithmetic(now(), 30, \"minute\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "text": "UPDATE DOWNTIME EVENT",
+              "textStyle": {
+                "fontSize": "1.5rem"
+              }
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "custom": {
+          "CommentID": 10
+        },
+        "meta": {
+          "name": "ButtonsContainer"
+        },
+        "position": {
+          "height": 0.295,
+          "width": 0.975,
+          "x": 0.0125,
+          "y": 0.69
+        },
+        "propConfig": {
+          "custom.DateTimeNow": {
+            "binding": {
+              "config": {
+                "expression": "now()"
+              },
+              "type": "expr"
+            }
+          },
+          "custom.EquipmentDown": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "EquipmentID": "{view.params.EquipmentID}"
+                },
+                "queryPath": "Downtime/GetActiveDowntimeEventByEquipmentID"
+              },
+              "transforms": [
+                {
+                  "expression": "len({value}) \u003e 0",
+                  "type": "expression"
+                }
+              ],
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "mode": "percent",
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 8
+          }
+        },
+        "type": "ia.container.coord"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "height": 0.1429,
+              "width": 0.1219,
+              "x": 0.421,
+              "y": 0.0116
+            },
+            "props": {
+              "style": {
+                "fontSize": "20px",
+                "fontWeight": "bold"
+              },
+              "text": "HR/HR",
+              "textStyle": {
+                "fontSize": "24px",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Process Area Label_0",
+              "visible": false
+            },
+            "position": {
+              "height": 0.0409,
+              "width": 0.1321,
+              "x": 0.8039,
+              "y": 0.0503
+            },
+            "props": {
+              "text": "Filter By",
+              "textStyle": {
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Dropdown_0",
+              "visible": false
+            },
+            "position": {
+              "height": 0.0656,
+              "width": 0.1308,
+              "x": 0.8337,
+              "y": 0.05
+            },
+            "propConfig": {
+              "custom.end": {
+                "binding": {
+                  "config": {
+                    "expression": "now(0)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "custom.start": {
+                "binding": {
+                  "config": {
+                    "expression": "addHours(now(0), -14)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Shift",
+                  "value": 1
+                },
+                {
+                  "label": "Day",
+                  "value": 2
+                }
+              ],
+              "value": 2
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\tif self.session.props.locale \u003d\u003d \u0027en-US\u0027:\n\t\tself.session.props.locale \u003d \u0027es\u0027\n\telse:\n\t\tself.session.props.locale \u003d \u0027en-US\u0027"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "LanguageSwitch"
+            },
+            "position": {
+              "height": 0.15,
+              "width": 0.2218,
+              "x": 0.0115,
+              "y": 0.0107
+            },
+            "props": {
+              "label": {
+                "position": "left",
+                "text": "Español"
+              }
+            },
+            "type": "ia.input.toggle-switch"
+          },
+          {
+            "meta": {
+              "name": "MDIRowHeader"
+            },
+            "position": {
+              "height": 0.2105,
+              "width": 0.9949,
+              "x": 0.002,
+              "y": 0.12
+            },
+            "props": {
+              "params": {
+                "Font": 18,
+                "ID": 1510
+              },
+              "path": "OEE/NestedViews/MDIRowHeader",
+              "useDefaultViewHeight": true
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "FlexRepeater"
+            },
+            "position": {
+              "height": 0.6485,
+              "width": 0.9949,
+              "x": 0.002,
+              "y": 0.32
+            },
+            "propConfig": {
+              "props.instances": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "ProductionLineID": "{view.params.EquipmentID}",
+                      "Toggle": "1",
+                      "day": "addMinutes(now(0), {session.props.device.timezone.utcOffset} * 60)",
+                      "offset": "{session.props.device.timezone.utcOffset} * 60"
+                    },
+                    "queryPath": "HourByHour/GetMDIIDsByProductionLineIDAndDate",
+                    "returnFormat": "json"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tinstances \u003d [] \n\tfor row in value:\n\t\tinstances.append({\"ID\": row[\"ID\"], \"Font\": 32})\n\treturn instances",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "query"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "path": "OEE/NestedViews/MDIRow",
+              "useDefaultViewWidth": false
+            },
+            "type": "ia.display.flex-repeater"
+          }
+        ],
+        "meta": {
+          "name": "HourPerHour"
+        },
+        "position": {
+          "height": 0.665,
+          "width": 0.99,
+          "x": 0.0076,
+          "y": 0.0125
+        },
+        "props": {
+          "mode": "percent",
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 8
+          }
+        },
+        "type": "ia.container.coord"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tself.parent.getChild(\"HourPerHour\").getChild(\"FlexRepeater\").refreshBinding(\"props.instances\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "height": 0.0437,
+          "rotate": {
+            "anchor": "50% 25%"
+          },
+          "width": 0.05,
+          "x": 0.9246,
+          "y": 0.0278
+        },
+        "props": {
+          "path": "material/refresh"
+        },
+        "type": "ia.display.icon"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "backgroundColor": "#EEEEEE"
+      }
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "CommentID",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tcommentID \u003d payload[\"CommentID\"]\n\tself.getChild(\"ButtonsContainer\").custom.CommentID \u003d commentID",
+          "sessionScope": true,
+          "viewScope": false
+        },
+        {
+          "messageType": "update-andon-status",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tplID \u003d payload[\"plID\"]\n\t\n\tif plID \u003d\u003d self.view.custom.ProductionLineID:\n\t\tself.view.refreshBinding(\"custom.AndonStatus\")",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.coord"
+  }
+}

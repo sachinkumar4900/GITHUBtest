@@ -1,0 +1,353 @@
+{
+  "custom": {
+    "Data": [
+      {
+        "ActualParts": 10,
+        "AvgSpeed": 0,
+        "Downtime": 0,
+        "ID": "410002-B01-PF1302-130004",
+        "PartNumber": "410002",
+        "PlannedParts": 22,
+        "ProductionLineID": 1,
+        "Scrap": 50,
+        "StartTime": 1721203217986
+      }
+    ],
+    "DateDiff": "value",
+    "EndTime": {
+      "$": [
+        "ts",
+        192,
+        1750695772223
+      ],
+      "$ts": 1721206818136
+    },
+    "Performance": 0.45454545454545453
+  },
+  "params": {
+    "ID": 5
+  },
+  "propConfig": {
+    "custom.Data": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "ID": "{view.params.ID}"
+          },
+          "queryPath": "HourByHour/GetHourByHourOEEByID",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.DateDiff": {
+      "persistent": true
+    },
+    "custom.EndTime": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "id": "{view.params.ID}"
+          },
+          "queryPath": "HourByHour/GetNextStartTimeByID"
+        },
+        "transforms": [
+          {
+            "code": "\treturn value if value is not None else system.date.addHours(system.date.fromMillis(self.custom.Data[0].StartTime), 1)",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.Performance": {
+      "binding": {
+        "config": {
+          "expression": "{view.custom.Data[0].ActualParts} / {view.custom.Data[0].PlannedParts}"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "params.ID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 60,
+      "width": 900
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Hour Label"
+        },
+        "position": {
+          "height": 0.6538,
+          "width": 0.1349,
+          "x": 0.009,
+          "y": 0.2013
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "addMinutes(fromMillis({view.custom.Data[0].StartTime}), {session.props.device.timezone.utcOffset} * 60)"
+              },
+              "transforms": [
+                {
+                  "expression": "dateFormat({value}, \"HH:mm\")",
+                  "type": "expression"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": 42,
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Part Number"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.1954,
+          "x": 0.1712,
+          "y": 0.1412
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Data[0].PartNumber"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": 42,
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Planned"
+        },
+        "position": {
+          "height": 0.7115,
+          "width": 0.0754,
+          "x": 0.4871,
+          "y": 0.1437
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Data[0].PlannedParts"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": 54,
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Actual"
+        },
+        "position": {
+          "height": 0.7692,
+          "width": 0.0846,
+          "x": 0.3738,
+          "y": 0.086
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Data[0].ActualParts"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": 54,
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Scrap"
+        },
+        "position": {
+          "height": 0.75,
+          "width": 0.048,
+          "x": 0.626,
+          "y": 0.113
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Data[0].Scrap"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": 50,
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Downtime"
+        },
+        "position": {
+          "height": 0.7692,
+          "width": 0.1589,
+          "x": 0.6817,
+          "y": 0.1437
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.Data[0].Downtime}"
+              },
+              "transforms": [
+                {
+                  "code": "\timport math\n\tminutes \u003d int(math.floor(value / 60))\n\tseconds \u003d int(round(value % 60))\n\ttimeFormat \u003d str(minutes) + \u0027:\u0027 + str(seconds) if len(str(seconds)) \u003e\u003d 2 else str(minutes) + \u0027:0\u0027 + str(seconds)\n\treturn timeFormat",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": 42,
+            "fontWeight": "bold",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Downtime_0"
+        },
+        "position": {
+          "height": 0.6923,
+          "width": 0.1463,
+          "x": 0.8302,
+          "y": 0.1535
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Data[0].AvgSpeed"
+              },
+              "transforms": [
+                {
+                  "code": "\timport math\n\tminutes \u003d int(math.floor(value / 60))\n\tseconds \u003d int(round(value % 60))\n\ttimeFormat \u003d str(minutes) + \u0027:\u0027 + str(seconds) if len(str(seconds)) \u003e\u003d 2 else str(minutes) + \u0027:0\u0027 + str(seconds)\n\treturn timeFormat",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": 42,
+            "fontWeight": "bold",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "events": {
+      "dom": {
+        "onClick": {
+          "config": {
+            "draggable": true,
+            "id": "PQsOBwM8",
+            "modal": false,
+            "overlayDismiss": true,
+            "resizable": true,
+            "showCloseIcon": true,
+            "type": "open",
+            "viewParams": {
+              "End": "{view.custom.EndTime}",
+              "PartNumber": "{view.custom.Data[0].PartNumber}",
+              "ProductionLineID": "{view.custom.Data[0].ProductionLineID}",
+              "Start": "{view.custom.Data[0].StartTime}",
+              "WorkOrder": "{view.custom.Data[0].ID}"
+            },
+            "viewPath": "OEE/NestedViews/HourDetails",
+            "viewportBound": false
+          },
+          "scope": "C",
+          "type": "popup"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "props.style.backgroundColor": {
+        "binding": {
+          "config": {
+            "expression": "if({view.custom.Performance} \u003e\u003d 1, \"#8AFF8A\", \r\n\tif({view.custom.Performance} \u003e 1, \"#FFFF8A\", \r\n\t\t\"#FF8A8A\"))"
+          },
+          "type": "expr"
+        }
+      }
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "borderStyle": "solid",
+        "borderWidth": 2,
+        "overflowY": "hidden"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

@@ -1,0 +1,890 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 816,
+      "width": 888
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "ToggleSwitch"
+                },
+                "position": {
+                  "align": "stretch",
+                  "basis": "170px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.label.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "now()\t\t\t\t\t\t"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\tif(self.props.selected):\n\t\treturn \"Time (in Min)\"\n\telse:\n\t\treturn \"Occurance\"",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "label": {}
+                },
+                "type": "ia.input.toggle-switch"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "200px"
+            },
+            "props": {
+              "style": {
+                "marginBottom": 1,
+                "paddingBottom": 1,
+                "paddingTop": 2
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "basis": "58px"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "92px"
+            },
+            "props": {
+              "style": {
+                "color": "#0C3471",
+                "fontFamily": "Roboto",
+                "fontSize": 24,
+                "fontWeight": "bolder",
+                "textAlign": "center"
+              },
+              "text": "From"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "DateTimeInput"
+            },
+            "position": {
+              "basis": "211px"
+            },
+            "props": {
+              "formattedValue": "Oct 1, 2024 10:31 PM",
+              "inputProps": {
+                "style": {
+                  "color": "#000000",
+                  "fontFamily": "Roboto",
+                  "fontSize": 18
+                }
+              },
+              "style": {
+                "color": "#000000",
+                "fontFamily": "Roboto",
+                "fontSize": 24
+              },
+              "value": {
+                "$": [
+                  "ts",
+                  192,
+                  1728643734636
+                ],
+                "$ts": 1727821891000
+              }
+            },
+            "type": "ia.input.date-time-input"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "83px"
+            },
+            "props": {
+              "style": {
+                "color": "#0C3471",
+                "fontFamily": "Roboto",
+                "fontSize": 24,
+                "fontWeight": "bolder",
+                "textAlign": "center"
+              },
+              "text": "To"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "End DateTimeInput"
+            },
+            "propConfig": {
+              "custom.formattedDate": {
+                "binding": {
+                  "config": {
+                    "expression": "setTime(getDate(getYear({this.props.value}), getMonth({this.props.value}), getDayOfMonth({this.props.value})), getHour24({this.props.value}), getMinute({this.props.value}), 0)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "expression": "now(0)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "formattedValue": "Nov 20, 2024 5:12 AM",
+              "inputProps": {
+                "style": {
+                  "color": "#000000",
+                  "fontFamily": "Roboto",
+                  "fontSize": 18
+                }
+              }
+            },
+            "type": "ia.input.date-time-input"
+          },
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "164px"
+            },
+            "props": {
+              "style": {
+                "color": "#0C3471",
+                "fontFamily": "Roboto",
+                "fontSize": 24,
+                "fontWeight": "bolder",
+                "textAlign": "center"
+              },
+              "text": "Machine"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "96.1px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.options": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "SiteID": "{session.custom.ProductionSiteID}"
+                    },
+                    "queryPath": "Pentair/EquipmentDropdownBySiteID"
+                  },
+                  "type": "query"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "color": "#000000",
+                "fontFamily": "Roboto",
+                "fontSize": 18
+              },
+              "value": 11
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_1"
+        },
+        "position": {
+          "basis": "36px"
+        },
+        "props": {
+          "style": {
+            "borderColor": "#808080",
+            "borderStyle": "solid",
+            "borderWidth": 1
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "PieChart",
+              "tooltip": {
+                "enabled": true
+              }
+            },
+            "position": {
+              "basis": "500px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.data": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "Equipment": "{.../FlexContainer_1/Dropdown.props.value}",
+                      "Switch1": "{.../FlexContainer/FlexContainer/ToggleSwitch.props.selected}",
+                      "endtime": "{.../FlexContainer_1/End DateTimeInput.props.value}",
+                      "startTime": "{.../FlexContainer_1/DateTimeInput.props.value}"
+                    },
+                    "queryPath": "Pentair/DowntimeR1"
+                  },
+                  "type": "query"
+                }
+              },
+              "props.title": {
+                "binding": {
+                  "config": {
+                    "expression": "now()"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif (self.parent.parent.getChild(\"FlexContainer\").getChild(\"FlexContainer\").getChild(\"ToggleSwitch\").props.selected):\n\t\treturn \"Time (in Min)\"\n\telse:\n\t\treturn \"Occurrence (Number of Times)\"",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "colors": [
+                "#3366CC",
+                "#EC4B3D",
+                "#4FC86C",
+                "#00A9C6",
+                "#E69300"
+              ],
+              "labels": {
+                "align": false,
+                "color": "#000000",
+                "inside": {
+                  "color": "#000000",
+                  "enabled": true,
+                  "radius": 70
+                },
+                "showName": false,
+                "showValue": false,
+                "wrap": {
+                  "enabled": true
+                }
+              },
+              "legend": {
+                "fontSize": 20,
+                "icon": {
+                  "height": 10,
+                  "width": 10
+                },
+                "position": "right",
+                "wrap": 1
+              },
+              "legendLabelColor": "#000000",
+              "showLabels": false,
+              "style": {
+                "color": "#FF8C00",
+                "fontFamily": "Roboto",
+                "fontSize": 20,
+                "fontWeight": "normal",
+                "textAlign": "left"
+              },
+              "threeDimensional": true,
+              "titleColor": "#FF4747",
+              "valueFormat": {
+                "showValueAsPercent": false
+              }
+            },
+            "type": "ia.chart.pie"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_0"
+        },
+        "position": {
+          "basis": "400px",
+          "grow": 1
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Table"
+            },
+            "position": {
+              "basis": "888px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.data": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "Equipment": "{.../FlexContainer_1/Dropdown.props.value}",
+                      "endtime": "{.../FlexContainer_1/End DateTimeInput.props.value}",
+                      "startTime": "{.../FlexContainer_1/DateTimeInput.props.value}"
+                    },
+                    "queryPath": "Pentair/DowntimeTable"
+                  },
+                  "type": "query"
+                }
+              }
+            },
+            "props": {
+              "cells": {
+                "style": {
+                  "color": "#000000",
+                  "fontFamily": "Roboto",
+                  "fontSize": 18
+                }
+              },
+              "columns": [
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "ParentReason",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": true,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "center",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": "Parent Reason"
+                  },
+                  "justify": "center",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": true,
+                  "width": ""
+                },
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "Reason",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": true,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "justify": "auto",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": true,
+                  "width": ""
+                },
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "Occurrences",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": true,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "center",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": "No of Occurrences"
+                  },
+                  "justify": "center",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": true,
+                  "width": ""
+                },
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "Time_Min",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": true,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "center",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": "Time(Min)"
+                  },
+                  "justify": "center",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": true,
+                  "width": ""
+                },
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "Comment",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": false,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "justify": "auto",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": true,
+                  "width": ""
+                }
+              ],
+              "filter": {
+                "enabled": true
+              },
+              "nullFormat": {
+                "nullFormatValue": "N/A"
+              },
+              "rows": {
+                "highlight": {
+                  "color": "#47FF47"
+                },
+                "striped": {
+                  "color": {
+                    "even": "#FFE8CC",
+                    "odd": "#CCFFFF"
+                  }
+                },
+                "style": {
+                  "color": "#000000",
+                  "fontFamily": "Roboto",
+                  "fontSize": 18
+                }
+              },
+              "selection": {
+                "enableColumnSelection": true,
+                "mode": "multiple interval"
+              }
+            },
+            "type": "ia.display.table"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_2"
+        },
+        "position": {
+          "basis": "300px",
+          "grow": 1
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "custom": {
+      "Mac1": "IM43"
+    },
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

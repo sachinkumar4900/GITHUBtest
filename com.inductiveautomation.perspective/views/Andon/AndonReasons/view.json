@@ -1,0 +1,292 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 703
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "height": 0.5264,
+          "width": 0.9775,
+          "x": 0.0112,
+          "y": 0.1669
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "path": "view.custom.Reasons"
+              },
+              "transforms": [
+                {
+                  "code": "\tinstances \u003d []\n\tfor row in range(value.getRowCount()):\n\t\treasonData \u003d {\"ID\": value.getValueAt(row,\"ID\"), \"Name\": value.getValueAt(row,\"Name\")}\n\t\tinstances.append(reasonData)\n\t\n\treturn instances",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "alignContent": "flex-start",
+          "alignItems": "flex-start",
+          "path": "Andon/NestedViews/AndonReasons",
+          "wrap": "wrap"
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\teqID \u003d self.props.value\n\t\n\tparameters  \u003d {\"EquipmentID\":eqID}\n\t  \n\t# Run the Named Query.\n\tself.view.custom.Reasons \u003d system.db.runNamedQuery(\"Downtime Entry/GetTopLevelReasonsByEquipmentID\", parameters)\n\tsystem.perspective.sendMessage(\"ClearLastActiveReason\", {\"ReasonId\": 0})"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Dropdown"
+        },
+        "position": {
+          "height": 0.0703,
+          "width": 0.32,
+          "x": 0.3362,
+          "y": 0.0374
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "view.params.splitMode"
+              },
+              "type": "property"
+            }
+          },
+          "props.options": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "LineID": "{view.custom.lineID}"
+                },
+                "queryPath": "Downtime Entry/GetEquipmentByLineID"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "value": 3
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "meta": {
+          "name": "TextArea"
+        },
+        "position": {
+          "height": 0.1925,
+          "width": 0.5212,
+          "x": 0.0868,
+          "y": 0.7841
+        },
+        "props": {
+          "deferUpdates": false
+        },
+        "type": "ia.input.text-area"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\teqID \u003d self.getSibling(\"Dropdown\").props.value\n\t\n\t#normal downtime event assignment\n\tif int(self.view.params.splitMode) \u003d\u003d 0:\n\t\n\t\t# Assing the reason to DB\n\t\tDowntime.AssignReason(self.view.params.DowntimeEventID, self.session.custom.SelectedReasonID, self.getSibling(\"TextArea\").props.text)\n\t\t\n\t\tparameters  \u003d {\"EquipmentID\":eqID}\n\t\tself.view.custom.Reasons \u003d system.db.runNamedQuery(\"Downtime Entry/GetTopLevelReasonsByEquipmentID\", parameters)\n\t\tsystem.perspective.sendMessage(\"ClearLastActiveReason\", {\"ReasonId\": 0})\n\t\t\n\t\tself.session.custom.SelectedReasonID \u003d 0\n\t\t\n\t#user is splitting a dt event and needs to select a reason, but not save to db yet\n\telif int(self.view.params.splitMode) \u003d\u003d 1:\n\t\t\n\t\tself.session.custom.DowntimeSplitComment \u003d self.getSibling(\"TextArea\").props.text\n\t\tself.session.custom.DowntimeSplitEq \u003d self.getSibling(\"Dropdown\").props.value\n\t\n\t\n\tsystem.perspective.closePopup(\u0027\u0027)\n\t\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Save Button"
+        },
+        "position": {
+          "height": 0.1416,
+          "width": 0.1338,
+          "x": 0.7719,
+          "y": 0.8257
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "{session.custom.SelectedReasonID} !\u003d 0"
+              },
+              "type": "expr"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "path": "this.props.enabled"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "text": "Save"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.0581,
+          "width": 0.2225,
+          "x": 0.0894,
+          "y": 0.7186
+        },
+        "props": {
+          "text": "Comment"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "custom": {
+          "PressedReasonId": 0
+        },
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\treasonId \u003d self.custom.PressedReasonId\n\treasonParams \u003d {\"ReasonId\": reasonId}\n\t\n\tprevId \u003d system.db.runNamedQuery(\"Downtime Entry/GetPreviousDowntimeReasonId\", reasonParams)\n\tchildParams \u003d {\"ReasonId\": prevId}\n\treasons \u003d system.db.runNamedQuery(\"Downtime Entry/GetChildReasons\", childParams)\n\n\tif reasons.getRowCount() \u003e 0:\n\t\tself.view.custom.Reasons \u003d reasons\n\telse:\n\t\teqID \u003d self.view.params.EquipmentID\n\t\t\n\t\tparameters  \u003d {\"EquipmentID\":eqID}\n\t\tself.view.custom.Reasons \u003d system.db.runNamedQuery(\"Downtime Entry/GetTopLevelReasonsByEquipmentID\", parameters)\n\tself.session.custom.SelectedReasonID \u003d 0\n\tsystem.perspective.sendMessage(\"ClearLastActiveReason\", {\"ReasonId\": 0})"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Back Button"
+        },
+        "position": {
+          "height": 0.1416,
+          "width": 0.2475,
+          "x": 0.0136,
+          "y": 0.0053
+        },
+        "props": {
+          "text": "Back"
+        },
+        "scripts": {
+          "customMethods": [],
+          "extensionFunctions": null,
+          "messageHandlers": [
+            {
+              "messageType": "ClearLastActiveReason",
+              "pageScope": true,
+              "script": "\t# implement your handler here\n\tself.custom.PressedReasonId \u003d payload[\"ReasonId\"]",
+              "sessionScope": false,
+              "viewScope": false
+            }
+          ]
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "Test DowntimeEventID",
+          "visible": false
+        },
+        "position": {
+          "height": 0.0581,
+          "width": 0.1613,
+          "x": 0.7475,
+          "y": 0.0234
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.DowntimeEventID"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Test ReasonID",
+          "visible": false
+        },
+        "position": {
+          "height": 0.0581,
+          "width": 0.1613,
+          "x": 0.7411,
+          "y": 0.096
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "session.custom.SelectedReasonID"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\t\n\tself.session.custom.SelectedReasonID \u003d 0\n\tsystem.perspective.closePopup(\u0027\u0027)\n\t\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Close Button"
+        },
+        "position": {
+          "height": 0.1416,
+          "width": 0.1338,
+          "x": 0.625,
+          "y": 0.8258
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#A31313"
+          },
+          "text": "Close"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

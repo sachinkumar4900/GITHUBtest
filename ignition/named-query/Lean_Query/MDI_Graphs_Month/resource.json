@@ -1,0 +1,65 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 60,
+    "cacheEnabled": true,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "407a953b201f438b811a1d4dd9249ade2300f59e715ede8d50b0dfef99804602",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2025-07-02T09:39:17Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "startTime",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "endTime",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ProductionLineID",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "resetOption",
+        "sqlType": 0
+      },
+      {
+        "type": "Parameter",
+        "identifier": "targetPercent",
+        "sqlType": 1
+      },
+      {
+        "type": "Parameter",
+        "identifier": "targetPercentPlanned",
+        "sqlType": 1
+      }
+    ]
+  }
+}

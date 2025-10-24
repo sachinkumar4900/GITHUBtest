@@ -1,0 +1,329 @@
+{
+  "custom": {
+    "ValueStream": "Assembly"
+  },
+  "params": {
+    "ProductionLineID": 11
+  },
+  "propConfig": {
+    "custom.ValueStream": {
+      "binding": {
+        "config": {
+          "expression": "{view.params.ProductionLineID}"
+        },
+        "transforms": [
+          {
+            "fallback": null,
+            "inputType": "scalar",
+            "mappings": [
+              {
+                "input": 1,
+                "output": "Molding"
+              },
+              {
+                "input": 2,
+                "output": "Molding"
+              },
+              {
+                "input": 3,
+                "output": "Molding"
+              },
+              {
+                "input": 4,
+                "output": "Molding"
+              },
+              {
+                "input": 5,
+                "output": "Molding"
+              },
+              {
+                "input": 7,
+                "output": "Molding"
+              },
+              {
+                "input": 8,
+                "output": "Molding"
+              },
+              {
+                "input": 9,
+                "output": "Molding"
+              },
+              {
+                "input": 10,
+                "output": "Molding"
+              },
+              {
+                "input": 11,
+                "output": "Assembly"
+              }
+            ],
+            "outputType": "scalar",
+            "type": "map"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "params.ProductionLineID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 500,
+      "width": 462
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "component": {
+            "onEditCellCommit": [
+              {
+                "config": {
+                  "script": "\tid \u003d self.props.selection.data[0].ID\n\tusername \u003d self.session.props.auth.user.userName\n\tcountermeasure \u003d event.value\n\t\n\tsystem.db.runPrepUpdate(\"UPDATE HourByHourQualityAndDelivery SET Countermeasure \u003d ?, CountermeasureModifiedBy \u003d ? WHERE ID \u003d ?\", [countermeasure, username, id])\n\tself.refreshBinding(\"props.data\")"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.sendMessage(\"quality-and-delivery-update\", {\"id\": self.view.params.HourByHourMDIID})\n\t"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Table"
+        },
+        "position": {
+          "height": 0.976,
+          "width": 0.987,
+          "x": 0.0099,
+          "y": 0.014
+        },
+        "propConfig": {
+          "props.data": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "ValueStream": "{view.custom.ValueStream}"
+                },
+                "queryPath": "Lean_Query/ScrapCodesAll"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "columns": [
+            {
+              "align": "center",
+              "boolean": "checkbox",
+              "dateFormat": "MM/DD/YYYY",
+              "editable": false,
+              "field": "ScrapCode",
+              "filter": {
+                "boolean": {
+                  "condition": ""
+                },
+                "date": {
+                  "condition": "",
+                  "value": ""
+                },
+                "enabled": false,
+                "number": {
+                  "condition": "",
+                  "value": ""
+                },
+                "string": {
+                  "condition": "",
+                  "value": ""
+                },
+                "visible": "on-hover"
+              },
+              "footer": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "header": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "justify": "auto",
+              "nullFormat": {
+                "includeNullStrings": false,
+                "nullFormatValue": "",
+                "strict": false
+              },
+              "number": "value",
+              "numberFormat": "0,0.##",
+              "progressBar": {
+                "bar": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "max": 100,
+                "min": 0,
+                "track": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "value": {
+                  "enabled": true,
+                  "format": "0,0.##",
+                  "justify": "center",
+                  "style": {
+                    "classes": ""
+                  }
+                }
+              },
+              "render": "auto",
+              "resizable": true,
+              "sort": "none",
+              "sortable": true,
+              "strictWidth": false,
+              "style": {
+                "classes": ""
+              },
+              "toggleSwitch": {
+                "color": {
+                  "selected": "",
+                  "unselected": ""
+                }
+              },
+              "viewParams": {},
+              "viewPath": "",
+              "visible": true,
+              "width": ""
+            },
+            {
+              "align": "center",
+              "boolean": "checkbox",
+              "dateFormat": "MM/DD/YYYY",
+              "editable": false,
+              "field": "Name",
+              "filter": {
+                "boolean": {
+                  "condition": ""
+                },
+                "date": {
+                  "condition": "",
+                  "value": ""
+                },
+                "enabled": false,
+                "number": {
+                  "condition": "",
+                  "value": ""
+                },
+                "string": {
+                  "condition": "",
+                  "value": ""
+                },
+                "visible": "on-hover"
+              },
+              "footer": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "header": {
+                "align": "center",
+                "justify": "left",
+                "style": {
+                  "classes": ""
+                },
+                "title": ""
+              },
+              "justify": "auto",
+              "nullFormat": {
+                "includeNullStrings": false,
+                "nullFormatValue": "",
+                "strict": false
+              },
+              "number": "value",
+              "numberFormat": "0,0.##",
+              "progressBar": {
+                "bar": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "max": 100,
+                "min": 0,
+                "track": {
+                  "color": "",
+                  "style": {
+                    "classes": ""
+                  }
+                },
+                "value": {
+                  "enabled": true,
+                  "format": "0,0.##",
+                  "justify": "center",
+                  "style": {
+                    "classes": ""
+                  }
+                }
+              },
+              "render": "auto",
+              "resizable": true,
+              "sort": "none",
+              "sortable": true,
+              "strictWidth": false,
+              "style": {
+                "classes": ""
+              },
+              "toggleSwitch": {
+                "color": {
+                  "selected": "",
+                  "unselected": ""
+                }
+              },
+              "viewParams": {},
+              "viewPath": "",
+              "visible": true,
+              "width": ""
+            }
+          ],
+          "filter": {
+            "enabled": true
+          },
+          "style": {
+            "paddingLeft": "10px"
+          }
+        },
+        "type": "ia.display.table"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

@@ -1,0 +1,16 @@
+IF EXISTS (
+	SELECT TOP 1 StatusID
+	FROM AndonEvent
+	WHERE EventHeaderID = :EventHeaderID
+	ORDER BY ID DESC
+)
+BEGIN
+	SELECT TOP 1 StatusID
+	FROM AndonEvent
+	WHERE EventHeaderID = :EventHeaderID
+	ORDER BY ID DESC
+END
+	ELSE
+BEGIN
+	SELECT -1 AS StatusID
+END

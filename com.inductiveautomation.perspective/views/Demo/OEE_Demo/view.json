@@ -1,0 +1,480 @@
+{
+  "custom": {},
+  "params": {
+    "EndDate": {
+      "$": [
+        "ts",
+        192,
+        1740981931833
+      ],
+      "$ts": 1739145600000
+    },
+    "ProductionLineID": 5,
+    "StartDate": {
+      "$": [
+        "ts",
+        192,
+        1740981918488
+      ],
+      "$ts": 1738368000000
+    }
+  },
+  "propConfig": {
+    "params.EndDate": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ProductionLineID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.StartDate": {
+      "paramDirection": "output",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 600,
+      "width": 1200
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "TabContainer"
+        },
+        "position": {
+          "height": 1,
+          "width": 1
+        },
+        "propConfig": {
+          "props.currentTabIndex": {
+            "binding": {
+              "config": {
+                "expression": "getMonth(Now())"
+              },
+              "transforms": [
+                {
+                  "code": "\tif(self.props.currentTabIndex \u003c\u003d value):\n\t\treturn self.props.currentTabIndex\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          },
+          "props.tabs": {
+            "binding": {
+              "config": {
+                "expression": "now()"
+              },
+              "transforms": [
+                {
+                  "code": "\tfrom datetime import datetime\n\timport calendar\n\tcurrent_month \u003d datetime.now().month\n\treturn [calendar.month_abbr[i] for i in range(1, current_month+1)]",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "menuStyle": {
+            "color": "#FFFF8A",
+            "fontFamily": "Arial",
+            "fontSize": 22,
+            "fontWeight": "bold"
+          },
+          "menuType": "modern",
+          "tabSize": {
+            "width": 150
+          },
+          "tabStyle": {
+            "active": {
+              "backgroundColor": "#FFFFFF",
+              "borderColor": "#0000FF",
+              "borderStyle": "solid",
+              "borderWidth": 3,
+              "color": "#FF8C00",
+              "fontFamily": "Roboto",
+              "fontSize": 22
+            }
+          }
+        },
+        "type": "ia.container.tab"
+      },
+      {
+        "events": {
+          "dom": {
+            "onDoubleClick": {
+              "config": {
+                "draggable": true,
+                "id": "lvOs4VLd",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndDate": "{/root/EmbeddedView.props.params.EndDate}",
+                  "ProductionLineID": "{/root/EmbeddedView.props.params.ProductionLineID}",
+                  "StartDate": "{/root/EmbeddedView.props.params.StartDate}"
+                },
+                "viewPath": "Demo/NestedViewDemo/OEEGraph",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "EmbeddedView"
+        },
+        "position": {
+          "height": 1,
+          "width": 0.1992,
+          "y": 0.0637
+        },
+        "propConfig": {
+          "props.params.EndDate": {
+            "binding": {
+              "config": {
+                "expression": "if({../TabContainer.props.currentTabIndex} \u003d 0 ,dateFormat(addYears(now(), 0), \"yyyy-02-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 1 ,dateFormat(addYears(now(), 0), \"yyyy-03-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 2 ,dateFormat(addYears(now(), 0), \"yyyy-04-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 3 ,dateFormat(addYears(now(), 0), \"yyyy-05-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 4 ,dateFormat(addYears(now(), 0), \"yyyy-06-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 5 ,dateFormat(addYears(now(), 0), \"yyyy-07-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 6 ,dateFormat(addYears(now(), 0), \"yyyy-08-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 7 ,dateFormat(addYears(now(), 0), \"yyyy-09-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 8 ,dateFormat(addYears(now(), 0), \"yyyy-10-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 9 ,dateFormat(addYears(now(), 0), \"yyyy-11-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 10 ,dateFormat(addYears(now(), 0), \"yyyy-12-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 11 ,dateFormat(addYears(now(), 1), \"yyyy-01-01\") + \" 00:00:00\",\"NULL\"\r\n))))))))))))\r\n\r\n"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.Month": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID}\u003d1,\"P08\",\"IM43\")"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.ProductionLineID": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID}\u003d1, 11, 10)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.StartDate": {
+            "binding": {
+              "config": {
+                "expression": "if({../TabContainer.props.currentTabIndex} \u003d 0 ,dateFormat(addYears(now(), 0), \"yyyy-01-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 1 ,dateFormat(addYears(now(), 0), \"yyyy-02-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 2 ,dateFormat(addYears(now(), 0), \"yyyy-03-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 3 ,dateFormat(addYears(now(), 0), \"yyyy-04-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 4 ,dateFormat(addYears(now(), 0), \"yyyy-05-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 5 ,dateFormat(addYears(now(), 0), \"yyyy-06-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 6 ,dateFormat(addYears(now(), 0), \"yyyy-07-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 7 ,dateFormat(addYears(now(), 0), \"yyyy-08-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 8 ,dateFormat(addYears(now(), 0), \"yyyy-09-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 9 ,dateFormat(addYears(now(), 0), \"yyyy-10-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 10 ,dateFormat(addYears(now(), 0), \"yyyy-11-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 11 ,dateFormat(addYears(now(), 0), \"yyyy-12-01\") + \" 00:00:00\",\"NULL\"\r\n))))))))))))\r\n"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "path": "Demo/NestedViewDemo/OEECard"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "events": {
+          "dom": {
+            "onDoubleClick": {
+              "config": {
+                "draggable": true,
+                "id": "W73xq2_j",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndDate": "{/root/EmbeddedView_0.props.params.EndDate}",
+                  "ProductionLineID": "{/root/EmbeddedView_0.props.params.ProductionLineID}",
+                  "StartDate": "{/root/EmbeddedView_0.props.params.StartDate}"
+                },
+                "viewPath": "Demo/NestedViewDemo/OEEGraph",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "EmbeddedView_0"
+        },
+        "position": {
+          "height": 1,
+          "width": 0.2017,
+          "x": 0.1984,
+          "y": 0.0637
+        },
+        "propConfig": {
+          "props.params.EndDate": {
+            "binding": {
+              "config": {
+                "expression": "if({../TabContainer.props.currentTabIndex} \u003d 0 ,dateFormat(addYears(now(), 0), \"yyyy-02-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 1 ,dateFormat(addYears(now(), 0), \"yyyy-03-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 2 ,dateFormat(addYears(now(), 0), \"yyyy-04-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 3 ,dateFormat(addYears(now(), 0), \"yyyy-05-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 4 ,dateFormat(addYears(now(), 0), \"yyyy-06-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 5 ,dateFormat(addYears(now(), 0), \"yyyy-07-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 6 ,dateFormat(addYears(now(), 0), \"yyyy-08-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 7 ,dateFormat(addYears(now(), 0), \"yyyy-09-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 8 ,dateFormat(addYears(now(), 0), \"yyyy-10-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 9 ,dateFormat(addYears(now(), 0), \"yyyy-11-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 10 ,dateFormat(addYears(now(), 0), \"yyyy-12-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 11 ,dateFormat(addYears(now(), 1), \"yyyy-01-01\") + \" 00:00:00\",\"NULL\"\r\n))))))))))))\r\n\r\n"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.Month": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID}\u003d1,\"SB01\",\"IM45\")"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.ProductionLineID": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID}\u003d1, 1, 5)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.StartDate": {
+            "binding": {
+              "config": {
+                "expression": "if({../TabContainer.props.currentTabIndex} \u003d 0 ,dateFormat(addYears(now(), 0), \"yyyy-01-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 1 ,dateFormat(addYears(now(), 0), \"yyyy-02-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 2 ,dateFormat(addYears(now(), 0), \"yyyy-03-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 3 ,dateFormat(addYears(now(), 0), \"yyyy-04-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 4 ,dateFormat(addYears(now(), 0), \"yyyy-05-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 5 ,dateFormat(addYears(now(), 0), \"yyyy-06-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 6 ,dateFormat(addYears(now(), 0), \"yyyy-07-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 7 ,dateFormat(addYears(now(), 0), \"yyyy-08-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 8 ,dateFormat(addYears(now(), 0), \"yyyy-09-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 9 ,dateFormat(addYears(now(), 0), \"yyyy-10-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 10 ,dateFormat(addYears(now(), 0), \"yyyy-11-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 11 ,dateFormat(addYears(now(), 0), \"yyyy-12-01\") + \" 00:00:00\",\"NULL\"\r\n))))))))))))\r\n"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "path": "Demo/NestedViewDemo/OEECard"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "events": {
+          "dom": {
+            "onDoubleClick": {
+              "config": {
+                "draggable": true,
+                "id": "rxd3krl-",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndDate": "{/root/EmbeddedView_1.props.params.EndDate}",
+                  "ProductionLineID": "{/root/EmbeddedView_1.props.params.ProductionLineID}",
+                  "StartDate": "{/root/EmbeddedView_1.props.params.StartDate}"
+                },
+                "viewPath": "Demo/NestedViewDemo/OEEGraph",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "EmbeddedView_1"
+        },
+        "position": {
+          "height": 1,
+          "width": 0.2008,
+          "x": 0.4,
+          "y": 0.0637
+        },
+        "propConfig": {
+          "props.params.EndDate": {
+            "binding": {
+              "config": {
+                "expression": "if({../TabContainer.props.currentTabIndex} \u003d 0 ,dateFormat(addYears(now(), 0), \"yyyy-02-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 1 ,dateFormat(addYears(now(), 0), \"yyyy-03-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 2 ,dateFormat(addYears(now(), 0), \"yyyy-04-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 3 ,dateFormat(addYears(now(), 0), \"yyyy-05-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 4 ,dateFormat(addYears(now(), 0), \"yyyy-06-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 5 ,dateFormat(addYears(now(), 0), \"yyyy-07-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 6 ,dateFormat(addYears(now(), 0), \"yyyy-08-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 7 ,dateFormat(addYears(now(), 0), \"yyyy-09-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 8 ,dateFormat(addYears(now(), 0), \"yyyy-10-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 9 ,dateFormat(addYears(now(), 0), \"yyyy-11-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 10 ,dateFormat(addYears(now(), 0), \"yyyy-12-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 11 ,dateFormat(addYears(now(), 1), \"yyyy-01-01\") + \" 00:00:00\",\"NULL\"\r\n))))))))))))\r\n\r\n"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.Month": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID}\u003d1,\"SB02\",\"IM48\")"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.ProductionLineID": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID}\u003d1, 2, 7)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.StartDate": {
+            "binding": {
+              "config": {
+                "expression": "if({../TabContainer.props.currentTabIndex} \u003d 0 ,dateFormat(addYears(now(), 0), \"yyyy-01-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 1 ,dateFormat(addYears(now(), 0), \"yyyy-02-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 2 ,dateFormat(addYears(now(), 0), \"yyyy-03-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 3 ,dateFormat(addYears(now(), 0), \"yyyy-04-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 4 ,dateFormat(addYears(now(), 0), \"yyyy-05-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 5 ,dateFormat(addYears(now(), 0), \"yyyy-06-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 6 ,dateFormat(addYears(now(), 0), \"yyyy-07-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 7 ,dateFormat(addYears(now(), 0), \"yyyy-08-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 8 ,dateFormat(addYears(now(), 0), \"yyyy-09-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 9 ,dateFormat(addYears(now(), 0), \"yyyy-10-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 10 ,dateFormat(addYears(now(), 0), \"yyyy-11-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 11 ,dateFormat(addYears(now(), 0), \"yyyy-12-01\") + \" 00:00:00\",\"NULL\"\r\n))))))))))))\r\n"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "path": "Demo/NestedViewDemo/OEECard"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "events": {
+          "dom": {
+            "onDoubleClick": {
+              "config": {
+                "draggable": true,
+                "id": "eZLVc3ls",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndDate": "{/root/EmbeddedView_2.props.params.EndDate}",
+                  "ProductionLineID": "{/root/EmbeddedView_2.props.params.ProductionLineID}",
+                  "StartDate": "{/root/EmbeddedView_2.props.params.StartDate}"
+                },
+                "viewPath": "Demo/NestedViewDemo/OEEGraph",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "EmbeddedView_2"
+        },
+        "position": {
+          "height": 1,
+          "width": 0.2025,
+          "x": 0.6008,
+          "y": 0.0637
+        },
+        "propConfig": {
+          "props.params.EndDate": {
+            "binding": {
+              "config": {
+                "expression": "if({../TabContainer.props.currentTabIndex} \u003d 0 ,dateFormat(addYears(now(), 0), \"yyyy-02-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 1 ,dateFormat(addYears(now(), 0), \"yyyy-03-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 2 ,dateFormat(addYears(now(), 0), \"yyyy-04-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 3 ,dateFormat(addYears(now(), 0), \"yyyy-05-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 4 ,dateFormat(addYears(now(), 0), \"yyyy-06-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 5 ,dateFormat(addYears(now(), 0), \"yyyy-07-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 6 ,dateFormat(addYears(now(), 0), \"yyyy-08-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 7 ,dateFormat(addYears(now(), 0), \"yyyy-09-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 8 ,dateFormat(addYears(now(), 0), \"yyyy-10-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 9 ,dateFormat(addYears(now(), 0), \"yyyy-11-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 10 ,dateFormat(addYears(now(), 0), \"yyyy-12-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 11 ,dateFormat(addYears(now(), 1), \"yyyy-01-01\") + \" 00:00:00\",\"NULL\"\r\n))))))))))))\r\n\r\n"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.Month": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID}\u003d1,\"SB03\",\"IM50\")"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.ProductionLineID": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID}\u003d1, 3, 8)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.StartDate": {
+            "binding": {
+              "config": {
+                "expression": "if({../TabContainer.props.currentTabIndex} \u003d 0 ,dateFormat(addYears(now(), 0), \"yyyy-01-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 1 ,dateFormat(addYears(now(), 0), \"yyyy-02-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 2 ,dateFormat(addYears(now(), 0), \"yyyy-03-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 3 ,dateFormat(addYears(now(), 0), \"yyyy-04-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 4 ,dateFormat(addYears(now(), 0), \"yyyy-05-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 5 ,dateFormat(addYears(now(), 0), \"yyyy-06-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 6 ,dateFormat(addYears(now(), 0), \"yyyy-07-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 7 ,dateFormat(addYears(now(), 0), \"yyyy-08-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 8 ,dateFormat(addYears(now(), 0), \"yyyy-09-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 9 ,dateFormat(addYears(now(), 0), \"yyyy-10-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 10 ,dateFormat(addYears(now(), 0), \"yyyy-11-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 11 ,dateFormat(addYears(now(), 0), \"yyyy-12-01\") + \" 00:00:00\",\"NULL\"\r\n))))))))))))\r\n"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "path": "Demo/NestedViewDemo/OEECard"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "events": {
+          "dom": {
+            "onDoubleClick": {
+              "config": {
+                "draggable": true,
+                "id": "xJ82Ci3r",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "EndDate": "{/root/EmbeddedView_3.props.params.EndDate}",
+                  "ProductionLineID": "{/root/EmbeddedView_3.props.params.ProductionLineID}",
+                  "StartDate": "{/root/EmbeddedView_3.props.params.StartDate}"
+                },
+                "viewPath": "Demo/NestedViewDemo/OEEGraph",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "EmbeddedView_3"
+        },
+        "position": {
+          "height": 1,
+          "width": 0.1967,
+          "x": 0.8024,
+          "y": 0.0637
+        },
+        "propConfig": {
+          "props.params.EndDate": {
+            "binding": {
+              "config": {
+                "expression": "if({../TabContainer.props.currentTabIndex} \u003d 0 ,dateFormat(addYears(now(), 0), \"yyyy-02-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 1 ,dateFormat(addYears(now(), 0), \"yyyy-03-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 2 ,dateFormat(addYears(now(), 0), \"yyyy-04-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 3 ,dateFormat(addYears(now(), 0), \"yyyy-05-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 4 ,dateFormat(addYears(now(), 0), \"yyyy-06-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 5 ,dateFormat(addYears(now(), 0), \"yyyy-07-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 6 ,dateFormat(addYears(now(), 0), \"yyyy-08-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 7 ,dateFormat(addYears(now(), 0), \"yyyy-09-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 8 ,dateFormat(addYears(now(), 0), \"yyyy-10-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 9 ,dateFormat(addYears(now(), 0), \"yyyy-11-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 10 ,dateFormat(addYears(now(), 0), \"yyyy-12-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 11 ,dateFormat(addYears(now(), 1), \"yyyy-01-01\") + \" 00:00:00\",\"NULL\"\r\n))))))))))))\r\n\r\n"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.Month": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID}\u003d1,\"SB04\",\"IM54\")"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.ProductionLineID": {
+            "binding": {
+              "config": {
+                "expression": "if({session.custom.ProductionSiteID}\u003d1, 4, 9)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.params.StartDate": {
+            "binding": {
+              "config": {
+                "expression": "if({../TabContainer.props.currentTabIndex} \u003d 0 ,dateFormat(addYears(now(), 0), \"yyyy-01-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 1 ,dateFormat(addYears(now(), 0), \"yyyy-02-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 2 ,dateFormat(addYears(now(), 0), \"yyyy-03-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 3 ,dateFormat(addYears(now(), 0), \"yyyy-04-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 4 ,dateFormat(addYears(now(), 0), \"yyyy-05-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 5 ,dateFormat(addYears(now(), 0), \"yyyy-06-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 6 ,dateFormat(addYears(now(), 0), \"yyyy-07-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 7 ,dateFormat(addYears(now(), 0), \"yyyy-08-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 8 ,dateFormat(addYears(now(), 0), \"yyyy-09-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 9 ,dateFormat(addYears(now(), 0), \"yyyy-10-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 10 ,dateFormat(addYears(now(), 0), \"yyyy-11-01\") + \" 00:00:00\",\r\nif({../TabContainer.props.currentTabIndex} \u003d 11 ,dateFormat(addYears(now(), 0), \"yyyy-12-01\") + \" 00:00:00\",\"NULL\"\r\n))))))))))))\r\n"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "path": "Demo/NestedViewDemo/OEECard"
+        },
+        "type": "ia.display.view"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

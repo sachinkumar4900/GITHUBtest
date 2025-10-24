@@ -1,0 +1,322 @@
+{
+  "custom": {
+    "ProductionLineID": 11,
+    "WorkOrderID": 1395
+  },
+  "params": {
+    "EquipmentID": 19
+  },
+  "propConfig": {
+    "custom.ProductionLineID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "EquipmentID": "{view.params.EquipmentID}"
+          },
+          "queryPath": "ProductionLine/GetProductionLineIDByEquipmentID",
+          "returnFormat": "scalar"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.WorkOrderID": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "productionLineID": "{view.custom.ProductionLineID}"
+          },
+          "queryPath": "WorkOrder/GetActiveWorkOrderIDForAsset"
+        },
+        "transforms": [
+          {
+            "code": "\tif value \u003d\u003d \"0\" or value \u003d\u003d None or value \u003d\u003d 0:\n\t\treturn -1\n\telse:\n\t\treturn value",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "OperatorInterfaceAssembly"
+            },
+            "propConfig": {
+              "props.params.EquipmentID": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.EquipmentID"
+                  },
+                  "type": "property"
+                }
+              },
+              "props.params.WorkOrderID": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.WorkOrderID"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "NotifiedDate": 0
+              },
+              "path": "OperatorInterface/AssemblyViews/OperatorInterfaceAssembly"
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Carousel"
+            },
+            "position": {
+              "tabIndex": 1
+            },
+            "props": {
+              "views": [
+                {
+                  "alignItems": "flex-start",
+                  "direction": "row",
+                  "justify": "flex-start",
+                  "viewParams": {
+                    "id": 346
+                  },
+                  "viewPath": "OperatorInterface/NestedViews/PDFViewer"
+                },
+                {
+                  "alignItems": "flex-start",
+                  "direction": "row",
+                  "justify": "flex-start",
+                  "viewParams": {
+                    "id": 347
+                  },
+                  "viewPath": "OperatorInterface/NestedViews/PDFViewer"
+                },
+                {
+                  "alignItems": "flex-start",
+                  "direction": "row",
+                  "justify": "flex-start",
+                  "viewParams": {
+                    "id": 348
+                  },
+                  "viewPath": "OperatorInterface/NestedViews/PDFViewer"
+                },
+                {
+                  "alignItems": "flex-start",
+                  "direction": "row",
+                  "justify": "flex-start",
+                  "viewParams": {
+                    "id": 349
+                  },
+                  "viewPath": "OperatorInterface/NestedViews/PDFViewer"
+                },
+                {
+                  "alignItems": "flex-start",
+                  "direction": "row",
+                  "justify": "flex-start",
+                  "viewParams": {
+                    "id": 350
+                  },
+                  "viewPath": "OperatorInterface/NestedViews/PDFViewer"
+                }
+              ]
+            },
+            "type": "ia.display.carousel"
+          }
+        ],
+        "meta": {
+          "name": "TabContainer"
+        },
+        "position": {
+          "height": 0.6,
+          "width": 1,
+          "y": 0.3
+        },
+        "props": {
+          "tabSize": {
+            "width": 175
+          },
+          "tabStyle": {
+            "active": {
+              "backgroundColor": "#006E96",
+              "color": "#FFFFFF",
+              "fontWeight": "bold"
+            }
+          },
+          "tabs": [
+            "Operator Interface",
+            "Documents"
+          ]
+        },
+        "type": "ia.container.tab"
+      },
+      {
+        "meta": {
+          "name": "OverviewHeader_Assembly"
+        },
+        "position": {
+          "height": 0.3,
+          "width": 1
+        },
+        "propConfig": {
+          "props.params.EquipmentID": {
+            "binding": {
+              "config": {
+                "path": "view.params.EquipmentID"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.WorkOrderID": {
+            "binding": {
+              "config": {
+                "path": "view.custom.WorkOrderID"
+              },
+              "transforms": [
+                {
+                  "code": "\tif self.props.params.WorkOrderID \u003d\u003d 0:\n\t\treturn -1\n\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "path": "OperatorInterface/AssemblyViews/OverviewHeader_Assembly"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "AndonStatus"
+        },
+        "position": {
+          "height": 0.1,
+          "width": 1,
+          "y": 0.9
+        },
+        "propConfig": {
+          "props.params.AndonHeader": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "productionLineID": "{view.custom.ProductionLineID}"
+                },
+                "polling": {
+                  "enabled": true,
+                  "rate": "1"
+                },
+                "queryPath": "Andon/GetEventHeaderByProductionLineID",
+                "returnFormat": "scalar"
+              },
+              "type": "query"
+            }
+          },
+          "props.params.AndonStatus": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "EventHeaderID": "{this.props.params.AndonHeader}"
+                },
+                "polling": {
+                  "enabled": true,
+                  "rate": "1"
+                },
+                "queryPath": "Andon/GetEventStatusByEventHeaderID",
+                "returnFormat": "scalar"
+              },
+              "type": "query"
+            }
+          },
+          "props.params.DowntimeEventID": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "ProductionLineID": "{view.custom.ProductionLineID}"
+                },
+                "polling": {
+                  "enabled": true,
+                  "rate": "1"
+                },
+                "queryPath": "Downtime/GetActiveDowntimeEventByProductionLineID",
+                "returnFormat": "scalar"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d None:\n\t\treturn -1\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "query"
+            }
+          },
+          "props.params.EquipmentID": {
+            "binding": {
+              "config": {
+                "path": "view.params.EquipmentID"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.ProductionLineID": {
+            "binding": {
+              "config": {
+                "path": "view.custom.ProductionLineID"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.WorkOrderID": {
+            "binding": {
+              "config": {
+                "path": "view.custom.WorkOrderID"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "UdtType": "Assembly"
+          },
+          "path": "OperatorInterface/NestedViews/AndonStatus"
+        },
+        "type": "ia.display.view"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "refresh-Operator-Interface-Header",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tself.view.refreshBinding(\"custom.WorkOrderID\")",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.coord"
+  }
+}

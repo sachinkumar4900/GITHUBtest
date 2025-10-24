@@ -1,0 +1,50 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 60,
+    "cacheEnabled": true,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "9c6f175e40bd0cf00dc3aa17184169286ee1f855c11f904e42a18a25352484c2",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2025-07-02T09:39:17Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "FPY_Target",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "OTD_Target",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ID",
+        "sqlType": 1
+      }
+    ]
+  }
+}

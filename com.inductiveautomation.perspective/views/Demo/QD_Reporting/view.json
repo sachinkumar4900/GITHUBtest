@@ -1,0 +1,211 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 900
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "props": {
+              "text": "StartTime"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Start DateTimeInput"
+            },
+            "position": {
+              "basis": "173px"
+            },
+            "propConfig": {
+              "custom.formattedDate": {
+                "binding": {
+                  "config": {
+                    "expression": "setTime(getDate(getYear({this.props.value}), getMonth({this.props.value}), getDayOfMonth({this.props.value})), getHour24({this.props.value}), 0, 0)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "expression": "addHours(now(0), -4)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "formattedValue": "Jul 18, 2025 5:17 AM"
+            },
+            "type": "ia.input.date-time-input"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "86px"
+            },
+            "props": {
+              "text": "EndTime"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "End DateTimeInput"
+            },
+            "propConfig": {
+              "custom.formattedDate": {
+                "binding": {
+                  "config": {
+                    "expression": "setTime(getDate(getYear({this.props.value}), getMonth({this.props.value}), getDayOfMonth({this.props.value})), getHour24({this.props.value}), 0, 0)"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "expression": "now(0)"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "formattedValue": "Jul 18, 2025 9:17 AM"
+            },
+            "type": "ia.input.date-time-input"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "70.9px"
+            },
+            "props": {
+              "text": "Asset"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Dropdown"
+            },
+            "propConfig": {
+              "props.options": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "SiteID": "{session.custom.ProductionSiteID}"
+                    },
+                    "queryPath": "ProductionLine/GetProductionLinesForDropdownBySiteID"
+                  },
+                  "type": "query"
+                }
+              }
+            },
+            "props": {
+              "value": 2
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\tplID \u003d self.getSibling(\"Dropdown\").props.value\n\t\n\tself.parent.parent.getChild(\"FlexContainer_0\").getChild(\"ReportViewer\").props.params.ProductionLineID \u003d plID\n\tself.parent.parent.getChild(\"FlexContainer_0\").getChild(\"ReportViewer\").props.params.StartDate \u003d self.getSibling(\"Start DateTimeInput\").custom.formattedDate\n\tself.parent.parent.getChild(\"FlexContainer_0\").getChild(\"ReportViewer\").props.params.EndDate \u003d self.getSibling(\"End DateTimeInput\").custom.formattedDate\n\t\n\t#i \u003d 0\n\t\n\t#while self.getSibling(\"Dropdown\").props.options.getValueAt(i, 0) !\u003d plID:\n\t#\ti +\u003d 1\n\t\n\t#self.getSibling(\"ReportViewer\").props.params.tagPath \u003d self.getSibling(\"Dropdown\").props.options.getValueAt(i, 1)"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Button"
+            },
+            "props": {
+              "text": "Generate Report"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "height": 0.1,
+          "width": 1
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "ReportViewer"
+            },
+            "position": {
+              "grow": 1
+            },
+            "props": {
+              "page": 1,
+              "pageCount": 3,
+              "params": {
+                "EndDate": {
+                  "$": [
+                    "ts",
+                    192,
+                    1745429309538
+                  ],
+                  "$ts": 1745427600000
+                },
+                "ProductionLineID": 2,
+                "StartDate": {
+                  "$": [
+                    "ts",
+                    192,
+                    1745429309536
+                  ],
+                  "$ts": 1745413200000
+                }
+              },
+              "source": "OEESummaryReport"
+            },
+            "type": "ia.reporting.report-viewer"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_0"
+        },
+        "position": {
+          "height": 1,
+          "width": 1,
+          "x": -0.0018,
+          "y": 0.1061
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

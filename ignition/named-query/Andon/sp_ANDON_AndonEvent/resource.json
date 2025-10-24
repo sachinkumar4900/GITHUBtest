@@ -1,0 +1,80 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "148a09c161f44e6432e5035ed85032dc0afef8022fb94b7fe6214e214edca6bc",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-04-08T15:59:07Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "pEventHeaderID",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pNotificationGroupID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pTimestamp",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pProductionLineID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pStatusID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pIsDelete",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pCommentID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pReasonID",
+        "sqlType": 2
+      }
+    ]
+  }
+}

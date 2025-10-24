@@ -1,0 +1,55 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 60,
+    "cacheEnabled": true,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "0b847c602f3ae26aa719137e860261a8f98ff8e5427a7e75cf9f41a4eda644ef",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2025-07-02T09:39:17Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "Month",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "Year",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "OTD_Target",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "ProductionSiteID",
+        "sqlType": 0
+      }
+    ]
+  }
+}

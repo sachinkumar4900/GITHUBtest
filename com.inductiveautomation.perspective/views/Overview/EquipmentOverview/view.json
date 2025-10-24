@@ -1,0 +1,204 @@
+{
+  "custom": {
+    "Asset": "SB01",
+    "AssetType": "Molding",
+    "EquipmentData": [
+      {
+        "Asset": "SB01",
+        "AssetType": "Molding",
+        "Site": "Sanford"
+      }
+    ],
+    "Location": "Sanford"
+  },
+  "events": {
+    "system": {
+      "onStartup": {
+        "config": {
+          "script": "\tself.session.custom.ActiveWindow \u003d \"Equipment Overview\""
+        },
+        "scope": "G",
+        "type": "script"
+      }
+    }
+  },
+  "params": {
+    "ProductionLineID": 1
+  },
+  "propConfig": {
+    "custom.Asset": {
+      "binding": {
+        "config": {
+          "path": "view.custom.EquipmentData[0].Asset"
+        },
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.AssetType": {
+      "binding": {
+        "config": {
+          "path": "view.custom.EquipmentData[0].AssetType"
+        },
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.EquipmentData": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "productionLineID": "{view.params.ProductionLineID}"
+          },
+          "queryPath": "Overview/Equipment/GetLocationAndAssetNameByProductionLineID",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.Location": {
+      "binding": {
+        "config": {
+          "path": "view.custom.EquipmentData[0].Site"
+        },
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "params.ProductionLineID": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 691,
+      "width": 947
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "OverviewHeader"
+        },
+        "position": {
+          "height": 0.1722,
+          "width": 1
+        },
+        "propConfig": {
+          "props.params.ProductionLineID": {
+            "binding": {
+              "config": {
+                "path": "view.params.ProductionLineID"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.tagPath": {
+            "binding": {
+              "config": {
+                "expression": "\"[default]\" + {view.custom.Location} + \"/\" + {view.custom.AssetType} + \"/\" + {view.custom.Asset}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "path": "Overview/NestedViews/OverviewHeader"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "OverviewTabView"
+        },
+        "position": {
+          "height": 0.8205,
+          "width": 1,
+          "y": 0.1746
+        },
+        "propConfig": {
+          "props.params.ProductionLineID": {
+            "binding": {
+              "config": {
+                "path": "view.params.ProductionLineID"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.tagPath": {
+            "binding": {
+              "config": {
+                "expression": "\"[default]\" + {view.custom.Location} + \"/\" + {view.custom.AssetType} + \"/\" + {view.custom.Asset}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "path": "Overview/NestedViews/Tabs/EquipmentOverviewTab"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tself.view.params.ProductionLineID \u003d self.props.value"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Dropdown",
+          "visible": false
+        },
+        "position": {
+          "height": 0.0521,
+          "width": 0.1394,
+          "x": 0.2165,
+          "y": 0.0144
+        },
+        "props": {
+          "options": [
+            {
+              "label": "SB01",
+              "value": 2
+            },
+            {
+              "label": "P08",
+              "value": 5
+            },
+            {
+              "label": "IM45",
+              "value": 10
+            }
+          ],
+          "placeholder": {
+            "text": "Testing only..."
+          }
+        },
+        "type": "ia.input.dropdown"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": 0.0581,
+      "y": 0.3126
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "backgroundColor": "#EEEEEE"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

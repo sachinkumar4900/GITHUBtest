@@ -1,0 +1,10 @@
+{
+  "base": {
+    "style": {
+      "marginTop": "5px",
+      "padding": "5px",
+      "textAlign": "start",
+      "whiteSpace": "pre-line"
+    }
+  }
+}

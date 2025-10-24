@@ -1,0 +1,232 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "ReportViewer"
+        },
+        "position": {
+          "height": 0.8263,
+          "width": 0.7738,
+          "x": 0.1131,
+          "y": 0.1275
+        },
+        "propConfig": {
+          "props.params.SiteOffset": {
+            "binding": {
+              "config": {
+                "path": "session.props.device.timezone.utcOffset"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "page": 1,
+          "pageCount": 2,
+          "params": {
+            "EndDate": {
+              "$": [
+                "ts",
+                201,
+                1723734716500
+              ],
+              "$ts": 1723734660000
+            },
+            "ProductionLineID": 1,
+            "StartDate": {
+              "$": [
+                "ts",
+                201,
+                1723734706538
+              ],
+              "$ts": 1723720260000
+            }
+          },
+          "source": "Downtime Details"
+        },
+        "type": "ia.reporting.report-viewer"
+      },
+      {
+        "meta": {
+          "name": "Dropdown"
+        },
+        "position": {
+          "height": 0.0533,
+          "width": 0.2575,
+          "x": 0.5449,
+          "y": 0.0537
+        },
+        "propConfig": {
+          "props.options": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "direct",
+                "tagPath": "[default]TagPaths"
+              },
+              "transforms": [
+                {
+                  "code": "\tsiteAssets \u003d []\n\theader \u003d [\"ID\", \"Name\"]\n\tfor i in range(value.getRowCount()):\n\t\tif self.session.custom.ProductionSite in value.getValueAt(i, 1):\n\t\t\tsiteAssets.append([value.getValueAt(i, 0), value.getValueAt(i, 1)])\n\t\n\treturn system.dataset.toDataSet(header, siteAssets)",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "value": 1
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "meta": {
+          "name": "End DateTimeInput"
+        },
+        "position": {
+          "height": 0.0533,
+          "width": 0.2,
+          "x": 0.2853,
+          "y": 0.0572
+        },
+        "propConfig": {
+          "custom.formattedDate": {
+            "binding": {
+              "config": {
+                "expression": "setTime(getDate(getYear({this.props.value}), getMonth({this.props.value}), getDayOfMonth({this.props.value})), getHour24({this.props.value}), getMinute({this.props.value}), 0)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "expression": "now(0)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "formattedValue": "Apr 23, 2025 5:27 PM"
+        },
+        "type": "ia.input.date-time-input"
+      },
+      {
+        "meta": {
+          "name": "Start DateTimeInput"
+        },
+        "position": {
+          "height": 0.0533,
+          "width": 0.2,
+          "x": 0.0245,
+          "y": 0.0572
+        },
+        "propConfig": {
+          "custom.formattedDate": {
+            "binding": {
+              "config": {
+                "expression": "setTime(getDate(getYear({this.props.value}), getMonth({this.props.value}), getDayOfMonth({this.props.value})), getHour24({this.props.value}), getMinute({this.props.value}), 0)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "expression": "addHours(now(0), -4)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "formattedValue": "Apr 23, 2025 1:27 PM"
+        },
+        "type": "ia.input.date-time-input"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.0417,
+          "width": 0.1138,
+          "x": 0.2853,
+          "y": 0.0011
+        },
+        "props": {
+          "text": "EndTime"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "height": 0.0417,
+          "width": 0.1138,
+          "x": 0.554,
+          "y": 0.0011
+        },
+        "props": {
+          "text": "Asset"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.0417,
+          "width": 0.1138,
+          "x": 0.0245,
+          "y": 0.0011
+        },
+        "props": {
+          "text": "StartTime"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tself.getSibling(\"ReportViewer\").props.params.ProductionLineID \u003d self.getSibling(\"Dropdown\").props.value\n\tself.getSibling(\"ReportViewer\").props.params.StartDate \u003d self.getSibling(\"Start DateTimeInput\").custom.formattedDate\n\tself.getSibling(\"ReportViewer\").props.params.EndDate \u003d self.getSibling(\"End DateTimeInput\").custom.formattedDate\n\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "height": 0.0462,
+          "width": 0.1525,
+          "x": 0.83,
+          "y": 0.0575
+        },
+        "props": {
+          "text": "Generate Report"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

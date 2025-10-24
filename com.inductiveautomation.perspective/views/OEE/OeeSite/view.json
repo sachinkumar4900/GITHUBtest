@@ -1,0 +1,241 @@
+{
+  "custom": {
+    "AssemblyShiftTimes": [
+      {
+        "EndTime": 1751486400000,
+        "StartTime": 1751448600000
+      }
+    ],
+    "MoldingShiftTimes": [
+      {
+        "EndTime": 1751457600000,
+        "StartTime": 1751428800000
+      }
+    ],
+    "offset": -4
+  },
+  "events": {
+    "system": {
+      "onStartup": {
+        "config": {
+          "script": "\tip \u003d self.session.props.host\n\tif ip \u003d\u003d \"10.103.38.90\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/InjectionMolding/10\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Molding\"\n\telif ip \u003d\u003d \"10.103.37.159\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/InjectionMolding/5\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Molding\"\n\telif ip \u003d\u003d \"10.103.38.92\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/InjectionMolding/7\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Molding\"\n\telif ip \u003d\u003d \"10.103.38.71\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/InjectionMolding/8\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Molding\"\n\telif ip \u003d\u003d \"10.103.37.158\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/InjectionMolding/9\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Molding\"\n\telif ip \u003d\u003d \"10.106.202.255\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/InjectionMolding/1\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Molding\"\n\telif ip \u003d\u003d \"10.106.202.244\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/InjectionMolding/2\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Molding\"\n\telif ip \u003d\u003d \"10.106.203.103\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/InjectionMolding/3\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Molding\"\n\telif ip \u003d\u003d \"10.106.203.17\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/InjectionMolding/4\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Molding\"\n\telif ip \u003d\u003d \"10.106.36.15\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/Assembly/11\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Assembly\"\n\telif ip \u003d\u003d \"10.106.63.22\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/Assembly/12\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Assembly\"\n\telif ip \u003d\u003d \"10.106.35.215\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/Assembly/13\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Assembly\"\n\telif ip \u003d\u003d \"10.106.203.218\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/Assembly/14\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Assembly\"\n\telif ip \u003d\u003d \"10.106.63.89\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/Assembly/15\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Assembly\"\n\telif ip \u003d\u003d \"10.106.35.5\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/Assembly/16\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Assembly\"\n\telif ip \u003d\u003d \"10.106.36.146\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/Assembly/17\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Assembly\"\n\telif ip \u003d\u003d \"10.106.35.42\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/Assembly/18\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Assembly\"\n\telif ip \u003d\u003d \"10.106.34.214\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/Assembly/19\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Assembly\"\n\telif ip \u003d\u003d \"10.106.63.57\":\n\t\tsystem.perspective.navigate(\"/OperatorInterface/Assembly/20\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Operator Interface - Assembly\"\n\telif ip \u003d\u003d \"10.106.39.73\":\n\t\tsystem.perspective.navigate(\"/MDI\")\t\n\t\tself.session.custom.ActiveWindow \u003d \"Hour By Hour MDI Overview\"\n\n\n\telse:\n\t\tself.getChild(\"root\").getChild(\"Dropdown\").custom.MoldingStart \u003d system.date.midnight(system.date.now())\n\t\tself.getChild(\"root\").getChild(\"Dropdown\").custom.MoldingEnd \u003d system.date.addDays(system.date.midnight(system.date.now()), 1)\n\t\t\n\t\tself.getChild(\"root\").getChild(\"Dropdown\").custom.AssemblyStart \u003d system.date.midnight(system.date.now())\n\t\tself.getChild(\"root\").getChild(\"Dropdown\").custom.AssemblyEnd \u003d system.date.addDays(system.date.midnight(system.date.now()), 1)\n\t\t\n\t\tself.getChild(\"root\").getChild(\"FlexRepeater\").refreshBinding(\"props.instances\")\n\t\t\n\t\tself.session.custom.ActiveWindow \u003d \"Site Overview\""
+        },
+        "scope": "G",
+        "type": "script"
+      }
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.AssemblyShiftTimes": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "siteID": "{session.custom.ProductionSiteID}",
+            "vsType": "\u0027Assembly\u0027"
+          },
+          "queryPath": "Overview/GetValueStreamShiftTimes",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.MoldingShiftTimes": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "siteID": "{session.custom.ProductionSiteID}",
+            "vsType": "\u0027Molding\u0027"
+          },
+          "queryPath": "Overview/GetValueStreamShiftTimes",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.offset": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "1": "{/root/Label.props.text}"
+          },
+          "tagPath": "General/{1} UTC offset"
+        },
+        "type": "tag"
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.0533,
+          "width": 0.2325,
+          "x": 0.0125,
+          "y": 0.0383
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "siteID": "{session.custom.ProductionSiteID}"
+                },
+                "queryPath": "Overview/GetSiteNameByID"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "3rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Dropdown"
+        },
+        "position": {
+          "height": 0.06,
+          "width": 0.2375,
+          "x": 0.75,
+          "y": 0.0383
+        },
+        "propConfig": {
+          "custom.AssemblyEnd": {
+            "binding": {
+              "config": {
+                "expression": "now(10000)//if({this.props.value} \u003d \u0027Day\u0027, now(10000), fromMillis({view.custom.AssemblyShiftTimes[0].EndTime}))"
+              },
+              "type": "expr"
+            }
+          },
+          "custom.AssemblyStart": {
+            "binding": {
+              "config": {
+                "expression": "if(\t{this.props.value} \u003d \u0027Day\u0027,\r\n\tif( getHour24(now(10000)) \u003c ({view.custom.offset} * -1), \r\n\t\taddMinutes( midnight(addDays(now(10000), -1)), {view.custom.offset} * -60) ,\r\n\t\taddMinutes( midnight(now(10000)), {view.custom.offset} * -60) \r\n\t),  \r\n\tfromMillis({view.custom.AssemblyShiftTimes[0].StartTime})\r\n)"
+              },
+              "type": "expr"
+            }
+          },
+          "custom.MoldingEnd": {
+            "binding": {
+              "config": {
+                "expression": "now(10000)//if({this.props.value} \u003d \u0027Day\u0027, now(10000), fromMillis({view.custom.MoldingShiftTimes[0].EndTime}))"
+              },
+              "type": "expr"
+            }
+          },
+          "custom.MoldingStart": {
+            "binding": {
+              "config": {
+                "expression": "\r\nif(\t{this.props.value} \u003d \u0027Day\u0027,\r\n\tif( getHour24(now(10000)) \u003c ({view.custom.offset} * -1), \r\n\t\taddMinutes( midnight(addDays(now(10000), -1)), {view.custom.offset} * -60) ,\r\n\t\taddMinutes( midnight(now(10000)), {view.custom.offset} * -60) \r\n\t),  \r\n\tfromMillis({view.custom.MoldingShiftTimes[0].StartTime})\r\n)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "options": [
+            {
+              "label": "Day",
+              "value": "Day"
+            },
+            {
+              "label": "Shift",
+              "value": "Shift"
+            }
+          ],
+          "search": {
+            "enabled": false
+          },
+          "style": {
+            "fontSize": 24
+          },
+          "value": "Day"
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "height": 0.85,
+          "width": 0.975,
+          "x": 0.0125,
+          "y": 0.1265
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "siteID": "{session.custom.ProductionSiteID}",
+                  "start": "{../Dropdown.custom.MoldingStart}"
+                },
+                "polling": {
+                  "enabled": true,
+                  "rate": "5"
+                },
+                "queryPath": "ProductionLine/GetProductionLineTypesForTemplateBySiteID",
+                "returnFormat": "json"
+              },
+              "transforms": [
+                {
+                  "code": "\tds \u003d []\n\t\n\tfor row in value:\n\t\tif row[\"Name\"] \u003d\u003d \"Molding\":\n\t\t\tds.append({\"ID\": row[\"ID\"], \"Name\": row[\"Name\"], \"Start\": self.getSibling(\"Dropdown\").custom.MoldingStart, \"End\": self.getSibling(\"Dropdown\").custom.MoldingEnd, \"PartActionLabel\": \"Made\"})\n\t\telse:\n\t\t\tds.append({\"ID\": row[\"ID\"], \"Name\": row[\"Name\"], \"Start\": self.getSibling(\"Dropdown\").custom.AssemblyStart, \"End\": self.getSibling(\"Dropdown\").custom.AssemblyEnd, \"PartActionLabel\": \"Assembled\"})\n\t\n\treturn ds",
+                  "type": "script"
+                }
+              ],
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "path": "OEE/NestedViews/TopOeeBarCard",
+          "style": {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 8
+          },
+          "useDefaultViewHeight": false,
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": 0.04,
+      "y": -0.0117
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "backgroundColor": "#EEEEEE",
+        "fontFamily": "Arial"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

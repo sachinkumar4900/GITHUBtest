@@ -1,0 +1,80 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "c900882441cfb8ccd9b689a6f2fae312e1297f2303538e974c8d220010186395",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-07-18T18:10:41Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "pWorkOrderID",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pProductionLineID",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pCommentID",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pID",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pReasonID",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pIsDelete",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pQuantity",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pTimestamp",
+        "sqlType": 8
+      },
+      {
+        "type": "Parameter",
+        "identifier": "pEquipmentID",
+        "sqlType": 2
+      }
+    ]
+  }
+}

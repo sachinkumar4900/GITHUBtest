@@ -1,0 +1,2151 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "width": 1402
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "custom": {
+              "Unplanned": {
+                "1": [
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713657600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713700800000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713729600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713787200000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713816000000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713873600000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713902400000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737748800000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737777600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737849600000
+                    }
+                  ]
+                ],
+                "11": [
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713657600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713691800000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713729600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713778200000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713816000000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713864600000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713902400000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737748800000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737786600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737849600000
+                    }
+                  ]
+                ],
+                "2": [
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713657600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713700800000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713729600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713787200000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713816000000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713873600000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713902400000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737748800000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737777600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737849600000
+                    }
+                  ]
+                ],
+                "3": [
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713657600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713700800000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713729600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713787200000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713816000000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713873600000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713902400000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737748800000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737777600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737849600000
+                    }
+                  ]
+                ],
+                "4": [
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713657600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713700800000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713729600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713787200000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713816000000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713873600000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1713902400000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737748800000
+                    }
+                  ],
+                  [
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737777600000
+                    },
+                    {
+                      "$": [
+                        "ts",
+                        192,
+                        1737132144457
+                      ],
+                      "$ts": 1737849600000
+                    }
+                  ]
+                ]
+              },
+              "params": {
+                "WorkOrderScheduleID": 68,
+                "startTime": {
+                  "$": [
+                    "ts",
+                    192,
+                    1712953690202
+                  ],
+                  "$ts": 1712953689000
+                }
+              },
+              "returns": "value"
+            },
+            "events": {
+              "component": {
+                "onClickEvent": {
+                  "config": {
+                    "draggable": true,
+                    "id": "lnaO9TFI",
+                    "modal": false,
+                    "overlayDismiss": false,
+                    "resizable": true,
+                    "showCloseIcon": true,
+                    "type": "open",
+                    "viewParams": {
+                      "events": "{/root/AssetContainer/EquipmentSchedule.props.scheduledEvents}",
+                      "scheduledEvent": "{/root/AssetContainer/EquipmentSchedule.props.selectedEvent}"
+                    },
+                    "viewPath": "Scheduling/NestedViews/SetStartTiime",
+                    "viewportBound": false
+                  },
+                  "scope": "C",
+                  "type": "popup"
+                },
+                "onDeleteEvent": {
+                  "config": {
+                    "script": "\tscheduled \u003d self.props.scheduledEvents\n\tfor count, toFind in enumerate(scheduled):\n\t    if toFind.eventId \u003d\u003d event.eventId and toFind.itemId \u003d\u003d event.itemId:\n\t    \tstartDate \u003d system.date.parse(self.view.getChild(\"root\").custom.StartDate)\n\t    \tparams \u003d {\"WorkOrderScheduleID\":event.eventId,\n\t    \t\t\t\t\"startTime\":startDate\n\t    \t\t\t\t}\n\t    \tself.custom.params \u003d params\n\t    \tsystem.db.runNamedQuery(\"Scheduling/DeleteWOScheduleEntry\", params)\n\t        del scheduled[count]\n\t        break"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                },
+                "onMoveEvent": {
+                  "config": {
+                    "script": "\tquantity \u003d -1\n\tfor entry in self.props.scheduledEvents:\n\t\tif entry[\"eventId\"] \u003d\u003d event.eventId:\n\t\t\tquantity \u003d entry[\"quantity\"]\n\t\t\t\n\tstartDate \u003d system.date.parse(event.start)\n\tendDate \u003d system.date.parse(event.end)\n\tparams \u003d {\"ID\":event.eventId,\n\t\t\t\"StartTime\":startDate,\n\t\t\t\"EndTime\":endDate,\n\t\t\t\"Quantity\":quantity}\n\treturn system.db.runNamedQuery(\"Scheduling/UpdateWOScheduleEntry\", params)"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              },
+              "dom": {
+                "onDoubleClick": {
+                  "config": {
+                    "script": "\tself.props.selectedEvent.itemId \u003d \"\"\n\tself.props.selectedEvent.eventId \u003d \"\"\n\t\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "contextMenu": {},
+              "name": "EquipmentSchedule"
+            },
+            "position": {
+              "basis": "750px",
+              "grow": 1
+            },
+            "propConfig": {
+              "custom.Shifts": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "productionSiteID": "{session.custom.ProductionSiteID}"
+                    },
+                    "queryPath": "Shift/GetShiftSchedule"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tparams \u003d {\"productionSiteID\":self.session.custom.ProductionSiteID,\"DefaultVal\":1}\n\tworkingHours \u003d {}\n\tds \u003d system.db.runNamedQuery(\"Shift/GetShiftsByDefault\", params)\n\tstartDate \u003d system.date.addDays(self.view.getChild(\"root\").custom.StartDate,-1)\n\tendDate \u003d system.date.addDays(startDate, self.view.getChild(\"root\").custom.DaysDisplayed)\n\t\n\tdefaultShifts \u003d ds.getColumnAsList(ds.getColumnIndex(\"ProductionLineID\"))\n\tscheduledLines \u003d value.getColumnAsList(value.getColumnIndex(\"ProductionLineID\"))\n\tstartTimes \u003d value.getColumnAsList(value.getColumnIndex(\"StartTime\"))\n\tendTimes \u003d value.getColumnAsList(value.getColumnIndex(\"EndTime\"))\n\tworkingHours \u003d  {k:[{\"startDate\":s,\"endDate\":t}] for (k,(s,t)) in zip(scheduledLines, zip(startTimes,endTimes))}\n\t\n\tfor line in ds:\n\t\tfor day in range(self.view.getChild(\"root\").custom.DaysDisplayed+2):\n\t\t\n\t\t\tproductionLineID \u003d line[\"ProductionLineID\"]\n\t\t\t\n\t\t\thours \u003d system.date.getHour24(line[\"StartTime\"])\n\t\t\tmins \u003d system.date.getMinute(line[\"StartTime\"])\n\t\t\tsec \u003d system.date.getSecond(line[\"StartTime\"])\n\t\t\t\n\t\t\tstart \u003d system.date.setTime(system.date.addDays(startDate, day), hours, mins, sec)\n\t\t\tend \u003d system.date.addSeconds(start, int(line[\"Hours\"]*3600))\n\t\t\t\n\t\t\tif productionLineID in workingHours.keys():\n\t\t\t\tadd \u003d True\n\t\t\t\tfor plan in workingHours[productionLineID]:\n\t\t\t\t\tif system.date.isBetween(start, plan[\"startDate\"], plan[\"endDate\"]) or system.date.isBetween(end, plan[\"startDate\"], plan[\"endDate\"]):\n\t\t\t\t\t\tadd \u003d False\n\t\t\t\tif add:\n\t\t\t\t\tworkingHours[productionLineID].append({\"startDate\":start,\"endDate\":end})\n\t\t\telse:\n\t\t\t\tworkingHours[productionLineID].append({\"startDate\":start,\"endDate\":end})\n\t\tworkingHours[productionLineID].sort(key\u003dlambda x:x[\"startDate\"])\n\t\t\n\tdowntime \u003d {}\n\tfor line, times in workingHours.iteritems():\n\t\tdowntime[line] \u003d []\n\t\tfor shift in range(len(times)):\n\t\t\tif shift \u003d\u003d 0:\n\t\t\t\tdowntime[line].append((system.date.midnight(times[shift][\"startDate\"]),times[shift][\"startDate\"]))\n\t\t\t\tdowntime[line].append((times[shift][\"endDate\"],times[shift+1][\"startDate\"]))\n\t\t\telif shift \u003d\u003d len(times) -1:\n\t\t\t\tdowntime[line].append((times[shift][\"endDate\"],system.date.addDays(system.date.midnight(times[shift][\"endDate\"]),1)))\n\t\t\telse:\n\t\t\t\tdowntime[line].append((times[shift][\"endDate\"],times[shift+1][\"startDate\"]))\n\tself.custom.Unplanned \u003d downtime\n\treturn workingHours",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "query"
+                }
+              },
+              "custom.selectedEventDate": {
+                "binding": {
+                  "config": {
+                    "expression": "{this.props.scheduledEvents}"
+                  },
+                  "overlayOptOut": true,
+                  "transforms": [
+                    {
+                      "code": "\tindex \u003d -1\n\teventId \u003d self.props.selectedEvent.eventId\n\tfor items in range(len(value)):\n\t\tif value[items][\"eventId\"] \u003d\u003d eventId:\n\t\t\tindex \u003d items\n\treturn value[index] if index \u003e\u003d 0 else []",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "expr"
+                }
+              },
+              "custom.target": {
+                "persistent": false
+              },
+              "meta.contextMenu.items": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "AssemblyMP": "{session.custom.LineAccess.Moorpark.Assembly}",
+                      "AssemblySF": "{session.custom.LineAccess.Sanford.Assembly}",
+                      "MoldingMP": "{session.custom.LineAccess.Moorpark.Molding}",
+                      "MoldingSF": "{session.custom.LineAccess.Sanford.Molding}",
+                      "case": "{/root.custom.ViewOverride}"
+                    },
+                    "polling": {
+                      "enabled": true,
+                      "rate": "30"
+                    },
+                    "queryPath": "Scheduling/GetProductionLines"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tlineInfo \u003d []\n\tfor row in range(value.getRowCount()):\n\t\tlineInfo.append({\n\t\t\t\"text\":str(value.getValueAt(row,\"Name\")),\n\t\t\t\"method\":{\"name\":\"selectTarget\",\"params\":{\"target\":value.getValueAt(row,\"ID\")}},\n\t\t\t\"icon\":{\"path\":\"\",\"color\":\"c0c0c0\",\"style\":{}},\n\t\t\t\"headerStyle\":{},\n\t\t\t\"type\":\"method\",\n\t\t\t\"style\":{}\n\t\t})\n\treturn lineInfo",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "query"
+                }
+              },
+              "props.dateRange.endDate": {
+                "binding": {
+                  "config": {
+                    "expression": "addDays(now(),{/root.custom.DaysDisplayed})"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.dateRange.startDate": {
+                "binding": {
+                  "config": {
+                    "path": "/root.custom.StartDate"
+                  },
+                  "type": "property"
+                }
+              },
+              "props.downtimeEvents": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "ProductionLineID": "-1",
+                      "startTime": "{/root.custom.StartDate}"
+                    },
+                    "queryPath": "Scheduling/GetDowntime"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tdowntimeInfo \u003d []\n\tfor row in range(value.getRowCount()):\n\t\tdowntimeInfo.append({\n\t\t\t\"itemId\":value.getValueAt(row,\"ProductionLineID\"),\n\t\t\t\"startDate\":value.getValueAt(row,\"StartTime\"),\n\t\t\t\"endDate\":value.getValueAt(row,\"EndTime\"),\n\t\t\t\"underlay\":False,\n\t\t\t\"color\":\"#E52C4F\" if value.getValueAt(row,\"PlannedDowntime\") \u003d\u003d 0 else \"#6EB70B\",\n\t\t\t\"opacity\":.3,\n\t\t\t\"style\":{}\n\t\t})\n\tfor lineID, line in self.custom.Unplanned.iteritems():\n\t\tfor row in line:\n\t\t\tdowntimeInfo.append({\n\t\t\t\t\"itemId\":lineID,\n\t\t\t\t\"startDate\":row[0],\n\t\t\t\t\"endDate\":row[1],\n\t\t\t\t\"underlay\":False,\n\t\t\t\t\"color\":\"#D0DF00\",\n\t\t\t\t\"opacity\":.7,\n\t\t\t\t\"style\":{}\n\t\t\t})\n\t\t\n\treturn downtimeInfo",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "query"
+                }
+              },
+              "props.items": {
+                "binding": {
+                  "config": {
+                    "enableValueCache": false,
+                    "parameters": {
+                      "AssemblyMP": "{session.custom.LineAccess.Moorpark.Assembly}",
+                      "AssemblySF": "{session.custom.LineAccess.Sanford.Assembly}",
+                      "MoldingMP": "{session.custom.LineAccess.Moorpark.Molding}",
+                      "MoldingSF": "{session.custom.LineAccess.Sanford.Molding}",
+                      "case": "{/root.custom.ViewOverride}"
+                    },
+                    "polling": {
+                      "enabled": true,
+                      "rate": "30"
+                    },
+                    "queryPath": "Scheduling/GetProductionLines"
+                  },
+                  "enabled": false,
+                  "previewEnabled": false,
+                  "transforms": [
+                    {
+                      "code": "\tlineInfo \u003d []\n\tfor row in range(value.getRowCount()):\n\t\tlineInfo.append({\n\t\t\t\"id\":value.getValueAt(row,\"ID\"),\n\t\t\t\"label\":value.getValueAt(row,\"Name\"),\n\t\t\t\"iconConfig\":{\"path\":\"\",\"color\":\"c0c0c0\",\"style\":{}},\n\t\t\t\"headerStyle\":{},\n\t\t\t\"rowStyle\":{},\n\t\t\t\"footerStyle\":{}\n\t\t})\n\treturn lineInfo",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "query"
+                }
+              },
+              "props.scheduledEvents": {
+                "binding": {
+                  "config": {
+                    "parameters": {
+                      "EndTime": "None",
+                      "ProductionLineID": "-1",
+                      "StartTime": "{/root.custom.StartDate}"
+                    },
+                    "polling": {
+                      "enabled": true,
+                      "rate": "{session.custom.DBSecondsToRefresh}"
+                    },
+                    "queryPath": "Scheduling/GetCurrentWOSchedule"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tscheduledEvents \u003d []\n\tfor row in range(value.getRowCount()):\n\t\n\t\tscheduledEvents.append({\n\t\t\"itemId\":value.getValueAt(row,\"ProductionLineID\"),\n\t\t\"eventId\":value.getValueAt(row,\"ID\"),\n\t\t\"startDate\":value.getValueAt(row,\"StartTime\"),\n\t\t\"endDate\":value.getValueAt(row,\"EndTime\"),\n\t\t\"label\":value.getValueAt(row,\"WOName\"),\n\t\t\"leadStyle\":{},\n\t\t\"percentDone\":0,\n\t\t\"style\":{},\n\t\t\"quantity\":value.getValueAt(row,\"Quantity\")\n\t\t})\n\t\t\n\t\n\t\n\treturn scheduledEvents",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "query"
+                }
+              },
+              "props.selectedEvent": {
+                "persistent": false
+              }
+            },
+            "props": {
+              "addEnabled": false,
+              "data": {
+                "$": [
+                  "ds",
+                  192,
+                  1709680236008
+                ],
+                "$columns": [
+                  {
+                    "data": [
+                      2,
+                      2,
+                      2,
+                      2,
+                      2,
+                      2,
+                      2,
+                      2
+                    ],
+                    "name": "WorkOrderID",
+                    "type": "Integer"
+                  },
+                  {
+                    "data": [
+                      "Injection Molding 1",
+                      "Injection Molding 1",
+                      "Injection Molding 1",
+                      "Injection Molding 1",
+                      "Injection Molding 1",
+                      "Injection Molding 1",
+                      "Injection Molding 1",
+                      "Injection Molding 1"
+                    ],
+                    "name": "ProductionLine",
+                    "type": "String"
+                  },
+                  {
+                    "data": [
+                      1708799400000,
+                      1708814100000,
+                      1709273128094,
+                      1709399763000,
+                      1709399763000,
+                      1709340240000,
+                      1709353546000,
+                      1709689063000
+                    ],
+                    "name": "StartTime",
+                    "type": "Date"
+                  },
+                  {
+                    "data": [
+                      1708812000000,
+                      1708822800000,
+                      1709276728094,
+                      1709403363000,
+                      1709403363000,
+                      1709343840000,
+                      1709357146000,
+                      1709696263000
+                    ],
+                    "name": "EndTime",
+                    "type": "Date"
+                  },
+                  {
+                    "data": [
+                      150,
+                      0,
+                      150,
+                      150,
+                      150,
+                      150,
+                      150,
+                      300
+                    ],
+                    "name": "Quantity",
+                    "type": "Integer"
+                  },
+                  {
+                    "data": [
+                      150,
+                      150,
+                      150,
+                      150,
+                      150,
+                      150,
+                      150,
+                      150
+                    ],
+                    "name": "Rate",
+                    "type": "Integer"
+                  },
+                  {
+                    "data": [
+                      2,
+                      2,
+                      2,
+                      2,
+                      2,
+                      2,
+                      2,
+                      2
+                    ],
+                    "name": "ID",
+                    "type": "Integer"
+                  },
+                  {
+                    "data": [
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      2
+                    ],
+                    "name": "Duration",
+                    "type": "Float"
+                  }
+                ]
+              },
+              "dateRange": {},
+              "headerStyles": {
+                "primaryHeaderStyle": {
+                  "backgroundColor": "#F0F8FE",
+                  "fontSize": 35
+                },
+                "secondaryHeaderStyle": {
+                  "backgroundColor": "#F0F8FE",
+                  "fontSize": 24
+                },
+                "tertiaryHeaderStyle": {
+                  "fontWeight": "bold"
+                }
+              },
+              "items": [
+                {
+                  "footerStyle": {},
+                  "headerStyle": {
+                    "classes": ""
+                  },
+                  "iconConfig": {
+                    "color": "c0c0c0",
+                    "path": "",
+                    "style": {}
+                  },
+                  "id": 1,
+                  "label": "SB01",
+                  "rowStyle": {
+                    "classes": ""
+                  }
+                },
+                {
+                  "footerStyle": {},
+                  "headerStyle": {},
+                  "iconConfig": {
+                    "color": "c0c0c0",
+                    "path": "",
+                    "style": {}
+                  },
+                  "id": 2,
+                  "label": "SB02",
+                  "rowStyle": {}
+                },
+                {
+                  "footerStyle": {},
+                  "headerStyle": {},
+                  "iconConfig": {
+                    "color": "c0c0c0",
+                    "path": "",
+                    "style": {}
+                  },
+                  "id": 3,
+                  "label": "SB03",
+                  "rowStyle": {}
+                },
+                {
+                  "footerStyle": {},
+                  "headerStyle": {},
+                  "iconConfig": {
+                    "color": "c0c0c0",
+                    "path": "",
+                    "style": {}
+                  },
+                  "id": 4,
+                  "label": "SB04",
+                  "rowStyle": {}
+                },
+                {
+                  "footerStyle": {},
+                  "headerStyle": {},
+                  "iconConfig": {
+                    "color": "c0c0c0",
+                    "path": "",
+                    "style": {}
+                  },
+                  "id": 11,
+                  "label": "P08",
+                  "rowStyle": {}
+                }
+              ],
+              "resizeEnabled": false
+            },
+            "scripts": {
+              "customMethods": [
+                {
+                  "name": "selectTarget",
+                  "params": [
+                    "target"
+                  ],
+                  "script": "\tself.custom.target \u003d target"
+                }
+              ],
+              "extensionFunctions": null,
+              "messageHandlers": []
+            },
+            "type": "ia.display.equipmentschedule"
+          }
+        ],
+        "meta": {
+          "name": "AssetContainer"
+        },
+        "position": {
+          "basis": "800px",
+          "grow": 1
+        },
+        "props": {
+          "direction": "column"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "WorkOrders"
+            },
+            "position": {
+              "basis": "400px",
+              "grow": 1
+            },
+            "propConfig": {
+              "custom.debug": {
+                "binding": {
+                  "config": {
+                    "queryPath": "Scheduling/GetWorkOrdersByLine"
+                  },
+                  "type": "query"
+                }
+              },
+              "custom.key": {
+                "binding": {
+                  "config": {
+                    "path": "this.props.selection.data[0]"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tquery \u003d \"dbo.getDuration(\"+str(value[\"ID\"])+\", \"+str(int(self.parent.getChild(\"QuantityPicker\").getChild(\"QtyInput\").props.value))+\")\"\n\t#Add 1 day + duration for a larger window to schedule out to\n\treturn query\n\t",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              },
+              "props.columns[6].visible": {
+                "binding": {
+                  "config": {
+                    "expression": "!isNull({../QuantityPicker/QtyInput.props.value}) \u0026\u0026\r\n{../QuantityPicker/QtyInput.props.value}\u003e0"
+                  },
+                  "overlayOptOut": true,
+                  "type": "expr"
+                }
+              },
+              "props.data": {
+                "binding": {
+                  "config": {
+                    "designerUseLimit": false,
+                    "enableValueCache": false,
+                    "parameters": {
+                      "WorkOrderID": "-1",
+                      "quantity": "{../QuantityPicker/QtyInput.props.value}"
+                    },
+                    "polling": {
+                      "enabled": true,
+                      "rate": "3"
+                    },
+                    "queryPath": "Scheduling/GetWorkOrdersByLine"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tworkOrders \u003d system.dataset.toPyDataSet(value)\n\tqty \u003d self.parent.getChild(\"QuantityPicker\").getChild(\"QtyInput\").props.value\n\tqty \u003d int(long(qty)) if qty !\u003d \"\" else 0\n\trowIndices \u003d []\n\tproductionLineIDs \u003d [x[\"id\"] for x in self.parent.parent.getChild(\"AssetContainer\").getChild(\"EquipmentSchedule\").props.items]\n\tfor index, row in enumerate(workOrders):\n\t\tif row[\"ProductionLineID\"] not in productionLineIDs:\n\t\t\trowIndices.append(index)\n\tself.custom.debug \u003d rowIndices\n\tworkOrders \u003d system.dataset.deleteRows(workOrders, rowIndices)\n\t\n\treturn workOrders\n\t#return Scheduling.getWODuration(workOrders,qty )",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "query"
+                }
+              },
+              "props.selection": {
+                "persistent": false
+              }
+            },
+            "props": {
+              "cells": {
+                "style": {
+                  "paddingLeft": 5
+                }
+              },
+              "columns": [
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "Name",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": false,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "justify": "auto",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": true,
+                  "width": 60
+                },
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "ProductionLine",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": false,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "justify": "auto",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": true,
+                  "width": 80
+                },
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "Description",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": false,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "justify": "auto",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": true,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": false,
+                  "width": 95
+                },
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "Rate",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": false,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "justify": "auto",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": true,
+                  "width": 30
+                },
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "ProductionLineID",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": false,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "justify": "auto",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": false,
+                  "width": ""
+                },
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "ID",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": false,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "justify": "auto",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": false,
+                  "width": ""
+                },
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "TotalTime",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": false,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "justify": "auto",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "width": ""
+                }
+              ],
+              "filter": {
+                "enabled": true
+              }
+            },
+            "type": "ia.display.table"
+          },
+          {
+            "meta": {
+              "name": "DateTimePicker"
+            },
+            "position": {
+              "basis": "360px",
+              "display": false
+            },
+            "propConfig": {
+              "props.minDate": {
+                "binding": {
+                  "config": {
+                    "path": ".../AssetContainer/EquipmentSchedule.props.dateRange.startDate"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "formattedValue": null
+            },
+            "type": "ia.input.date-time-picker"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "QtyLabel"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "alignContent": "flex-end",
+                    "borderColor": "#AAAAAA",
+                    "borderStyle": "none",
+                    "borderWidth": 1,
+                    "borderwidth": "1px",
+                    "paddingLeft": "10px",
+                    "textAlign": "right"
+                  },
+                  "text": "Quantity: "
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "QtyInput"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.value": {
+                    "persistent": false
+                  }
+                },
+                "props": {
+                  "align": "left",
+                  "containerStyle": {
+                    "textAlign": "start"
+                  },
+                  "format": "0,0",
+                  "inputBounds": {
+                    "minimum": 1
+                  },
+                  "placeholder": "Desired Quantity",
+                  "style": {
+                    "borderStyle": "none",
+                    "paddingRight": "10px",
+                    "textAlign": "start"
+                  }
+                },
+                "type": "ia.input.numeric-entry-field"
+              }
+            ],
+            "meta": {
+              "name": "QuantityPicker"
+            },
+            "position": {
+              "basis": "40px"
+            },
+            "props": {
+              "style": {
+                "borderColor": "#AAAAAA",
+                "borderStyle": "solid",
+                "borderWidth": 1
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "DateInput"
+                },
+                "position": {
+                  "basis": "32px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.minDate": {
+                    "binding": {
+                      "config": {
+                        "path": "..../AssetContainer/EquipmentSchedule.props.dateRange.startDate"
+                      },
+                      "type": "property"
+                    }
+                  },
+                  "props.value": {
+                    "binding": {
+                      "config": {
+                        "expression": "now(0)"
+                      },
+                      "type": "expr"
+                    },
+                    "persistent": false
+                  }
+                },
+                "props": {
+                  "format": "ll",
+                  "formattedValue": "Jan 17, 2025",
+                  "pickerType": "date",
+                  "placeholder": "Select date for Work Order"
+                },
+                "type": "ia.input.date-time-input"
+              },
+              {
+                "meta": {
+                  "name": "TimeInput"
+                },
+                "position": {
+                  "basis": "32px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.value": {
+                    "binding": {
+                      "config": {
+                        "expression": "midnight(now(0))"
+                      },
+                      "type": "expr"
+                    },
+                    "persistent": false
+                  }
+                },
+                "props": {
+                  "formattedValue": "Jan 17, 2025 12:00 AM",
+                  "pickerType": "time",
+                  "placeholder": "Select date for Work Order",
+                  "style": {
+                    "borderColor": "#AAAAAA",
+                    "borderStyle": "solid",
+                    "borderWidth": 1,
+                    "overflow": "auto"
+                  }
+                },
+                "type": "ia.input.date-time-input"
+              }
+            ],
+            "meta": {
+              "name": "DateTimeInput"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "custom": {
+                  "returns": {
+                    "$": [
+                      "ds",
+                      192,
+                      1713750475078
+                    ],
+                    "$columns": [
+                      {
+                        "data": [
+                          83,
+                          85,
+                          88
+                        ],
+                        "name": "ID",
+                        "type": "Integer"
+                      },
+                      {
+                        "data": [
+                          5,
+                          27,
+                          23
+                        ],
+                        "name": "WorkOrderID",
+                        "type": "Integer"
+                      },
+                      {
+                        "data": [
+                          4,
+                          10,
+                          6
+                        ],
+                        "name": "ProductionLineID",
+                        "type": "Integer"
+                      },
+                      {
+                        "data": [
+                          1713744000000,
+                          1713751200000,
+                          1713729900000
+                        ],
+                        "name": "StartTime",
+                        "type": "Date"
+                      },
+                      {
+                        "data": [
+                          1713747420000,
+                          1713780060000,
+                          1713788940000
+                        ],
+                        "name": "EndTime",
+                        "type": "Date"
+                      },
+                      {
+                        "data": [
+                          null,
+                          null,
+                          null
+                        ],
+                        "name": "CommentID",
+                        "type": "Integer"
+                      },
+                      {
+                        "data": [
+                          200,
+                          60,
+                          200
+                        ],
+                        "name": "Quantity",
+                        "type": "Integer"
+                      }
+                    ]
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": [
+                      {
+                        "config": {
+                          "script": "\timport math \n\tselectedWO \u003d self.getSibling(\"WorkOrders\").props.selection.data\n\tself.custom.returns \u003d {}\n\tif selectedWO !\u003d None and selectedWO[0] !\u003d None:\n\t\tstartTime \u003d self.custom.datetime\n\t\tqty \u003d self.parent.getChild(\"QuantityPicker\").getChild(\"QtyInput\").props.value\n\t\tduration \u003d int(selectedWO[0][\"TotalTime\"] * 60)\n\t\tdowntimeEvents \u003d self.parent.parent.getChild(\"AssetContainer\").getChild(\"EquipmentSchedule\").props.downtimeEvents\n\t\tincludedDT \u003d []\n\t\t\n\t\t\n\t\tnoStart \u003d True\n\t\twhile noStart:\n\t\t\tnoStart \u003d False\n\t\t\tfor item in downtimeEvents:\n\t\t\t\tif item[\"itemId\"] \u003d\u003d selectedWO[0][\"ProductionLineID\"] and system.date.isBetween(startTime, item[\"startDate\"], item[\"endDate\"]) and item[\"endDate\"] !\u003d startTime:\n\t\t\t\t\tnoStart \u003d True\n\t\t\t\t\tstartTime \u003d item[\"endDate\"]\n\t\t\tfor item in self.parent.parent.getChild(\"AssetContainer\").getChild(\"EquipmentSchedule\").props.scheduledEvents:\n\t\t\t\tif item[\"itemId\"] \u003d\u003d selectedWO[0][\"ProductionLineID\"] and system.date.isBetween(startTime, item[\"startDate\"], item[\"endDate\"]) and item[\"endDate\"] !\u003d startTime:\n\t\t\t\t\tnoStart \u003d True\n\t\t\t\t\tstartTime \u003d item[\"endDate\"]\n\t\t\t\t\t\n\t\tlastStart \u003d startTime\n\t\tendTime \u003d system.date.addMinutes(lastStart, duration)\n\t\tself.custom.returns \u003d {}\n\t\tcheckDt \u003d True\n\t\tself.custom.returns[\"ProductionLineID\"] \u003d []\n\t\twhile (checkDt):\n\t\t\tcheckDt \u003d False\n\t\t\tfor item in downtimeEvents:\n\t\t\t\tif selectedWO[0][\"ProductionLineID\"] \u003d\u003d int(item[\"itemId\"]) and startTime \u003c item[\"endDate\"] and endTime \u003e item[\"startDate\"] and item[\"startDate\"] not in includedDT:\n\t\t\t\t\tincludedDT.append(item[\"startDate\"])\n\t\t\t\t\tduration -\u003d system.date.minutesBetween(lastStart, item[\"startDate\"])\n\t\t\t\t\tlastStart \u003d item[\"endDate\"]\n\t\t\t\t\tendTime \u003d system.date.addMinutes(lastStart, int(duration))\n\t\t\t\t\tcheckDt \u003d True\n\t\t\t\t\n\t\t\t\t\t\n\t\tparams \u003d {\"WorkOrderID\":selectedWO[0][\"ID\"],\n\t\t\"ProductionLineID\":selectedWO[0][\"ProductionLineID\"],\n\t\t\"StartTime\":startTime,\n\t\t\"EndTime\":endTime,\n\t\t\"Quantity\":qty}\n\t\tself.custom.returns[\"params\"]\u003d params\n\t\tif system.db.runNamedQuery(\"Scheduling/ScheduleWorkOrder\", params) !\u003d None:\n\t\t\tself.parent.getChild(\"QuantityPicker\").getChild(\"QtyInput\").props.value \u003d \"\"\n\t\t\tself.parent.getChild(\"DateTimeInput\").getChild(\"DateInput\").props.value \u003d \"\"\n\t\t\tself.parent.getChild(\"DateTimeInput\").getChild(\"TimeInput\").props.value \u003d \"\"\n\t\t\treturn None\n\t\t\n\telse: \n\t\tself.custom.returns \u003d \"failed\"\n\t\treturn None"
+                        },
+                        "enabled": false,
+                        "scope": "G",
+                        "type": "script"
+                      },
+                      {
+                        "config": {
+                          "script": "\tWO \u003d self.parent.parent.getChild(\"WorkOrders\").props.selection.data[0] if self.parent.parent.getChild(\"WorkOrders\").props.selection.data is not None else None\n\tDTE \u003d  self.parent.parent.parent.getChild(\"AssetContainer\").getChild(\"EquipmentSchedule\").props.downtimeEvents\n\tquantity \u003d self.parent.parent.getChild(\"QuantityPicker\").getChild(\"QtyInput\").props.value\n\tschedule \u003d self.parent.parent.parent.getChild(\"AssetContainer\").getChild(\"EquipmentSchedule\").props.scheduledEvents\n\tstart \u003d self.custom.datetime\n\t\n\tself.parent.parent.getChild(\"QuantityPicker\").getChild(\"QtyInput\").props.value \u003d \"\"\n\tself.parent.parent.getChild(\"DateTimeInput\").getChild(\"DateInput\").props.value \u003d \"\"\n\tself.parent.parent.getChild(\"DateTimeInput\").getChild(\"TimeInput\").props.value \u003d \"\"\n\n\t#assigning value is just for debug visibility\n\tself.custom.returns \u003d Scheduling.scheduleEvent(WO, start, DTE, quantity, schedule) \n\t\t\t"
+                        },
+                        "scope": "G",
+                        "type": "script"
+                      },
+                      {
+                        "config": {
+                          "script": "\tself.parent.parent.getChild(\"AssetContainer\").getChild(\"EquipmentSchedule\").refreshBinding(\"props.scheduledEvents\")"
+                        },
+                        "scope": "G",
+                        "type": "script"
+                      }
+                    ]
+                  }
+                },
+                "meta": {
+                  "name": "QuickAddWorkOrder"
+                },
+                "position": {
+                  "basis": "34px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "custom.datetime": {
+                    "binding": {
+                      "config": {
+                        "expression": "addMinutes(\r\naddHours(\r\n\tgetDate(getYear({.../DateTimeInput/DateInput.props.value}), getMonth({.../DateTimeInput/DateInput.props.value}), getDayOfMonth({.../DateTimeInput/DateInput.props.value}))\r\n\t,\r\n\tgetHour24({.../DateTimeInput/TimeInput.props.value})\r\n\t)\r\n\t,\r\n\tgetMinute({.../DateTimeInput/TimeInput.props.value})\r\n)\r\n"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "custom.returns": {
+                    "persistent": true
+                  },
+                  "props.enabled": {
+                    "binding": {
+                      "config": {
+                        "expression": "!isNull({../WorkOrders.props.selection.data[0]}) \u0026\u0026 \r\n!isNull({../QuantityPicker/QtyInput.props.value}) \u0026\u0026\r\n{../QuantityPicker/QtyInput.props.value}\u003e0 \u0026\u0026\r\n!isNull({../DateTimeInput/DateInput.props.value}) \u0026\u0026\r\n!isNull({../DateTimeInput/TimeInput.props.value}) "
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "text": "Quick Add Work Order"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "custom": {
+                  "returns": {
+                    "$": [
+                      "ds",
+                      192,
+                      1713750475078
+                    ],
+                    "$columns": [
+                      {
+                        "data": [
+                          83,
+                          85,
+                          88
+                        ],
+                        "name": "ID",
+                        "type": "Integer"
+                      },
+                      {
+                        "data": [
+                          5,
+                          27,
+                          23
+                        ],
+                        "name": "WorkOrderID",
+                        "type": "Integer"
+                      },
+                      {
+                        "data": [
+                          4,
+                          10,
+                          6
+                        ],
+                        "name": "ProductionLineID",
+                        "type": "Integer"
+                      },
+                      {
+                        "data": [
+                          1713744000000,
+                          1713751200000,
+                          1713729900000
+                        ],
+                        "name": "StartTime",
+                        "type": "Date"
+                      },
+                      {
+                        "data": [
+                          1713747420000,
+                          1713780060000,
+                          1713788940000
+                        ],
+                        "name": "EndTime",
+                        "type": "Date"
+                      },
+                      {
+                        "data": [
+                          null,
+                          null,
+                          null
+                        ],
+                        "name": "CommentID",
+                        "type": "Integer"
+                      },
+                      {
+                        "data": [
+                          200,
+                          60,
+                          200
+                        ],
+                        "name": "Quantity",
+                        "type": "Integer"
+                      }
+                    ]
+                  }
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": [
+                      {
+                        "config": {
+                          "script": "\timport math \n\tselectedWO \u003d self.getSibling(\"WorkOrders\").props.selection.data\n\tself.custom.returns \u003d {}\n\tif selectedWO !\u003d None and selectedWO[0] !\u003d None:\n\t\tstartTime \u003d self.custom.datetime\n\t\tqty \u003d self.parent.getChild(\"QuantityPicker\").getChild(\"QtyInput\").props.value\n\t\tduration \u003d int(selectedWO[0][\"TotalTime\"] * 60)\n\t\tdowntimeEvents \u003d self.parent.parent.getChild(\"AssetContainer\").getChild(\"EquipmentSchedule\").props.downtimeEvents\n\t\tincludedDT \u003d []\n\t\t\n\t\t\n\t\tnoStart \u003d True\n\t\twhile noStart:\n\t\t\tnoStart \u003d False\n\t\t\tfor item in downtimeEvents:\n\t\t\t\tif item[\"itemId\"] \u003d\u003d selectedWO[0][\"ProductionLineID\"] and system.date.isBetween(startTime, item[\"startDate\"], item[\"endDate\"]) and item[\"endDate\"] !\u003d startTime:\n\t\t\t\t\tnoStart \u003d True\n\t\t\t\t\tstartTime \u003d item[\"endDate\"]\n\t\t\tfor item in self.parent.parent.getChild(\"AssetContainer\").getChild(\"EquipmentSchedule\").props.scheduledEvents:\n\t\t\t\tif item[\"itemId\"] \u003d\u003d selectedWO[0][\"ProductionLineID\"] and system.date.isBetween(startTime, item[\"startDate\"], item[\"endDate\"]) and item[\"endDate\"] !\u003d startTime:\n\t\t\t\t\tnoStart \u003d True\n\t\t\t\t\tstartTime \u003d item[\"endDate\"]\n\t\t\t\t\t\n\t\tlastStart \u003d startTime\n\t\tendTime \u003d system.date.addMinutes(lastStart, duration)\n\t\tself.custom.returns \u003d {}\n\t\tcheckDt \u003d True\n\t\tself.custom.returns[\"ProductionLineID\"] \u003d []\n\t\twhile (checkDt):\n\t\t\tcheckDt \u003d False\n\t\t\tfor item in downtimeEvents:\n\t\t\t\tif selectedWO[0][\"ProductionLineID\"] \u003d\u003d int(item[\"itemId\"]) and startTime \u003c item[\"endDate\"] and endTime \u003e item[\"startDate\"] and item[\"startDate\"] not in includedDT:\n\t\t\t\t\tincludedDT.append(item[\"startDate\"])\n\t\t\t\t\tduration -\u003d system.date.minutesBetween(lastStart, item[\"startDate\"])\n\t\t\t\t\tlastStart \u003d item[\"endDate\"]\n\t\t\t\t\tendTime \u003d system.date.addMinutes(lastStart, int(duration))\n\t\t\t\t\tcheckDt \u003d True\n\t\t\t\t\n\t\t\t\t\t\n\t\tparams \u003d {\"WorkOrderID\":selectedWO[0][\"ID\"],\n\t\t\"ProductionLineID\":selectedWO[0][\"ProductionLineID\"],\n\t\t\"StartTime\":startTime,\n\t\t\"EndTime\":endTime,\n\t\t\"Quantity\":qty}\n\t\tself.custom.returns[\"params\"]\u003d params\n\t\tif system.db.runNamedQuery(\"Scheduling/ScheduleWorkOrder\", params) !\u003d None:\n\t\t\tself.parent.getChild(\"QuantityPicker\").getChild(\"QtyInput\").props.value \u003d \"\"\n\t\t\tself.parent.getChild(\"DateTimeInput\").getChild(\"DateInput\").props.value \u003d \"\"\n\t\t\tself.parent.getChild(\"DateTimeInput\").getChild(\"TimeInput\").props.value \u003d \"\"\n\t\t\treturn None\n\t\t\n\telse: \n\t\tself.custom.returns \u003d \"failed\"\n\t\treturn None"
+                        },
+                        "enabled": false,
+                        "scope": "G",
+                        "type": "script"
+                      },
+                      {
+                        "config": {
+                          "script": "\tWO \u003d self.parent.parent.getChild(\"WorkOrders\").props.selection.data[0] if self.parent.parent.getChild(\"WorkOrders\").props.selection.data is not None else None\n\tDTE \u003d  self.parent.parent.parent.getChild(\"AssetContainer\").getChild(\"EquipmentSchedule\").props.downtimeEvents\n\tquantity \u003d self.parent.parent.getChild(\"QuantityPicker\").getChild(\"QtyInput\").props.value\n\tschedule \u003d self.parent.parent.parent.getChild(\"AssetContainer\").getChild(\"EquipmentSchedule\").props.scheduledEvents\n\tstart \u003d self.custom.datetime\n\t\n\tself.parent.parent.getChild(\"QuantityPicker\").getChild(\"QtyInput\").props.value \u003d \"\"\n\tself.parent.parent.getChild(\"DateTimeInput\").getChild(\"DateInput\").props.value \u003d \"\"\n\tself.parent.parent.getChild(\"DateTimeInput\").getChild(\"TimeInput\").props.value \u003d \"\"\n\n\t#assigning value is just for debug visibility\n\tself.custom.returns \u003d Scheduling.scheduleEvent(WO, start, DTE, quantity, schedule) \n\t\t\t"
+                        },
+                        "scope": "G",
+                        "type": "script"
+                      },
+                      {
+                        "config": {
+                          "script": "\tself.parent.parent.getChild(\"AssetContainer\").getChild(\"EquipmentSchedule\").refreshBinding(\"props.scheduledEvents\")"
+                        },
+                        "scope": "G",
+                        "type": "script"
+                      }
+                    ]
+                  }
+                },
+                "meta": {
+                  "name": "ScheduleWorkOrder"
+                },
+                "position": {
+                  "basis": "34px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "custom.datetime": {
+                    "binding": {
+                      "config": {
+                        "expression": "addMinutes(\r\naddHours(\r\n\tgetDate(getYear({.../DateTimeInput/DateInput.props.value}), getMonth({.../DateTimeInput/DateInput.props.value}), getDayOfMonth({.../DateTimeInput/DateInput.props.value}))\r\n\t,\r\n\tgetHour24({.../DateTimeInput/TimeInput.props.value})\r\n\t)\r\n\t,\r\n\tgetMinute({.../DateTimeInput/TimeInput.props.value})\r\n)\r\n"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "custom.returns": {
+                    "persistent": true
+                  },
+                  "props.enabled": {
+                    "binding": {
+                      "config": {
+                        "expression": "!isNull({../WorkOrders.props.selection.data[0]}) \u0026\u0026 \r\n!isNull({../QuantityPicker/QtyInput.props.value}) \u0026\u0026\r\n{../QuantityPicker/QtyInput.props.value}\u003e0 \u0026\u0026\r\n!isNull({../DateTimeInput/DateInput.props.value}) \u0026\u0026\r\n!isNull({../DateTimeInput/TimeInput.props.value}) "
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "text": "Schedule Work Order"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "Schedule WO"
+            },
+            "position": {
+              "basis": "80px"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "WorkOrderContainer"
+        },
+        "position": {
+          "basis": "200px",
+          "grow": 1
+        },
+        "props": {
+          "direction": "column"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "custom": {
+      "DaysDisplayed": 1,
+      "StartDate": {
+        "$": [
+          "ts",
+          192,
+          1713800816715
+        ],
+        "$ts": 1713782833000
+      },
+      "ViewOverride": 0
+    },
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "custom.StartDate": {
+        "binding": {
+          "config": {
+            "expression": "now()"
+          },
+          "enabled": false,
+          "type": "expr"
+        }
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

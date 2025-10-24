@@ -1,0 +1,378 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 373,
+      "width": 700
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.1334,
+          "rotate": {
+            "anchor": "-408% -122%"
+          },
+          "width": 0.47,
+          "x": 0.007,
+          "y": 0.0015
+        },
+        "props": {
+          "style": {
+            "borderStyle": "groove",
+            "fontSize": 28,
+            "textAlign": "center"
+          },
+          "text": "Resin Part Number"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.1334,
+          "rotate": {
+            "anchor": "-408% -122%"
+          },
+          "width": 0.47,
+          "x": 0.007,
+          "y": 0.1426
+        },
+        "props": {
+          "style": {
+            "borderStyle": "groove",
+            "fontSize": 28,
+            "textAlign": "center"
+          },
+          "text": "Material Dry Time"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "height": 0.1334,
+          "rotate": {
+            "anchor": "-408% -122%"
+          },
+          "width": 0.47,
+          "x": 0.007,
+          "y": 0.2843
+        },
+        "props": {
+          "style": {
+            "borderStyle": "groove",
+            "fontSize": 28,
+            "textAlign": "center"
+          },
+          "text": "Dry Temperature"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_2"
+        },
+        "position": {
+          "height": 0.1334,
+          "rotate": {
+            "anchor": "-408% -122%"
+          },
+          "width": 0.47,
+          "x": 0.007,
+          "y": 0.4285
+        },
+        "props": {
+          "style": {
+            "borderStyle": "groove",
+            "fontSize": 28,
+            "textAlign": "center"
+          },
+          "text": "Process Temperature"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_3"
+        },
+        "position": {
+          "height": 0.1335,
+          "rotate": {
+            "anchor": "-408% -122%"
+          },
+          "width": 0.47,
+          "x": 0.007,
+          "y": 0.5703
+        },
+        "props": {
+          "style": {
+            "borderStyle": "groove",
+            "fontSize": 28,
+            "textAlign": "center"
+          },
+          "text": "Color"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_4"
+        },
+        "position": {
+          "height": 0.1335,
+          "rotate": {
+            "anchor": "-408% -122%"
+          },
+          "width": 0.47,
+          "x": 0.007,
+          "y": 0.7142
+        },
+        "props": {
+          "style": {
+            "borderStyle": "groove",
+            "fontSize": 28,
+            "textAlign": "center"
+          },
+          "text": "Resin Description"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "ResinPartNum"
+        },
+        "position": {
+          "height": 0.1262,
+          "width": 0.515,
+          "x": 0.477,
+          "y": 0.0046
+        },
+        "props": {
+          "style": {
+            "color": "#000000",
+            "fontFamily": "Roboto",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.input.text-field"
+      },
+      {
+        "meta": {
+          "name": "MaterialDryTime"
+        },
+        "position": {
+          "height": 0.1298,
+          "width": 0.5157,
+          "x": 0.477,
+          "y": 0.1426
+        },
+        "props": {
+          "style": {
+            "color": "#000000",
+            "fontFamily": "Roboto",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.input.numeric-entry-field"
+      },
+      {
+        "meta": {
+          "name": "DryTemp"
+        },
+        "position": {
+          "height": 0.1298,
+          "width": 0.5157,
+          "x": 0.477,
+          "y": 0.2843
+        },
+        "props": {
+          "style": {
+            "color": "#000000",
+            "fontFamily": "Roboto",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.input.numeric-entry-field"
+      },
+      {
+        "meta": {
+          "name": "ProcessTemp"
+        },
+        "position": {
+          "height": 0.1298,
+          "width": 0.5157,
+          "x": 0.477,
+          "y": 0.4285
+        },
+        "props": {
+          "style": {
+            "color": "#000000",
+            "fontFamily": "Roboto",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.input.numeric-entry-field"
+      },
+      {
+        "meta": {
+          "name": "ColorInp"
+        },
+        "position": {
+          "height": 0.1298,
+          "width": 0.5157,
+          "x": 0.477,
+          "y": 0.5703
+        },
+        "props": {
+          "style": {
+            "color": "#000000",
+            "fontFamily": "Roboto",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.input.text-field"
+      },
+      {
+        "meta": {
+          "name": "ResinDescrip"
+        },
+        "position": {
+          "height": 0.1298,
+          "width": 0.5157,
+          "x": 0.477,
+          "y": 0.7142
+        },
+        "props": {
+          "style": {
+            "color": "#000000",
+            "fontFamily": "Roboto",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.input.text-field"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tsystem.db.runPrepUpdate(\n    \"INSERT INTO WorkOrderMoldingResinPart ([ResinPartNumber], [ResinDescription], [MaterialDryTime], [DryTemperature], [ProcessTemperature], [Color]) VALUES (?, ?, ?, ?, ?, ?)\",\n    [self.getSibling(\"ResinPartNum\").props.text,\n    self.getSibling(\"ResinDescrip\").props.text,\n    self.getSibling(\"MaterialDryTime\").props.value,\n    self.getSibling(\"DryTemp\").props.value,\n    self.getSibling(\"ProcessTemp\").props.value,\n    self.getSibling(\"ColorInp\").props.text])\n"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "draggable": true,
+                  "id": "popup11",
+                  "modal": false,
+                  "overlayDismiss": false,
+                  "resizable": true,
+                  "showCloseIcon": false,
+                  "type": "open",
+                  "viewParams": {
+                    "Resin": "{/root/ResinPartNum.props.text}"
+                  },
+                  "viewPath": "Demo/NestedViewDemo/ResinConfirm",
+                  "viewportBound": false
+                },
+                "scope": "C",
+                "type": "popup"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "height": 0.134,
+          "rotate": {
+            "anchor": "86% 1274%"
+          },
+          "width": 0.4657,
+          "x": 0.007,
+          "y": 0.859
+        },
+        "props": {
+          "text": "ADD RESIN DETAILS",
+          "textStyle": {
+            "color": "#FFCCCC",
+            "fontFamily": "Roboto",
+            "fontSize": 22,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tsystem.db.runPrepUpdate(\"UPDATE WorkOrderMoldingResinPart SET ResinDescription \u003d ?, MaterialDryTime \u003d ?, DryTemperature \u003d ?, ProcessTemperature \u003d ?, Color \u003d ? WHERE ResinPartNumber \u003d ?\",\n\t[self.getSibling(\"ResinDescrip\").props.text, self.getSibling(\"MaterialDryTime\").props.value, self.getSibling(\"DryTemp\").props.value, self.getSibling(\"ProcessTemp\").props.value, self.getSibling(\"ColorInp\").props.text, self.getSibling(\"ResinPartNum\").props.text])"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button_0"
+        },
+        "position": {
+          "height": 0.134,
+          "width": 0.4471,
+          "x": 0.5448,
+          "y": 0.859
+        },
+        "props": {
+          "text": "UPDATE RESIN DETAILS",
+          "textStyle": {
+            "color": "#FFCCCC",
+            "fontFamily": "Roboto",
+            "fontSize": 22,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": -0.3729,
+      "y": -0.2842
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

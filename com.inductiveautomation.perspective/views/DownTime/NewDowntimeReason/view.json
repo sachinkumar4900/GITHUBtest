@@ -1,0 +1,311 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 340,
+      "width": 459
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Reason TextField"
+        },
+        "position": {
+          "height": 0.0941,
+          "width": 0.5577,
+          "x": 0.341,
+          "y": 0.2
+        },
+        "type": "ia.input.text-field"
+      },
+      {
+        "meta": {
+          "name": "Planned Checkbox"
+        },
+        "position": {
+          "height": 0.1059,
+          "width": 0.5294,
+          "x": 0.341,
+          "y": 0.3471
+        },
+        "props": {
+          "text": "Planned Downtime"
+        },
+        "type": "ia.input.checkbox"
+      },
+      {
+        "meta": {
+          "name": "Parent Reason Dropdown"
+        },
+        "position": {
+          "height": 0.1059,
+          "width": 0.5577,
+          "x": 0.341,
+          "y": 0.0324
+        },
+        "propConfig": {
+          "props.options": {
+            "binding": {
+              "config": {
+                "queryPath": "Downtime/GetTopLevelReasonsForDropdown"
+              },
+              "type": "query"
+            }
+          },
+          "props.value": {
+            "onChange": {
+              "enabled": null,
+              "script": "\tif currentValue.value !\u003d \"\" and currentValue.value is not None and currentValue.value !\u003d 0:\n\t\treasonGroupID \u003d system.db.runScalarPrepQuery(\"SELECT ReasonGroupID FROM DowntimeReason WHERE ID \u003d ?\", [currentValue.value])\n\t\tself.getSibling(\"Reason Group Dropdown\").props.value \u003d reasonGroupID\n\telse:\n\t\tself.getSibling(\"Reason Group Dropdown\").props.value \u003d \"\""
+            }
+          }
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "meta": {
+          "name": "AndonGroup Dropdown"
+        },
+        "position": {
+          "height": 0.1059,
+          "width": 0.5577,
+          "x": 0.341,
+          "y": 0.5147
+        },
+        "propConfig": {
+          "props.options": {
+            "binding": {
+              "config": {
+                "queryPath": "Downtime/GetAndonGroupForDropdown"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "meta": {
+          "name": "Reason Group Dropdown"
+        },
+        "position": {
+          "height": 0.1059,
+          "width": 0.5577,
+          "x": 0.341,
+          "y": 0.6676
+        },
+        "propConfig": {
+          "custom.ParentReasonEmpty": {
+            "binding": {
+              "config": {
+                "expression": "{../Parent Reason Dropdown.props.value} \u003d \"\" \r\n||\r\nisNull({../Parent Reason Dropdown.props.value})\r\n||\r\n{../Parent Reason Dropdown.props.value} \u003d 0"
+              },
+              "type": "expr"
+            }
+          },
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "path": "this.custom.ParentReasonEmpty"
+              },
+              "type": "property"
+            }
+          },
+          "props.options": {
+            "binding": {
+              "config": {
+                "queryPath": "Downtime/GetDowntimeReasonGroupForDropdown"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.0941,
+          "width": 0.2854,
+          "x": 0.0109,
+          "y": 0.0441
+        },
+        "props": {
+          "style": {
+            "textAlign": "right"
+          },
+          "text": "Parent Reason:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.0941,
+          "width": 0.2854,
+          "x": 0.0109,
+          "y": 0.2
+        },
+        "props": {
+          "style": {
+            "textAlign": "right"
+          },
+          "text": "Reason:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "height": 0.0941,
+          "width": 0.2854,
+          "x": 0.0109,
+          "y": 0.5265
+        },
+        "props": {
+          "style": {
+            "textAlign": "right"
+          },
+          "text": "Andon Group:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_2"
+        },
+        "position": {
+          "height": 0.0941,
+          "width": 0.2854,
+          "x": 0.0109,
+          "y": 0.6794
+        },
+        "props": {
+          "style": {
+            "textAlign": "right"
+          },
+          "text": "Reason Group:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\tself.getSibling(\"Parent Reason Dropdown\").props.value \u003d \"\"\n\tself.getSibling(\"Reason TextField\").props.text \u003d \"\"\n\tself.getSibling(\"Planned Checkbox\").props.selected \u003d False\n\tself.getSibling(\"AndonGroup Dropdown\").props.value \u003d \"\"\n\tself.getSibling(\"Reason Group Dropdown\").props.value \u003d \"\""
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Reset Button"
+        },
+        "position": {
+          "height": 0.1,
+          "width": 0.1743,
+          "x": 0.2305,
+          "y": 0.8353
+        },
+        "props": {
+          "text": "Reset"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": [
+              {
+                "config": {
+                  "script": "\tlevel \u003d 1 if self.getSibling(\"Reason Group Dropdown\").custom.ParentReasonEmpty else 2\n\tparentReason \u003d None if self.getSibling(\"Reason Group Dropdown\").custom.ParentReasonEmpty else self.getSibling(\"Parent Reason Dropdown\").props.value\n\tparams \u003d {\"pID\": None, \"pName\": self.getSibling(\"Reason TextField\").props.text, \"pReasonGroupID\": self.getSibling(\"Reason Group Dropdown\").props.value, \"pLevel\": level, \"pParentReasonID\": parentReason, \"pPlannedDowntime\": self.getSibling(\"Planned Checkbox\").props.selected, \"pAndonGroupID\": self.getSibling(\"AndonGroup Dropdown\").props.value, \"pIsDelete\": False}\n\tsystem.db.runNamedQuery(\"Downtime/sp_MD_DowntimeReason\", params)"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "script": "\tsystem.perspective.sendMessage(\"refresh-Downtime-Reason-Table\", {})\n\tsystem.perspective.closePopup(\u0027\u0027)"
+                },
+                "scope": "G",
+                "type": "script"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Save Button"
+        },
+        "position": {
+          "height": 0.1,
+          "width": 0.1743,
+          "x": 0.5954,
+          "y": 0.8353
+        },
+        "propConfig": {
+          "custom.AndonGroupSet": {
+            "binding": {
+              "config": {
+                "expression": "{../AndonGroup Dropdown.props.value} !\u003d \"\""
+              },
+              "type": "expr"
+            }
+          },
+          "custom.ReasonGroupSet": {
+            "binding": {
+              "config": {
+                "expression": "{../Reason Group Dropdown.props.value} !\u003d \"\""
+              },
+              "type": "expr"
+            }
+          },
+          "custom.ReasonSet": {
+            "binding": {
+              "config": {
+                "expression": "len({../Reason TextField.props.text}) \u003e 0"
+              },
+              "type": "expr"
+            }
+          },
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "{this.custom.ReasonSet}\r\n\u0026\u0026\r\n{this.custom.AndonGroupSet}\r\n\u0026\u0026\r\n{this.custom.ReasonGroupSet}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.primary": {
+            "binding": {
+              "config": {
+                "path": "this.props.enabled"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "text": "Save"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

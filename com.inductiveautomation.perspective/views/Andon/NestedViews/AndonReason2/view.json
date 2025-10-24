@@ -1,0 +1,168 @@
+{
+  "custom": {},
+  "params": {
+    "DTCode": "value",
+    "EquipmentID": 9,
+    "ID": 1,
+    "ProcessArea": "Assembly"
+  },
+  "propConfig": {
+    "params.DTCode": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.EquipmentID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ProcessArea": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 125,
+      "width": 175
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.675,
+          "width": 1,
+          "y": 0.325
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "ReasonID": "{view.params.ID}"
+                },
+                "queryPath": "Downtime/GetDowntimeReasonByID",
+                "returnFormat": "scalar"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "22px",
+            "overflow": "visible",
+            "overflowX": "visible",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.325,
+          "width": 1
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.DTCode}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "PentairColorPalette/Red_Light"
+          },
+          "textStyle": {
+            "classes": "Barlow",
+            "color": "#E52C4F",
+            "fontSize": "22px",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "events": {
+      "dom": {
+        "onClick": [
+          {
+            "config": {
+              "draggable": true,
+              "id": "AndonComment2",
+              "modal": true,
+              "overlayDismiss": false,
+              "position": {
+                "height": 700,
+                "width": 700
+              },
+              "positionType": "exact",
+              "resizable": true,
+              "showCloseIcon": true,
+              "type": "open",
+              "viewParams": {
+                "EquipmentID": "{view.params.EquipmentID}",
+                "ProcessArea": "{view.params.ProcessArea}",
+                "Reason": "{view.params.ID}"
+              },
+              "viewPath": "Andon/AndonReasonSelect 02",
+              "viewportBound": false
+            },
+            "scope": "C",
+            "type": "popup"
+          },
+          {
+            "config": {
+              "draggable": true,
+              "id": "Reason2",
+              "modal": false,
+              "overlayDismiss": false,
+              "resizable": true,
+              "showCloseIcon": true,
+              "type": "close",
+              "viewPath": "",
+              "viewportBound": false
+            },
+            "scope": "C",
+            "type": "popup"
+          }
+        ]
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "backgroundColor": "#FFFFFF",
+        "borderBottomLeftRadius": "8px",
+        "borderBottomRightRadius": "8px",
+        "borderColor": "#696969",
+        "borderStyle": "solid",
+        "borderTopLeftRadius": "8px",
+        "borderTopRightRadius": "8px",
+        "borderWidth": "1px",
+        "overflow": "visible",
+        "overflowX": "visible",
+        "overflowY": "visible"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

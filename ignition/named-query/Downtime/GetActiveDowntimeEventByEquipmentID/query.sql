@@ -1,0 +1,4 @@
+SELECT TOP 1 ID
+FROM DowntimeEvent
+WHERE EquipmentID = :EquipmentID AND EndTime IS NULL-- AND ReasonID IS NULL
+ORDER BY ID DESC

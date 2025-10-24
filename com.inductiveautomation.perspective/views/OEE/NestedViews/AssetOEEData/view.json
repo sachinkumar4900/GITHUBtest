@@ -1,0 +1,145 @@
+{
+  "custom": {},
+  "params": {
+    "ExtraInfo": "value",
+    "value": 0.86
+  },
+  "propConfig": {
+    "params.ExtraInfo": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.value": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 100,
+      "width": 300
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Progress"
+        },
+        "position": {
+          "height": 0.23,
+          "width": 0.9333,
+          "x": 0.0333,
+          "y": 0.6
+        },
+        "propConfig": {
+          "props.bar.color": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.value} \u003e .80, \"#8AFF8A\", \r\n\tif({view.params.value} \u003e .65, \"#FFFF8A\", \r\n\t\t\"#FF8A8A\"))"
+              },
+              "type": "expr"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "view.params.value"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "bar": {},
+          "max": 1
+        },
+        "type": "ia.display.progress"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.49,
+          "width": 0.3567,
+          "x": 0.0533,
+          "y": 0.11
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.value"
+              },
+              "transforms": [
+                {
+                  "formatType": "numeric",
+                  "formatValue": "percent",
+                  "type": "format"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "color": "#8A8AFF",
+            "fontSize": 24,
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.49,
+          "width": 0.5033,
+          "x": 0.46,
+          "y": 0.11
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.ExtraInfo"
+              },
+              "overlayOptOut": true,
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontWeight": "bold",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "backgroundColor": "#FFFFFF",
+        "borderBottomColor": "#EEEEEE",
+        "borderBottomLeftRadius": 8,
+        "borderBottomRightRadius": 8,
+        "borderBottomStyle": "solid",
+        "borderLeftStyle": "none",
+        "borderRightStyle": "none",
+        "borderTopLeftRadius": 8,
+        "borderTopRightRadius": 8,
+        "borderTopStyle": "none"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

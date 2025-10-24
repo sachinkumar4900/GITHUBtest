@@ -1,0 +1,705 @@
+{
+  "custom": {
+    "Hour": 5
+  },
+  "events": {
+    "system": {
+      "onStartup": {
+        "config": {
+          "script": "\tself.getChild(\"root\").getChild(\"Dropdown\").props.value \u003d 1"
+        },
+        "scope": "G",
+        "type": "script"
+      }
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.Hour": {
+      "binding": {
+        "config": {
+          "expression": "getHour24(now())"
+        },
+        "type": "expr"
+      },
+      "onChange": {
+        "enabled": null,
+        "script": "\tself.getChild(\"root\").getChild(\"FlexRepeater\").refreshBinding(\"props.instances\")"
+      },
+      "persistent": true
+    },
+    "custom.Site": {
+      "binding": {
+        "config": {
+          "path": "session.custom.ProductionSite"
+        },
+        "type": "property"
+      },
+      "persistent": false
+    },
+    "custom.offset": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "1": "{view.custom.Site}"
+          },
+          "tagPath": "General/{1} UTC offset"
+        },
+        "type": "tag"
+      },
+      "persistent": false
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 975
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Process Area Label"
+        },
+        "position": {
+          "height": 0.0409,
+          "width": 0.1138,
+          "x": 0.088,
+          "y": 0.0153
+        },
+        "props": {
+          "style": {
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          },
+          "text": "Process Area",
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Dropdown"
+        },
+        "position": {
+          "height": 0.046,
+          "width": 0.1395,
+          "x": 0.209,
+          "y": 0.0128
+        },
+        "propConfig": {
+          "props.options": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "SiteID": "{session.custom.ProductionSiteID}"
+                },
+                "queryPath": "ProductionLine/GetProductionLinesForDropdownBySiteID"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "search": {
+            "enabled": false
+          },
+          "value": 1
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "meta": {
+          "name": "Site_Label"
+        },
+        "position": {
+          "height": 0.0383,
+          "width": 0.1307,
+          "x": 0.849,
+          "y": 0.0419
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "session.custom.ProductionSite"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "classes": "Barlow",
+            "color": "#000000",
+            "fontSize": "16px",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "ProcessAreaLabel"
+        },
+        "position": {
+          "height": 0.046,
+          "width": 0.1867,
+          "x": 0.8092,
+          "y": 0.0019
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown.props.value"
+              },
+              "transforms": [
+                {
+                  "fallback": "",
+                  "inputType": "scalar",
+                  "mappings": [
+                    {
+                      "input": 1,
+                      "output": "SB01"
+                    },
+                    {
+                      "input": 2,
+                      "output": "SB02"
+                    },
+                    {
+                      "input": 3,
+                      "output": "SB03"
+                    },
+                    {
+                      "input": 4,
+                      "output": "SB04"
+                    },
+                    {
+                      "input": 5,
+                      "output": "IM45"
+                    },
+                    {
+                      "input": 7,
+                      "output": "IM48"
+                    },
+                    {
+                      "input": 8,
+                      "output": "IM50"
+                    },
+                    {
+                      "input": 9,
+                      "output": "IM54"
+                    },
+                    {
+                      "input": 10,
+                      "output": "IM43"
+                    },
+                    {
+                      "input": 11,
+                      "output": "P08"
+                    }
+                  ],
+                  "outputType": "scalar",
+                  "type": "map"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "24px",
+            "textAlign": "right"
+          },
+          "textStyle": {
+            "classes": "Barlow",
+            "color": "#000000",
+            "fontSize": "2.75rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Date Label"
+        },
+        "position": {
+          "height": 0.0409,
+          "width": 0.1138,
+          "x": 0.089,
+          "y": 0.08
+        },
+        "props": {
+          "style": {
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          },
+          "text": "Date",
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "DateTimeInput"
+        },
+        "position": {
+          "height": 0.046,
+          "width": 0.1385,
+          "x": 0.209,
+          "y": 0.0787
+        },
+        "propConfig": {
+          "props.value": {
+            "binding": {
+              "config": {
+                "expression": "addMinutes(now(0), {view.custom.offset} * 60)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "format": "ll",
+          "formattedValue": "Jun 23, 2025",
+          "inputProps": {
+            "style": {
+              "textAlign": "left"
+            }
+          },
+          "pickerType": "date",
+          "style": {
+            "borderStyle": "none",
+            "outlineStyle": "none"
+          }
+        },
+        "type": "ia.input.date-time-input"
+      },
+      {
+        "meta": {
+          "name": "Takt Label"
+        },
+        "position": {
+          "height": 0.0409,
+          "rotate": {
+            "anchor": "-18% 63%"
+          },
+          "width": 0.1692,
+          "x": 0.4689,
+          "y": 0.08
+        },
+        "props": {
+          "style": {
+            "borderStyle": "groove",
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          },
+          "text": "TaktTime",
+          "textStyle": {
+            "textAlign": "left"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Operators"
+        },
+        "position": {
+          "height": 0.0409,
+          "width": 0.0738,
+          "x": 0.86,
+          "y": 0.08
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if({../Dropdown.props.value} !\u003d 11, 1, {../Dropdown.props.value})"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d 1:\n\t\treturn value\n\tquery \u003d \"SELECT NumberOfPeople FROM WorkOrderSchedule wos JOIN WorkOrderAssembly woa ON wos.WorkOrderID \u003d woa.WorkOrderID WHERE wos.ProductionLineID \u003d ? AND GETUTCDATE() BETWEEN StartTime AND EndTime\"\n\tnum \u003d system.db.runScalarPrepQuery(query, [value])\n\treturn num",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Operators Label"
+        },
+        "position": {
+          "height": 0.0409,
+          "width": 0.2349,
+          "x": 0.7063,
+          "y": 0.08
+        },
+        "props": {
+          "style": {
+            "borderStyle": "groove",
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          },
+          "text": "Planned Operators",
+          "textStyle": {
+            "textAlign": "left"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Takt"
+        },
+        "position": {
+          "height": 0.0409,
+          "width": 0.1159,
+          "x": 0.5113,
+          "y": 0.08
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown.props.value"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value !\u003d 11:\n\t\tquery \u003d \"SELECT TOP 1 CycleTime FROM WorkOrderSchedule wos JOIN WorkOrderMolding wom ON wos.WorkOrderID \u003d wom.WorkOrderID WHERE wos.ProductionLineID \u003d ? AND GETUTCDATE() BETWEEN StartTime AND EndTime\"\n\telse:\n\t\tquery \u003d \"SELECT TOP 1 RatePerHour FROM WorkOrderSchedule wos JOIN WorkOrderAssembly woa ON wos.WorkOrderID \u003d woa.WorkOrderID WHERE wos.ProductionLineID \u003d ? AND GETUTCDATE() BETWEEN StartTime AND EndTime\"\n\ttakt \u003d system.db.runScalarPrepQuery(query, [value])\n\t\n\tif value \u003d\u003d 11:\n\t\ttakt \u003d 3600.0 / takt \n\treturn takt",
+                  "type": "script"
+                },
+                {
+                  "expression": "if(isNull({value}), \"N/A\",\r\n\r\nnumberFormat({value}, \"0.##\") + \" secs\")",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "height": 0.75,
+          "width": 0.98,
+          "x": 0.015,
+          "y": 0.2395
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "ProductionLineID": "{../Dropdown.props.value}",
+                  "Toggle": "{../MDIRowHeader.props.params.Toggle}",
+                  "day": "{../DateTimeInput.props.value}",
+                  "offset": "{session.props.device.timezone.utcOffset} * 60"
+                },
+                "queryPath": "HourByHour/GetMDIIDsByProductionLineIDAndDate",
+                "returnFormat": "json"
+              },
+              "transforms": [
+                {
+                  "code": "\tinstances \u003d [] \n\tfor row in value:\n\t\tinstances.append({\"ID\": row[\"ID\"], \"Font\": 28})\n\treturn instances",
+                  "type": "script"
+                }
+              ],
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "path": "OEE/NestedViews/MDIRow",
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "meta": {
+          "name": "MDIRowHeader"
+        },
+        "position": {
+          "height": 0.1098,
+          "width": 0.98,
+          "x": 0.015,
+          "y": 0.13
+        },
+        "props": {
+          "params": {
+            "Font": 18,
+            "ID": 1510,
+            "Toggle": 1
+          },
+          "path": "OEE/NestedViews/MDIRowHeader",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "Shift 1 Color Label"
+        },
+        "position": {
+          "height": 0.0268,
+          "width": 0.0533,
+          "x": 0.0556,
+          "y": 0.0127
+        },
+        "props": {
+          "text": "Shift 1",
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Shift 2 Color Label"
+        },
+        "position": {
+          "height": 0.0268,
+          "width": 0.0533,
+          "x": 0.0556,
+          "y": 0.0413
+        },
+        "props": {
+          "text": "Shift 2",
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Shift 1 Color Label_1"
+        },
+        "position": {
+          "height": 0.0268,
+          "width": 0.0533,
+          "x": 0.0556,
+          "y": 0.0686
+        },
+        "props": {
+          "text": "Shift 3",
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Shift 1 Color"
+        },
+        "position": {
+          "height": 0.0255,
+          "width": 0.0328,
+          "x": 0.0185,
+          "y": 0.0127
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#D2CE9E"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Shift 2 Color"
+        },
+        "position": {
+          "height": 0.0255,
+          "width": 0.0328,
+          "x": 0.0185,
+          "y": 0.0413
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#C4BFB6"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Shift 3 Color"
+        },
+        "position": {
+          "height": 0.0255,
+          "width": 0.0328,
+          "x": 0.0185,
+          "y": 0.0686
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#ADCAB8"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "y76MmWJy",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "ProductionLineID": "{/root/Dropdown.props.value}"
+                },
+                "viewPath": "OEE/NestedViews/ScrapReasonCodes",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "Scrap Reason"
+        },
+        "position": {
+          "height": 0.0409,
+          "rotate": {
+            "anchor": "-48% 0%"
+          },
+          "width": 0.1672,
+          "x": 0.4694,
+          "y": 0.0179
+        },
+        "props": {
+          "text": "Scrap Reasons",
+          "textStyle": {
+            "borderStyle": "groove",
+            "outlineStyle": "groove",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "7jg6yw6M",
+                "modal": false,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "ProductionLineID": "{/root/Dropdown.props.value}"
+                },
+                "viewPath": "OEE/NestedViews/DowntimeReasonCodes",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "DT Reason"
+        },
+        "position": {
+          "height": 0.0409,
+          "rotate": {
+            "anchor": "-48% 0%"
+          },
+          "width": 0.1672,
+          "x": 0.7084,
+          "y": 0.0179
+        },
+        "props": {
+          "text": "DT Reasons",
+          "textStyle": {
+            "borderStyle": "groove",
+            "outlineStyle": "groove",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.0912,
+          "width": 0.0851,
+          "x": 0.3733,
+          "y": 0.0249
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "../DateTimeInput.props.value"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": -0.0718,
+      "y": -0.0792
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

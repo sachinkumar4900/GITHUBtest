@@ -1,0 +1,46 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 851,
+      "width": 869
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "EditDefaultShifts"
+        },
+        "props": {
+          "path": "Shift/NestedViews/EditDefaultShifts"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "EditAdHocShifts"
+        },
+        "position": {
+          "tabIndex": 1
+        },
+        "props": {
+          "path": "Shift/NestedViews/EditAdHocShifts"
+        },
+        "type": "ia.display.view"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "currentTabIndex": 1,
+      "tabs": [
+        "Edit Default",
+        "Edit Ad-Hoc"
+      ]
+    },
+    "type": "ia.container.tab"
+  }
+}

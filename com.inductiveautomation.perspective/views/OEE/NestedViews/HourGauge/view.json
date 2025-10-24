@@ -1,0 +1,292 @@
+{
+  "custom": {},
+  "params": {
+    "Count": "value",
+    "Hour": "value",
+    "Perf": "value",
+    "Qual": "value",
+    "Rejects": "value"
+  },
+  "propConfig": {
+    "params.Count": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.Hour": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.Perf": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.Qual": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.Rejects": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 362,
+      "width": 240
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Quality Value"
+        },
+        "position": {
+          "height": 22,
+          "width": "100%",
+          "y": 340
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.Qual"
+              },
+              "transforms": [
+                {
+                  "formatType": "numeric",
+                  "formatValue": "##0.00",
+                  "type": "format"
+                },
+                {
+                  "expression": "concat({value}, \u0027% Quality\u0027)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Card",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Rejects Value"
+        },
+        "position": {
+          "height": 21,
+          "width": "100%",
+          "y": 320
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "concat({view.params.Rejects}, \" Rejects\")"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Card",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Eff Value"
+        },
+        "position": {
+          "height": 22,
+          "width": "100%",
+          "y": 25
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.Perf"
+              },
+              "transforms": [
+                {
+                  "formatType": "numeric",
+                  "formatValue": "##0.00",
+                  "type": "format"
+                },
+                {
+                  "expression": "concat(round({value}, 1), \u0027% Performance\u0027)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Card",
+            "fontWeight": "normal",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Count Value"
+        },
+        "position": {
+          "height": 22,
+          "width": "50%",
+          "x": 60,
+          "y": 285
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.Count"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderColor": "#000000",
+            "borderStyle": "solid",
+            "borderWidth": "1px",
+            "classes": "Card",
+            "fontStyle": "italic",
+            "fontWeight": "bolder",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Time Value"
+        },
+        "position": {
+          "height": 22,
+          "width": "100%",
+          "y": 5
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.Hour"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Card",
+            "fontWeight": "bolder",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "LinearScale"
+        },
+        "position": {
+          "height": 228,
+          "width": 141,
+          "x": 4,
+          "y": 52
+        },
+        "propConfig": {
+          "props.indicators[1].color": {
+            "binding": {
+              "config": {
+                "expression": "if({view.params.Perf} \u003c 71, \u0027#C21D4F\u0027, \u0027#6BA364\u0027)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.indicators[1].extent": {
+            "binding": {
+              "config": {
+                "path": "view.params.Count"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "fineTicks": {
+            "color": "#000000",
+            "span": 0
+          },
+          "indicators": [
+            {
+              "color": "#D8D8D8",
+              "extent": 105000,
+              "indicatorStyle": "range",
+              "label": "",
+              "labelAngle": 0,
+              "labelColor": "#000000",
+              "length": 40,
+              "opacity": 1,
+              "stroke": 1,
+              "value": 0
+            },
+            {
+              "indicatorStyle": "range",
+              "label": "",
+              "labelAngle": 270,
+              "labelColor": "#FFFFFF",
+              "length": 40,
+              "opacity": 1,
+              "stroke": 1,
+              "value": 0
+            }
+          ],
+          "labels": {
+            "style": {
+              "fill": "#000000",
+              "fontWeight": "normal"
+            }
+          },
+          "majorTicks": {
+            "color": "#2F3131",
+            "length": 50,
+            "span": 10
+          },
+          "maxValue": 80,
+          "minorTicks": {
+            "color": "#000000",
+            "span": 0
+          },
+          "style": {
+            "borderColor": "#F8F1E5",
+            "borderStyle": "none",
+            "borderWidth": "1px"
+          }
+        },
+        "type": "ia.display.linear-scale"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "type": "ia.container.coord"
+  }
+}

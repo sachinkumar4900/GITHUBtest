@@ -1,0 +1,103 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 300,
+      "width": 300
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "CommentField"
+            },
+            "position": {
+              "basis": "230px"
+            },
+            "props": {
+              "text": "comment 10"
+            },
+            "type": "ia.input.text-area"
+          },
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": [
+                  {
+                    "config": {
+                      "script": "\tpID \u003d None\n\ttext \u003d self.getSibling(\"CommentField\").props.text\n\ttimestamp \u003d self.parent.custom.DateTimeNow\n\tisDelete \u003d False\n\t\n\tparams \u003d {\"pID\": pID, \"pText\": text, \"pTimestamp\": timestamp, \"pIsDelete\": isDelete}\n\tsystem.db.runNamedQuery(\"Comment/sp_GEN_Comment\", params)\n\t\n\tID \u003d system.db.runNamedQuery(\"Comment/GetCommentByTimeStamp\", {\"timeStamp\": timestamp})\n\t\n\tsystem.perspective.sendMessage(\"CommentID\", payload \u003d {\"CommentID\": ID[0][0]}, scope \u003d \"session\")"
+                    },
+                    "scope": "G",
+                    "type": "script"
+                  },
+                  {
+                    "config": {
+                      "draggable": true,
+                      "id": "CommentEntry",
+                      "modal": false,
+                      "overlayDismiss": false,
+                      "resizable": true,
+                      "showCloseIcon": true,
+                      "type": "close",
+                      "viewPath": "",
+                      "viewportBound": false
+                    },
+                    "scope": "C",
+                    "type": "popup"
+                  }
+                ]
+              }
+            },
+            "meta": {
+              "name": "Submit"
+            },
+            "position": {
+              "basis": "55px"
+            },
+            "props": {
+              "text": "Submit Comment",
+              "textStyle": {
+                "fontSize": "26px"
+              }
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "height": 0.95,
+          "width": 0.95,
+          "x": 0.025,
+          "y": 0.025
+        },
+        "propConfig": {
+          "custom.DateTimeNow": {
+            "binding": {
+              "config": {
+                "expression": "now()"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "direction": "column"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

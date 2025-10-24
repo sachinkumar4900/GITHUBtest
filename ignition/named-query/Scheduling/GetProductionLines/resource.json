@@ -1,0 +1,60 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "d0b7887e414f25321da29fd18b0cc6b5a929182c22b345b8e2c669070892e744",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2024-07-29T23:34:01Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "MoldingSF",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "AssemblySF",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "MoldingMP",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "AssemblyMP",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "case",
+        "sqlType": 3
+      }
+    ]
+  }
+}

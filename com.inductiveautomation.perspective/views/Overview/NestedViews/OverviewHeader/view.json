@@ -1,0 +1,430 @@
+{
+  "custom": {
+    "EquipmentData": [
+      {
+        "Asset": "IM50",
+        "AssetType": "Molding",
+        "Site": "Moorpark"
+      }
+    ],
+    "ScheduleData": [],
+    "ScrapCount": 0,
+    "TagFormat": [
+      {
+        "aggregate": "LastValue",
+        "alias": "value"
+      }
+    ]
+  },
+  "params": {
+    "ProductionLineID": 8,
+    "tagPath": "[default]Moorpark/Molding/IM50"
+  },
+  "propConfig": {
+    "custom.EquipmentData": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "productionLineID": "{view.params.ProductionLineID}"
+          },
+          "queryPath": "Overview/Equipment/GetLocationAndAssetNameByProductionLineID",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.ScheduleData": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "ProductionLineID": "{view.params.ProductionLineID}"
+          },
+          "queryPath": "WorkOrder/GetWorkOrderScheduleDataByAsset",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.ScrapCount": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "end": "now(30000)",
+            "plID": "{view.params.ProductionLineID}",
+            "start": "{view.custom.ScheduleData[0].StartTime}"
+          },
+          "queryPath": "HourByHour/GetDetailScrapEvents"
+        },
+        "transforms": [
+          {
+            "code": "\tqty \u003d 0\n\tfor i in range(value.getRowCount()):\n\t\tqty +\u003d value.getValueAt(i, \"Quantity\")\n\t\n\treturn qty",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "persistent": true
+    },
+    "custom.TagFormat": {
+      "persistent": true
+    },
+    "custom.TagFormat[0].path": {
+      "binding": {
+        "config": {
+          "expression": "replace({view.params.tagPath}, \u0027[\u0027, \u0027[ConnectedFactoryPilot_Historian/ignition-uschisap401:\u0027) + \u0027/oee/quality/total daily count\u0027"
+        },
+        "type": "expr"
+      }
+    },
+    "params.ProductionLineID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 277,
+      "width": 1600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "ProcessAreaLabel"
+        },
+        "position": {
+          "height": 0.3718,
+          "width": 0.1163,
+          "x": 0.8831,
+          "y": 0.0121
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.EquipmentData[0].Asset"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": 58,
+            "fontWeight": "bold",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.2708,
+          "width": 0.2025,
+          "x": 0.797,
+          "y": 0.3484
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.EquipmentData[0].Site"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "color": "#555555",
+            "fontSize": 44,
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "height": 0.1417,
+          "width": 0.1588,
+          "y": 0.0612
+        },
+        "props": {
+          "text": "WORK ORDER",
+          "textStyle": {
+            "classes": "Barlow",
+            "fontSize": 32
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "height": 0.1625,
+          "width": 0.1087,
+          "y": 0.4335
+        },
+        "props": {
+          "text": "SKU",
+          "textStyle": {
+            "fontSize": 32
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_2"
+        },
+        "position": {
+          "height": 0.32,
+          "width": 0.1844,
+          "x": 0.6408,
+          "y": 0.5338
+        },
+        "props": {
+          "text": "PLANNED TOTAL",
+          "textStyle": {
+            "fontSize": 32,
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_3"
+        },
+        "position": {
+          "height": 0.32,
+          "width": 0.1437,
+          "x": 0.3181,
+          "y": 0.5628
+        },
+        "props": {
+          "text": "GOOD PARTS",
+          "textStyle": {
+            "fontSize": 32,
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_4"
+        },
+        "position": {
+          "height": 0.2622,
+          "width": 0.4669,
+          "y": 0.18
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScheduleData}) \u003e 0, {view.custom.ScheduleData[0].WorkOrder}, \u0027\u0027)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": 42,
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_5"
+        },
+        "position": {
+          "height": 0.2202,
+          "width": 0.1537,
+          "y": 0.5847
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScheduleData}) \u003e 0, {view.custom.ScheduleData[0].PartNumber}, \u0027\u0027)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": 42,
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_6"
+        },
+        "position": {
+          "height": 0.343,
+          "width": 0.1187,
+          "x": 0.6703,
+          "y": 0.1762
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if(len({view.custom.ScheduleData}) \u003e 0, {view.custom.ScheduleData[0].Quantity}, 0)"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "color": "#6F6F6F",
+            "fontSize": 100,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_7"
+        },
+        "position": {
+          "height": 0.3863,
+          "width": 0.1831,
+          "x": 0.3009,
+          "y": 0.1617
+        },
+        "propConfig": {
+          "custom.WorkOrderCount": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "1": "{view.params.tagPath}"
+                },
+                "tagPath": "{1}/OEE/Quality/Work Order Count"
+              },
+              "type": "tag"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "if(toInt({../Label_6.props.text}) \u003d 0, 0, {this.custom.WorkOrderCount} - {view.custom.ScrapCount})"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "color": "#6EB70B",
+            "fontSize": 100,
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Scrap_Label"
+        },
+        "position": {
+          "height": 0.4558,
+          "width": 0.1375,
+          "x": 0.4888,
+          "y": 0.1653
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.ScrapCount}"
+              },
+              "transforms": [
+                {
+                  "code": "\tif self.getSibling(\"Label_4\").props.text \u003d\u003d \"NOT SCHEDULED\":\n\t\treturn 0\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "textAlign": "center"
+          },
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/ProgressBar_Num",
+            "color": "#E52C4F"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_9"
+        },
+        "position": {
+          "height": 0.1709,
+          "width": 0.1338,
+          "x": 0.4906,
+          "y": 0.5993
+        },
+        "props": {
+          "style": {
+            "textAlign": "center"
+          },
+          "text": "SCRAP",
+          "textStyle": {
+            "classes": "Barlow OverviewHeader/Label",
+            "fontSize": "1.5rem"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "backgroundColor": "#EEEEEE",
+        "borderBottomStyle": "solid",
+        "overflowX": "hidden",
+        "overflowY": "hidden"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

@@ -1,0 +1,501 @@
+{
+  "custom": {},
+  "params": {
+    "EndTime": "2025-3-6 8:47:06",
+    "ProductionLineID": 5,
+    "Reason": "Short shot",
+    "StartTime": {
+      "$": [
+        "ts",
+        192,
+        1741250838210
+      ],
+      "$ts": 1735721226000
+    }
+  },
+  "propConfig": {
+    "params.EndTime": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ProductionLineID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.Reason": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.StartTime": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 400,
+      "width": 1100
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "TimeSeriesChart_0"
+        },
+        "position": {
+          "height": 0.9875,
+          "width": 0.99
+        },
+        "propConfig": {
+          "props.series[0].data": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "EndTime": "{view.params.EndTime}",
+                  "ProductionLineID": "{view.params.ProductionLineID}",
+                  "Reason": "{view.params.Reason}",
+                  "StartTime": "{view.params.StartTime}"
+                },
+                "queryPath": "ReportQuery/ScrapTrend"
+              },
+              "type": "query"
+            }
+          },
+          "props.series[1].data": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "EndTime": "{view.params.EndTime}",
+                  "ProductionLineID": "{view.params.ProductionLineID}",
+                  "Reason": "{view.params.Reason}",
+                  "StartTime": "{view.params.StartTime}"
+                },
+                "queryPath": "ReportQuery/ScrapTrend (1)"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "defaultStyles": {
+            "colorScheme": "RdPu"
+          },
+          "legend": {
+            "style": {
+              "color": "#555555",
+              "fontFamily": "Roboto",
+              "fontSize": 22,
+              "fontWeight": "normal",
+              "textAlign": "center"
+            }
+          },
+          "plots": [
+            {
+              "axes": [
+                {
+                  "alignment": "left",
+                  "grid": {
+                    "color": "#0000D9",
+                    "dashArray": 0,
+                    "opacity": 0.9,
+                    "style": {
+                      "classes": ""
+                    },
+                    "visible": false
+                  },
+                  "label": {
+                    "font": {
+                      "color": "#0000D9",
+                      "size": 24
+                    },
+                    "offset": -30,
+                    "style": {
+                      "classes": "",
+                      "color": "#0000D9",
+                      "fontFamily": "Roboto",
+                      "fontSize": 24,
+                      "fontWeight": "normal",
+                      "textAlign": "middle"
+                    },
+                    "text": "Missed Parts",
+                    "verticalCenter": "middle\n",
+                    "visible": true
+                  },
+                  "max": "",
+                  "min": "",
+                  "name": "MissedParts",
+                  "style": {
+                    "classes": "",
+                    "stroke": "#0000D9"
+                  },
+                  "tick": {
+                    "color": "#0000D9",
+                    "count": "Auto",
+                    "label": {
+                      "font": {
+                        "color": "#808080",
+                        "size": 20
+                      },
+                      "format": "Auto",
+                      "style": {
+                        "classes": "",
+                        "fontWeight": "bold"
+                      }
+                    },
+                    "style": {
+                      "classes": ""
+                    }
+                  },
+                  "width": 85
+                }
+              ],
+              "markers": [],
+              "relativeWeight": 3,
+              "trends": [
+                {
+                  "axis": "MissedParts",
+                  "baselines": [],
+                  "breakLine": true,
+                  "columns": [
+                    {
+                      "color": "#D90000",
+                      "key": "MissedParts",
+                      "styles": {
+                        "highlighted": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        },
+                        "muted": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        },
+                        "normal": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "#D90000",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": 4
+                          }
+                        },
+                        "selected": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "interpolation": "curveLinear",
+                  "radius": 2,
+                  "series": "Production",
+                  "stack": true,
+                  "type": "line",
+                  "visible": true
+                },
+                {
+                  "axis": "MissedParts",
+                  "baselines": [],
+                  "breakLine": true,
+                  "columns": [
+                    {
+                      "color": "#D97700",
+                      "key": "MissedParts",
+                      "styles": {
+                        "highlighted": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        },
+                        "muted": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        },
+                        "normal": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "#D97700",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        },
+                        "selected": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "interpolation": "curveLinear",
+                  "radius": 8,
+                  "series": "Production",
+                  "stack": true,
+                  "type": "scatter",
+                  "visible": true
+                },
+                {
+                  "axis": "MissedParts",
+                  "baselines": [],
+                  "breakLine": true,
+                  "columns": [
+                    {
+                      "color": "#000000",
+                      "key": "Occurrences",
+                      "styles": {
+                        "highlighted": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        },
+                        "muted": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        },
+                        "normal": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "#000000",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": 4
+                          }
+                        },
+                        "selected": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "interpolation": "curveLinear",
+                  "radius": 2,
+                  "series": "Data",
+                  "stack": true,
+                  "type": "line",
+                  "visible": true
+                },
+                {
+                  "axis": "MissedParts",
+                  "baselines": [],
+                  "breakLine": true,
+                  "columns": [
+                    {
+                      "color": "#0000FF",
+                      "key": "Occurrences",
+                      "styles": {
+                        "highlighted": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        },
+                        "muted": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        },
+                        "normal": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        },
+                        "selected": {
+                          "fill": {
+                            "color": "",
+                            "opacity": null
+                          },
+                          "stroke": {
+                            "color": "",
+                            "dashArray": null,
+                            "opacity": null,
+                            "width": null
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "interpolation": "curveLinear",
+                  "radius": 8,
+                  "series": "Data",
+                  "stack": true,
+                  "type": "scatter",
+                  "visible": true
+                }
+              ]
+            }
+          ],
+          "series": [
+            {
+              "name": "Production"
+            },
+            {
+              "name": "Data"
+            }
+          ],
+          "style": {
+            "backgroundColor": "rgba(250,250,250,1)",
+            "borderColor": "rgba(120,150,150,1)",
+            "overflow": "hidden"
+          },
+          "timeAxis": {
+            "color": "#0000D9",
+            "tick": {
+              "color": "#0000D9",
+              "label": {
+                "font": {
+                  "color": "#0000D9",
+                  "size": 18
+                },
+                "format": "MM-DD"
+              },
+              "style": {
+                "fontSize": 18
+              }
+            },
+            "tickCount": 15
+          },
+          "timeRange": {
+            "dateFormat": "MMM Do",
+            "timeFormat": "None",
+            "visible": false
+          },
+          "title": {
+            "font": {
+              "color": "#0000D9",
+              "size": 16
+            },
+            "height": 10,
+            "style": {
+              "color": "#0000D9",
+              "fontFamily": "Roboto",
+              "fontSize": 22,
+              "fontWeight": "bold",
+              "paddingTop": "10px",
+              "textAlign": "center"
+            },
+            "visible": true
+          },
+          "xTrace": {
+            "infoBox": {
+              "font": {
+                "size": 22
+              }
+            },
+            "line": {
+              "color": "#FF0000",
+              "width": 5
+            }
+          }
+        },
+        "type": "ia.chart.timeseries"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent"
+    },
+    "type": "ia.container.coord"
+  }
+}

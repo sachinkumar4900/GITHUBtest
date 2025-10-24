@@ -1,0 +1,1149 @@
+{
+  "custom": {
+    "CountResetTime": {
+      "$": [
+        "ts",
+        192,
+        1751450354252
+      ],
+      "$ts": 1724212800000
+    },
+    "TotalPartCount": 219,
+    "TotalPartCountEnd": 262,
+    "TotalPartCountStart": 43,
+    "ValueStreamCount": 4,
+    "countTagFormat": [
+      {
+        "aggregate": "LastValue",
+        "alias": "value",
+        "path": "[ConnectedFactoryPilot_Historian/ignition-uschisap401:default]Sanford/Molding/SB01/oee/quality/Total Daily Count"
+      },
+      {
+        "aggregate": "LastValue",
+        "alias": "value",
+        "path": "[ConnectedFactoryPilot_Historian/ignition-uschisap401:default]Sanford/Molding/SB02/oee/quality/Total Daily Count"
+      },
+      {
+        "aggregate": "LastValue",
+        "alias": "value",
+        "path": "[ConnectedFactoryPilot_Historian/ignition-uschisap401:default]Sanford/Molding/SB03/oee/quality/Total Daily Count"
+      },
+      {
+        "aggregate": "LastValue",
+        "alias": "value",
+        "path": "[ConnectedFactoryPilot_Historian/ignition-uschisap401:default]Sanford/Molding/SB04/oee/quality/Total Daily Count"
+      }
+    ],
+    "dataOEE": [
+      {
+        "Asset": "IM45",
+        "OEE": 0
+      },
+      {
+        "Asset": "IM48",
+        "OEE": 0
+      },
+      {
+        "Asset": "IM50",
+        "OEE": 0
+      },
+      {
+        "Asset": "IM54",
+        "OEE": 0
+      },
+      {
+        "Asset": "IM43",
+        "OEE": 0
+      }
+    ],
+    "offset": -4,
+    "resetCount": 939
+  },
+  "params": {
+    "Data": [
+      {
+        "Asset": "SB01",
+        "Availability": 0,
+        "ID": 1,
+        "OEE": 0,
+        "Performance": 0,
+        "Quality": 1,
+        "tagPath": "[default]Sanford/Molding/SB01"
+      },
+      {
+        "Asset": "SB02",
+        "Availability": 1,
+        "ID": 2,
+        "OEE": 0,
+        "Performance": 0,
+        "Quality": 1,
+        "tagPath": "[default]Sanford/Molding/SB02"
+      },
+      {
+        "Asset": "SB03",
+        "Availability": 1,
+        "ID": 3,
+        "OEE": 0,
+        "Performance": 0,
+        "Quality": 1,
+        "tagPath": "[default]Sanford/Molding/SB03"
+      },
+      {
+        "Asset": "SB04",
+        "Availability": 1,
+        "ID": 4,
+        "OEE": 0,
+        "Performance": 0,
+        "Quality": 1,
+        "tagPath": "[default]Sanford/Molding/SB04"
+      }
+    ],
+    "End": "2024-08-21 12:30:00",
+    "ID": 2,
+    "Name": "Process Area",
+    "PartActionLabel": "Assembled",
+    "Start": "2024-08-21 05:20:00",
+    "ValueStreamLabel": "Assets"
+  },
+  "propConfig": {
+    "custom.CountResetTime": {
+      "binding": {
+        "config": {
+          "expression": "addHours(midnight({view.params.Start}), {view.custom.offset} * -1)"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.TotalPartCount": {
+      "binding": {
+        "config": {
+          "expression": "if(\r\n   isNull(dateIsBetween({view.custom.CountResetTime}, {view.params.Start}, {view.params.End})), \r\n   0, \r\n   if(\r\n      dateIsBetween({view.custom.CountResetTime}, {view.params.Start}, {view.params.End}) \u0026\u0026 \r\n      dateIsAfter({view.custom.CountResetTime}, {view.params.Start}),\r\n      {view.custom.TotalPartCountEnd} + ({view.custom.resetCount} - {view.custom.TotalPartCountStart}),\r\n      {view.custom.TotalPartCountEnd} - {view.custom.TotalPartCountStart}\r\n   )\r\n)\r\n"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.TotalPartCountEnd": {
+      "binding": {
+        "config": {
+          "aggregate": "MinMax",
+          "avoidScanClassValidation": true,
+          "dateRange": {
+            "endDate": "{view.params.End}",
+            "startDate": "{view.params.Start}"
+          },
+          "enableValueCache": true,
+          "ignoreBadQuality": false,
+          "preventInterpolation": false,
+          "returnFormat": "Wide",
+          "returnSize": {
+            "numRows": "1",
+            "type": "FIXED"
+          },
+          "tags": "{view.custom.countTagFormat}",
+          "valueFormat": "DATASET"
+        },
+        "transforms": [
+          {
+            "code": "\ttotal \u003d 0\n\t\n\tfor i in range(1, value.getColumnCount()):\n\t\ttotal +\u003d value.getValueAt(0, i)\n\treturn total",
+            "type": "script"
+          }
+        ],
+        "type": "tag-history"
+      },
+      "persistent": true
+    },
+    "custom.TotalPartCountStart": {
+      "binding": {
+        "config": {
+          "aggregate": "MinMax",
+          "avoidScanClassValidation": true,
+          "dateRange": {
+            "endDate": "addMinutes({view.params.Start}, 1)",
+            "startDate": "{view.params.Start}"
+          },
+          "enableValueCache": true,
+          "ignoreBadQuality": false,
+          "preventInterpolation": false,
+          "returnFormat": "Wide",
+          "returnSize": {
+            "numRows": "1",
+            "type": "FIXED"
+          },
+          "tags": "{view.custom.countTagFormat}",
+          "valueFormat": "DATASET"
+        },
+        "transforms": [
+          {
+            "code": "\ttotal \u003d 0\n\t\n\tfor i in range(1, value.getColumnCount()):\n\t\ttotal +\u003d value.getValueAt(0, i)\n\treturn total",
+            "type": "script"
+          }
+        ],
+        "type": "tag-history"
+      },
+      "persistent": true
+    },
+    "custom.ValueStreamCount": {
+      "binding": {
+        "config": {
+          "expression": "len({view.params.Data})"
+        },
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.countTagFormat": {
+      "binding": {
+        "config": {
+          "path": "view.params.Data"
+        },
+        "transforms": [
+          {
+            "code": "\tcounts \u003d []\n\t\n\tfor row in value:\n\t\tcounts.append({\"aggregate\": \"LastValue\", \"alias\": \"value\", \"path\": (row[\"tagPath\"].replace(\"[default]\", \"[ConnectedFactoryPilot_Historian/ignition-uschisap401:default]\") + \"/oee/quality/Total Daily Count\") })\n\n\treturn counts",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.dataOEE": {
+      "binding": {
+        "config": {
+          "expression": "now()"
+        },
+        "enabled": false,
+        "transforms": [
+          {
+            "code": "#\tstartdate \u003d self.view.params.Start\n#\tenddate \u003d self.view.params.End\n#\tid_map \u003d {\n#\t5:\"IM45\",\n#\t7:\"IM48\",\n#\t8:\"IM50\",\n#\t9:\"IM54\",\n#\t10:\"IM43\"\n#\t}\n#\t\n#\tresults \u003d []\n#\tfor i, name in id_map.items():\n#\t\trow \u003d system.db.runNamedQuery(\"ReportQuery/AvaibilityTargetParts\", {\n#\t\t\t\"ProductionLineID\": i,\n#\t\t\t\"StartDate\": startdate,\n#\t\t\t\"EndDate\": enddate\n#\t\t})\n#\t\t\n#\t\tif row.getRowCount() \u003e 0:\n#\t\t\toee \u003d row.getValueAt(0,16)*100\n#\t\telse:\n#\t\t\toee \u003d None\n#\t\tresults.append({\n#\t\t\t\"Asset\": name,\n#\t\t\t\"OEE\":oee\n#\t\t})\n#\treturn results\n",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      },
+      "persistent": true
+    },
+    "custom.offset": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "1": "{session.custom.ProductionSite}"
+          },
+          "tagPath": "General/{1} UTC offset"
+        },
+        "type": "tag"
+      },
+      "persistent": true
+    },
+    "custom.resetCount": {
+      "binding": {
+        "config": {
+          "aggregate": "MinMax",
+          "avoidScanClassValidation": true,
+          "dateRange": {
+            "endDate": "{view.custom.CountResetTime}",
+            "startDate": "{view.custom.CountResetTime}"
+          },
+          "enableValueCache": true,
+          "ignoreBadQuality": false,
+          "preventInterpolation": false,
+          "returnFormat": "Wide",
+          "returnSize": {
+            "numRows": "1",
+            "type": "FIXED"
+          },
+          "tags": "{view.custom.countTagFormat}",
+          "valueFormat": "DATASET"
+        },
+        "transforms": [
+          {
+            "code": "\ttotal \u003d 0\n\t\n\tfor i in range(1, value.getColumnCount()):\n\t\ttotal +\u003d value.getValueAt(0, i)\n\treturn total",
+            "type": "script"
+          }
+        ],
+        "type": "tag-history"
+      },
+      "persistent": true
+    },
+    "params.Data": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "siteID": "{session.custom.ProductionSiteID}",
+            "start": "{view.params.Start}",
+            "typeID": "{view.params.ID}"
+          },
+          "queryPath": "Overview/GetWOStatusByLineTypeAndSite",
+          "returnFormat": "json"
+        },
+        "transforms": [
+          {
+            "code": "\tds \u003d []\n\t#headers \u003d [\u0027ID\u0027, \u0027Asset\u0027, \u0027Availability\u0027, \u0027Performance\u0027, \u0027Quality\u0027, \u0027OEE\u0027, \u0027Status\u0027, \u0027WorkOrder\u0027]\n\tfor row in value:\n\t\tasset \u003d row[\u0027Asset\u0027]\n\t\t\n\t\tif asset.startswith(\u0027IM\u0027):\n\t\t\tprefix \u003d \"[default]Moorpark/Molding/\"\n\t\telif asset.startswith(\u0027P\u0027) or asset.startswith(\u0027A\u0027):\n\t\t\tprefix \u003d \"[default]Sanford/Assembly/\"\n\t\telse:\n\t\t\tprefix \u003d \"[default]Sanford/Molding/\"\n\t\t\n\t\ttagPath \u003d prefix + asset \n\t\tstart \u003d system.date.parse(self.params.Start)\n\t\tend \u003d system.date.parse(self.params.End)\n\t\t\n\t\tavail \u003d OEE.getAvailability(tagPath, start, end)\n\t\tperf \u003d OEE.getPerformance(tagPath, start, end)\n\t\tqual \u003d OEE.getQuality(tagPath, start, end)\n\t\toee \u003d avail * perf * qual\n\t\t\n\t\tstatus \u003d \u0027Running\u0027\n\t\tworkOrder \u003d system.tag.readBlocking([tagPath + \"/Work Order/Name\"])[0].value\n\t\tds.append({\u0027ID\u0027:row[\u0027ID\u0027], \u0027Asset\u0027:row[\u0027Asset\u0027], \u0027Availability\u0027:avail, \u0027Performance\u0027:perf, \u0027Quality\u0027:qual, \u0027OEE\u0027:oee, \u0027tagPath\u0027:tagPath})\n\t\t#ds.append([row[\u0027ID\u0027], row[\u0027Asset\u0027], avail, perf, qual, oee, status, workOrder])\n\t\n\treturn ds#system.dataset.toDataSet(headers, ds)",
+            "type": "script"
+          }
+        ],
+        "type": "query"
+      },
+      "paramDirection": "inout",
+      "persistent": true
+    },
+    "params.End": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.Name": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.PartActionLabel": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.Start": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.ValueStreamLabel": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 300,
+      "width": 275
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "params": {
+                  "processAreaID": "{/root/ProcessAreaLabel.custom.processAreaID}"
+                },
+                "view": "OEE/OeeProcessArea"
+              },
+              "scope": "C",
+              "type": "nav"
+            }
+          }
+        },
+        "meta": {
+          "name": "ProcessAreaLabel"
+        },
+        "position": {
+          "height": 0.1067,
+          "width": 0.7709,
+          "x": 0.0364,
+          "y": 0.0333
+        },
+        "propConfig": {
+          "custom.processAreaID": {
+            "binding": {
+              "config": {
+                "expression": "if({this.props.text} \u003d \u0027Assembly\u0027, 1, 2)"
+              },
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.Name"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "color": "#4747FF",
+            "fontSize": "2rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "TotalStreamsLabel"
+        },
+        "position": {
+          "height": 0.0867,
+          "width": 0.3382,
+          "x": 0.0364,
+          "y": 0.13
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"Total \" + {view.params.ValueStreamLabel} + \": \""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "2rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "TotalPartsLabel"
+        },
+        "position": {
+          "height": 0.0867,
+          "width": 0.3382,
+          "x": 0.0364,
+          "y": 0.21
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"Parts \" + {view.params.PartActionLabel} + \": \""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "2rem"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "XYChart"
+        },
+        "position": {
+          "height": 0.6967,
+          "width": 0.9418,
+          "x": 0.0291,
+          "y": 0.2867
+        },
+        "propConfig": {
+          "props.dataSources.example": {
+            "binding": {
+              "config": {
+                "path": "view.params.Data"
+              },
+              "transforms": [
+                {
+                  "code": "\tds \u003d []\n\t\n\tfor row in value:\n\t\tds.append({\"Asset\":row[\"Asset\"], \"OEE\":(row[\"OEE\"] * 100), \"ID\":row[\"ID\"]})\n\treturn sorted(ds, key\u003dlambda d: d[\u0027OEE\u0027])\n\t",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          },
+          "props.selection.data": {
+            "onChange": {
+              "enabled": null,
+              "script": "\tif len(currentValue.value) \u003e 0:\n\t\tid \u003d self.props.selection.data[0].ID\n\t\t\n\t\tsystem.perspective.navigate(view \u003d \u0027Overview/EquipmentOverview\u0027, params \u003d {\u0027ProductionLineID\u0027:id})"
+            }
+          }
+        },
+        "props": {
+          "dataSources": {},
+          "legend": {
+            "enabled": false
+          },
+          "selection": {
+            "enabled": true
+          },
+          "series": [
+            {
+              "candlestick": {
+                "appearance": {
+                  "deriveFieldsFromData": {
+                    "fill": {
+                      "color": "",
+                      "opacity": ""
+                    },
+                    "stroke": {
+                      "color": "",
+                      "opacity": "",
+                      "width": ""
+                    }
+                  },
+                  "fill": {
+                    "color": "",
+                    "opacity": 1
+                  },
+                  "heatRules": {
+                    "dataField": "",
+                    "enabled": false,
+                    "max": "",
+                    "min": ""
+                  },
+                  "stacked": false,
+                  "stroke": {
+                    "color": "",
+                    "opacity": 1,
+                    "width": 1
+                  }
+                },
+                "high": {
+                  "x": "",
+                  "y": ""
+                },
+                "low": {
+                  "x": "",
+                  "y": ""
+                },
+                "open": {
+                  "x": "",
+                  "y": ""
+                }
+              },
+              "column": {
+                "appearance": {
+                  "deriveFieldsFromData": {
+                    "fill": {
+                      "color": "",
+                      "opacity": ""
+                    },
+                    "stroke": {
+                      "color": "",
+                      "opacity": "",
+                      "width": ""
+                    }
+                  },
+                  "fill": {
+                    "color": "",
+                    "opacity": 1
+                  },
+                  "heatRules": {
+                    "dataField": "",
+                    "enabled": false,
+                    "max": "",
+                    "min": ""
+                  },
+                  "height": null,
+                  "stacked": false,
+                  "stroke": {
+                    "color": "",
+                    "opacity": 1,
+                    "width": 1
+                  },
+                  "width": null
+                },
+                "open": {
+                  "x": "",
+                  "y": ""
+                }
+              },
+              "data": {
+                "source": "example",
+                "x": "Asset",
+                "y": "OEE"
+              },
+              "defaultState": {
+                "visible": true
+              },
+              "hiddenInLegend": false,
+              "label": {
+                "text": "OEE"
+              },
+              "line": {
+                "appearance": {
+                  "bullets": [
+                    {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "rotation": "",
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "enabled": false,
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": 100,
+                        "min": 2
+                      },
+                      "height": 10,
+                      "label": {
+                        "position": {
+                          "dx": 0,
+                          "dy": 0
+                        },
+                        "text": "{value}"
+                      },
+                      "render": "circle",
+                      "rotation": 0,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      },
+                      "tooltip": {
+                        "background": {
+                          "color": "",
+                          "opacity": 1
+                        },
+                        "cornerRadius": 3,
+                        "enabled": true,
+                        "pointerLength": 4,
+                        "text": "{name}: [bold]{valueY}[/]"
+                      },
+                      "width": 10
+                    }
+                  ],
+                  "connect": true,
+                  "fill": {
+                    "color": "",
+                    "opacity": 0
+                  },
+                  "minDistance": 0.5,
+                  "stroke": {
+                    "color": "",
+                    "dashArray": "",
+                    "opacity": 1,
+                    "width": 3
+                  },
+                  "tensionX": 1,
+                  "tensionY": 1
+                },
+                "open": {
+                  "x": "",
+                  "y": ""
+                }
+              },
+              "name": "OEE",
+              "render": "column",
+              "stepLine": {
+                "appearance": {
+                  "bullets": [
+                    {
+                      "deriveFieldsFromData": {
+                        "fill": {
+                          "color": "",
+                          "opacity": ""
+                        },
+                        "rotation": "",
+                        "stroke": {
+                          "color": "",
+                          "opacity": "",
+                          "width": ""
+                        }
+                      },
+                      "enabled": true,
+                      "fill": {
+                        "color": "",
+                        "opacity": 1
+                      },
+                      "heatRules": {
+                        "dataField": "",
+                        "enabled": false,
+                        "max": 100,
+                        "min": 2
+                      },
+                      "height": 10,
+                      "label": {
+                        "position": {
+                          "dx": 0,
+                          "dy": 0
+                        },
+                        "text": "{value}"
+                      },
+                      "render": "circle",
+                      "rotation": 0,
+                      "stroke": {
+                        "color": "",
+                        "opacity": 1,
+                        "width": 1
+                      },
+                      "tooltip": {
+                        "background": {
+                          "color": "",
+                          "opacity": 1
+                        },
+                        "cornerRadius": 3,
+                        "enabled": true,
+                        "pointerLength": 4,
+                        "text": "{name}: [bold]{valueY}[/]"
+                      },
+                      "width": 10
+                    }
+                  ],
+                  "connect": true,
+                  "fill": {
+                    "color": "",
+                    "opacity": 0
+                  },
+                  "minDistance": 0.5,
+                  "stroke": {
+                    "color": "",
+                    "dashArray": "",
+                    "opacity": 1,
+                    "width": 3
+                  },
+                  "tensionX": 1,
+                  "tensionY": 1
+                },
+                "open": {
+                  "x": "",
+                  "y": ""
+                }
+              },
+              "tooltip": {
+                "background": {
+                  "color": "",
+                  "opacity": 1
+                },
+                "cornerRadius": 3,
+                "enabled": true,
+                "pointerLength": 4,
+                "text": "{name}: [bold]{valueY}[/]"
+              },
+              "visible": true,
+              "xAxis": "Asset",
+              "yAxis": "OEE",
+              "zIndex": 0
+            }
+          ],
+          "title": {
+            "text": "OEE"
+          },
+          "xAxes": [
+            {
+              "appearance": {
+                "font": {
+                  "size": 24,
+                  "weight": 1000
+                },
+                "grid": {
+                  "color": "",
+                  "dashArray": "",
+                  "minDistance": 60,
+                  "opacity": 1,
+                  "position": 0.5
+                },
+                "inside": false,
+                "labels": {
+                  "color": "",
+                  "horizontalCenter": "middle",
+                  "opacity": 1,
+                  "rotation": 0,
+                  "verticalCenter": "middle"
+                },
+                "opposite": false
+              },
+              "category": {
+                "break": {
+                  "enabled": false,
+                  "endCategory": "",
+                  "size": 0.05,
+                  "startCategory": ""
+                }
+              },
+              "date": {
+                "baseInterval": {
+                  "count": 1,
+                  "enabled": false,
+                  "skipEmptyPeriods": false,
+                  "timeUnit": "hour"
+                },
+                "break": {
+                  "enabled": false,
+                  "endDate": "",
+                  "size": 0.05,
+                  "startDate": ""
+                },
+                "format": "M/d",
+                "inputFormat": "yyyy-MM-dd kk:mm:ss",
+                "range": {
+                  "max": "",
+                  "min": "",
+                  "useStrict": false
+                }
+              },
+              "inversed": false,
+              "label": {
+                "color": "",
+                "enabled": false,
+                "text": "Time"
+              },
+              "name": "Asset",
+              "render": "category",
+              "tooltip": {
+                "background": {
+                  "color": "",
+                  "opacity": 1
+                },
+                "cornerRadius": 3,
+                "enabled": true,
+                "pointerLength": 4,
+                "text": ""
+              },
+              "value": {
+                "break": {
+                  "enabled": false,
+                  "endValue": 100,
+                  "size": 0.05,
+                  "startValue": 0
+                },
+                "format": "#,###.##",
+                "logarithmic": false,
+                "range": {
+                  "max": "",
+                  "min": "",
+                  "useStrict": false
+                }
+              },
+              "visible": true
+            }
+          ],
+          "yAxes": [
+            {
+              "appearance": {
+                "font": {
+                  "size": "",
+                  "weight": 500
+                },
+                "grid": {
+                  "color": "",
+                  "dashArray": "",
+                  "minDistance": null,
+                  "opacity": 1,
+                  "position": 0.5
+                },
+                "inside": false,
+                "labels": {
+                  "color": "",
+                  "horizontalCenter": "middle",
+                  "opacity": 1,
+                  "rotation": 0,
+                  "verticalCenter": "middle"
+                },
+                "opposite": false
+              },
+              "category": {
+                "break": {
+                  "enabled": false,
+                  "endCategory": "",
+                  "size": 0.05,
+                  "startCategory": ""
+                }
+              },
+              "date": {
+                "baseInterval": {
+                  "count": 1,
+                  "enabled": false,
+                  "skipEmptyPeriods": false,
+                  "timeUnit": "hour"
+                },
+                "break": {
+                  "enabled": false,
+                  "endDate": "",
+                  "size": 0.05,
+                  "startDate": ""
+                },
+                "format": "M/d/yyyy HH:mm:ss",
+                "inputFormat": "yyyy-MM-dd kk:mm:ss",
+                "range": {
+                  "max": "",
+                  "min": "",
+                  "useStrict": false
+                }
+              },
+              "inversed": false,
+              "label": {
+                "color": "",
+                "enabled": true,
+                "text": "OEE %"
+              },
+              "name": "OEE",
+              "render": "value",
+              "tooltip": {
+                "background": {
+                  "color": "",
+                  "opacity": 1
+                },
+                "cornerRadius": 3,
+                "enabled": true,
+                "pointerLength": 4,
+                "text": ""
+              },
+              "value": {
+                "break": {
+                  "enabled": false,
+                  "endValue": 100,
+                  "size": 0.05,
+                  "startValue": 0
+                },
+                "format": "#,###.##",
+                "logarithmic": false,
+                "range": {
+                  "max": 100,
+                  "min": 0,
+                  "useStrict": false
+                }
+              },
+              "visible": true
+            }
+          ]
+        },
+        "type": "ia.chart.xy"
+      },
+      {
+        "meta": {
+          "name": "TotalStreamsLabel_0"
+        },
+        "position": {
+          "height": 0.0867,
+          "width": 0.36,
+          "x": 0.3786,
+          "y": 0.13
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.ValueStreamCount}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "2.5rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "TotalPartsLabel_0"
+        },
+        "position": {
+          "height": 0.0867,
+          "width": 0.3568,
+          "x": 0.3786,
+          "y": 0.21
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{view.custom.TotalPartCount}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": "2.5rem",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "custom": {
+          "LowLimit": 33,
+          "WarningLimit": 66
+        },
+        "meta": {
+          "name": "OEEGauge"
+        },
+        "position": {
+          "height": 0.3033,
+          "width": 0.4473,
+          "x": 0.556,
+          "y": 0.0564
+        },
+        "propConfig": {
+          "props.outerAxis.ranges[0].end": {
+            "binding": {
+              "config": {
+                "path": "this.custom.LowLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[1].end": {
+            "binding": {
+              "config": {
+                "path": "this.custom.WarningLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[1].start": {
+            "binding": {
+              "config": {
+                "path": "this.custom.LowLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.outerAxis.ranges[2].start": {
+            "binding": {
+              "config": {
+                "path": "this.custom.WarningLimit"
+              },
+              "type": "property"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "../OEENum.custom.OEE"
+              },
+              "transforms": [
+                {
+                  "code": "\tif(value\u003c\u003d120):\n\t\treturn value\n\telse:\n\t\treturn 100",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "backgroundColor": "",
+          "innerAxis": {
+            "data": "secondaryValue",
+            "maxValue": 80,
+            "percentRadius": 85,
+            "show": false,
+            "width": 1
+          },
+          "outerAxis": {
+            "color": "#D5D5D5",
+            "data": "value",
+            "needle": {
+              "color": "#2B2B2B"
+            },
+            "percentRadius": 100,
+            "ranges": [
+              {
+                "color": "#FF0000",
+                "start": 0,
+                "width": 40
+              },
+              {
+                "color": "#FFE100",
+                "width": 40
+              },
+              {
+                "color": "#6EB70B",
+                "end": 100,
+                "width": 40
+              }
+            ],
+            "show": true,
+            "tickMarks": {
+              "length": 0,
+              "thickness": 0
+            },
+            "width": 8
+          },
+          "style": {
+            "classes": [],
+            "fontSize": 0
+          }
+        },
+        "type": "ia.chart.gauge"
+      },
+      {
+        "meta": {
+          "name": "OEENum"
+        },
+        "position": {
+          "height": 0.1033,
+          "width": 0.2836,
+          "x": 0.6361,
+          "y": 0.0095
+        },
+        "propConfig": {
+          "custom.OEE": {
+            "binding": {
+              "config": {
+                "expression": "now(5000)"
+              },
+              "transforms": [
+                {
+                  "code": "\tsiteID \u003d self.session.custom.ProductionSiteID\n\ttypeID \u003d 1 if self.view.params.Name \u003d\u003d \"Assembly\" else 2\n\tstart \u003d system.date.parse(self.view.params.Start)\n\tend \u003d system.date.parse(self.view.params.End)\n\t\n\tavail \u003d OEE.getValueStreamAvailability(siteID, typeID, start, end)\n\tperf \u003d OEE.getValueStreamPerformance(siteID, typeID, start, end)\n\tqual \u003d OEE.getValueStreamQuality(siteID, typeID, start, end)\n\toee \u003d avail * perf * qual\n\t\n\treturn oee * 100",
+                  "type": "script"
+                }
+              ],
+              "type": "expr"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "{this.custom.OEE}"
+              },
+              "transforms": [
+                {
+                  "formatType": "numeric",
+                  "formatValue": "#",
+                  "type": "format"
+                },
+                {
+                  "expression": "{value} + \" %\"",
+                  "type": "expression"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "fontSize": "2rem",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "backgroundColor": "#FFFFFF",
+        "fontFamily": "Arial",
+        "overflowX": "hidden"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}
